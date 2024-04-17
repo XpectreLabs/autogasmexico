@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  user_id       Int         @id @default(autoincrement())
+  username      String      @db.VarChar(100)
+  firstname     String      @db.VarChar(100)
+  lastname      String      @db.VarChar(120)
+  password      String      @db.VarChar(120)
+  email         String?     @db.VarChar(150)
+  date          DateTime?   @db.Date
+  proveedores   proveedores[]
+  clients       clients[]
+}
+
+model proveedores {
+  proveedor_id    Int         @id @default(autoincrement())
+  name            String      @db.VarChar(80)
+  rfc             String      @db.VarChar(30)
+  permiso         String      @db.VarChar(100)
+  phone           String?     @db.VarChar(20)
+  email           String?     @db.VarChar(200)
+  user_id         Int?        @db.Integer
+  date            DateTime?   @db.Date
+  active          Int?        @db.SmallInt
+  users          users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+}
+
+model clients {
+  client_id       Int         @id @default(autoincrement())
+  name            String      @db.VarChar(80)
+  rfc             String      @db.VarChar(30)
+  phone           String?     @db.VarChar(20)
+  permiso         String      @db.VarChar(100)
+  email           String?     @db.VarChar(200)
+  user_id         Int?        @db.Integer
+  date            DateTime?   @db.Date
+  active          Int?        @db.SmallInt
+  users           users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_client")
+}
+
+
