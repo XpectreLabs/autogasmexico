@@ -3,7 +3,7 @@
 
 # Requerimientos
 
-- [postgreSQL] (Cluser, local or docker container.)
+- [postgreSQL]
 - [NodeJS](https://nodejs.org/es/) (v. 19 or later)
 - [npm](https://www.npmjs.com/get-npm)
 - [Docker](https://docs.docker.com/install/)
