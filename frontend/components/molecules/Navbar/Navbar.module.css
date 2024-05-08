@@ -1,0 +1,45 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem;
+}
+
+.main > * {
+  color: black;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.ListNav {
+  box-shadow: none !important;
+}
+
+.ListNav li{
+  margin-top: -6px;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+}
+
+.ListNav li:hover, .ListNav li.activo {
+  color: #fff !important;
+  background: #303092 !important;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+  cursor: pointer;
+}
+
+
+.ListNav li:hover svg, .ListNav li.activo svg {
+  color: #fff;
+}

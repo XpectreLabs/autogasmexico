@@ -1,0 +1,60 @@
+
+.Logo img {
+  width: 100px;
+  margin-bottom: 40px;
+}
+
+.Btn {
+  width: 114px !important;
+  height: 30px;
+  border-radius: 4px;
+  color: #072525 !important;
+  text-transform: none !important;
+  background: #e1f292 !important;
+  border: 1px solid #072525;
+  margin: 18px 0px;
+  padding: 2px 30px;
+  -webkit-transition: all 300ms ease-out;
+ 	-moz-transition: all 300ms ease-out;
+	 -ms-transition: all 300ms ease-out;
+ 	-o-transition: all 300ms ease-out;
+ 	transition: all 300ms ease-out;
+}
+
+.Btn:hover {
+  color: #fff;
+  background: #072525;
+  border: 1px solid #072525;
+  cursor: pointer;
+  -webkit-transition: all 300ms ease-out;
+ 	-moz-transition: all 300ms ease-out;
+	 -ms-transition: all 300ms ease-out;
+ 	-o-transition: all 300ms ease-out;
+ 	transition: all 300ms ease-out;
+}
+
+.Link {
+  display: block;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 5px;
+  position: relative;
+  top: -40px;
+}
+
+.Link:hover {
+  color: #0d5252;
+}
+
+.message {
+  width: 96%;
+  color: #b20707;
+  background-color: rgb(243 253 232 / 90%);
+  box-shadow: 0px 1px 2px 0px #083636;
+  font-size: 17px;
+  margin-bottom: 15px;
+  padding: 8px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

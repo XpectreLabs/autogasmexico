@@ -1,0 +1,115 @@
+.main {
+  background-color: white;
+  min-height: 100vh;
+  padding: 5rem;
+  padding-top: 1.4rem;
+}
+
+.BorderBottom {
+  box-shadow: 0px 1px 0px 0px #b7b7b7;
+}
+
+.Logo {
+  margin-bottom: 25px;
+}
+
+.Logo img {
+  width: 170px;
+}
+
+h1.title {
+  color: #083636;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.agregarProveedorButton {
+  color: #072525 !important;
+  background: #c1c1ff !important;
+  width: 215px !important;
+  font-size: 12px !important;
+  line-height: 20px !important;
+  margin-top: 1rem !important;
+  margin-bottom: 12px !important;
+}
+
+.agregarProveedorButton span {
+  font-size: 19px !important;
+  line-height: 19px !important;
+  margin-right: 10px !important;
+}
+
+.agregarProveedorButton:hover {
+  color: #fff !important;
+  background: #303092 !important;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.DeleteBorder {
+  box-shadow: none !important;
+  padding: 0px !important;
+}
+
+.BtnLogIn svg {
+  font-size: 30px;
+  margin-top: -11px;
+}
+
+.BtnLogIn:hover {
+  color: #083636;
+  background: none !important;
+}
+
+.BtnLogIn:hover svg {
+  color: #083636;
+}
+
+.ContentLoadding {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.NoData {
+  color: #000;
+  font: 17px "Roboto","Helvetica","Arial",sans-serif;
+  line-height: 21px;
+  text-align: center;
+  padding-top: 5px;
+}
+
+
+.message {
+  width: 340px;
+  color: #b20707;
+  background-color: rgb(243 253 232 / 90%);
+  box-shadow: 0px 1px 2px 0px #083636;
+  font: 17px "Roboto","Helvetica","Arial",sans-serif;
+  line-height: 21px;
+  margin-bottom: 15px;
+  padding: 8px;
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  text-align: center;
+  z-index: 1;
+}
+
+
+.errors {
+  color: #072525 !important;
+  font: 16px "Roboto","Helvetica","Arial",sans-serif;
+  line-height: 16px; 
+  margin-top: 15px;
+  line-height: 21px;
+}
+
+.btnAccion:hover {
+  color: #303092;
+  cursor: pointer;
+}
