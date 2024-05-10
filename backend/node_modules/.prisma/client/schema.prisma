@@ -165,7 +165,7 @@ model reportes {
   composdepropanoengaslp                Float       @db.Real
   composdebutanoengaslp                 Float       @db.Real
   volumenexistenciasees                 Float       @db.Real
-  fechayhoraestamedicionmes             DateTime    @db.Date
+  fechayhoraestamedicionmes             DateTime    @db.Timestamptz
   numeroregistro                        Int         @db.Integer
   usuarioresponsable                    String      @db.VarChar(150)
   tipoevento                            Int         @db.Integer

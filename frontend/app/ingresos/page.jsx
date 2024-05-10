@@ -12,7 +12,7 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-// import PowerSettingsNewIcon from '@mui/iTcons-material/PowerSettingsNew';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useRouter } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -315,9 +315,9 @@ export default function Compras() {
                           router.push('/');
                         }}
                       >
-                        {/* <ListItemIcon>
+                      <ListItemIcon>
                           <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon> */}
+                        </ListItemIcon>
                       </div>
                     </MenuItem>
                   </MenuList>

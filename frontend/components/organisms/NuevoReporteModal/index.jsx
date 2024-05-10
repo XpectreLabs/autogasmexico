@@ -23,6 +23,72 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
   const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', numpermiso:'LP/22811/COM/2019',  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
+  /*let dataJson = {
+    "Version": "1.012",
+    "RfcContribuyente": "AME050309Q32",
+    "RfcRepresentanteLegal": "IAJA7201074W4",
+    "RfcProveedor": "APR9609194H4",
+    "Caracter": "permisionario",
+    "ModalidadPermiso": "PER45",
+    "NumPermiso": "LP/22811/COM/2019",
+    "ClaveInstalacion": "CMN-0001",
+    "DescripcionInstalacion": "CMN-Comercialización",
+    "NumeroPozos": 0,
+    "NumeroTanques": 1,
+    "NumeroDuctosEntradaSalida": 0,
+    "NumeroDuctosTransporteDistribucion": 0,
+    "NumeroDispensarios": 0,
+    "FechaYHoraReporteMes": "2024-04-09T17:22:58-06:00",
+    "Producto": [
+      {
+        "ClaveProducto": "PR12",
+        "ComposDePropanoEnGasLP": 60.0,
+        "ComposDeButanoEnGasLP": 40.0,
+        "ReporteDeVolumenMensual": {
+          "ControlDeExistencias": {
+            "VolumenExistenciasMes": 0.0,
+            "FechaYHoraEstaMedicionMes": "2023-09-30T23:59:59-06:00"
+          },
+        }
+      }
+    ],
+    "BitacoraMensual": [
+      {
+        "NumeroRegistro": 2033,
+        "FechaYHoraEvento": "2024-04-09T17:22:58-06:00",
+        "UsuarioResponsable": "ANGEL LUIS IBARRA",
+        "TipoEvento": 5,
+        "DescripcionEvento": "Consulta Informacion"
+      }
+    ]
+  }*/
+
+
+  /*console.log("j",dataJson);
+  dataJson.Version="2.0";
+  console.log("j2",dataJson);*/
+
+/*  const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
+    const jsonURL = URL.createObjectURL(jsonData);
+    const link = document.createElement('a');
+    link.href = jsonURL;
+    link.download = `prueba.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);*/
+
+    const descargarJSON = (dataJson) => {
+      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
+      const jsonURL = URL.createObjectURL(jsonData);
+      const link = document.createElement('a');
+      const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
+
+      link.href = jsonURL;
+      link.download = `${fecha}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   return (
     <Formik
         enableReinitialize={true}
@@ -58,7 +124,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           numeropozos: Yup.number()
             .required("El numero de pozos es requerido"),
           numerotanques: Yup.number()
-            .min(1, "El numero dispensarios tener minimo 1 digito")
+            .min(1, "El numero tanques tener minimo 1 digito")
             .required("El numero de tanques es requerido"),
           numeroductosentradasalida: Yup.number()
             .required("El numero de producto entrada salida es requerido"),
@@ -97,6 +163,34 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             .required("* Fecha de terminación"),
         })}
         onSubmit={(values, actions) => {
+
+          /*dataJson.Version=values.version;
+          dataJson.RfcContribuyente=values.rfccontribuyente;
+          dataJson.RfcRepresentanteLegal=values.rfcrepresentantelegal;
+          dataJson.RfcProveedor=values.rfcproveedor;
+          dataJson.Caracter=values.caracter;
+          dataJson.ModalidadPermiso=values.modalidadpermiso;
+          dataJson.NumPermiso=values.numpermiso;
+          dataJson.ClaveInstalacion=values.claveinstalacion;
+          dataJson.DescripcionInstalacion=values.DescripcionInstalacion;
+          dataJson.NumeroPozos=values.numeropozos;
+          dataJson.NumeroTanques=values.numerotanques;
+          dataJson.NumeroDuctosEntradaSalida=values.numeroductosentradasalida;
+          dataJson.NumeroDuctosTransporteDistribucion=values.numeroductostransportedistribucion;
+          dataJson.NumeroDispensarios=values.numerodispensarios;
+          dataJson.FechaYHoraReporteMes=new Date();
+          dataJson.ClaveProducto=values.claveproducto;
+          dataJson.ComposDePropanoEnGasLP=values.composdepropanoengaslp;
+          dataJson.ComposDeButanoEnGasLP=values.composdebutanoengaslp;
+          dataJson.VolumenExistenciasMes=values.volumenexistenciasees;
+          dataJson.FechaYHoraEstaMedicionMes=values.fechayhoraestamedicionmes;
+          dataJson.NumeroRegistro=values.numeroregistro;
+          dataJson.FechaYHoraEvento=new Date();
+          dataJson.UsuarioResponsable=values.usuarioresponsable;
+          dataJson.TipoEvento=values.tipoevento;
+          dataJson.DescripcionEvento=values.descripcionevento;
+          dataJson.=values.;*/
+
           const user_id = localStorage.getItem('user_id');
           const tipo_reporte_id   = 1;
           const scriptURL = "http://localhost:3001/api/v1/reportes";
@@ -127,6 +221,9 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             setTypeOfMessage("error");
 
             if(data.message==="success") {
+              console.log("dataRe",data);
+              descargarJSON(data.dataJson);
+
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron guardados");
               setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));

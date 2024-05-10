@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
+const reporteS = require('../services/reportes.js');
 const sch = require('../schemas/reportes.js');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
@@ -16,8 +17,10 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   }
 
   let date = new Date().toISOString();
+  const dataJson = await reporteS.generarJson(req.body,date);
 
-  await prisma.reportes.create({
+
+  /*await prisma.reportes.create({
     data: {
       ...req.body,
       tipoevento:  parseFloat(req.body.tipoevento),
@@ -27,8 +30,8 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
       date: date,
       active: 1,
     },
-  });
-  res.status(200).json({ message:"success" });
+  });*/
+  res.status(200).json({ message:"success", dataJson });
 });
 
 router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
@@ -54,7 +57,7 @@ router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
       res.status(400).json({ message:"Id invalido", error: "Solicitud no válida, el ID no existe" });
   }
 });
-/*
+
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
@@ -62,38 +65,40 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
-  const id = parseInt(req.body.venta_id);
+  const id = parseInt(req.body.reporte_id);
 
-  await prisma.ventas.update({
+  await prisma.reportes.update({
     where: {
-      venta_id: parseInt(id),
+      reporte_id: parseInt(id),
     },
     data: {
       ...req.body,
-      client_id:parseInt(req.body.client_id),
+      tipoevento:  parseFloat(req.body.tipoevento),
+      composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
+      composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
     },
   });
   res.status(200).json({ message:"success"});
 });
 
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
-  const { error } = sch.schemaIdVenta.validate(req.body);
+  const { error } = sch.schemaIdReporte.validate(req.body);
   if (error) {
     console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
-  const id = parseInt(req.body.venta_id);
-  await prisma.ventas.update({
+  const id = parseInt(req.body.reporte_id);
+  await prisma.reportes.update({
     where: {
-      venta_id: parseInt(id),
+      reporte_id: parseInt(id),
     },
     data: {
       active: 0,
     },
   });
   res.status(200).json({message:"success"});
-});*/
+});
 
 
 async function validateUser(user_id) {

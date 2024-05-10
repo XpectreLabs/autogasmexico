@@ -12,7 +12,7 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-// import PowerSettingsNewIcon from '@mui/iTcons-material/PowerSettingsNew';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useRouter } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -104,11 +104,11 @@ export default function Compras() {
     });
   }
 
-  function deleteVenta(venta_id) {
+  function deleteReporte(reporte_id) {
     const scriptURL = "http://localhost:3001/api/v1/reportes/";
     fetch(scriptURL, {
       method: 'DELETE',
-      body: JSON.stringify({ venta_id }),
+      body: JSON.stringify({ reporte_id }),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export default function Compras() {
     .then((resp) => resp.json())
     .then(function(dataL) {
       if(dataL.message==="success") {
-        setTextError("El ingreso fue eliminado");
+        setTextError("El reporte fue eliminado");
         setShowAlert(true);
         data();
       }
@@ -201,7 +201,7 @@ export default function Compras() {
         <CreateIcon
           className={styles.btnAccion}
           onClick={() => {
-            setIngresodd(params.row.venta_id);
+            setIngresodd(params.row.reporte_id);
             setReporteToEdit(params.row);
             setIsEditPReporteModalOpen(true);
           }}
@@ -217,7 +217,7 @@ export default function Compras() {
         <VisibilityIcon
           className={styles.btnAccion}
           onClick={() => {
-            setIngresodd(params.row.venta_id);
+            setIngresodd(params.row.reporte_id);
             setReporteToDetalle(params.row);
             setIsDetallePReporteModalOpen(true);
           }}
@@ -233,8 +233,8 @@ export default function Compras() {
         <DeleteIcon
           className={styles.btnAccion}
           onClick={() => {
-            if(confirm("¿Desea borrar este ingreso?"))
-              deleteVenta(params.row.venta_id);
+            if(confirm("¿Desea borrar este reporte?"))
+              deleteReporte(params.row.reporte_id);
           }}
         />
       ),
@@ -254,10 +254,11 @@ export default function Compras() {
   };
 
   const changedateformat = (date) => {
-    return (""+date).slice(0,10)+"-"+(""+date).slice(3,5)+"-"+(""+date).slice(0,2)
+    return (""+date).slice(6,10)+"-"+(""+date).slice(3,5)+"-"+(""+date).slice(0,2)
   };
 
   const convertDate = (date) => {
+    alert(changedateformat(date));
     return Date.parse(changedateformat(date));
   };
 
@@ -266,14 +267,12 @@ export default function Compras() {
       const fechaInicio = convertDate(document.querySelector(".fechaDesde input").value);
       const fechaHasta = convertDate(document.querySelector(".fechaHasta input").value);
 
-      console.log(fechaInicio + " " +item + " " + fechaHasta);
-
       let listResult = [];
 
       if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
         console.log("Aux",reportesAux);
         for(let j=0;j<reportesAux.length;j++) {
-          const dateEmi = convertDate(new Date((""+reportesAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+          const dateEmi = convertDate(new Date((""+reportesAux[j].date)).toLocaleDateString('en-GB'));
 
           if(fechaInicio!==fechaHasta) {
             if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
@@ -321,9 +320,9 @@ export default function Compras() {
                           router.push('/');
                         }}
                       >
-                        {/* <ListItemIcon>
+                        <ListItemIcon>
                           <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon> */}
+                        </ListItemIcon>
                       </div>
                     </MenuItem>
                   </MenuList>
@@ -353,8 +352,9 @@ export default function Compras() {
                       const sear=query.target.value;
                       if(reportesAux.length>0) {
                         let listResult = [];
+                        console.log("b",reportesAux);
                         for(let j=0;j<reportesAux.length;j++) {
-                          let busqueda = (reportesAux[j].folio + " " + reportesAux[j].fecha_emision + " " + reportesAux[j].cantidad+ " " + reportesAux[j].concepto + " " + reportesAux[j].preciounitario + " " + reportesAux[j].importe + " " + reportesAux[j].preciovent).toLowerCase();
+                          let busqueda = (reportesAux[j].version + " " + reportesAux[j].rfccontribuyente + " " + reportesAux[j].rfcproveedor + " " + reportesAux[j].claveinstalacion + " " + reportesAux[j].usuarioresponsable+ " " + changedateformatF(reportesAux[j].fecha_inicio) + " " + changedateformatF(reportesAux[j].fecha_terminacion) + " " + changedateformatF(reportesAux[j].date)).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(reportesAux[j]);
                         }

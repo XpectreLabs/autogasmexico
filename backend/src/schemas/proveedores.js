@@ -1,9 +1,9 @@
 const joi = require('joi');
 
 const schemaCreate = joi.object({
-  name: joi.string().pattern(new RegExp('^[a-zA-Z ]{3,100}$')).required(),
+  name: joi.string().pattern(new RegExp('^[a-zA-Z\u00C0-\u017F ]{3,100}$')).required(),
   rfc: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{11,15}$')).required(),
-  direccion: joi.string().pattern(new RegExp('^[a-zA-Z ]{3,200}$')).optional().allow(null, ""),
+  direccion: joi.string().pattern(new RegExp('^[a-zA-Z\u00C0-\u017F ]{3,200}$')).optional().allow(null, ""),
   tipo_situacion_fiscal: joi.string().pattern(new RegExp('^[a-zA-Z ]{3,100}$')).required(),
   permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
   phone: joi.string().pattern(new RegExp('^[0-9 ]{7,20}$')).optional().allow(null, ""),
@@ -16,9 +16,9 @@ const schemaId = joi.object({
 });
 
 const schemaUpdate = joi.object({
-  name: joi.string().pattern(new RegExp('^[a-zA-Z ]{3,100}$')).required(),
+  name: joi.string().pattern(new RegExp('^[a-zA-Z\u00C0-\u017F ]{3,100}$')).required(),
   rfc: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{11,15}$')).required(),
-  direccion: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).optional().allow(null, ""),
+  direccion: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F ]{3,100}$')).optional().allow(null, ""),
   tipo_situacion_fiscal: joi.string().pattern(new RegExp('^[a-zA-Z ]{3,100}$')).required(),
   permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
   phone: joi.string().pattern(new RegExp('^[0-9 ]{7,20}$')).optional().allow(null, ""),

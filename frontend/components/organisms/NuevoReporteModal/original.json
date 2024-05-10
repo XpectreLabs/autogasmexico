@@ -1,0 +1,241 @@
+{
+  "Version": "1.012",
+  "RfcContribuyente": "AME050309Q32",
+  "RfcRepresentanteLegal": "IAJA7201074W4",
+  "RfcProveedor": "APR9609194H4",
+  "Caracter": "permisionario",
+  "ModalidadPermiso": "PER45",
+  "NumPermiso": "LP/22811/COM/2019",
+  "ClaveInstalacion": "CMN-0001",
+  "DescripcionInstalacion": "CMN-Comercialización",
+  "NumeroPozos": 0,
+  "NumeroTanques": 1,
+  "NumeroDuctosEntradaSalida": 0,
+  "NumeroDuctosTransporteDistribucion": 0,
+  "NumeroDispensarios": 0,
+  "FechaYHoraReporteMes": "2024-04-09T17:22:58-06:00",
+  "Producto": [
+    {
+      "ClaveProducto": "PR12",
+      "ComposDePropanoEnGasLP": 60.0,
+      "ComposDeButanoEnGasLP": 40.0,
+      "ReporteDeVolumenMensual": {
+        "ControlDeExistencias": {
+          "VolumenExistenciasMes": 0.0,
+          "FechaYHoraEstaMedicionMes": "2023-09-30T23:59:59-06:00"
+        },
+        "Recepciones": {
+          "TotalRecepcionesMes": 4,
+          "SumaVolumenRecepcionMes": {
+            "ValorNumerico": 168071.06,
+            "UnidadDeMedida": "UM03"
+          },
+          "TotalDocumentosMes": 4,
+          "ImporteTotalRecepcionesMensual": 882009.04,
+          "Complemento": [
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "ECE111116MP2",
+                  "NombreClienteOProveedor": "ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV ",
+                  "PermisoClienteOProveedor": "H/20224/COM/2017",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "C47038B6-C8EB-4E90-BB4B-C21C50D9ACE4",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 181468.7,
+                      "FechaYHoraTransaccion": "2023-09-02T11:51:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 39229.24,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "Aclaracion": "NO CUENTA CON INFRAESTRUCTURA PROPIA"
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "ECE111116MP2",
+                  "NombreClienteOProveedor": "ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV ",
+                  "PermisoClienteOProveedor": "H/20224/COM/2017",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "D58A8069-68B5-4AC3-B707-6FE3C4729854",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 266892.48,
+                      "FechaYHoraTransaccion": "2023-09-11T12:44:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 49509.8,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "Aclaracion": "NO CUENTA CON INFRAESTRUCTURA PROPIA"
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "ECE111116MP2",
+                  "NombreClienteOProveedor": "ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV ",
+                  "PermisoClienteOProveedor": "H/20224/COM/2017",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "EC87806B-772D-4002-93B3-A4524A2F8341",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 240213.96,
+                      "FechaYHoraTransaccion": "2023-09-22T12:06:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 42000.0,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "ECE111116MP2",
+                  "NombreClienteOProveedor": "ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV ",
+                  "PermisoClienteOProveedor": "H/20224/COM/2017",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "039D708B-D818-4DC1-9C30-115EAC413B30",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 193433.9,
+                      "FechaYHoraTransaccion": "2023-09-30T22:46:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 37332.02,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Entregas": {
+          "TotalEntregasMes": 4,
+          "SumaVolumenEntregadoMes": {
+            "ValorNumerico": 168071.08,
+            "UnidadDeMedida": "UM03"
+          },
+          "TotalDocumentosMes": 4,
+          "ImporteTotalEntregasMes": 950888.77,
+          "Complemento": [
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "GAP940503GH7",
+                  "NombreClienteOProveedor": "GAS DE APAN SA DE CV",
+                  "PermisoClienteOProveedor": "LP/14123/DIST/PLA/2016",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "EEB992E8-ECD3-42DD-B370-1395BA9F6B2A",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 201279.01,
+                      "FechaYHoraTransaccion": "2023-09-05T20:52:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 39229.25,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "Aclaracion": "NO CUENTA CON INFRAESTRUCTURA PROPIA"
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "GAP940503GH7",
+                  "NombreClienteOProveedor": "GAS DE APAN SA DE CV",
+                  "PermisoClienteOProveedor": "LP/14123/DIST/PLA/2016",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "618662F2-7F56-43BE-8D80-609436286A0D",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 283557.5,
+                      "FechaYHoraTransaccion": "2023-09-21T22:14:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 49509.8,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "Aclaracion": "NO CUENTA CON INFRAESTRUCTURA PROPIA"
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "GAP940503GH7",
+                  "NombreClienteOProveedor": "GAS DE APAN SA DE CV",
+                  "PermisoClienteOProveedor": "LP/14123/DIST/PLA/2016",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "9425B2A0-3CBD-448C-B0F2-E6DE8C333EE3",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 253728.69,
+                      "FechaYHoraTransaccion": "2023-09-22T12:06:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 42000.0,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "TipoComplemento": "Comercializacion",
+              "Nacional": [
+                {
+                  "RfcClienteOProveedor": "GAP940503GH7",
+                  "NombreClienteOProveedor": "GAS DE APAN SA DE CV",
+                  "PermisoClienteOProveedor": "LP/14123/DIST/PLA/2016",
+                  "CFDIs": [
+                    {
+                      "Cfdi": "191B86D9-8A38-43E1-99AD-4FD500E70489",
+                      "TipoCfdi": "Ingreso",
+                      "PrecioVentaOCompraOContrap": 212323.57,
+                      "FechaYHoraTransaccion": "2023-09-30T22:46:00-06:00",
+                      "VolumenDocumentado": {
+                        "ValorNumerico": 37332.03,
+                        "UnidadDeMedida": "UM03"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "BitacoraMensual": [
+    {
+      "NumeroRegistro": 2033,
+      "FechaYHoraEvento": "2024-04-09T17:22:58-06:00",
+      "UsuarioResponsable": "ANGEL LUIS IBARRA",
+      "TipoEvento": 5,
+      "DescripcionEvento": "Consulta Informacion"
+    }
+  ]
+}

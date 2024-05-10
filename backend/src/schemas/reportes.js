@@ -9,7 +9,7 @@ const schemaCreate = joi.object({
   modalidadpermiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   numpermiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{3,100}$')).required(),
   claveinstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
-  descripcioninstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
+  descripcioninstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9-\u00C0-\u017F ]{3,100}$')).required(),
   numeropozos: joi.number().required(),
   numerotanques: joi.number().required(),
   numeroductosentradasalida: joi.number().required(),
@@ -43,7 +43,7 @@ const schemaUpdate = joi.object({
   modalidadpermiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   numpermiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{3,100}$')).required(),
   claveinstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
-  descripcioninstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
+  descripcioninstalacion: joi.string().pattern(new RegExp('^[a-zA-Z0-9-\u00C0-\u017F ]{3,100}$')).required(),
   numeropozos: joi.number().required(),
   numerotanques: joi.number().required(),
   numeroductosentradasalida: joi.number().required(),
@@ -64,9 +64,9 @@ const schemaUpdate = joi.object({
   reporte_id: joi.number().min(1).required(),
 });
 
- const schemaIdReporre = joi.object({
+ const schemaIdReporte = joi.object({
   reporte_id: joi.number().min(1).required(),
  });
 
-module.exports = { schemaCreate, schemaId,schemaUpdate, schemaIdReporre }
+module.exports = { schemaCreate, schemaId,schemaUpdate, schemaIdReporte }
 //module.exports = { schemaCreate, schemaId, schemaUpdate, schemaIdVenta }
