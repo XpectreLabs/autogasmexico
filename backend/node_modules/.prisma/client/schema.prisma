@@ -31,7 +31,7 @@ model proveedores {
   rfc                     String      @db.VarChar(30)
   direccion               String?     @db.VarChar(255)
   tipo_situacion_fiscal   String      @db.VarChar(255)
-  permiso                 String      @db.VarChar(100)
+  permiso                 String?     @db.VarChar(100)
   phone                   String?     @db.VarChar(20)
   email                   String?     @db.VarChar(200)
   user_id                 Int?        @db.Integer
@@ -47,7 +47,7 @@ model clients {
   rfc                     String      @db.VarChar(30)
   direccion               String      @db.VarChar(255)
   tipo_situacion_fiscal   String      @db.VarChar(255)
-  permiso                 String      @db.VarChar(100)
+  permiso                 String?     @db.VarChar(100)
   phone                   String?     @db.VarChar(20)
   email                   String?     @db.VarChar(200)
   user_id                 Int         @db.Integer
@@ -74,7 +74,7 @@ model abastecimientos {
   concepto              String      @db.VarChar(600)
   preciounitario        Float       @db.Real
   importe               Float       @db.Real
-  ivaaplicado           Int         @db.Integer
+  ivaaplicado           Float       @db.Real
   tipo_modena_id        Int         @db.SmallInt
   condicion_pago_id     Int?        @db.SmallInt
   cfdi                  String      @db.VarChar(150)
@@ -82,7 +82,6 @@ model abastecimientos {
   preciovent            Float       @db.Real
   aclaracion            String      @db.VarChar(300)
   tipocomplemento       String      @db.VarChar(100)
-  valornumerico         Float       @db.Real
   unidaddemedida        String      @db.VarChar(60)
   user_id               Int         @db.Integer
   date                  DateTime    @db.Date
@@ -124,7 +123,7 @@ model ventas {
   concepto                String      @db.VarChar(600)
   preciounitario          Float       @db.Real
   importe                 Float       @db.Real
-  ivaaplicado             Int         @db.Integer
+  ivaaplicado             Float       @db.Real
   tipo_modena_id          Int         @db.SmallInt
   condicion_pago_id       Int?        @db.SmallInt
   cfdi                    String      @db.VarChar(150)
@@ -132,7 +131,6 @@ model ventas {
   preciovent              Float       @db.Real
   aclaracion              String      @db.VarChar(300)
   tipocomplemento         String      @db.VarChar(100)
-  valornumerico           Float       @db.Real
   unidaddemedida          String      @db.VarChar(60)
   user_id                 Int         @db.Integer
   date                    DateTime    @db.Date

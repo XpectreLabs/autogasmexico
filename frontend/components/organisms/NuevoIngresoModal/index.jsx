@@ -18,7 +18,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   return (
@@ -61,9 +61,6 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
           tipocomplemento: Yup.string()
             .min(3, "El tipo de complemento es muy corto")
             .required("El tipo de complemento es requerido"),
-          valornumerico: Yup.number()
-            .min(1, "El valor numérico debe tener minimo 1 digito")
-            .required("El valor numérico es requerido"),
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
             .required("La unidad de medida es requerido"),
@@ -84,7 +81,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
           const data = {...values,user_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
@@ -103,7 +100,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del ingreso fueron guardados");
-              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -190,6 +187,18 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                   <TextField
                     className={`InputModal`}
                     required
+                    placeholder="Unidad de medida"
+                    id="unidaddemedida"
+                    label="Unidad de medida"
+                    name="unidaddemedida"
+                    value={values.unidaddemedida}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                  />
+                  <TextField
+                    className={`InputModal ${styles.Mr}`}
+                    required
                     placeholder="Concepto"
                     id="concepto"
                     label="Concepto"
@@ -200,7 +209,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -214,7 +223,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                   />
 
                 <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -227,7 +236,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -240,7 +249,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Precio de ingreso"
                     id="preciovent"
@@ -253,7 +262,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Cfdi"
                     id="cfdi"
@@ -265,7 +274,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -277,7 +286,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -289,7 +298,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"
@@ -300,31 +309,8 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Valor numérico"
-                    id="valornumerico"
-                    label="Valor numérico"
-                    name="valornumerico"
-                    value={values.valornumerico}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Unidad de medida"
-                    id="unidaddemedida"
-                    label="Unidad de medida"
-                    name="unidaddemedida"
-                    value={values.unidaddemedida}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                  
+                  
 
                 <NativeSelect
                   className={`Fecha ${styles.select} ${styles.Mt}`}
@@ -342,7 +328,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                 </NativeSelect>
 
 
-                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento|| errors.valornumerico|| errors.unidaddemedida)?(<div className={styles.errors}>
+                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.folio? (<p>{errors.folio}</p>):null}
                         {errors.fecha_emision? (<p>{errors.fecha_emision}</p>):null}
@@ -356,7 +342,6 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                         {errors.preciovent? (<p>{errors.preciovent}</p>):null}
                         {errors.aclaracion? (<p>{errors.aclaracion}</p>):null}
                         {errors.tipocomplemento? (<p>{errors.tipocomplemento}</p>):null}
-                        {errors.valornumerico? (<p>{errors.valornumerico}</p>):null}
                         {errors.unidaddemedida? (<p>{errors.unidaddemedida}</p>):null}
                         {errors.client_id? (<p>{errors.client_id}</p>):null}
                     </div>):null}

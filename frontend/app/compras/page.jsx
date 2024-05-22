@@ -439,15 +439,15 @@ export default function Compras() {
           preciovent:  compra.preciovent,
           preciovent2:  formatter.format(compra.preciovent),
           ivaaplicado: compra.ivaaplicado,
-          ivaaplicado2: compra.ivaaplicado+"%",
+          ivaaplicado2: formatter.format(compra.ivaaplicado),
           tipo_modena_id: compra.tipo_modena_id,
           cfdi: compra.cfdi,
           tipoCfdi: compra.tipoCfdi,
           aclaracion: compra.aclaracion,
           tipocomplemento: compra.tipocomplemento,
           valornumerico: compra.valornumerico,
-          valornumerico2: formatter.format(compra.valornumerico),
           unidaddemedida: compra.unidaddemedida,
+          proveedor: compra.proveedores.name,
         }))}
         columns={columns}
         initialState={{
@@ -495,10 +495,7 @@ export default function Compras() {
           data();
         }}
       />
-
-      
     </div>
-
-    </main>
+  </main>
   );
 }

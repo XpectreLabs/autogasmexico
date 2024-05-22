@@ -20,7 +20,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   console.log("Dta",abastecimientoData);
@@ -64,9 +64,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           tipocomplemento: Yup.string()
             .min(3, "El tipo de complemento es muy corto")
             .required("El tipo de complemento es requerido"),
-          valornumerico: Yup.number()
-            .min(1, "El valor numérico debe tener minimo 1 digito")
-            .required("El valor numérico es requerido"),
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
             .required("La unidad de medida es requerido"),
@@ -82,7 +79,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           delete values.importe2;
           delete values.preciounitario2;
           delete values.preciovent2;
-          delete values.valornumerico2;
           delete values.ivaaplicado2;
           /*const folio = values.name;
           const rfc = values.rfc;
@@ -94,7 +90,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           const data = {...values,abastecimiento_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -113,7 +109,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron actualizados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -200,6 +196,18 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   <TextField
                     className={`InputModal`}
                     required
+                    placeholder="Unidad de medida"
+                    id="unidaddemedida"
+                    label="Unidad de medida"
+                    name="unidaddemedida"
+                    value={values.unidaddemedida}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                  />
+                  <TextField
+                    className={`InputModal ${styles.Mr}`}
+                    required
                     placeholder="Concepto"
                     id="concepto"
                     label="Concepto"
@@ -210,7 +218,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -224,7 +232,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   />
 
                 <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -237,7 +245,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -250,7 +258,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Precio de compra"
                     id="preciovent"
@@ -263,7 +271,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Cfdi"
                     id="cfdi"
@@ -275,7 +283,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -288,7 +296,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   />
                   
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -300,7 +308,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"
@@ -311,35 +319,10 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Valor numérico"
-                    id="valornumerico"
-                    label="Valor numérico"
-                    name="valornumerico"
-                    value={values.valornumerico}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Unidad de medida"
-                    id="unidaddemedida"
-                    label="Unidad de medida"
-                    name="unidaddemedida"
-                    value={values.unidaddemedida}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
 
                 <p>a {values.proveedor_id}</p>
                 <NativeSelect
-                  className={` Fecha ${styles.select} ${styles.Mt}`}
+                  className={` Fecha ${styles.select}`}
                   required
                   value={values.proveedor_id}
                   onChange={handleChange}
@@ -470,7 +453,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   /> */}
 
-                  {(errors.proveedor_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento|| errors.valornumerico|| errors.unidaddemedida)?(<div className={styles.errors}>
+                  {(errors.proveedor_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.folio? (<p>{errors.folio}</p>):null}
                         {errors.fecha_emision? (<p>{errors.fecha_emision}</p>):null}
@@ -484,7 +467,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                         {errors.preciovent? (<p>{errors.preciovent}</p>):null}
                         {errors.aclaracion? (<p>{errors.aclaracion}</p>):null}
                         {errors.tipocomplemento? (<p>{errors.tipocomplemento}</p>):null}
-                        {errors.valornumerico? (<p>{errors.valornumerico}</p>):null}
                         {errors.unidaddemedida? (<p>{errors.unidaddemedida}</p>):null}
                         {errors.proveedor_id? (<p>{errors.proveedor_id}</p>):null}
                     </div>):null}

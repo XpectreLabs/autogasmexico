@@ -38,6 +38,11 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                     </div>
 
                     <div>
+                      <p><strong>Unidad de medida:</strong></p>
+                      <p>{ventaData.unidaddemedida}</p>
+                    </div>
+
+                    <div>
                       <p><strong>Concepto:</strong></p>
                       <p>{ventaData.concepto}</p>
                     </div>
@@ -56,8 +61,8 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                       <p>{ventaData.ivaaplicado2}</p>
                     </div>
                     <div>
-                      <p><strong>Precio compra:</strong></p>
-                      <p>{ventaData.importe2}</p>
+                      <p><strong>Precio ingreso:</strong></p>
+                      <p>{ventaData.preciovent2}</p>
                     </div>
 
                     <div>
@@ -68,7 +73,7 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                       <p><strong>Tipo CFDI:</strong></p>
                       <p>{ventaData.tipoCfdi}</p>
                     </div>
-                    
+
                     <div>
                       <p><strong>Aclaración:</strong></p>
                       <p>{ventaData.aclaracion}</p>
@@ -78,14 +83,9 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                       <p>{ventaData.tipocomplemento}</p>
                     </div>
 
-
                     <div>
-                      <p><strong>Valor numérico:</strong></p>
-                      <p>{ventaData.valornumerico2}</p>
-                    </div>
-                    <div>
-                      <p><strong>Unidad de medida:</strong></p>
-                      <p>{ventaData.unidaddemedida}</p>
+                      <p><strong>Cliente:</strong></p>
+                      <p>{ventaData.cliente}</p>
                     </div>
                   </div>
                 </Form>

@@ -20,7 +20,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   console.log("Dta",ventaData);
@@ -64,9 +64,6 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           tipocomplemento: Yup.string()
             .min(3, "El tipo de complemento es muy corto")
             .required("El tipo de complemento es requerido"),
-          valornumerico: Yup.number()
-            .min(1, "El valor numérico debe tener minimo 1 digito")
-            .required("El valor numérico es requerido"),
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
             .required("La unidad de medida es requerido"),
@@ -82,7 +79,6 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           delete values.importe2;
           delete values.preciounitario2;
           delete values.preciovent2;
-          delete values.valornumerico2;
           delete values.ivaaplicado2;
           /*const folio = values.name;
           const rfc = values.rfc;
@@ -94,7 +90,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           const data = {...values,venta_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -113,7 +109,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del ingreso fueron actualizados");
-              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',valornumerico:'',unidaddemedida:''}));
+              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -200,6 +196,18 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   <TextField
                     className={`InputModal`}
                     required
+                    placeholder="Unidad de medida"
+                    id="unidaddemedida"
+                    label="Unidad de medida"
+                    name="unidaddemedida"
+                    value={values.unidaddemedida}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                  />
+                  <TextField
+                    className={`InputModal ${styles.Mr}`}
+                    required
                     placeholder="Concepto"
                     id="concepto"
                     label="Concepto"
@@ -210,7 +218,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -224,7 +232,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   />
 
                 <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -237,7 +245,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -250,11 +258,11 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
-                    placeholder="Precio de compra"
+                    placeholder="Precio de ingreso"
                     id="preciovent"
-                    label="Precio de compra"
+                    label="Precio de ingreso"
                     name="preciovent"
                     value={values.preciovent}
                     onChange={handleChange}
@@ -263,7 +271,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Cfdi"
                     id="cfdi"
@@ -275,7 +283,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -288,7 +296,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   />
                   
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -300,7 +308,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"
@@ -311,34 +319,10 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Valor numérico"
-                    id="valornumerico"
-                    label="Valor numérico"
-                    name="valornumerico"
-                    value={values.valornumerico}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Unidad de medida"
-                    id="unidaddemedida"
-                    label="Unidad de medida"
-                    name="unidaddemedida"
-                    value={values.unidaddemedida}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                  
 
                 <NativeSelect
-                  className={` Fecha ${styles.select} ${styles.Mt}`}
+                  className={` Fecha ${styles.select}`}
                   required
                   value={values.client_id}
                   onChange={handleChange}
@@ -352,7 +336,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   <option value={1}>PETREOS</option>
                 </NativeSelect>
 
-                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento|| errors.valornumerico|| errors.unidaddemedida)?(<div className={styles.errors}>
+                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.folio? (<p>{errors.folio}</p>):null}
                         {errors.fecha_emision? (<p>{errors.fecha_emision}</p>):null}
@@ -366,7 +350,6 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                         {errors.preciovent? (<p>{errors.preciovent}</p>):null}
                         {errors.aclaracion? (<p>{errors.aclaracion}</p>):null}
                         {errors.tipocomplemento? (<p>{errors.tipocomplemento}</p>):null}
-                        {errors.valornumerico? (<p>{errors.valornumerico}</p>):null}
                         {errors.unidaddemedida? (<p>{errors.unidaddemedida}</p>):null}
                         {errors.client_id? (<p>{errors.client_id}</p>):null}
                     </div>):null}

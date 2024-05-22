@@ -41,6 +41,11 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
                     </div>
 
                     <div>
+                      <p><strong>Unidad de medida:</strong></p>
+                      <p>{abastecimientoData.unidaddemedida}</p>
+                    </div>
+
+                    <div>
                       <p><strong>Concepto:</strong></p>
                       <p>{abastecimientoData.concepto}</p>
                     </div>
@@ -71,24 +76,20 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
                       <p><strong>Tipo CFDI:</strong></p>
                       <p>{abastecimientoData.tipoCfdi}</p>
                     </div>
-                    
+
                     <div>
                       <p><strong>Aclaración:</strong></p>
                       <p>{abastecimientoData.aclaracion}</p>
                     </div>
+
                     <div>
                       <p><strong>Tipo de complemento:</strong></p>
                       <p>{abastecimientoData.tipocomplemento}</p>
                     </div>
 
-
                     <div>
-                      <p><strong>Valor numérico:</strong></p>
-                      <p>{abastecimientoData.valornumerico2}</p>
-                    </div>
-                    <div>
-                      <p><strong>Unidad de medida:</strong></p>
-                      <p>{abastecimientoData.unidaddemedida}</p>
+                      <p><strong>Proveedor:</strong></p>
+                      <p>{abastecimientoData.proveedor}</p>
                     </div>
                   </div>
                 </Form>

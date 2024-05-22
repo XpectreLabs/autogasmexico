@@ -427,8 +427,8 @@ export default function Compras() {
           preciounitario2:formatter.format(ingreso.preciounitario),
           importe2: formatter.format(ingreso.importe),
           preciovent2:  formatter.format(ingreso.preciovent),
-          ivaaplicado2: ingreso.ivaaplicado+"%",
-          valornumerico2: formatter.format(ingreso.valornumerico),
+          ivaaplicado2: formatter.format(ingreso.ivaaplicado),
+          cliente: ingreso.clients.name,
 
           /*client_id: ingreso.client_id,
           venta_id: ingreso.venta_id,
@@ -499,8 +499,6 @@ export default function Compras() {
           data();
         }}
       />
-
-      
     </div>
 
     </main>

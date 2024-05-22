@@ -14,8 +14,7 @@ const schemaCreate = joi.object({
   tipoCfdi: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
   preciovent: joi.number().min(1).required(),
   aclaracion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
-  tipocomplemento: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
-  valornumerico: joi.number().min(1).required(),
+  tipocomplemento: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F ]{3,100}$')).required(),
   unidaddemedida: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
   user_id: joi.number().min(1).required(),
 });
@@ -38,8 +37,7 @@ const schemaUpdate = joi.object({
   tipoCfdi: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
   preciovent: joi.number().min(1).required(),
   aclaracion: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
-  tipocomplemento: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
-  valornumerico: joi.number().min(1).required(),
+  tipocomplemento: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F ]{3,100}$')).required(),
   unidaddemedida: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,120}$')).required(),
   venta_id: joi.number().min(1).required(),
 });

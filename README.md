@@ -12,3 +12,16 @@
 
 docker run --name autogasmexico -e POSTGRES_USER=autogasmexico -e POSTGRES_PASSWORD=test123 -e POSTGRES_DB=dbautogasmexico -p 5432:5432  -d postgres
 
+
+# Para correrlo 
+- npm i
+- npm run start
+
+
+# Autogasmexico Frontend
+
+# Para correrlo 
+- nvm use 19
+- npm i
+- npm run dev
+
