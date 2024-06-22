@@ -140,10 +140,10 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                   open={isOpen}
                   onClose={onClose}
                   className={styles.Modal}
-                  title="Agregar ingreso"
+                  title="Agregar venta"
               >
                 <Form id="formAddIngreso" className={styles.form} onSubmit={handleSubmit}>
-                  <h2 className={styles.Title}>Agregar ingreso</h2>
+                  <h2 className={styles.Title}>Agregar venta</h2>
                   <TextField
                     className={`InputModal ${styles.Mr}`}
                     placeholder="Folio"
@@ -309,8 +309,6 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
-                  
-                  
 
                 <NativeSelect
                   className={`Fecha ${styles.select} ${styles.Mt}`}
@@ -325,6 +323,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                 >
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
+                  <option value={2}>MARTHA PATRICIA GUTIERREZ URIBE</option>
                 </NativeSelect>
 
 

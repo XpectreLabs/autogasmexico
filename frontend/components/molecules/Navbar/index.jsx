@@ -47,9 +47,9 @@ export default function Navbar({activeMain}) {
 
           <Paper sx={{ width: 95, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
             <MenuList  className={styles.ListNav}>
-              <Link href="/ingresos" onClick={()=>{setActive(3)}}>
+              <Link href="/ventas" onClick={()=>{setActive(3)}}>
                 <MenuItem className={active===3?"activo":null}>
-                  Ingresos
+                  Ventas
                 </MenuItem>
               </Link>
             </MenuList>

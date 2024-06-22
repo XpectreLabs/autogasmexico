@@ -19,7 +19,7 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                   title="Editar ingreso"
               >
                 <Form id="formEditIngreso" className={styles.form}>
-                  <h2 className={styles.Title}>Detalle del ingreso</h2>
+                  <h2 className={styles.Title}>Detalle del venta</h2>
 
                   <div className={styles.Texts}>
                     <div>

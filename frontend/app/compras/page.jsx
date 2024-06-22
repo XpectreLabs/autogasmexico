@@ -25,6 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {es} from 'date-fns/locale'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -249,7 +250,7 @@ export default function Compras() {
   })
 
   const changedateformat = (date) => {
-    return (""+date).slice(6,10)+"-"+(""+date).slice(3,5)+"-"+(""+date).slice(0,2)
+    return (""+date).slice(6,10)+"-"+(""+date).slice(3,5)+"-"+(""+date).slice(0,2);
   };
 
   const convertDate = (date) => {
@@ -257,6 +258,7 @@ export default function Compras() {
   };
 
   const onChangeDate = (item) => {
+    console.log("item",item);
     setTimeout(()=>{
       const fechaInicio = convertDate(document.querySelector(".fechaDesde input").value);
       const fechaHasta = convertDate(document.querySelector(".fechaHasta input").value);
@@ -286,7 +288,11 @@ export default function Compras() {
     },1000)
 	};
 
-  
+  const cambiarFechaNormal = (fecha) => {
+    fecha=fecha+"";
+    return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
+  }
+
   return (
     <main
       className={styles.main}
@@ -335,6 +341,23 @@ export default function Compras() {
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
+              <Grid item xs={3} style={{marginTop: '15px', marginBottom: '0px'}} align="left">
+              <p><strong>Litros totales:</strong> $999,000.00</p>
+              </Grid>
+              <Grid item xs={6}><p><strong>Kilos totales:</strong> 999kg</p></Grid>
+              <Grid item xs={3} align="right">
+                <div>
+                  <p><strong>Total en compra:</strong> $999,000.00</p>
+                </div>
+              </Grid>
+            </Grid>
+          </Item>
+        </Grid>
+
+
+        <Grid item xs={12}>
+          <Item className={styles.DeleteBorder}>
+            <Grid container spacing={0}>
               <Grid item xs={3} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
                 <Paper
                   className={styles.ItemOpcion}
@@ -371,17 +394,17 @@ export default function Compras() {
               <Grid item xs={5}>
                 <div className={`${styles.ItemFecha}`}>
                   <p><strong>Desde:</strong></p>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <LocalizationProvider adapterLocale={es} dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
-                      format="DD/MM/YYYY"
                       required
                       placeholder="Fecha"
                       label="Fecha"
                       id="fecha_desde"
                       name="fecha_desde"
                       //defaultValue={values.fecha_emision}
-                      onChange={onChangeDate} 
+                      onChange={onChangeDate}
+                      views={['month', 'year']}
                     />
                   </LocalizationProvider>
                 </div>
@@ -424,30 +447,13 @@ export default function Compras() {
 
       <DataGrid
         rows={compras.map((compra) => ({
+          ...compra,
           id: compra.abastecimiento_id,
-          proveedor_id: compra.proveedor_id,
-          abastecimiento_id: compra.abastecimiento_id,
-          folio: compra.folio,
-          fecha_emision: compra.fecha_emision,
-          fecha_emision2: new Date(compra.fecha_emision).toLocaleDateString('en-US'),
-          cantidad: compra.cantidad,
-          concepto: compra.concepto,
-          preciounitario:compra.preciounitario,
+          fecha_emision2: cambiarFechaNormal(compra.fecha_emision),
           preciounitario2:formatter.format(compra.preciounitario),
-          importe: compra.importe,
           importe2: formatter.format(compra.importe),
-          preciovent:  compra.preciovent,
           preciovent2:  formatter.format(compra.preciovent),
-          ivaaplicado: compra.ivaaplicado,
           ivaaplicado2: formatter.format(compra.ivaaplicado),
-          tipo_modena_id: compra.tipo_modena_id,
-          cfdi: compra.cfdi,
-          tipoCfdi: compra.tipoCfdi,
-          aclaracion: compra.aclaracion,
-          tipocomplemento: compra.tipocomplemento,
-          valornumerico: compra.valornumerico,
-          unidaddemedida: compra.unidaddemedida,
-          proveedor: compra.proveedores.name,
         }))}
         columns={columns}
         initialState={{

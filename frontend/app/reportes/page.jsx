@@ -258,7 +258,6 @@ export default function Compras() {
   };
 
   const convertDate = (date) => {
-    alert(changedateformat(date));
     return Date.parse(changedateformat(date));
   };
 
@@ -289,6 +288,11 @@ export default function Compras() {
         setReportes(listResult);
     },1000)
 	};
+
+  const cambiarFechaNormal = (fecha) => {
+    fecha=fecha+"";
+    return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
+  }
 
   return (
     <main

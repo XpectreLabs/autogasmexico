@@ -70,11 +70,12 @@ model abastecimientos {
   exportacion           String?     @db.VarChar(150)
   uso                   String?     @db.VarChar(150)
   cantidad              Float       @db.Real
-  unidad                String?      @db.VarChar(150)
+  unidad                String?     @db.VarChar(150)
   concepto              String      @db.VarChar(600)
   preciounitario        Float       @db.Real
   importe               Float       @db.Real
   ivaaplicado           Float       @db.Real
+  densidad              Float?      @db.Real
   tipo_modena_id        Int         @db.SmallInt
   condicion_pago_id     Int?        @db.SmallInt
   cfdi                  String      @db.VarChar(150)

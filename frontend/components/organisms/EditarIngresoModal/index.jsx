@@ -149,10 +149,10 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   open={isOpen}
                   onClose={onClose}
                   className={styles.Modal}
-                  title="Editar ingreso"
+                  title="Editar venta"
               >
                 <Form id="formEditIngreso" className={styles.form} onSubmit={handleSubmit}>
-                  <h2 className={styles.Title}>Editar ingreso</h2>
+                  <h2 className={styles.Title}>Editar venta</h2>
                   <TextField
                     className={`InputModal ${styles.Mr}`}
                     placeholder="Folio"
@@ -334,6 +334,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                 >
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
+                  <option value={2}>MARTHA PATRICIA GUTIERREZ URIBE</option>
                 </NativeSelect>
 
                   {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>

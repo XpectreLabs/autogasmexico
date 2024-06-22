@@ -118,7 +118,7 @@ export default function Compras() {
     .then((resp) => resp.json())
     .then(function(dataL) {
       if(dataL.message==="success") {
-        setTextError("El ingreso fue eliminado");
+        setTextError("La venta fue eliminada");
         setShowAlert(true);
         data();
       }
@@ -233,7 +233,7 @@ export default function Compras() {
         <DeleteIcon
           className={styles.btnAccion}
           onClick={() => {
-            if(confirm("¿Desea borrar este ingreso?"))
+            if(confirm("¿Desea borrar esta venta?"))
               deleteVenta(params.row.venta_id);
           }}
         />
@@ -284,6 +284,11 @@ export default function Compras() {
         setIngresos(listResult);
     },1000)
 	};
+
+  const cambiarFechaNormal = (fecha) => {
+    fecha=fecha+"";
+    return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
+  }
 
   return (
     <main
@@ -409,7 +414,7 @@ export default function Compras() {
                     setIsAgregarIngresoModalOpen(true);
                   }}
                 >
-                  <span>+</span> Agregar ingreso
+                  <span>+</span> Agregar venta
                 </Button>
               </Grid>
             </Grid>
@@ -423,7 +428,7 @@ export default function Compras() {
         rows={ingresos.map((ingreso) => ({
           ...ingreso,
           id: ingreso.venta_id,
-          fecha_emision2: new Date(ingreso.fecha_emision).toLocaleDateString('en-US'),
+          fecha_emision2: cambiarFechaNormal(ingreso.fecha_emision),
           preciounitario2:formatter.format(ingreso.preciounitario),
           importe2: formatter.format(ingreso.importe),
           preciovent2:  formatter.format(ingreso.preciovent),

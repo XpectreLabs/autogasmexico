@@ -294,7 +294,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     onBlur={handleBlur}
                     size="small"
                   />
-                  
+
                   <TextField
                     className={`InputModal`}
                     required
@@ -335,6 +335,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   <option aria-label="None" value="">Proveedor *</option>
                   <option value={1}>DISTRIBUIDORA POTOSINA</option>
                   <option value={2}>MER MAC GAS</option>
+                  <option value={3}>TRANSCAMELLO</option>
                 </NativeSelect>
 
 

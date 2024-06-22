@@ -56,6 +56,7 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
           preciounitario: true,
           importe: true,
           ivaaplicado: true,
+          densidad: true,
           tipo_modena_id: true,
           cfdi: true,
           tipoCfdi: true,
