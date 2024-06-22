@@ -48,6 +48,9 @@ export default function Compras() {
   const [isEditCompraModalOpen, setIsEditPCompraModalOpen] = useState(false);
   const [compraToEdit, setCompraToEdit] = useState({});
   const [compraIdd, setCompraIdd] = useState(0);
+  const [litrosTotales, setLitrosTotales] = useState(0);
+  const [densidadTotales, setDensidadTotales] = useState(0);
+  const [totalTotales, setTotalTotales] = useState(0);
 
   const [isDetalleCompraModalOpen, setIsDetallePCompraModalOpen] = useState(false);
   const [compraToDetalle, setCompraToDetalle] = useState({});
@@ -58,7 +61,9 @@ export default function Compras() {
     router.push('/');
   }
 
-  function data() {
+
+
+  function data(compras) {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://localhost:3001/api/v1/compras/"+user_id+"/compras";
 
@@ -80,6 +85,8 @@ export default function Compras() {
         setLoading(false);
         setCompras(data.listCompras);
         setComprasAux(data.listCompras);
+        
+        cargarTotales(data.listCompras)
       }
       else if(data.message==="schema") {
         setTextError(data.error);
@@ -122,7 +129,7 @@ export default function Compras() {
       if(dataL.message==="success") {
         setTextError("La compra fue eliminada");
         setShowAlert(true);
-        data();
+        data(compras);
       }
       else if(dataL.message==="schema") {
         setTextError(data.error);
@@ -143,9 +150,28 @@ export default function Compras() {
     });
   }
 
+
+  const cargarTotales = (compras) => {
+    let litrosT = 0;
+    let total = 0;
+    let densidadT = 0;
+
+    for(let w=0; w<compras.length;w++) {
+      litrosT += compras[w].cantidad;
+      densidadT += parseInt(compras[w].cantidad*compras[w].densidad)
+      total += compras[w].preciovent;
+    }
+    setLitrosTotales(litrosT);
+    setTotalTotales(total);
+    setDensidadTotales(densidadT);
+  }
+
   useEffect(() => {
-    loadingData===false?data():null;
+    loadingData===false?data(compras):null;
+
+    
   }, []);
+
 
   const columns = [
     {
@@ -342,12 +368,12 @@ export default function Compras() {
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
               <Grid item xs={3} style={{marginTop: '15px', marginBottom: '0px'}} align="left">
-              <p><strong>Litros totales:</strong> $999,000.00</p>
+              <p><strong>Litros totales:</strong> {litrosTotales}L</p>
               </Grid>
-              <Grid item xs={6}><p><strong>Kilos totales:</strong> 999kg</p></Grid>
+              <Grid item xs={6}><p><strong>Kilos totales:</strong> {densidadTotales}kg</p></Grid>
               <Grid item xs={3} align="right">
                 <div>
-                  <p><strong>Total en compra:</strong> $999,000.00</p>
+                  <p><strong>Total en compra:</strong> {formatter.format(totalTotales)}</p>
                 </div>
               </Grid>
             </Grid>
@@ -478,7 +504,7 @@ export default function Compras() {
         isOpen={isAgregarCompraModalOpen}
         onClose={() => {
           setIsAgregarCompraModalOpen(false);
-          data();
+          data(compras);
         }}
       />
 
@@ -488,7 +514,7 @@ export default function Compras() {
         isOpen={isEditCompraModalOpen}
         onClose={() => {
           setIsEditPCompraModalOpen(false);
-          data();
+          data(compras);
         }}
       />
 
@@ -498,7 +524,7 @@ export default function Compras() {
         isOpen={isDetalleCompraModalOpen}
         onClose={() => {
           setIsDetallePCompraModalOpen(false);
-          data();
+          data(compras);
         }}
       />
     </div>
