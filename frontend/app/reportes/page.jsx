@@ -56,6 +56,8 @@ export default function Compras() {
     router.push('/');
   }
 
+  let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
+  
   function data() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://localhost:3001/api/v1/reportes/"+user_id+"/reportes";
@@ -262,31 +264,43 @@ export default function Compras() {
   };
 
   const onChangeDate = (item) => {
-    setTimeout(()=>{
-      const fechaInicio = convertDate(document.querySelector(".fechaDesde input").value);
-      const fechaHasta = convertDate(document.querySelector(".fechaHasta input").value);
+    if(item!==null) {
+      let anio = item.$y;
+      let mes = item.$M+1;
+      let diaBisiesto = mes==2?anio%4===0?1:0:0;
+      let diasMes = meses[mes-1]+diaBisiesto;
+      mes = mes<10?("0"+mes):mes;
+      let fechaIni = "01/"+mes+"/"+anio;
+      let fechaFin = diasMes+"/"+mes+"/"+anio;
 
-      let listResult = [];
+      setTimeout(()=>{
+        const fechaInicio = convertDate(fechaIni);
+        const fechaHasta = convertDate(fechaFin);
+        let listResult = [];
 
-      if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-        console.log("Aux",reportesAux);
-        for(let j=0;j<reportesAux.length;j++) {
-          const dateEmi = convertDate(new Date((""+reportesAux[j].date)).toLocaleDateString('en-GB'));
+        if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
+          console.log("Aux",reportesAux);
+          for(let j=0;j<reportesAux.length;j++) {
+            const dateEmi = convertDate(new Date((""+reportesAux[j].date)).toLocaleDateString('en-GB'));
 
-          if(fechaInicio!==fechaHasta) {
-            if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-              listResult.push(reportesAux[j]);
+            if(fechaInicio!==fechaHasta) {
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
+                listResult.push(reportesAux[j]);
+            }
+            else {
+              if(fechaInicio===dateEmi)
+                listResult.push(reportesAux[j]);
+            }
           }
-          else {
-            if(fechaInicio===dateEmi)
-              listResult.push(reportesAux[j]);
-          }
+          setReportes(listResult);
         }
-        setReportes(listResult);
-      }
-      else
-        setReportes(listResult);
-    },1000)
+        else
+          setReportes(listResult);
+      },1000);
+    }
+    {
+      setReportes(reportesAux);
+    }
 	};
 
   const cambiarFechaNormal = (fecha) => {
@@ -378,34 +392,18 @@ export default function Compras() {
 
               <Grid item xs={5}>
                 <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Desde:</strong></p>
+                  <p><strong>Mes y año de filtro:</strong></p>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
-                      format="DD/MM/YYYY"
                       required
                       placeholder="Fecha"
                       label="Fecha"
                       id="fecha_desde"
                       name="fecha_desde"
                       //defaultValue={values.fecha_emision}
-                      onChange={onChangeDate} 
-                    />
-                  </LocalizationProvider>
-                </div>
-                <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Hasta:</strong></p>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                    className='fechaHasta'
-                      format="DD/MM/YYYY"
-                      required
-                      placeholder="Fecha"
-                      label="Fecha"
-                      id="fecha_hasta"
-                      name="fecha_hasta"
-                      //defaultValue={values.fecha_emision}
                       onChange={onChangeDate}
+                      views={['month','year']}
                     />
                   </LocalizationProvider>
                 </div>

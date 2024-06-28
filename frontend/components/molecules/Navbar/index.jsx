@@ -45,7 +45,7 @@ export default function Navbar({activeMain}) {
             </MenuList>
           </Paper>
 
-          <Paper sx={{ width: 95, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
+          <Paper sx={{ width: 80, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
             <MenuList  className={styles.ListNav}>
               <Link href="/ventas" onClick={()=>{setActive(3)}}>
                 <MenuItem className={active===3?"activo":null}>
@@ -75,7 +75,7 @@ export default function Navbar({activeMain}) {
             </MenuList>
           </Paper>
 
-          <Paper sx={{ width: 100, maxWidth: '100%', display:"inline-block" }}>
+          <Paper sx={{ width: 95, maxWidth: '100%', display:"inline-block" }}>
             <MenuList  className={styles.ListNav}>
               <Link href="/usuarios" onClick={()=>{setActive(6)}}>
                 <MenuItem className={active===6?"activo":null}>

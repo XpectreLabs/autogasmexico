@@ -62,7 +62,7 @@ export default function Compras() {
     router.push('/');
   }
 
-  let meses = [31,28,31,30,31,30,31,31,30,31,30,31]
+  let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
 
   function data(compras) {
     const user_id = localStorage.getItem('user_id');
@@ -86,8 +86,8 @@ export default function Compras() {
         setLoading(false);
         setCompras(data.listCompras);
         setComprasAux(data.listCompras);
-        
-        cargarTotales(data.listCompras)
+
+        cargarTotales(data.listCompras);
       }
       else if(data.message==="schema") {
         setTextError(data.error);
@@ -296,7 +296,7 @@ export default function Compras() {
         const fechaInicio = convertDate(fechaIni);
         const fechaHasta = convertDate(fechaFin);
         let listResult = [];
-  
+
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
           console.log("Aux",comprasAux);
           for(let j=0;j<comprasAux.length;j++) {
