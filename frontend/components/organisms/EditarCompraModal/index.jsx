@@ -20,7 +20,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad: '', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   console.log("Dta",abastecimientoData);
@@ -80,6 +80,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           delete values.preciounitario2;
           delete values.preciovent2;
           delete values.ivaaplicado2;
+          delete values.proveedores;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -88,9 +89,10 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           const phone = values.phone;
           const email = values.email;*/
           const data = {...values,abastecimiento_id,tipo_modena_id};
+          console.log(data);
           setLoading(true);
 
-          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad: '', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -109,7 +111,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron actualizados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad: '', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -220,6 +222,19 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   <TextField
                     className={`InputModal`}
                     required
+                    placeholder="Densidad"
+                    id="densidad"
+                    label="Densidad"
+                    name="densidad"
+                    value={values.densidad}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                    type='number'
+                  />
+                  <TextField
+                    className={`InputModal ${styles.Mr}`}
+                    required
                     placeholder="Precio unitario"
                     id="preciounitario"
                     label="Precio unitario"
@@ -232,7 +247,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   />
 
                 <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -245,7 +260,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -258,7 +273,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio de compra"
                     id="preciovent"
@@ -271,7 +286,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Cfdi"
                     id="cfdi"
@@ -283,7 +298,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -296,7 +311,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   />
 
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -308,7 +323,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"
@@ -322,7 +337,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
 
                 <p>a {values.proveedor_id}</p>
                 <NativeSelect
-                  className={` Fecha ${styles.select}`}
+                  className={`Fecha ${styles.select}`}
                   required
                   value={values.proveedor_id}
                   onChange={handleChange}

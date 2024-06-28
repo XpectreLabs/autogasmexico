@@ -22,21 +22,23 @@ router.post('/', async (req, res, next) => {
 
   let date = new Date().toISOString();
   const password = fn.getPasswordEncrypted(req.body.password);
-  const newUser = await prisma.users.create({
+  await prisma.users.create({
     data: {
       username: req.body.username,
       firstname: req.body.firstName,
       lastname: req.body.lastName,
       password: password,
-      email: req.body.email,
+      email: req.body.email?req.body.email:null,
       date: date,
     },
   });
-  const token = generateAccessToken(jwt, newUser.user_id);
-  res.status(200).json({ message:"success", user_id: newUser.user_id, token: token });
+  //const token = generateAccessToken(jwt, newUser.user_id);
+  res.status(200).json({ message:"success" });
+  //res.status(200).json({ message:"success", user_id: newUser.user_id, token: token });
 });
 
-router.get('/:userId',jwtV.verifyToken, async (req, res, next) => {
+
+router.get('/:userId/usuarios',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
     console.log(error.details[0].message)
@@ -47,18 +49,13 @@ router.get('/:userId',jwtV.verifyToken, async (req, res, next) => {
     const id = req.params.userId;
 
     if(await validateUser(parseInt(id))) {
-      const dataUser = await prisma.users.findMany({
+      const listaUsuarios = await prisma.users.findMany({
         where: {
-          user_id: parseInt(id),
-        },
-        select: {
-          user_id: true,
-          firstname: true,
-          lastname: true,
-          email: true,
+          type_user: 2,
+          active: 1,
         },
       });
-      res.status(200).json({ message:"success", dataUser });
+      res.status(200).json({ message:"success", listaUsuarios });
     }
     else
       res.status(400).json({ message:"Invalid id", error: "Invalid request, id does not exist" });
@@ -66,7 +63,7 @@ router.get('/:userId',jwtV.verifyToken, async (req, res, next) => {
 });
 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
     console.log(error.details[0].message)
@@ -74,20 +71,37 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   }
 
   const id = parseInt(req.body.user_id);
+  req.body.password?(req.body.password = fn.getPasswordEncrypted(req.body.password)):null;
   await prisma.users.update({
     where: {
       user_id: parseInt(id),
     },
     data: {
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
-      email: req.body.email,
+      ...req.body,
     },
   });
   res.status(200).json({ message:"success" });
 });
 
+router.delete('/',jwtV.verifyToken, async (req, res, next) => {
+  //console.log(req.body);
+  const { error } = sch.schemaId.validate(req.body);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).json({ message:"schema",error: error.details[0].message });
+  }
 
+  const id = parseInt(req.body.userId);
+  await prisma.users.update({
+    where: {
+      user_id: parseInt(id),
+    },
+    data: {
+      active: 0,
+    },
+  });
+  res.status(200).json({message:"success"});
+});
 
 router.post('/email', async (req, res, next) => {
   const { error } = sch.schemaEmail.validate(req.body);

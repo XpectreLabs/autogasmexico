@@ -65,11 +65,21 @@ export default function Navbar({activeMain}) {
             </MenuList>
           </Paper>
 
-          <Paper sx={{ width: 70, maxWidth: '100%', display:"inline-block" }}>
+          <Paper sx={{ width: 70, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
             <MenuList  className={styles.ListNav}>
               <Link href="/perfil" onClick={()=>{setActive(5)}}>
                 <MenuItem className={active===5?"activo":null}>
                   Perfil
+                </MenuItem>
+              </Link>
+            </MenuList>
+          </Paper>
+
+          <Paper sx={{ width: 100, maxWidth: '100%', display:"inline-block" }}>
+            <MenuList  className={styles.ListNav}>
+              <Link href="/usuarios" onClick={()=>{setActive(6)}}>
+                <MenuItem className={active===6?"activo":null}>
+                  Usuarios
                 </MenuItem>
               </Link>
             </MenuList>

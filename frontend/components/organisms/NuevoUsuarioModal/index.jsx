@@ -4,55 +4,61 @@ import React from 'react';
 import { useState } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import styles from './EditPatientModal.module.css';
+import styles from './Index.module.css';
 import Modal from '@mui/material/Modal';
 import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from "yup";
 
-export default function EditPatientModal({ isOpen, onClose,patientData,patientIdd }) {
-  console.log(patientData);
+export default function NuevoUsuarioModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({firstName:'',lastName:'', email:' ', phone:'', ssn:''}));
+  const [initialValues, setInitialValues] = useState(({firstName:'',lastName:'', email:'',username:'',password:'',confirmPassword:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   return (
     <Formik
         enableReinitialize={true}
-        initialValues={{...patientData}}
+        initialValues={initialValues}
         validationSchema={Yup.object().shape({
           firstName: Yup.string()
-            .min(3, "The first name is short")
-            .required("The first name is requiered"),
+            .min(3, "El nombre es muy corto")
+            .required("El nombre es requerido"),
           lastName: Yup.string()
-            .min(3, "The last name is short")
-            .required("The last name is requiered"),
+            .min(3, "Los apellidos tener minimo 3 digitos")
+            .required("Los apellidos es requerido"),
           email: Yup.string()
-            .email("The email es incorrect")
-            .required("The email is requiered"),
-          phone: Yup.string()
-            .min(3, "The phone is short")
-            .required("The phone is requiered"),
-          ssn: Yup.string()
-            .min(3, "The ssn is short")
-            .required("The ssn is requiered"),
+            .email("El email es incorrecto"),
+          username: Yup.string()
+          .required("El nombre de usuario es requerido"),
+          password: Yup.string()
+            .min(3, "La contraseña es muy corto")
+            .required("La contraseña es requerida"),
+          confirmPassword:  Yup.string()
+            .oneOf([Yup.ref('password')],"Las contraseñas y la repetición de contraseña deben ser las mismas.")
+            .min(3, 'La contraseña de confirmación debe tener un mínimo de 3 caracteres.')
+            .required("Se requiere la confirmación de contraseña."),
         })}
         onSubmit={(values, actions) => {
-          const id = localStorage.getItem('user_id');
-          const scriptURL = "http://localhost:3001/api/v1/patients/";
-          const patient_id = patientIdd;
-          const firstName = values.firstName;
-          const lastName = values.lastName;
-          const email = values.email;
-          const phone = values.phone+"";
-          const ssn = values.ssn;
-          const data = {patient_id,firstName, lastName, email, phone, ssn,id};
+          const user_id = localStorage.getItem('user_id');
+          const scriptURL = "http://localhost:3001/api/v1/usuarios";
+          /*const name = values.name;
+          const rfc = values.rfc;
+          const direccion = values.direccion;
+          const tipo_situacion_fiscal = values.tipo_situacion_fiscal;
+          const permiso = values.permiso+"";
+          const phone = values.phone;
+          const email = values.email;*/
+          delete values.confirmPassword;
+          const data = {...values};
           setLoading(true);
+          console.log(data);
+
+          //setInitialValues(({firstName:'',lastName:'', email:'',username:'',password:'',confirmPassword:''}));
 
           fetch(scriptURL, {
-            method: 'PUT',
+            method: 'POST',
             body: JSON.stringify(data),
             headers: {
               'Accept': 'application/json',
@@ -67,8 +73,8 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
 
             if(data.message==="success") {
               setTypeOfMessage("success");
-              setTextError("Data has been updated");
-              setInitialValues(({firstName:'',lastName:'', email:' ', phone:'', ssn:''}));
+              setTextError("Los datos del usuario fueron guardados");
+              setInitialValues(({firstName:'',lastName:'', email:'',username:'',password:'',confirmPassword:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -107,26 +113,15 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
                   open={isOpen}
                   onClose={onClose}
                   className={styles.Modal}
-                  title="Add a Patient">
+                  title="Agregar usuario">
  
                 <Form id="formAddPatient" className={styles.form} onSubmit={handleSubmit}>
-                  <h2 className={styles.Title}>Edit a Patient</h2>
+                  <h2 className={styles.Title}>Agregar usuario</h2>
                   <TextField
-                    placeholder="SSN"
-                    required
-                    id="ssn"
-                    label="SSN"
-                    name="ssn"
-                    value={values.ssn}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    placeholder="First Name"
+                    placeholder="Nombre"
                     required
                     id="firstName"
-                    label="First Name"
+                    label="Nombre"
                     name="firstName"
                     value={values.firstName}
                     onChange={handleChange}
@@ -134,10 +129,10 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
                     size="small"
                   />
                   <TextField
-                    placeholder="Last Name"
+                    placeholder="Apellidos"
                     required
                     id="lastName"
-                    label="Last Name"
+                    label="Apellidos"
                     name="lastName"
                     value={values.lastName}
                     onChange={handleChange}
@@ -145,20 +140,7 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
                     size="small"
                   />
                   <TextField
-                    placeholder="Phone"
-                    required
-                    id="phone"
-                    label="Phone"
-                    name="phone"
-                    value={values.phone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
                     placeholder="Email"
-                    required
                     id="email"
                     label="Email"
                     name="email"
@@ -168,13 +150,47 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
                     size="small"
                   />
 
-                  {(errors.firstName || errors.lastName || errors.email || errors.phone || errors.ssn)?(<div className={styles.errors}>
+                  <TextField
+                    placeholder="Nombre de usuario"
+                    id="username"
+                    label="Nombre de usuario"
+                    name="username"
+                    value={values.username}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                  />
+
+                  <TextField
+                    placeholder="Contraseña"
+                    id="password"
+                    label="Contraseña"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                    type='password'
+                  />
+                  <TextField
+                    placeholder="Confirmación de la contraseña"
+                    type="Password"
+                    equired
+                    id="confirmPassword"
+                    label="Confirmación de la contraseña"
+                    name="confirmPassword"
+                    size="small"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {(errors.firstName || errors.lastName || errors.email || errors.username || errors.password || errors.confirmPassword)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.firstName? (<p>{errors.firstName}</p>):null}
                         {errors.lastName? (<p>{errors.lastName}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
-                        {errors.phone? (<p>{errors.phone}</p>):null}
-                        {errors.ssn? (<p>{errors.ssn}</p>):null}
+                        {errors.username? (<p>{errors.username}</p>):null}
+                        {errors.password? (<p>{errors.password}</p>):null}
+                        {errors.confirmPassword? (<p>{errors.confirmPassword}</p>):null}
                     </div>):null}
 
                     <div className={styles.ContentLoadding}>
@@ -182,7 +198,7 @@ export default function EditPatientModal({ isOpen, onClose,patientData,patientId
                     </div>
 
                   <div className={styles.btns}>
-                    <Button className={styles.btn} variant="outlined" type="submit">Save</Button>
+                    <Button className={styles.btn} variant="outlined" type="submit">Guardar</Button>
                   </div>
                 </Form>
               </Modal>

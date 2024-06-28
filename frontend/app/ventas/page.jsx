@@ -25,6 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Alegreya } from 'next/font/google';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -259,8 +260,6 @@ export default function Compras() {
     setTimeout(()=>{
       const fechaInicio = convertDate(document.querySelector(".fechaDesde input").value);
       const fechaHasta = convertDate(document.querySelector(".fechaHasta input").value);
-
-      console.log(fechaInicio + " " +item + " " + fechaHasta);
 
       let listResult = [];
 

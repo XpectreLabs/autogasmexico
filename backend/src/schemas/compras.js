@@ -45,6 +45,7 @@ const schemaUpdate = joi.object({
   cantidad: joi.number().required(),
   //unidad: joi.number().optional().allow(null, ""),
   concepto: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F/.:(), ]{3,300}$')).required(),
+  densidad: joi.number().required(),
   preciounitario: joi.number().required(),
   importe: joi.number().required(),
   ivaaplicado: joi.number().required(),

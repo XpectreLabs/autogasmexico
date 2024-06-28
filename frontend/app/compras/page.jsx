@@ -26,6 +26,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {es} from 'date-fns/locale'
+import { esES } from '@mui/material/locale';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -61,7 +62,7 @@ export default function Compras() {
     router.push('/');
   }
 
-
+  let meses = [31,28,31,30,31,30,31,31,30,31,30,31]
 
   function data(compras) {
     const user_id = localStorage.getItem('user_id');
@@ -168,8 +169,6 @@ export default function Compras() {
 
   useEffect(() => {
     loadingData===false?data(compras):null;
-
-    
   }, []);
 
 
@@ -284,34 +283,44 @@ export default function Compras() {
   };
 
   const onChangeDate = (item) => {
-    console.log("item",item);
-    setTimeout(()=>{
-      const fechaInicio = convertDate(document.querySelector(".fechaDesde input").value);
-      const fechaHasta = convertDate(document.querySelector(".fechaHasta input").value);
+    if(item!==null) {
+      let anio = item.$y;
+      let mes = item.$M+1;
+      let diaBisiesto = mes==2?anio%4===0?1:0:0;
+      let diasMes = meses[mes-1]+diaBisiesto;
+      mes = mes<10?("0"+mes):mes;
+      let fechaIni = "01/"+mes+"/"+anio;
+      let fechaFin = diasMes+"/"+mes+"/"+anio;
 
-      console.log(fechaInicio + " " +item + " " + fechaHasta);
-
-      let listResult = [];
-
-      if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-        console.log("Aux",comprasAux);
-        for(let j=0;j<comprasAux.length;j++) {
-          const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
-
-          if(fechaInicio!==fechaHasta) {
-            if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-              listResult.push(comprasAux[j]);
+      setTimeout(()=>{
+        const fechaInicio = convertDate(fechaIni);
+        const fechaHasta = convertDate(fechaFin);
+        let listResult = [];
+  
+        if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
+          console.log("Aux",comprasAux);
+          for(let j=0;j<comprasAux.length;j++) {
+            const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+  
+            if(fechaInicio!==fechaHasta) {
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
+                listResult.push(comprasAux[j]);
+            }
+            else {
+              if(fechaInicio===dateEmi)
+                listResult.push(comprasAux[j]);
+            }
           }
-          else {
-            if(fechaInicio===dateEmi)
-              listResult.push(comprasAux[j]);
-          }
+          setCompras(listResult);
         }
-        setCompras(listResult);
-      }
-      else
-        setCompras(listResult);
-    },1000)
+        else
+          setCompras(listResult);
+      },1000)
+    }
+    {
+      setCompras(comprasAux);
+    }
+    
 	};
 
   const cambiarFechaNormal = (fecha) => {
@@ -414,13 +423,12 @@ export default function Compras() {
               </Grid>
 
               <Grid item xs={1}>
-
               </Grid>
 
               <Grid item xs={5}>
                 <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Desde:</strong></p>
-                  <LocalizationProvider adapterLocale={es} dateAdapter={AdapterDayjs}>
+                  <p><strong>Mes y año de filtro:</strong></p>
+                  <LocalizationProvider locale={es} adapterLocale={es} dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
                       required
@@ -428,29 +436,15 @@ export default function Compras() {
                       label="Fecha"
                       id="fecha_desde"
                       name="fecha_desde"
+                      DateTimeFormat={ Intl.DateTimeFormat }
+                      locale='es-ES'
                       //defaultValue={values.fecha_emision}
                       onChange={onChangeDate}
-                      views={['month', 'year']}
+                      views={['month','year']}
                     />
                   </LocalizationProvider>
                 </div>
-                <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Hasta:</strong></p>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                    className='fechaHasta'
-                      format="DD/MM/YYYY"
-                      required
-                      placeholder="Fecha"
-                      label="Fecha"
-                      id="fecha_hasta"
-                      name="fecha_hasta"
-                      //defaultValue={values.fecha_emision}
-                      onChange={onChangeDate} 
-                    />
-                  </LocalizationProvider>
-                </div>
-
+                
               </Grid>
 
               <Grid item xs={3} align="right">

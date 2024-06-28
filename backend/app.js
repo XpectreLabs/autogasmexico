@@ -7,6 +7,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./src/routes/auth');
+const usuariosRoutes = require('./src/routes/users');
 const proveedoresRoutes = require('./src/routes/proveedores');
 const clientesRoutes = require('./src/routes/clientes');
 const comprasRoutes = require('./src/routes/compras');
@@ -19,6 +20,7 @@ router.use(express.json());
 router.use(cors());
 
 router.use('/api/v1/auth', authRoutes);
+router.use('/api/v1/usuarios', usuariosRoutes);
 router.use('/api/v1/proveedores', proveedoresRoutes);
 router.use('/api/v1/clientes', clientesRoutes);
 router.use('/api/v1/compras', comprasRoutes);

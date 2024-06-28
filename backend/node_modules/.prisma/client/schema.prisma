@@ -18,6 +18,8 @@ model users {
   password          String      @db.VarChar(120)
   email             String?     @db.VarChar(150)
   date              DateTime?   @db.Date
+  type_user         Int         @db.SmallInt @default(2)
+  active            Int?        @db.SmallInt @default(1)
   proveedores       proveedores[]
   clients           clients[]
   abastecimientos   abastecimientos[]
