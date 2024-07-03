@@ -62,6 +62,7 @@ const schemaUpdate = joi.object({
   fecha_terminacion: joi.date().required(),
   tipo_reporte_id: joi.number().min(1).required(),
   reporte_id: joi.number().min(1).required(),
+  user_id: joi.number().min(1).required(),
 });
 
  const schemaIdReporte = joi.object({

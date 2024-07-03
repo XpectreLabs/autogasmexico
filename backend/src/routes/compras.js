@@ -42,6 +42,11 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
 
     if(await validateUser(parseInt(id))) {
       const listCompras = await prisma.abastecimientos.findMany({
+        orderBy: [
+          {
+            fecha_emision: 'desc',
+          },
+        ],
         where: {
           user_id: parseInt(id),
           active: 1,

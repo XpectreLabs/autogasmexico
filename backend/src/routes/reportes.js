@@ -22,8 +22,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   console.log((req.body.fecha_inicio+"".substring(0.10))+" "+(req.body.fecha_terminacion+"".substring(0.10)));
   //const listRecepcions = await listRecepciones(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
   //const listEntregs =  await listEntregas(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
-  
-  
+
   //console.log(listRecepcions);
   await prisma.reportes.create({
     data: {
@@ -73,6 +72,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   }
 
   const id = parseInt(req.body.reporte_id);
+  let date = new Date().toISOString();
 
   await prisma.reportes.update({
     where: {
@@ -85,7 +85,9 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
       composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
     },
   });
-  res.status(200).json({ message:"success"});
+
+  const dataJson = await reporteS.generarJson(req.body,date);
+  res.status(200).json({ message:"success", dataJson });
 });
 
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {

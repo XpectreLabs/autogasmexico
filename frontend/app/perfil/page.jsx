@@ -32,9 +32,11 @@ export default function Perfil() {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({firstName:'', lastName:'', email:''}));
+  const [initialValues, setInitialValues] = useState(({firstname:'', lastname:'', email:''}));
   const [loadingData, setLoadingData] = React.useState(false);
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [showCambio,setShowCambio] = React.useState(true);
+
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -44,7 +46,7 @@ export default function Perfil() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/users/"+user_id;    //setLoading(true);
+    const scriptURL = "http://localhost:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -57,9 +59,10 @@ export default function Perfil() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
+      console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
-        setInitialValues(({firstName:""+data.dataUser[0]['firstname'], lastName:data.dataUser[0]['lastname'], email:data.dataUser[0]['email']}));
+        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
         setShowAlert(false);
       }
       else if(data.message==="schema") {
@@ -132,26 +135,78 @@ export default function Perfil() {
         enableReinitialize={true}
         initialValues={initialValues}
         validationSchema={Yup.object().shape({
-          firstName: Yup.string()
-            .min(3, "The first name is short")
-            .required("The first name is requiered"),
-          lastName: Yup.string()
-            .min(3, "The last name is short")
-            .required("The last name is requiered"),
+          firstname: Yup.string()
+            .min(3, "El nombre es muy corto")
+            .required("El nombre es requerido"),
+          lastname: Yup.string()
+            .min(3, "Los apellidos tener minimo 3 digitos")
+            .required("Los apellidos es requerido"),
           email: Yup.string()
-            .email("The email es incorrect")
-            .required("The email is requiered"),
+            .email("El email es incorrecto"),
+          password: Yup.string()
+            .min(3, "La contraseña es muy corto"),
+          confirmPassword:  Yup.string()
+            .oneOf([Yup.ref('password')],"Las contraseñas y la repetición de contraseña deben ser las mismas.")
+            .min(3, 'La contraseña de confirmación debe tener un mínimo de 3 caracteres.')
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/users/";
+          /*const scriptURL = "http://localhost:3001/api/v1/users/";
           const user_id = localStorage.getItem('user_id');
-          const firstName = values.firstName;
-          const lastName = values.lastName;
+          const firstname = values.firstname;
+          const lastname = values.lastname;
           const email = values.email;
-          const data = {user_id,firstName, lastName, email};
+          const data = {user_id,firstname, lastname, email};
+          setLoading(true);*/
+
+
+          const user_id = parseInt(localStorage.getItem('user_id'));
+          const scriptURL = "http://localhost:3001/api/v1/usuarios";
+          delete values.id;
+          delete values.confirmPassword;
+          delete values.username;
+          const data = {...values,user_id};
           setLoading(true);
+          console.log(data);
+
 
           fetch(scriptURL, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer "+localStorage.getItem('token'),
+            },
+          })
+          .then((resp) => resp.json())
+          .then(function(data) {
+            setLoading(false);
+            setTypeOfMessage("error");
+
+            if(data.message==="success") {
+              setTypeOfMessage("success");
+              setTextError("Tus datos de acceso fueron actualizados");
+              setShowAlert(true);
+            }
+            else if(data.message==="schema") {
+              setTextError(data.error);
+              setShowAlert(true);
+            }
+            else {
+              setTextError(data.message);
+              setShowAlert(true);
+              setTimeout(()=>{
+                Logout();
+              },3200)
+            }
+            setTimeout(()=>{setShowAlert(false);},3000)
+          })
+          .catch(error => {
+            console.log(error.message);
+            console.error('Error!', error.message);
+          });
+
+          /*fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {
@@ -187,7 +242,7 @@ export default function Perfil() {
           .catch(error => {
             console.log(error.message);
             console.error('Error!', error.message);
-          });
+          });*/
         }}
       >
         {({
@@ -216,9 +271,9 @@ export default function Perfil() {
                     <TextField
                       placeholder="Nombre"
                       required
-                      id="firstName"
-                      name="firstName"
-                      value={values.firstName}
+                      id="firstname"
+                      name="firstname"
+                      value={values.firstname}
                       size="small"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -227,9 +282,9 @@ export default function Perfil() {
                     <TextField
                       placeholder="Apellidos"
                       required
-                      id="lastName"
-                      value={values.lastName}
-                      name="lastName"
+                      id="lastname"
+                      value={values.lastname}
+                      name="lastname"
                       size="small"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -237,7 +292,6 @@ export default function Perfil() {
                     <label className={styles.lbl}><strong>Email:</strong></label>
                     <TextField
                       placeholder="email"
-                      required
                       id="email"
                       value={values.email}
                       name="email"
@@ -246,42 +300,55 @@ export default function Perfil() {
                       onBlur={handleBlur}
                     />
 
-                    <div style={{textAlign:'left', marginBottom: '10px'}}>
-                      <FormControlLabel  control={<Checkbox id="cbCambiar" name="cbCambiar" defaultChecked />} label="Cambiar datos de acceso:" />
-                    </div>
-
                     <label className={styles.lbl}><strong>Usuario:</strong></label>
                     <TextField
                       placeholder="Usuario"
                       required
                       id="usuario"
                       name="usuario"
-                      value={values.firstName}
+                      value={values.firstname}
                       size="small"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled="false"
                     />
+
+                    <div style={{textAlign:'left', marginBottom: '10px'}}>
+                      <FormControlLabel  control={<Checkbox id="cbCambiar" name="cbCambiar" onClick={()=>{setShowCambio(!showCambio)}} />} label="Cambiar datos de acceso:" />
+                    </div>
 
                     <label className={styles.lbl}><strong>Nueva contraseña:</strong></label>
                     <TextField
+                      placeholder="Contraseña"
                       id="password"
-                      type="password"
-                      autoComplete="current-password"
-                      placeholder="Nueva contraseña:"
+                      label="Contraseña"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='password'
+                      disabled={showCambio}
                     />
 
                     <label className={styles.lbl}><strong>Repite la contraseña:</strong></label>
                     <TextField
-                      id="password"
-                      type="password"
-                      autoComplete="current-password"
-                      placeholder="Nueva contraseña:"
+                      placeholder="Confirmación de la contraseña"
+                      type="Password"
+                      equired
+                      id="confirmPassword"
+                      label="Confirmación de la contraseña"
+                      name="confirmPassword"
+                      size="small"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      disabled={showCambio}
                     />
 
                     <div className={styles.errors}>
-                        <p><strong>{(errors.firstName || errors.lastName || errors.email)?`Errores:`:null}</strong></p>
-                        {errors.firstName? (<p>{errors.firstName}</p>):null}
-                        {errors.lastName? (<p>{errors.lastName}</p>):null}
+                        <p><strong>{(errors.firstname || errors.lastname || errors.email)?`Errores:`:null}</strong></p>
+                        {errors.firstname? (<p>{errors.firstname}</p>):null}
+                        {errors.lastname? (<p>{errors.lastname}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
                     </div>
 
@@ -293,7 +360,7 @@ export default function Perfil() {
                       <input
                         className={styles.btn}
                         type="submit"
-                        value="Edit profile"
+                        value="Editar perfil"
                       />
                     </div>
                   </Form>

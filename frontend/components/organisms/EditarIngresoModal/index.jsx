@@ -80,6 +80,8 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           delete values.preciounitario2;
           delete values.preciovent2;
           delete values.ivaaplicado2;
+          delete values.cliente;
+          delete values.clients
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -334,7 +336,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                 >
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
-                  <option value={2}>MARTHA PATRICIA GUTIERREZ URIBE</option>
+                  <option value={2}>GAS DE APAN SA DE CV</option>
                 </NativeSelect>
 
                   {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>

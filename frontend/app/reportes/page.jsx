@@ -17,14 +17,15 @@ import { useRouter } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import NuevoReporteModal from '@/components/organisms/NuevoReporteModal';
-import EditarIngresoModal from '@/components/organisms/EditarIngresoModal';
-import DetalleIngresoModal from '@/components/organisms/DetalleIngresoModal';
+import EditReporteModal from '@/components/organisms/EditarReporteModal';
+import DetalleReporteModal from '@/components/organisms/DetalleReporteModal';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -57,7 +58,7 @@ export default function Compras() {
   }
 
   let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
-  
+
   function data() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://localhost:3001/api/v1/reportes/"+user_id+"/reportes";
@@ -462,9 +463,9 @@ export default function Compras() {
         }}
       />
 
-      <EditarIngresoModal
-        ventaIdd={ReporteIdd}
-        ventaData={reporteoEdit}
+      <EditReporteModal
+        reporteData={reporteoEdit}
+        reporteIdd={ReporteIdd}
         isOpen={isEditReporteModalOpen}
         onClose={() => {
           setIsEditPReporteModalOpen(false);
@@ -472,8 +473,8 @@ export default function Compras() {
         }}
       />
 
-      <DetalleIngresoModal
-        ventaData={reporteToDetalle}
+      <DetalleReporteModal
+        reporteData={reporteToDetalle}
         isOpen={isDetalleReporteModalOpen}
         onClose={() => {
           setIsDetallePReporteModalOpen(false);

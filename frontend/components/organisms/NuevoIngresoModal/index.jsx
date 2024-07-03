@@ -323,7 +323,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                 >
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
-                  <option value={2}>MARTHA PATRICIA GUTIERREZ URIBE</option>
+                  <option value={2}>GAS DE APAN SA DE CV</option>
                 </NativeSelect>
 
 

@@ -42,6 +42,11 @@ router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
 
     if(await validateUser(parseInt(id))) {
       const listIngresos = await prisma.ventas.findMany({
+        orderBy: [
+          {
+            fecha_emision: 'desc',
+          },
+        ],
         where: {
           user_id: parseInt(id),
           active: 1,

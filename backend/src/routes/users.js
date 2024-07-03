@@ -62,6 +62,37 @@ router.get('/:userId/usuarios',jwtV.verifyToken, async (req, res, next) => {
   }
 });
 
+router.get('/:userId/usuario', async (req, res, next) => {
+  const { error } = sch.schemaId.validate(req.params);
+  if (error) {
+    console.log(error.details[0].message)
+    return res.status(400).json({ message:"schema", error: error.details[0].message });
+  }
+
+  if (req.params.userId !== null) {
+    const id = req.params.userId;
+
+    if(await validateUser(parseInt(id))) {
+      const dataUsuario = await prisma.users.findMany({
+        where: {
+          user_id: parseInt(id),
+          active: 1,
+        },
+        select: {
+          user_id: true,
+          username: true,
+          firstname: true,
+          lastname: true,
+          email: true,
+        },
+      });
+      res.status(200).json({ message:"success", dataUsuario });
+    }
+    else
+      res.status(400).json({ message:"Invalid id", error: "Invalid request, id does not exist" });
+  }
+});
+
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   //console.log(req.body);
   const { error } = sch.schemaUpdate.validate(req.body);

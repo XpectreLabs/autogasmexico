@@ -5,6 +5,7 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
 const cors = require('cors');
 require('dotenv').config();
+const fileUpload = require('express-fileupload')
 
 const authRoutes = require('./src/routes/auth');
 const usuariosRoutes = require('./src/routes/users');
@@ -26,6 +27,20 @@ router.use('/api/v1/clientes', clientesRoutes);
 router.use('/api/v1/compras', comprasRoutes);
 router.use('/api/v1/ingresos', ingresosRoutes);
 router.use('/api/v1/reportes', reportesRoutes);
+router.use(fileUpload())
+
+router.post('/cargarXML', (req, res, next) => {
+  console.log("Ja");
+  console.log(req.files);
+
+  let EDFile = req.files.file
+    EDFile.mv(`./xmls//${EDFile.name}`,err => {
+        if(err) return res.status(500).send({ message : err })
+
+        return res.status(200).send({ message : 'File upload' })
+    })
+});
+
 
 router.listen(3001, () => {
   console.log('Aplicación ejecutandose ....');

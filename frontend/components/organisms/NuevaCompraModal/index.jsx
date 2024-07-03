@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './NuevaCompra.module.css';
@@ -50,6 +50,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
     //setDensidad(cad);
     //document.querySelector("#densidad").value = cad;
   }
+
   return (
     <Formik
         enableReinitialize={true}
@@ -368,6 +369,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   <option value={1}>DISTRIBUIDORA POTOSINA</option>
                   <option value={2}>MER MAC GAS</option>
                   <option value={3}>TRANSCAMELLO</option>
+                  <option value={4}>ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV</option>
                 </NativeSelect>
 
 

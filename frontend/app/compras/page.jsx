@@ -27,6 +27,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {es} from 'date-fns/locale'
 import { esES } from '@mui/material/locale';
+import axios from 'axios';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -328,6 +329,25 @@ export default function Compras() {
     return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
   }
 
+  const  onFileChange = (e) => {
+    alert(e.target.files[0] );
+    //this.setState({ image: e.target.files[0] })
+  }
+
+
+  const handleUpload = (event) => {
+    //event.preventDefault();
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    axios.post('http://localhost:3001/cargarXML', formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <main
       className={styles.main}
@@ -425,7 +445,7 @@ export default function Compras() {
               <Grid item xs={1}>
               </Grid>
 
-              <Grid item xs={5}>
+              <Grid item xs={4}>
                 <div className={`${styles.ItemFecha}`}>
                   <p><strong>Mes y año de filtro:</strong></p>
                   <LocalizationProvider locale={es} adapterLocale={es} dateAdapter={AdapterDayjs}>
@@ -444,10 +464,16 @@ export default function Compras() {
                     />
                   </LocalizationProvider>
                 </div>
-                
               </Grid>
 
-              <Grid item xs={3} align="right">
+              <Grid item xs={4} align="right">
+                <form onSubmit={handleUpload} style={{display:'inline-block'}}>
+                  <label htmlFor="file" className="custom-file-upload">
+                    <span>+</span> IMPORTAR XML
+                  </label>
+                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload}/>
+                </form>
+
                 <Button
                   variant="outlined"
                   className={styles.agregarProveedorButton}

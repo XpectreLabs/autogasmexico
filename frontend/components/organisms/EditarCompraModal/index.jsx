@@ -351,6 +351,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   <option value={1}>DISTRIBUIDORA POTOSINA</option>
                   <option value={2}>MER MAC GAS</option>
                   <option value={3}>TRANSCAMELLO</option>
+                  <option value={4}>ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV</option>
                 </NativeSelect>
 
 
