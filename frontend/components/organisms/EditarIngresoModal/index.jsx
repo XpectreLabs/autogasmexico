@@ -23,6 +23,14 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
   const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
+  const convertirFecha = (fecha) => {
+    return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
+  }
+
+  if(ventaData.fecha_emision!==undefined){
+    ventaData.fecha_emision = dayjs(convertirFecha(ventaData.fecha_emision2));
+  }
+
   console.log("Dta",ventaData);
   return (
     <Formik

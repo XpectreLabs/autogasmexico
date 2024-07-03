@@ -15,13 +15,21 @@ import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
 import dayjs from 'dayjs';
 
-
+ 
 export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,abastecimientoIdd }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
   const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad: '', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+
+  const convertirFecha = (fecha) => {
+    return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
+  }
+
+  if(abastecimientoData.fecha_emision!==undefined){
+    abastecimientoData.fecha_emision = dayjs(convertirFecha(abastecimientoData.fecha_emision2));
+  }
 
   console.log("Dta",abastecimientoData);
   return (
