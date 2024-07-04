@@ -5,7 +5,10 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
 const cors = require('cors');
 require('dotenv').config();
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const xmlJs = require('xml-js');
+const fs = require('fs');
+
 
 const authRoutes = require('./src/routes/auth');
 const usuariosRoutes = require('./src/routes/users');
@@ -37,10 +40,25 @@ router.post('/cargarXML', (req, res, next) => {
     EDFile.mv(`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
-        return res.status(200).send({ message : 'File upload' })
+        let dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+        console.log(dataJson);
+
+        return res.status(200).send({ message : 'success',dataJson })
     })
 });
 
+
+router.get('/traerDatosXML', (req, res, next) => {
+
+  let result1 = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/M_177174_7d1c8379-85a8-9054-198c-665fdf8c17d4.xml', 'utf8')), {compact: true, spaces: 4}));
+
+  /*const xmlFile = fs.readFileSync('./xmls/M_177174_7d1c8379-85a8-9054-198c-665fdf8c17d4.xml', 'utf8');
+  result1 = xmlJs.xml2json(xmlFile, {compact: true, spaces: 4});
+  result1 = JSON.parse(result1);
+  console.log(result1);*/
+  console.log(result1);
+  return res.status(200).send({ message : 'File upload', result1 });
+});
 
 router.listen(3001, () => {
   console.log('Aplicación ejecutandose ....');
