@@ -290,7 +290,8 @@ export default function Compras() {
   };
 
   const onChangeDate = (item) => {
-    if(item!==null) {      
+    if(item!==null) {
+      let anio = item.$y;
       let mes = item.$M+1;
       let diaBisiesto = mes==2?anio%4===0?1:0:0;
       let diasMes = meses[mes-1]+diaBisiesto;
