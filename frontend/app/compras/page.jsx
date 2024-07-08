@@ -284,8 +284,7 @@ export default function Compras() {
   };
 
   const onChangeDate = (item) => {
-    if(item!==null) {
-      let anio = item.$y;
+    if(item!==null) {      
       let mes = item.$M+1;
       let diaBisiesto = mes==2?anio%4===0?1:0:0;
       let diasMes = meses[mes-1]+diaBisiesto;
@@ -329,22 +328,55 @@ export default function Compras() {
     return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
   }
 
-  const  onFileChange = (e) => {
-    alert(e.target.files[0] );
-    //this.setState({ image: e.target.files[0] })
-  }
-
-
   const handleUpload = (event) => {
     //event.preventDefault();
+    const user_id = localStorage.getItem('user_id');
     const formData = new FormData();
     formData.append('file', event.target.files[0]);
-    axios.post('http://localhost:3001/cargarXML', formData)
+    formData.append('user_id',user_id);
+    
+
+    axios.post('http://localhost:3001/api/v1/compras/cargarXML', formData)
       .then((response) => {
-        console.log(response.data);
+        /*console.log(response.data);
+        console.log(response.data.dataJson);
+        console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
+        console.log(response.data.dataJson['cfdi:Comprobante']._attributes.Folio)
+
+        console.log("Si");
+        console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
+
+        console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
+        console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
+        console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
+        console.log("Unidad de medida: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Unidad)
+        console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
+        console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
+        console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['_attributes'].SubTotal)
+
+        console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados)
+        console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['_attributes'].Total)
+        console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
+        console.log("Tipo de cfdi: Ingreso")
+        console.log("Aclaración: SIN OBSERVACIONES")
+        console.log("Tipo complemento: Comercializacion")
+
+
+        console.log("Para proveedor nuevo:");
+        console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre)
+        console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
+        console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal)
+        console.log("Permiso: null")*/
+
+        setTextError('El XML de compras fue importado');
+        setShowAlert(true);
+        setTimeout(()=>{setShowAlert(false); data(compras);},3000)
+        
       })
       .catch((error) => {
-        console.log(error);
+        setTextError('El XML no es de compras');
+        setShowAlert(true);
+        setTimeout(()=>{setShowAlert(false);},3000)
       });
   };
 
@@ -469,7 +501,7 @@ export default function Compras() {
               <Grid item xs={4} align="right">
                 <form onSubmit={handleUpload} style={{display:'inline-block'}}>
                   <label htmlFor="file" className="custom-file-upload">
-                    <span>+</span> IMPORTAR XML
+                    <span><strong>+</strong></span> IMPORTAR XML
                   </label>
                   <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload}/>
                 </form>

@@ -8,7 +8,9 @@ import { Formik, Form } from "formik";
 
 export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData,abastecimientoIdd }) {
 
-  console.log("Dta",abastecimientoData);
+  console.log("Dta t",abastecimientoData);
+  console.log("Dta ",abastecimientoData.proveedores?abastecimientoData.proveedores.name:'');
+  
   return (
     <Formik>
         {({
@@ -92,8 +94,10 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
 
                     <div>
                       <p><strong>Proveedor:</strong></p>
-                      <p>{abastecimientoData.proveedor}</p>
+                      <p>{abastecimientoData.proveedores?abastecimientoData.proveedores.name:''}</p>
                     </div>
+
+                    <div></div>
                   </div>
                 </Form>
               </Modal>

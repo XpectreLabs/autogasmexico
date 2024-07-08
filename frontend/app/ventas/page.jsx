@@ -26,6 +26,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Alegreya } from 'next/font/google';
+import axios from 'axios';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -320,6 +321,59 @@ export default function Ventas() {
     return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
   }
 
+  const handleUpload = (event) => {
+    //event.preventDefault();
+    const user_id = localStorage.getItem('user_id');
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    formData.append('user_id',user_id);
+    
+
+    axios.post('http://localhost:3001/api/v1/ingresos/cargarXML', formData)
+      .then((response) => {
+        console.log(response.data);
+        console.log(response.data.dataJson);
+        console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
+        console.log(response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales'])
+
+        console.log("Ventas");
+        console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
+
+        console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
+        console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
+        console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
+        console.log("Unid ad de medida: UM03");
+        console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
+        console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
+        console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16)
+        console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16)
+        console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos)
+        
+        console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
+        console.log("Tipo de cfdi: Ingreso")
+        console.log("Aclaración: SIN OBSERVACIONES")
+        console.log("Tipo complemento: Comercializacion")
+
+ 
+        console.log("Para cliente nuevo:");
+        console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre)
+        console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc)
+        console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor)
+        console.log("Domicilio: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor)
+        console.log("Permiso: null")
+
+        setTextError('El XML de ventas fue importado');
+        setShowAlert(true);
+        setTimeout(()=>{setShowAlert(false); data();},3000)
+        
+      })
+      .catch((error) => {
+        //setTextError('El XML no es de ventas');
+        setShowAlert(true);
+        setTimeout(()=>{setShowAlert(false); data();},3000)
+      });
+  };
+
   return (
     <main
       className={styles.main}
@@ -417,7 +471,7 @@ export default function Ventas() {
 
               </Grid>
 
-              <Grid item xs={5}>
+              <Grid item xs={4}>
                 <div className={`${styles.ItemFecha}`}>
                   <p><strong>Mes y año de filtro:</strong></p>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -436,7 +490,14 @@ export default function Ventas() {
                 </div>
               </Grid>
 
-              <Grid item xs={3} align="right">
+              <Grid item xs={4} align="right">
+                <form onSubmit={handleUpload} style={{display:'inline-block'}}>
+                  <label htmlFor="file" className="custom-file-upload">
+                    <span><strong>+</strong></span> IMPORTAR XML
+                  </label>
+                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload}/>
+                </form>
+
                 <Button
                   variant="outlined"
                   className={styles.agregarProveedorButton}

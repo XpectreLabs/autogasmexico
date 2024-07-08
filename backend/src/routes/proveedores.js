@@ -47,6 +47,11 @@ router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
 
     if(await validateUser(parseInt(id))) {
       const listProveedores = await prisma.proveedores.findMany({
+        orderBy: [
+          {
+            date: 'desc',
+          },
+        ],
         where: {
           user_id: parseInt(id),
           active: 1,

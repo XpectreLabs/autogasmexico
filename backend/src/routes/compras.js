@@ -7,6 +7,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
 const sch = require('../schemas/compras.js');
+const fileUpload = require('express-fileupload');
+const xmlJs = require('xml-js');
+const fs = require('fs');
+const fnProveedores = require('../services/proveedores');
+const fnCompras = require('../services/compras');
+
+router.use(fileUpload())
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
@@ -18,6 +25,8 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
   let date = new Date().toISOString();
 
+  console.log("Data");
+  console.log(req.body);
   await prisma.abastecimientos.create({
     data: {
       ...req.body,
@@ -85,6 +94,95 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
   }
 });
 
+
+router.post('/cargarXML', async (req, res, next) => {
+  let dataJson;
+
+  console.log(req.body.user_id);
+  let EDFile = req.files.file;
+  EDFile.mv (`./xmls//${EDFile.name}`,err => {
+        if(err) return res.status(500).send({ message : err })
+
+          return new Promise(async (resolve,reject)=>{  
+            dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+            console.log(dataJson);
+    
+            const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
+
+            if(rfc==='AME050309Q32')
+              return res.status(400).json({ message:"schema", error: 'El XML no es de compras' });
+            else {
+              let proveedor_id = await fnProveedores.findProveedor(rfc);
+              let date = new Date().toISOString();
+
+              console.log("rfc",rfc);
+              console.log("ID",proveedor_id)
+
+              if(proveedor_id===0) {                
+                const nuevo = await prisma.proveedores.create({
+                  data: {
+                    name: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre,
+                    rfc: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc,
+                    direccion: null,
+                    tipo_situacion_fiscal: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal,
+                    permiso: null,
+                    phone: null,
+                    email: null,
+                    user_id: parseInt(req.body.user_id),
+                    date: date,
+                    active: 1,
+                  },
+                });
+                console.log("Nuevo proveedor",nuevo);
+                proveedor_id = nuevo.proveedor_id;
+              }
+
+                const fecha = new Date((dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
+                const concepto = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+
+                const dens = fnCompras.getDensidad(concepto);
+                console.log("Rd",dens)
+
+                const densidad = parseFloat(dens===''?0:dens);
+
+                const dataR = {
+                  proveedor_id,
+                  folio: dataJson['cfdi:Comprobante']['_attributes'].Folio,
+                  fecha_emision: fecha,
+                  cantidad: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
+                  concepto,
+                  densidad,
+                  preciounitario: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
+                  importe: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
+                  ivaaplicado: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados),
+                  cfdi: dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
+                  tipoCfdi: 'Ingreso',
+                  preciovent: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].Total),
+                  aclaracion: 'SIN OBSERVACIONES',
+                  tipocomplemento: 'Comercializacion',
+                  unidaddemedida: 'UM03',
+                  tipo_modena_id: 1
+                }
+
+                await prisma.abastecimientos.create({
+                  data: {
+                    ...dataR,
+                    proveedor_id:parseInt(proveedor_id),
+                    user_id: parseInt(req.body.user_id),
+                    date: date,
+                    active: 1,
+                  },
+                });
+
+              return res.status(200).send({ message : 'success',dataJson })
+            }
+        })
+
+        
+        
+
+    })
+});
 
 router.get('/:userId/list', async (req, res, next) => {
   let Entregas = {

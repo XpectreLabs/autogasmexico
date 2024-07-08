@@ -32,20 +32,7 @@ router.use('/api/v1/ingresos', ingresosRoutes);
 router.use('/api/v1/reportes', reportesRoutes);
 router.use(fileUpload())
 
-router.post('/cargarXML', (req, res, next) => {
-  console.log("Ja");
-  console.log(req.files);
 
-  let EDFile = req.files.file
-    EDFile.mv(`./xmls//${EDFile.name}`,err => {
-        if(err) return res.status(500).send({ message : err })
-
-        let dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-        console.log(dataJson);
-
-        return res.status(200).send({ message : 'success',dataJson })
-    })
-});
 
 
 router.get('/traerDatosXML', (req, res, next) => {
