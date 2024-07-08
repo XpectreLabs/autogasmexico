@@ -267,6 +267,12 @@ export default function Ventas() {
     currency: "USD"
   })
 
+  const formatter2 = new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    currency: "USD"
+  })
+
+
   const changedateformat = (date) => {
     return (""+date).slice(6,10)+"-"+(""+date).slice(3,5)+"-"+(""+date).slice(0,2)
   };
@@ -423,7 +429,7 @@ export default function Ventas() {
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
               <Grid item xs={3} style={{marginTop: '15px', marginBottom: '0px'}} align="left">
-              <p><strong>Litros totales:</strong> {litrosTotales}L</p>
+              <p><strong>Litros totales:</strong> {formatter2.format(litrosTotales).replace(',','')}L</p>
               </Grid>
               <Grid item xs={6}></Grid>
               <Grid item xs={3} align="right">
