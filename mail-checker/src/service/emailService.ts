@@ -3,8 +3,8 @@ import { simpleParser } from "mailparser"
 import { parseStringPromise } from "xml2js"
 
 const imapConfig = {
-  user: "autogas_cliente@xpectrelabs.com",
-  password: "Xp3ct123l@bs20_",
+  user: "email",
+  password: "password",
   host: "imap.hostinger.com",
   port: 993,
   tls: true,
