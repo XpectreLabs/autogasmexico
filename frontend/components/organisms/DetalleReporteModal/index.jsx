@@ -6,6 +6,12 @@ import Modal from '@mui/material/Modal';
 import { Formik, Form } from "formik";
 
 export default function DetalleReporteModal({ isOpen, onClose, reporteData }) {
+
+  const cambiarFechaNormal = (fecha) => {
+    fecha=fecha+"";
+    return (fecha).substr(8,2)+"/"+(fecha).substr(5,2)+"/"+(fecha).substr(0,4);
+  }
+
   return (
     <Formik>
         {({
@@ -51,10 +57,10 @@ export default function DetalleReporteModal({ isOpen, onClose, reporteData }) {
                       <p><strong>Modalidad de permiso:</strong></p>
                       <p>{reporteData.modalidadpermiso}</p>
                     </div>
-                    <div>
+                    {/* <div>
                       <p><strong>Número de permiso:</strong></p>
                       <p>{reporteData.numpermiso}</p>
-                    </div>
+                    </div> */}
 
                     <div>
                       <p><strong>Clave de instalación:</strong></p>
@@ -105,7 +111,7 @@ export default function DetalleReporteModal({ isOpen, onClose, reporteData }) {
                     </div>
                     <div>
                       <p><strong>Fecha y hora de estas mediciones:</strong></p>
-                      <p>{reporteData.fechayhoraestamedicionmes}</p>
+                      <p>{cambiarFechaNormal((reporteData.fechayhoraestamedicionmes+"").substr(0,10))}</p>
                     </div>
                     <div>
                       <p><strong>Número de registro:</strong></p>

@@ -12,6 +12,7 @@ const xmlJs = require('xml-js');
 const fs = require('fs');
 router.use(fileUpload());
 const fnClientes = require('../services/clients');
+const fnCompras = require('../services/compras');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
@@ -26,6 +27,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   await prisma.ventas.create({
     data: {
       ...req.body,
+      permiso_id:parseInt(req.body.permiso_id),
       client_id:parseInt(req.body.client_id),
       user_id: parseInt(req.body.user_id),
       date: date,
@@ -78,6 +80,12 @@ router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
               name: true
             },
           },
+          permisos: {
+            select: {
+              permiso_id: true,
+              permiso: true
+            }
+          }
         },
       });
       res.status(200).json({ message:"success", listIngresos });
@@ -192,6 +200,32 @@ router.get('/:userId/list', async (req, res, next) => {
 });
 
 
+
+router.get('/:userId/listPermisoNulosVentas/:fecha_inicio/:fecha_terminacion', async (req, res, next) => {
+  const fi = (req.params.fecha_inicio+"").substring(0,10);
+  const ff = (req.params.fecha_terminacion+"").substring(0,10);
+
+  const listIngresosSinPermisos = await prisma.ventas.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      permiso_id: null,
+      active: 1,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range}
+      }
+    },
+    select: {
+      folio: true,
+    },
+  });
+  return res.status(200).send({ message : 'success',listIngresosSinPermisos })
+});
+
 router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
@@ -200,8 +234,10 @@ router.post('/cargarXML', async (req, res, next) => {
   EDFile.mv (`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
+          dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+          //console.log(dataJson);
           return new Promise(async (resolve,reject)=>{
-            dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+            //dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
             console.log(dataJson);
 
             const rfc = dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc;
@@ -222,7 +258,6 @@ router.post('/cargarXML', async (req, res, next) => {
                     rfc: dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc,
                     direccion: dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor,
                     tipo_situacion_fiscal: dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor,
-                    permiso: null,
                     phone: null,
                     email: null,
                     user_id: parseInt(req.body.user_id),
@@ -234,19 +269,82 @@ router.post('/cargarXML', async (req, res, next) => {
                 client_id = nuevo.client_id;
               }
 
+              const isArray = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length?true:false;
+              let canCantidadVm = 0, preciounitarioVm = 0, importeVm = 0, ivaaplicadoVm = 0, precioventaVm = 0;
+              let descripcionVm = "";
+              let permisoVm = "";
+
+              if(isArray) {
+                const totalFilas = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length;
+
+                for(let j=0; j<totalFilas; j++)
+                {
+                  const base = parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Base);
+                  const iva = parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe);
+
+                  canCantidadVm += parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Cantidad);
+                  descripcionVm = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Descripcion;
+                  preciounitarioVm += parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].ValorUnitario);
+                  importeVm += base;
+                  ivaaplicadoVm += iva;
+                  precioventaVm += parseFloat(base + iva);
+
+                  if(j===0){
+                    permisoVm = fnCompras.getPermiso(descripcionVm);
+
+                    if(permisoVm==="")
+                    {
+                      let NoIdentificacion=dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].NoIdentificacion?dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].NoIdentificacion:"";
+                      permisoVm = fnCompras.getPermiso(NoIdentificacion);
+                    }
+                  }
+                }
+                preciounitarioVm/=totalFilas;
+
+                preciounitarioVm = Number.parseFloat(preciounitarioVm).toFixed(2);
+                importeVm = Number.parseFloat(importeVm).toFixed(2);
+                ivaaplicadoVm = Number.parseFloat(ivaaplicadoVm).toFixed(2);
+                precioventaVm = Number.parseFloat(precioventaVm).toFixed(2);
+              }
+
               const fecha = new Date((dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
-              const concepto = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+              let concepto = isArray?descripcionVm:dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+
+              let permiso_id= null;
+              let permiso = isArray?permisoVm:fnCompras.getPermiso(concepto);
+
+              if(permiso===""&&!isArray)
+              {
+                let NoIdentificacion=dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion?dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion:"";
+                permiso = fnCompras.getPermiso(NoIdentificacion);
+              }
+
+              if(permiso!=="") {
+                const catPermisos = await prisma.cat_permisos.findFirst({
+                  where: {
+                    permiso
+                  },
+                  select: {
+                    permiso_id: true,
+                  },
+                });
+
+                if (catPermisos !== null)
+                  permiso_id = catPermisos.permiso_id;
+              }
+
               const dataR = {
                 client_id,
                 folio: dataJson['cfdi:Comprobante']['_attributes'].Folio,
                 fecha_emision: fecha,
-                cantidad: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
+                cantidad: parseFloat(isArray?canCantidadVm:dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
                 unidaddemedida: 'UM03',
                 concepto,
-                preciounitario: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
-                importe: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16:dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
-                ivaaplicado: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16:dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe),
-                preciovent: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos:dataJson['cfdi:Comprobante']['_attributes'].Total),
+                permiso_id,
+                preciounitario: parseFloat(isArray?preciounitarioVm:dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
+                importe: parseFloat(isArray?importeVm:dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16:dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
+                ivaaplicado: parseFloat(isArray?ivaaplicadoVm:dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16:dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe),
+                preciovent: parseFloat(isArray?precioventaVm:dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos:dataJson['cfdi:Comprobante']['_attributes'].Total),
                 cfdi: dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
                 tipoCfdi: 'Ingreso',
                 aclaracion: 'SIN OBSERVACIONES',
@@ -270,6 +368,8 @@ router.post('/cargarXML', async (req, res, next) => {
             return res.status(200).send({ message : 'success',dataJson })
           }
         })
+
+        //return res.status(200).send({ message : 'success',dataJson })
     })
 });
 
@@ -288,6 +388,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     },
     data: {
       ...req.body,
+      permiso_id:parseInt(req.body.permiso_id),
       client_id:parseInt(req.body.client_id),
     },
   });

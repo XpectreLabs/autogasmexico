@@ -24,16 +24,23 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   //const listEntregs =  await listEntregas(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
 
   //console.log(listRecepcions);
+  //delete req.body.permiso_id;
+  //delete req.body.user_id;
+  //delete req.body.tipo_reporte_id;
+  delete req.body.numpermiso
+
+
   await prisma.reportes.create({
     data: {
       ...req.body,
       tipoevento:  parseFloat(req.body.tipoevento),
       composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
       composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
+      permiso_id: parseInt(req.body.permiso_id),
       user_id: parseInt(req.body.user_id),
       date: date,
       active: 1,
-    },
+    }, 
   });
 
   const dataJson = await reporteS.generarJson(req.body,date);
@@ -74,6 +81,8 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const id = parseInt(req.body.reporte_id);
   let date = new Date().toISOString();
 
+  delete req.body.numpermiso;
+
   await prisma.reportes.update({
     where: {
       reporte_id: parseInt(id),
@@ -83,6 +92,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
       tipoevento:  parseFloat(req.body.tipoevento),
       composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
       composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
+      permiso_id: parseInt(req.body.permiso_id),
     },
   });
 

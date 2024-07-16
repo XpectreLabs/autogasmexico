@@ -9,7 +9,6 @@ const jwtV = require('../services/auth.js');
 const sch = require('../schemas/proveedores.js');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
-  console.log(typeof(req.body.permiso))
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
     console.log(error.details[0].message);
@@ -24,7 +23,6 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
       rfc: req.body.rfc,
       direccion: req.body.direccion?req.body.direccion:null,
       tipo_situacion_fiscal: req.body.tipo_situacion_fiscal,
-      permiso: req.body.permiso,
       phone: req.body.phone?req.body.phone:null,
       email: req.body.email?req.body.email:null,
       user_id: parseInt(req.body.user_id),
@@ -62,7 +60,6 @@ router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
           rfc: true,
           direccion: true,
           tipo_situacion_fiscal: true,
-          permiso: true,
           phone: true,
           email: true,
           date: true,
@@ -93,7 +90,6 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
       rfc: req.body.rfc,
       direccion: req.body.direccion?req.body.direccion:null,
       tipo_situacion_fiscal: req.body.tipo_situacion_fiscal,
-      permiso: req.body.permiso,
       phone: req.body.phone?req.body.phone:null,
       email: req.body.email?req.body.email:null,
     },

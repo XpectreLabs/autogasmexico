@@ -2,6 +2,7 @@ const joi = require('joi');
 
 const schemaCreate = joi.object({
   client_id: joi.number().min(1).required(),
+  permiso_id: joi.number().min(1).required(),
   folio: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
   fecha_emision: joi.date().required(),
   cantidad: joi.number().required(),
@@ -25,6 +26,7 @@ const schemaCreate = joi.object({
 
 const schemaUpdate = joi.object({
   client_id: joi.number().min(1).required(),
+  permiso_id: joi.number().min(1).required(),
   folio: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
   fecha_emision: joi.date().required(),
   cantidad: joi.number().required(),

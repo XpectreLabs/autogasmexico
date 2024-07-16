@@ -14,7 +14,7 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', permiso:'', phone:'',  email:''}));
+  const [initialValues, setInitialValues] = useState(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   clienteData.email = clienteData.email==="Sin email"?"":clienteData.email;
@@ -37,9 +37,6 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
           tipo_situacion_fiscal: Yup.string()
             .min(3, "El tipo de situación fiscal es muy corto")
             .required("El tipo de situación fiscal es requerido"),
-          permiso: Yup.string()
-            .min(3, "Es permiso es muy corto")
-            .required("El permiso es requerido"),
           phone: Yup.string()
             .min(3, "El teléfono es muy corto"),
           email: Yup.string()
@@ -53,13 +50,12 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
           const rfc = values.rfc;
           const direccion = values.direccion;
           const tipo_situacion_fiscal = values.tipo_situacion_fiscal;
-          const permiso = values.permiso+"";
           const phone = values.phone;
           const email = values.email;
-          const data = {client_id, name, rfc, direccion, tipo_situacion_fiscal, permiso, phone, email,id};
+          const data = {client_id, name, rfc, direccion, tipo_situacion_fiscal, phone, email,id};
           setLoading(true);
 
-          //setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', permiso:'', phone:'',  email:''}));
+          //setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
 
           fetch(scriptURL, {
             method: 'PUT',
@@ -78,7 +74,7 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del cliente fueron actualizado");
-              setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', permiso:'', phone:'',  email:''}));
+              setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -166,17 +162,6 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
                     size="small"
                   />
                   <TextField
-                    placeholder="Permiso"
-                    required
-                    id="permiso"
-                    label="Permiso"
-                    name="permiso"
-                    value={values.permiso}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
                     placeholder="Teléfono"
                     id="phone"
                     label="Teléfono"
@@ -198,13 +183,12 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
                     size="small"
                   />
 
-                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.permiso || errors.phone || errors.email)?(<div className={styles.errors}>
+                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.phone || errors.email)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.name? (<p>{errors.name}</p>):null}
                         {errors.rfc? (<p>{errors.rfc}</p>):null}
                         {errors.direccion? (<p>{errors.direccion}</p>):null}
                         {errors.tipo_situacion_fiscal? (<p>{errors.tipo_situacion_fiscal}</p>):null}
-                        {errors.permiso? (<p>{errors.permiso}</p>):null}
                         {errors.phone? (<p>{errors.phone}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
                     </div>):null}

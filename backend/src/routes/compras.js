@@ -71,6 +71,7 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
           importe: true,
           ivaaplicado: true,
           densidad: true,
+          permiso: true,
           tipo_modena_id: true,
           cfdi: true,
           tipoCfdi: true,
@@ -82,7 +83,6 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
             select: {
               name: true,
               rfc: true,
-              permiso: true,
             },
           },
         },
@@ -125,7 +125,6 @@ router.post('/cargarXML', async (req, res, next) => {
                     rfc: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc,
                     direccion: null,
                     tipo_situacion_fiscal: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal,
-                    permiso: null,
                     phone: null,
                     email: null,
                     user_id: parseInt(req.body.user_id),
@@ -141,6 +140,7 @@ router.post('/cargarXML', async (req, res, next) => {
                 const concepto = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
 
                 const dens = fnCompras.getDensidad(concepto);
+                const permiso = fnCompras.getPermiso(concepto);
                 console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
@@ -152,6 +152,7 @@ router.post('/cargarXML', async (req, res, next) => {
                   cantidad: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
                   concepto,
                   densidad,
+                  permiso,
                   preciounitario: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
                   importe: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
                   ivaaplicado: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados),
@@ -177,12 +178,36 @@ router.post('/cargarXML', async (req, res, next) => {
               return res.status(200).send({ message : 'success',dataJson })
             }
         })
-
-        
-        
-
     })
 });
+
+
+router.get('/:userId/listPermisoNulosCompras/:fecha_inicio/:fecha_terminacion', async (req, res, next) => {
+  const fi = (req.params.fecha_inicio+"").substring(0,10);
+  const ff = (req.params.fecha_terminacion+"").substring(0,10);
+
+  console.log("Si"+req.params.fecha_terminacion);
+  const listComprasSinPermisos = await prisma.abastecimientos.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      permiso: null,
+      active: 1,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range}
+      }
+    },
+    select: {
+      folio: true,
+    },
+  });
+  return res.status(200).send({ message : 'success',listComprasSinPermisos })
+});
+
 
 router.get('/:userId/list', async (req, res, next) => {
   let Entregas = {

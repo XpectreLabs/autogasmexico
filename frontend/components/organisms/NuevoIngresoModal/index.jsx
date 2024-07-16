@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './NuevoIngreso.module.css';
@@ -12,14 +12,66 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
-import * as Yup from "yup";
+import * as Yup from "yup"; 
 
 export default function NuevoIngresoModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+  const [listPermisos,setListPermisos] = React.useState([]);
+  const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+
+  function data() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        setListPermisos(data.listPermisos);
+        //setLoadingData(true);
+        //setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
+        //setShowAlert(false);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
+  useEffect(() => {
+    data();
+  }, []);
 
   return (
     <Formik
@@ -64,6 +116,8 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
             .required("La unidad de medida es requerido"),
+          permiso_id:Yup.number()
+            .required("El permiso es requerido"),
           client_id:Yup.number()
             .required("El cliente es requerido"),
         })}
@@ -81,7 +135,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
           const data = {...values,user_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+          setInitialValues(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
@@ -100,7 +154,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del ingreso fueron guardados");
-              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+              setInitialValues(({client_id:'', permiso_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -261,6 +315,25 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     size="small"
                     type='number'
                   />
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
+                    required
+                    value={values.permiso_id}
+                    onChange={handleChange}
+                    defaultValue={0}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Permiso *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
+
                   <TextField
                     className={`InputModal`}
                     required
@@ -327,7 +400,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                 </NativeSelect>
 
 
-                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>
+                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida || errors.permiso_id)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.folio? (<p>{errors.folio}</p>):null}
                         {errors.fecha_emision? (<p>{errors.fecha_emision}</p>):null}
@@ -343,6 +416,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                         {errors.tipocomplemento? (<p>{errors.tipocomplemento}</p>):null}
                         {errors.unidaddemedida? (<p>{errors.unidaddemedida}</p>):null}
                         {errors.client_id? (<p>{errors.client_id}</p>):null}
+                        {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
                     </div>):null}
 
                     <div className={styles.ContentLoadding}>

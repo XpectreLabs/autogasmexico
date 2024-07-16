@@ -74,7 +74,11 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
                       <p>{abastecimientoData.densidad}</p>
                     </div>
                     <div>
-                      <p><strong>CFDI:</strong></p>
+                      <p><strong>Permiso:</strong></p>
+                      <p>{abastecimientoData.permiso}</p>
+                    </div>
+                    <div>
+                      <p><strong>UUID:</strong></p>
                       <p>{abastecimientoData.cfdi}</p>
                     </div>
                     <div>

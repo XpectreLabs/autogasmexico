@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import styles from './NuevoIngreso.module.css';
+import styles from './Index.module.css';
 import Modal from '@mui/material/Modal';
 import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -13,6 +13,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import NativeSelect from '@mui/material/NativeSelect';
 import dayjs from 'dayjs';
 import { compareAsc, format } from "date-fns";
 import * as Yup from "yup";
@@ -21,20 +22,29 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', numpermiso:'LP/22811/COM/2019',  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+  const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [listPermisos,setListPermisos] = React.useState([]);
 
 
-  const convertirFecha = (fecha) => {
-    return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
-  }
+    const convertirFecha = (fecha) => {
+      return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
+    }
 
+    if(reporteData.fecha_inicio!==undefined){
+      reporteData.fechayhoraestamedicionmes = dayjs(reporteData.fechayhoraestamedicionmes);
+      reporteData.fecha_inicio = dayjs(convertirFecha(reporteData.fecha_inicio2));
+      reporteData.fecha_terminacion = dayjs(convertirFecha(reporteData.fecha_terminacion2));
+    }
 
-  if(reporteData.fecha_inicio!==undefined){
-    reporteData.fecha_inicio = dayjs(convertirFecha(reporteData.fecha_inicio2));
-    reporteData.fecha_terminacion = dayjs(convertirFecha(reporteData.fecha_terminacion2));
-  }
-
+    const obtenerPermiso = (permiso_id) => {
+      for(let j=0; j<listPermisos.length;j++)
+      {
+        if(parseInt(listPermisos[j].permiso_id)===parseInt(permiso_id))
+          return listPermisos[j].permiso;
+      }
+      return "";
+    }
 
     const descargarJSON = (dataJson) => {
       const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
@@ -48,6 +58,54 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
       link.click();
       document.body.removeChild(link);
     }
+
+    function data() {
+      const user_id = localStorage.getItem('user_id');
+      const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+      fetch(scriptURL, {
+        method: 'GET',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+localStorage.getItem('token'),
+        },
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        console.log("data r",data);
+        if(data.message==="success") {
+          setListPermisos(data.listPermisos);
+        }
+        else if(data.message==="schema") {
+          setTextError(data.error);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+        else {
+          setTextError(data.message);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+
+        setTimeout(()=>{
+          setShowAlert(false);
+        },3000)
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.error('Error!', error.message);
+      });
+    }
+
+    useEffect(() => {
+      data();
+    }, []);
 
     console.log("Dta",reporteData);
     console.log("reporteIdd",reporteIdd);
@@ -74,9 +132,8 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           modalidadpermiso: Yup.string()
             .min(3, "La modalidad permiso es muy corto")
             .required("La modalidad permiso es requerido"),
-          numpermiso: Yup.string()
-            .min(3, "El num permisoes muy corto")
-            .required("El num permiso permiso es requerido"),
+          permiso_id:Yup.number()
+            .required("El permiso es requerido"),
           claveinstalacion: Yup.string()
             .min(3, "La clave de instalación es muy corto")
             .required("La clave de instalación es requerido"),
@@ -129,6 +186,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           const tipo_reporte_id   = 1;
           const scriptURL = "http://localhost:3001/api/v1/reportes";
           const reporte_id = reporteIdd;
+          const numpermiso =  obtenerPermiso(values.permiso_id);
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -145,10 +203,10 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           delete values.active;
 
 
-          const data = {...values,reporte_id};
+          const data = {...values,reporte_id,numpermiso};
           setLoading(true);
 
-          //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+          //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', permiso_id: 1,  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -170,7 +228,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron actualizados");
-              setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+              //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', permiso_id: 1,  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -289,18 +347,24 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
                     required
-                    placeholder="Número de permiso"
-                    id="numpermiso"
-                    label="Número de permiso"
-                    name="numpermiso"
-                    value={values.numpermiso}
+                    value={values.permiso_id}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                    defaultValue={0}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Número de permiso *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id} selected={permiso.permiso_id===reporteData.permiso_id?true:false}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
 
                 <TextField
                     className={`InputModal`}
@@ -451,6 +515,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                         label="Fecha y hora de estas mediciones"
                         id="fechayhoraestamedicionmes"
                         name="fechayhoraestamedicionmes"
+                        value={values.fechayhoraestamedicionmes}
                         //defaultValue={values.fecha_emision}
                         onChange={(value) => {
                           setFieldValue('fechayhoraestamedicionmes', value, true);
@@ -544,7 +609,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                   </LocalizationProvider>
 
 
-                  {(errors.version || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.numpermiso|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.volumenexistenciasees || errors.fechayhoraestamedicionmes || errors.numeroregistro || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
+                  {(errors.version || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.volumenexistenciasees || errors.fechayhoraestamedicionmes || errors.numeroregistro || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.version? (<p>{errors.version}</p>):null}
                         {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
@@ -552,7 +617,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                         {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
                         {errors.caracter? (<p>{errors.caracter}</p>):null}
                         {errors.modalidadpermiso? (<p>{errors.modalidadpermiso}</p>):null}
-                        {errors.numpermiso? (<p>{errors.numpermiso}</p>):null}
+                        {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
                         {errors.claveinstalacion? (<p>{errors.claveinstalacion}</p>):null}
                         {errors.descripcioninstalacion? (<p>{errors.descripcioninstalacion}</p>):null}
                         {errors.numeropozos? (<p>{errors.numeropozos}</p>):null}

@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const findClient = async (rfc) =>  {    
+const findClient = async (rfc) =>  {
   const clientes = await prisma.clients.findFirst({
     where: {
       rfc,

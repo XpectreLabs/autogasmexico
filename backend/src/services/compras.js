@@ -21,7 +21,7 @@ const getDensidad = (texto) => {
     let dens = ".";
     if(texto.includes("Den.")) {
         const posicion = texto.indexOf("Den.")+4;
-                
+
         for(let j=posicion; j<texto.length; j++) {
             if(Number.isInteger(parseInt(texto[j])))
                 dens+=texto[j];
@@ -31,7 +31,7 @@ const getDensidad = (texto) => {
     }
     else if(texto.includes("Densidad")) {
         const posicion = texto.indexOf("Densidad")+9;
-              
+
         for(let j=posicion; j<texto.length; j++) {
             if(Number.isInteger(parseInt(texto[j]))||texto[j]==='.')
                 dens+=texto[j];
@@ -42,4 +42,20 @@ const getDensidad = (texto) => {
     return dens;
 }
 
-module.exports = { getDensidad }
+
+const getPermiso = (texto) => {
+  let permiso = "";
+    if(texto.includes("LP/")||texto.includes("H/")) {
+      const posicion = texto.includes("LP/")?texto.indexOf("LP/"):texto.indexOf("H/");
+
+      for(let j=posicion; j<texto.length; j++) {
+        if(texto[j]!==','&&texto[j]!=='-')
+          permiso+=texto[j];
+        else
+          break;
+      }
+    }
+  return permiso;
+}
+
+module.exports = { getDensidad, getPermiso }

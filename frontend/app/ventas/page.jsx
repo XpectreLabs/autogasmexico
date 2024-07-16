@@ -339,42 +339,87 @@ export default function Ventas() {
       .then((response) => {
         console.log(response.data);
         console.log(response.data.dataJson);
-        console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
-        console.log(response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales'])
+        /*console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
+        //console.log(response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales'])
 
         console.log("Ventas");
         console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
 
         console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
         console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
-        console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
+        //console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
         console.log("Unid ad de medida: UM03");
-        console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
-        console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
-        console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16)
-        console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16)
-        console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos)
-        
+        const isArray = response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length?true:false
+
+        //tambien
+        //console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
+        //console.log("tipo T",typeof(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']))
+        //console.log("total T",response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length)
+
+        console.log("Es array",isArray)
+
+        let dataG ;
+        //alert(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][0]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Base);
+        //alert(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][0]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe);
+
+        if(isArray) {
+          let canCantidad = 0, preciounitario = 0, importe = 0, ivaaplicado = 0, precioventa = 0;
+          let descripcion;
+
+          console.log("jaja");
+          const totalFilas = response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length;
+
+          for(let j=0; j<totalFilas; j++)
+          {
+            const base = parseFloat(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Base);
+            const iva = parseFloat(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe);
+
+            canCantidad += parseFloat(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Cantidad);
+            descripcion = response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Descripcion;
+            preciounitario += parseFloat(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].ValorUnitario);
+            importe += base;
+            ivaaplicado += iva;
+            precioventa += parseFloat(base + iva)
+          }
+            preciounitario/=totalFilas;
+
+
+          console.log("jja");
+
+          console.log("Resultado:",{
+            "cantidad": canCantidad,
+            "concepto": descripcion,
+            "preciounitario": Number.parseFloat(preciounitario).toFixed(2),
+            "importe": Number.parseFloat(importe).toFixed(2),
+            "ivaaplicado": Number.parseFloat(ivaaplicado).toFixed(2),
+            "precioventa": Number.parseFloat(precioventa).toFixed(2),
+          })
+        }
+
+        //console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
+        //console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16)
+        //console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16)
+        //console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos)
+
         console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
         console.log("Tipo de cfdi: Ingreso")
         console.log("Aclaración: SIN OBSERVACIONES")
         console.log("Tipo complemento: Comercializacion")
 
- 
         console.log("Para cliente nuevo:");
         console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre)
         console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc)
         console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor)
         console.log("Domicilio: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor)
-        console.log("Permiso: null")
+        console.log("Permiso: null")*/
+
 
         setTextError('El XML de ventas fue importado');
         setShowAlert(true);
         setTimeout(()=>{setShowAlert(false); data();},3000)
-        
       })
       .catch((error) => {
-        //setTextError('El XML no es de ventas');
+        setTextError('El XML no es de ventas');
         setShowAlert(true);
         setTimeout(()=>{setShowAlert(false); data();},3000)
       });
@@ -531,6 +576,8 @@ export default function Ventas() {
           preciovent2:  formatter.format(ingreso.preciovent),
           ivaaplicado2: formatter.format(ingreso.ivaaplicado),
           cliente: ingreso.clients.name,
+          permiso: ingreso.permisos?ingreso.permisos.permiso:'Sin permiso',
+          permiso_id: ingreso.permisos?ingreso.permisos.permiso_id:0,
 
           /*client_id: ingreso.client_id,
           venta_id: ingreso.venta_id,

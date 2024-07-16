@@ -34,7 +34,6 @@ model proveedores {
   rfc                     String      @db.VarChar(30)
   direccion               String?     @db.VarChar(255)
   tipo_situacion_fiscal   String      @db.VarChar(255)
-  permiso                 String?     @db.VarChar(100)
   phone                   String?     @db.VarChar(20)
   email                   String?     @db.VarChar(200)
   user_id                 Int?        @db.Integer
@@ -50,7 +49,6 @@ model clients {
   rfc                     String      @db.VarChar(30)
   direccion               String      @db.VarChar(255)
   tipo_situacion_fiscal   String      @db.VarChar(255)
-  permiso                 String?     @db.VarChar(100)
   phone                   String?     @db.VarChar(20)
   email                   String?     @db.VarChar(200)
   user_id                 Int         @db.Integer
@@ -87,6 +85,7 @@ model abastecimientos {
   aclaracion            String      @db.VarChar(300)
   tipocomplemento       String      @db.VarChar(100)
   unidaddemedida        String      @db.VarChar(60)
+  permiso               String?     @db.VarChar(100)
   user_id               Int         @db.Integer
   date                  DateTime    @db.Date
   active                Int         @db.SmallInt
@@ -136,6 +135,7 @@ model ventas {
   aclaracion              String      @db.VarChar(300)
   tipocomplemento         String      @db.VarChar(100)
   unidaddemedida          String      @db.VarChar(60)
+  permiso_id              Int?        @db.SmallInt
   user_id                 Int         @db.Integer
   date                    DateTime    @db.Date
   active                  Int?        @db.SmallInt
@@ -143,9 +143,16 @@ model ventas {
   users                   users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_venta")
   tipos_monedas           tipos_monedas? @relation(fields: [tipo_modena_id], references: [tipo_modena_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_modena_id_fk_user_id_venta")
   condiciones_pagos       condiciones_pagos? @relation(fields: [condicion_pago_id], references: [condicion_pago_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_condicion_pago_id_fk_user_id_venta")
+  permisos                cat_permisos? @relation(fields: [permiso_id], references: [permiso_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_id_fk_permiso_id_venta")
 }
 
 
+model cat_permisos {
+  permiso_id    Int     @id @default(autoincrement()) @db.SmallInt
+  permiso       String @db.VarChar(100)
+  ventas        ventas[]
+  reportes      reportes[]
+}
 
 model reportes {
   reporte_id                            Int         @id @default(autoincrement())
@@ -155,7 +162,7 @@ model reportes {
   rfcproveedor                          String      @db.VarChar(30)
   caracter                              String      @db.VarChar(100)
   modalidadpermiso                      String      @db.VarChar(100)
-  numpermiso                            String      @db.VarChar(100)
+  permiso_id                            Int?        @db.SmallInt
   claveinstalacion                      String      @db.VarChar(100)
   descripcioninstalacion                String      @db.VarChar(100)
   numeropozos                           Int         @db.SmallInt
@@ -180,6 +187,7 @@ model reportes {
   active                                Int?        @db.SmallInt
   users                                 users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_reporte")
   tipos_reporte                         tipos_reporte? @relation(fields: [tipo_reporte_id ], references: [tipo_reporte_id ], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_reporte_id_report")
+  permisos                              cat_permisos? @relation(fields: [permiso_id], references: [permiso_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_id_fk_permiso_id_reporte")
 }
 
 model tipos_reporte {

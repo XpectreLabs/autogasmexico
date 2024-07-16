@@ -164,12 +164,6 @@ export default function Clientes() {
       flex: 1.5,
     },
     {
-      field: 'permiso',
-      headerName: 'Permiso',
-      sortable: false,
-      flex: 1.7,
-    },
-    {
       field: 'phone',
       headerName: 'Teléfono',
       sortable: false,
@@ -276,7 +270,7 @@ export default function Clientes() {
                       if(clientesAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<clientesAux.length;j++) {
-                          let busqueda = (clientesAux[j].name + " " + clientesAux[j].rfc + " " + clientesAux[j].permiso+ " " + clientesAux[j].phone + " " + clientesAux[j].email).toLowerCase();
+                          let busqueda = (clientesAux[j].name + " " + clientesAux[j].rfc + " " + clientesAux[j].phone + " " + clientesAux[j].email).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(clientesAux[j]);
                         }
@@ -315,7 +309,6 @@ export default function Clientes() {
           rfc: cliente.rfc,
           direccion: cliente.direccion,
           tipo_situacion_fiscal: cliente.tipo_situacion_fiscal,
-          permiso: cliente.permiso,
           phone: cliente.phone?cliente.phone:"Sin teléfono",
           email: cliente.email?cliente.email:"Sin email",
         }))}

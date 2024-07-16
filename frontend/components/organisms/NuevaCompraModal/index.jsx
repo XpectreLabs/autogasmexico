@@ -19,9 +19,14 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'' , preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'' , preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
-  const [densidad, setDensidad] = React.useState(null);
+
+  //12/07/2024
+  function cambiarFechaNormal(fecha) {
+    fecha=fecha+"";
+    return (fecha).substr(6,4)+"-"+(fecha).substr(3,2)+"-"+(fecha).substr(0,2);
+  }
 
   function obtenerDensidad(texto) {
     let cad = ".";
@@ -45,8 +50,42 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
           break;
       }
     }
+    else
+      cad = "";
 
-    setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(document.querySelector("input[name=fecha_emision]").value), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+    let cadPermiso = "";
+    if(texto.includes("LP/")||texto.includes("H/")) {
+      const posicion = texto.includes("LP/")?texto.indexOf("LP/"):texto.indexOf("H/");
+
+      for(let j=posicion; j<texto.length; j++) {
+        if(texto[j]!==',')
+          cadPermiso+=texto[j];
+        else
+          break;
+      }
+    }
+    /*
+    const getPermiso = (texto) => {
+  let permiso = "";
+    if(texto.includes("LP/")||texto.includes("H/")) {
+      const posicion = texto.includes("LP/")?texto.indexOf("LP/"):texto.indexOf("H/");
+
+      for(let j=posicion; j<texto.length; j++) {
+        if(texto[j]!==','&&texto[j]!=='-')
+          permiso+=texto[j];
+        else
+          break;
+      }
+    }
+  return permiso;
+}
+    */
+
+
+
+    console.log(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value));
+
+    setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value)), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad), permiso: cadPermiso,  preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
     //setDensidad(cad);
     //document.querySelector("#densidad").value = cad;
   }
@@ -111,7 +150,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
           const data = {...values,user_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+          //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
@@ -130,7 +169,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron guardados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -254,6 +293,18 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   />
                   <TextField
                     className={`InputModal ${styles.Mr}`}
+                    placeholder="Permiso"
+                    required
+                    id="permiso"
+                    label="Permiso"
+                    name="permiso"
+                    value={values.permiso}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    size="small"
+                  />
+                  <TextField
+                    className={`InputModal`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -267,7 +318,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   />
 
                 <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -280,7 +331,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -293,7 +344,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Precio de compra"
                     id="preciovent"
@@ -306,11 +357,11 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
-                    placeholder="Cfdi"
+                    placeholder="UUID"
                     id="cfdi"
-                    label="Cfdi"
+                    label="UUID"
                     name="cfdi"
                     value={values.cfdi}
                     onChange={handleChange}
@@ -318,7 +369,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -330,7 +381,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -342,7 +393,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"

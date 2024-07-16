@@ -87,6 +87,12 @@ export default function DetalleIngresoModal({ isOpen, onClose, ventaData }) {
                       <p><strong>Cliente:</strong></p>
                       <p>{ventaData.cliente}</p>
                     </div>
+                    <div>
+                      <p><strong>Permiso:</strong></p>
+                      <p>{ventaData.permiso}</p>
+                    </div>
+                    <div>
+                    </div>
                   </div>
                 </Form>
               </Modal>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './EditarIngreso.module.css';
@@ -20,7 +20,8 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+  const [listPermisos,setListPermisos] = React.useState([]);
+  const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   const convertirFecha = (fecha) => {
@@ -32,6 +33,55 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
   }
 
   console.log("Dta",ventaData);
+
+  function data() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        setListPermisos(data.listPermisos);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
+  useEffect(() => {
+    data();
+  }, []);
+
   return (
     <Formik
         enableReinitialize={true}
@@ -75,6 +125,8 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
             .required("La unidad de medida es requerido"),
+          permiso_id:Yup.number()
+            .required("El permiso es requerido"),
           client_id:Yup.number()
             .required("El cliente es requerido"),
         })}
@@ -89,7 +141,9 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           delete values.preciovent2;
           delete values.ivaaplicado2;
           delete values.cliente;
-          delete values.clients
+          delete values.clients;
+          delete values.permisos;
+          delete values.permiso;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -100,7 +154,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           const data = {...values,venta_id,tipo_modena_id};
           setLoading(true);
 
-          setInitialValues(({client_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+          setInitialValues(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -119,7 +173,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del ingreso fueron actualizados");
-              setInitialValues(({client_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
+              setInitialValues(({client_id:'', permiso_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -280,6 +334,24 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     size="small"
                     type='number'
                   />
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
+                    required
+                    value={values.permiso_id}
+                    onChange={handleChange}
+                    defaultValue={values.permiso_id}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Permiso *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id} selected={permiso.permiso_id===ventaData.permiso_id?true:false}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
                   <TextField
                     className={`InputModal`}
                     required
@@ -304,7 +376,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     onBlur={handleBlur}
                     size="small"
                   />
-                  
+
                   <TextField
                     className={`InputModal`}
                     required
@@ -329,7 +401,6 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                     onBlur={handleBlur}
                     size="small"
                   />
-                  
 
                 <NativeSelect
                   className={` Fecha ${styles.select}`}
@@ -347,7 +418,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   <option value={2}>GAS DE APAN SA DE CV</option>
                 </NativeSelect>
 
-                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida)?(<div className={styles.errors}>
+                  {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida || errors.permiso_id)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.folio? (<p>{errors.folio}</p>):null}
                         {errors.fecha_emision? (<p>{errors.fecha_emision}</p>):null}
@@ -363,6 +434,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                         {errors.tipocomplemento? (<p>{errors.tipocomplemento}</p>):null}
                         {errors.unidaddemedida? (<p>{errors.unidaddemedida}</p>):null}
                         {errors.client_id? (<p>{errors.client_id}</p>):null}
+                        {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
                     </div>):null}
 
                     <div className={styles.ContentLoadding}>

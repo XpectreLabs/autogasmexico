@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './NuevoIngreso.module.css';
@@ -14,68 +14,25 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
+import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
 
 export default function NuevoReporteModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', numpermiso:'LP/22811/COM/2019',  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+  const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [listPermisos,setListPermisos] = React.useState([]);
 
-  /*let dataJson = {
-    "Version": "1.012",
-    "RfcContribuyente": "AME050309Q32",
-    "RfcRepresentanteLegal": "IAJA7201074W4",
-    "RfcProveedor": "APR9609194H4",
-    "Caracter": "permisionario",
-    "ModalidadPermiso": "PER45",
-    "NumPermiso": "LP/22811/COM/2019",
-    "ClaveInstalacion": "CMN-0001",
-    "DescripcionInstalacion": "CMN-Comercialización",
-    "NumeroPozos": 0,
-    "NumeroTanques": 1,
-    "NumeroDuctosEntradaSalida": 0,
-    "NumeroDuctosTransporteDistribucion": 0,
-    "NumeroDispensarios": 0,
-    "FechaYHoraReporteMes": "2024-04-09T17:22:58-06:00",
-    "Producto": [
+    const obtenerPermiso = (permiso_id) => {
+      for(let j=0; j<listPermisos.length;j++)
       {
-        "ClaveProducto": "PR12",
-        "ComposDePropanoEnGasLP": 60.0,
-        "ComposDeButanoEnGasLP": 40.0,
-        "ReporteDeVolumenMensual": {
-          "ControlDeExistencias": {
-            "VolumenExistenciasMes": 0.0,
-            "FechaYHoraEstaMedicionMes": "2023-09-30T23:59:59-06:00"
-          },
-        }
+        if(parseInt(listPermisos[j].permiso_id)===parseInt(permiso_id))
+          return listPermisos[j].permiso;
       }
-    ],
-    "BitacoraMensual": [
-      {
-        "NumeroRegistro": 2033,
-        "FechaYHoraEvento": "2024-04-09T17:22:58-06:00",
-        "UsuarioResponsable": "ANGEL LUIS IBARRA",
-        "TipoEvento": 5,
-        "DescripcionEvento": "Consulta Informacion"
-      }
-    ]
-  }*/
-
-
-  /*console.log("j",dataJson);
-  dataJson.Version="2.0";
-  console.log("j2",dataJson);*/
-
-/*  const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
-    const jsonURL = URL.createObjectURL(jsonData);
-    const link = document.createElement('a');
-    link.href = jsonURL;
-    link.download = `prueba.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);*/
+      return "";
+    }
 
     const descargarJSON = (dataJson) => {
       const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
@@ -89,6 +46,129 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       link.click();
       document.body.removeChild(link);
     }
+
+    function data() {
+      const user_id = localStorage.getItem('user_id');
+      const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+      fetch(scriptURL, {
+        method: 'GET',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+localStorage.getItem('token'),
+        },
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        console.log("data r",data);
+        if(data.message==="success") {
+          setListPermisos(data.listPermisos);
+        }
+        else if(data.message==="schema") {
+          setTextError(data.error);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+        else {
+          setTextError(data.message);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+
+        setTimeout(()=>{
+          setShowAlert(false);
+        },3000)
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.error('Error!', error.message);
+      });
+    }
+
+    async function getObtenerListaDeComprasSinPermisos(fecha_inicio,fecha_terminacion) {
+      const user_id = localStorage.getItem('user_id');
+      const scriptURL = "http://localhost:3001/api/v1/compras/"+user_id+"/listPermisoNulosCompras/"+fecha_inicio+"/"+fecha_terminacion+""; 
+
+      let folios = "";
+
+      fetch(scriptURL, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+localStorage.getItem('token'),
+        },
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        console.log("data r",data);
+        if(data.message==="success") {
+          for(let j=0; j<data.listComprasSinPermisos.length; j++) {
+            if(j===0)
+              folios = "Folio(s) de compra: "+ data.listComprasSinPermisos[j].folio;
+            else
+              folios += "," + data.listComprasSinPermisos[j].folio;
+          }
+
+          alert(folios)
+
+          return folios;
+        }
+        setTimeout(()=>{
+          setShowAlert(false);
+        },3000)
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.error('Error!', error.message);
+      });
+    }
+
+    async function getObtenerListaDeVentasSinPermisos(fecha_inicio,fecha_terminacion) {
+      const user_id = localStorage.getItem('user_id');
+      const scriptURL = "http://localhost:3001/api/v1/ingresos/"+user_id+"/listPermisoNulosVentas/"+fecha_inicio+"/"+fecha_terminacion; 
+      let folios = "";
+
+      fetch(scriptURL, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+localStorage.getItem('token'),
+        },
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        console.log("data Ventas",data);
+        if(data.message==="success") {
+          for(let j=0; j<data.listIngresosSinPermisos.length; j++) {
+            if(j===0)
+              folios = "Folio(s) de venta: "+ data.listIngresosSinPermisos[j].folio;
+            else
+              folios += "," + data.listIngresosSinPermisos[j].folio;
+          }
+
+          return folios;
+        }
+        setTimeout(()=>{
+          setShowAlert(false);
+        },3000)
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.error('Error!', error.message);
+      });
+    }
+
+    useEffect(() => {
+      data();
+    }, []);
   return (
     <Formik
         enableReinitialize={true}
@@ -112,9 +192,8 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           modalidadpermiso: Yup.string()
             .min(3, "La modalidad permiso es muy corto")
             .required("La modalidad permiso es requerido"),
-          numpermiso: Yup.string()
-            .min(3, "El num permisoes muy corto")
-            .required("El num permiso permiso es requerido"),
+          permiso_id:Yup.number()
+            .required("El permiso es requerido"),
           claveinstalacion: Yup.string()
             .min(3, "La clave de instalación es muy corto")
             .required("La clave de instalación es requerido"),
@@ -144,7 +223,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           volumenexistenciasees: Yup.number()
             .required("El volumen existencias es requerido"),
           fechayhoraestamedicionmes: Yup.date()
-            .required("* Fecha y hora esta mediciones mes"),
+            .required("Fecha y hora esta mediciones mes"),
           numeroregistro: Yup.number()
             .min(1, "El numero de registro debe tener minimo 1 digito")
             .required("El numero de registro  es requerido"),
@@ -158,12 +237,11 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             .min(3, "La descripción del evento es muy corto")
             .required("La descripción del evento es requerido"),
           fecha_inicio: Yup.date()
-            .required("* Fecha de inicio"),
+            .required("Fecha de inicio"),
           fecha_terminacion: Yup.date()
-            .required("* Fecha de terminación"),
+            .required("Fecha de terminación"),
         })}
-        onSubmit={(values, actions) => {
-
+         onSubmit={async(values, actions) => {
           /*dataJson.Version=values.version;
           dataJson.RfcContribuyente=values.rfccontribuyente;
           dataJson.RfcRepresentanteLegal=values.rfcrepresentantelegal;
@@ -190,22 +268,36 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           dataJson.TipoEvento=values.tipoevento;
           dataJson.DescripcionEvento=values.descripcionevento;
           dataJson.=values.;*/
+          /*const user_id = localStorage.getItem('user_id');
+          const tipo_reporte_id   = 1;
+          const numpermiso =  obtenerPermiso(values.permiso_id);
+          const data = {...values,user_id,tipo_reporte_id,numpermiso};
+          console.log("Da",data);
+          
+          const foliosCompras = await getObtenerListaDeComprasSinPermisos(dayjs(values.fecha_inicio).format("YYYY-MM-DD"),dayjs(values.fecha_terminacion).format("YYYY-MM-DD"));
+          const foliosVentas = await getObtenerListaDeVentasSinPermisos(dayjs(values.fecha_inicio).format("YYYY-MM-DD"),dayjs(values.fecha_terminacion).format("YYYY-MM-DD"));
+
+          if(foliosCompras!==""&&foliosVentas!=="") {
+          }
+          else {
+            alert("Ja");
+            setTextError("No puede generar el reporte los siguiente folios no tienen permisos: "+foliosCompras+" "+foliosVentas);
+            setShowAlert(true);
+            setTimeout(()=>{
+              setShowAlert(false);
+            },6200)
+          }*/
 
           const user_id = localStorage.getItem('user_id');
-          const tipo_reporte_id   = 1;
+          const tipo_reporte_id  = 1;
           const scriptURL = "http://localhost:3001/api/v1/reportes";
-          /*const folio = values.name;
-          const rfc = values.rfc;
-          const direccion = values.direccion;
-          const tipo_situacion_fiscal = values.tipo_situacion_fiscal;
-          const permiso = values.permiso+"";
-          const phone = values.phone;
-          const email = values.email;*/
-          const data = {...values,user_id,tipo_reporte_id};
+          const numpermiso =  obtenerPermiso(values.permiso_id);
+          const data = {...values,user_id,tipo_reporte_id,numpermiso};
           setLoading(true);
 
           //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
           console.log("v",data);
+
           fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -226,7 +318,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron guardados");
-              setInitialValues(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', numpermiso:'LP/22811/COM/2019',  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+              setInitialValues(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -345,18 +437,25 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
                     required
-                    placeholder="Número de permiso"
-                    id="numpermiso"
-                    label="Número de permiso"
-                    name="numpermiso"
-                    value={values.numpermiso}
+                    value={values.permiso_id}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                    defaultValue={0}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Número de permiso *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
+
 
                 <TextField
                     className={`InputModal`}
@@ -598,7 +697,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                   </LocalizationProvider>
 
 
-                  {(errors.version || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.numpermiso|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.volumenexistenciasees || errors.fechayhoraestamedicionmes || errors.numeroregistro || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
+                  {(errors.version || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id || errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.volumenexistenciasees || errors.fechayhoraestamedicionmes || errors.numeroregistro || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.version? (<p>{errors.version}</p>):null}
                         {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
@@ -606,7 +705,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                         {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
                         {errors.caracter? (<p>{errors.caracter}</p>):null}
                         {errors.modalidadpermiso? (<p>{errors.modalidadpermiso}</p>):null}
-                        {errors.numpermiso? (<p>{errors.numpermiso}</p>):null}
+                        {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
                         {errors.claveinstalacion? (<p>{errors.claveinstalacion}</p>):null}
                         {errors.descripcioninstalacion? (<p>{errors.descripcioninstalacion}</p>):null}
                         {errors.numeropozos? (<p>{errors.numeropozos}</p>):null}

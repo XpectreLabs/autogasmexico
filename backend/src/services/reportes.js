@@ -69,7 +69,7 @@ const generarJson = async (data,date) =>  {
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = data.volumenexistenciasees;
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = data.fechayhoraestamedicionmes;
   dataJson.Producto[0].Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion),
-  dataJson.Producto[0].Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion),
+  dataJson.Producto[0].Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.BitacoraMensual[0].NumeroRegistro = data.numeroregistro;
   dataJson.BitacoraMensual[0].FechaYHoraEvento = date;
   dataJson.BitacoraMensual[0].UsuarioResponsable = data.usuarioresponsable;
@@ -124,11 +124,11 @@ async function listRecepciones(user_id,fechaInicio, fechaFin) {
       aclaracion: true,
       tipocomplemento: true,
       unidaddemedida: true,
+      permiso: true,
       proveedores: {
         select: {
           name: true,
           rfc: true,
-          permiso: true,
         },
       },
     },
@@ -148,7 +148,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin) {
       {
         "RfcClienteOProveedor": listIngresos[j].proveedores.rfc,
         "NombreClienteOProveedor": listIngresos[j].proveedores.name,
-        "PermisoClienteOProveedor": listIngresos[j].proveedores.permiso,
+        "PermisoClienteOProveedor": listIngresos[j].permiso,
         "CFDIs": [
         {
           "Cfdi": listIngresos[j].cfdi,
@@ -177,7 +177,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin) {
 
 
 
-async function listEntregas(user_id,fechaInicio, fechaFin) {
+async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   let Entregas = {
     "TotalEntregasMes": 0,
     "SumaVolumenEntregadoMes": {
@@ -201,6 +201,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin) {
     where: {
       user_id,
       active: 1,
+      permiso_id,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
 			  lte: new Date(ff), // End of date range
@@ -224,12 +225,17 @@ async function listEntregas(user_id,fechaInicio, fechaFin) {
         select: {
           name: true,
           rfc: true,
-          permiso: true,
         },
-       },
+      },
+      permisos: {
+        select: {
+          permiso_id: true,
+          permiso: true
+        }
+      }
     },
    });
-   
+
 
   let totalCantidad=0;
   let totalImporteTotal=0;
@@ -245,7 +251,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin) {
         {
           "RfcClienteOProveedor": listCompras[j].clients.rfc,
           "NombreClienteOProveedor": listCompras[j].clients.name,
-          "PermisoClienteOProveedor": listCompras[j].clients.permiso,
+          "PermisoClienteOProveedor": listCompras[j].permisos.permiso,
           "CFDIs": [
             {
               "Cfdi": listCompras[j].cfdi,
