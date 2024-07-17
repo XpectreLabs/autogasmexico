@@ -21,3 +21,5 @@ Ejecuta la aplicación usando IDLE que permite leer casi realtime cualquier corr
 ```bash
 npm run start:idle
 ```
+
+## Testear la aplicación
