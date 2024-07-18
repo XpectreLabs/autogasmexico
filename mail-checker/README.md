@@ -21,3 +21,7 @@ Ejecuta la aplicación usando IDLE que permite leer casi realtime cualquier corr
 ```bash
 npm run start:idle
 ```
+
+## Testear la aplicación
+
+Es necesario mantener viva la terminal donde se esta corriendo el servicio del idle para poder ejecutar las pruebas.
