@@ -24,4 +24,4 @@ npm run start:idle
 
 ## Testear la aplicación
 
-Es necesario mantener viva la terminal donde se esta corriendo el servicio del idle para poder ejecutar las pruebas.
+Es necesario mantener viva la terminal donde se esta corriendo el servicio del idle para poder ejecutar las pruebas..
