@@ -373,6 +373,148 @@ router.post('/cargarXML', async (req, res, next) => {
     })
 });
 
+
+router.post('/cargarXMLCorreo', async (req, res, next) => {
+
+          return new Promise(async (resolve,reject)=>{
+            //dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+            console.log(req.body.dataJson);
+
+            const rfc = req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc;
+
+            if(rfc==='AME050309Q32')
+              return res.status(400).json({ message:"schema", error: 'El XML no es de ventas' });
+            else {
+              let client_id = await fnClientes.findClient(rfc);
+              let date = new Date().toISOString();
+
+              console.log("rfc",rfc);
+              console.log("ID",client_id)
+
+              if(client_id===0) {
+                const nuevo = await prisma.clients.create({
+                  data: {
+                    name: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre,
+                    rfc: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc,
+                    direccion: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor,
+                    tipo_situacion_fiscal: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor,
+                    phone: null,
+                    email: null,
+                    user_id: 1,
+                    date: date,
+                    active: 1,
+                  },
+                });
+                console.log("Nuevo cliente",nuevo);
+                client_id = nuevo.client_id;
+              }
+
+              const isArray = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length?true:false;
+              let canCantidadVm = 0, preciounitarioVm = 0, importeVm = 0, ivaaplicadoVm = 0, precioventaVm = 0;
+              let descripcionVm = "";
+              let permisoVm = "";
+
+              if(isArray) {
+                const totalFilas = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length;
+
+                for(let j=0; j<totalFilas; j++)
+                {
+                  const base = parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Base);
+                  const iva = parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe);
+
+                  canCantidadVm += parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Cantidad);
+                  descripcionVm = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].Descripcion;
+                  preciounitarioVm += parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].ValorUnitario);
+                  importeVm += base;
+                  ivaaplicadoVm += iva;
+                  precioventaVm += parseFloat(base + iva);
+
+                  if(j===0){
+                    permisoVm = fnCompras.getPermiso(descripcionVm);
+
+                    if(permisoVm==="")
+                    {
+                      let NoIdentificacion=req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].NoIdentificacion?req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][j]['_attributes'].NoIdentificacion:"";
+                      permisoVm = fnCompras.getPermiso(NoIdentificacion);
+                    }
+                  }
+                }
+                preciounitarioVm/=totalFilas;
+
+                preciounitarioVm = Number.parseFloat(preciounitarioVm).toFixed(2);
+                importeVm = Number.parseFloat(importeVm).toFixed(2);
+                ivaaplicadoVm = Number.parseFloat(ivaaplicadoVm).toFixed(2);
+                precioventaVm = Number.parseFloat(precioventaVm).toFixed(2);
+              }
+
+              const fecha = new Date((req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
+              let concepto = isArray?descripcionVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+
+              let permiso_id= null;
+              let permiso = isArray?permisoVm:fnCompras.getPermiso(concepto);
+
+              if(permiso===""&&!isArray)
+              {
+                let NoIdentificacion=req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion?req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion:"";
+                permiso = fnCompras.getPermiso(NoIdentificacion);
+              }
+
+              if(permiso!=="") {
+                const catPermisos = await prisma.cat_permisos.findFirst({
+                  where: {
+                    permiso
+                  },
+                  select: {
+                    permiso_id: true,
+                  },
+                });
+
+                if (catPermisos !== null)
+                  permiso_id = catPermisos.permiso_id;
+              }
+
+              const dataR = {
+                client_id,
+                folio: req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio,
+                fecha_emision: fecha,
+                cantidad: parseFloat(isArray?canCantidadVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
+                unidaddemedida: 'UM03',
+                concepto,
+                permiso_id,
+                preciounitario: parseFloat(isArray?preciounitarioVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
+                importe: parseFloat(isArray?importeVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16:req.body.dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
+                ivaaplicado: parseFloat(isArray?ivaaplicadoVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16:req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Importe),
+                preciovent: parseFloat(isArray?precioventaVm:req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']?req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos:req.body.dataJson['cfdi:Comprobante']['_attributes'].Total),
+                cfdi: req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
+                tipoCfdi: 'Ingreso',
+                aclaracion: 'SIN OBSERVACIONES',
+                tipocomplemento: 'Comercializacion',
+                tipo_modena_id: 1
+              }
+
+              console.log(dataR);
+
+              const nV = await prisma.ventas.create({
+                data: {
+                  ...dataR,
+                  client_id:parseInt(client_id),
+                  user_id: 1,
+                  date: date,
+                  active: 1,
+                },
+              });
+
+              console.log(nV);
+            return res.status(200).send({ message : 'success' })
+          }
+        })
+
+        //return res.status(200).send({ message : 'success',dataJson })
+});
+
+
+
+
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
