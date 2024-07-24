@@ -182,6 +182,89 @@ router.post('/cargarXML', async (req, res, next) => {
 });
 
 
+
+router.post('/cargarXMLCorreo', async (req, res, next) => {
+  //console.log(req.body.user_id);
+          return new Promise(async (resolve,reject)=>{
+            //req.body.dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+            //console.log(req.body.dataJson);
+            //console.log(req.body)
+
+            const rfc = req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
+
+            console.log("Rfc obtenido",rfc);
+            if(rfc==='AME050309Q32')
+              return res.status(400).json({ message:"schema", error: 'El XML no es de compras' });
+            else {
+              let proveedor_id = await fnProveedores.findProveedor(rfc);
+              let date = new Date().toISOString();
+
+              console.log("rfc",rfc);
+              console.log("ID",proveedor_id)
+
+              if(proveedor_id===0) {
+                const nuevo = await prisma.proveedores.create({
+                  data: {
+                    name: req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre,
+                    rfc: req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc,
+                    direccion: null,
+                    tipo_situacion_fiscal: req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal,
+                    phone: null,
+                    email: null,
+                    user_id: 1,
+                    date: date,
+                    active: 1,
+                  },
+                });
+                console.log("Nuevo proveedor",nuevo);
+                proveedor_id = nuevo.proveedor_id;
+              }
+
+                const fecha = new Date((req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
+                const concepto = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+
+                const dens = fnCompras.getDensidad(concepto);
+                const permiso = fnCompras.getPermiso(concepto);
+                console.log("Rd",dens)
+
+                const densidad = parseFloat(dens===''?0:dens);
+
+                const dataR = {
+                  proveedor_id,
+                  folio: req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio,
+                  fecha_emision: fecha,
+                  cantidad: parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
+                  concepto,
+                  densidad,
+                  permiso,
+                  preciounitario: parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
+                  importe: parseFloat(req.body.dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
+                  ivaaplicado: parseFloat(req.body.dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados),
+                  cfdi: req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
+                  tipoCfdi: 'Ingreso',
+                  preciovent: parseFloat(req.body.dataJson['cfdi:Comprobante']['_attributes'].Total),
+                  aclaracion: 'SIN OBSERVACIONES',
+                  tipocomplemento: 'Comercializacion',
+                  unidaddemedida: 'UM03',
+                  tipo_modena_id: 1
+                }
+
+                await prisma.abastecimientos.create({
+                  data: {
+                    ...dataR,
+                    proveedor_id:parseInt(proveedor_id),
+                    user_id: 1,
+                    date: date,
+                    active: 1,
+                  },
+                });
+
+              return res.status(200).send({ message : 'success' })
+            }
+        })
+});
+
+
 router.get('/:userId/listPermisoNulosCompras/:fecha_inicio/:fecha_terminacion', async (req, res, next) => {
   const fi = (req.params.fecha_inicio+"").substring(0,10);
   const ff = (req.params.fecha_terminacion+"").substring(0,10);
