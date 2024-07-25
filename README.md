@@ -31,9 +31,7 @@ docker run --name autogasmexico -e POSTGRES_USER=autogasmexico -e POSTGRES_PASSW
 - Agregar nuevo schema que permita almacenar el XML procesado (CFDI)
 
   - UID de la factura
-
   - Tipo de factura
-
   - Fecha de procesamiento
   - Ultima fecha de actualización.
   - status de procesamiento
