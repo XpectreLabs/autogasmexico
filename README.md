@@ -35,3 +35,4 @@ docker run --name autogasmexico -e POSTGRES_USER=autogasmexico -e POSTGRES_PASSW
   - status de procesamiento
 - Agregar lógica para ignorar los complementos de pago de los emails.
 - Revisar la logica
+- Mostrar calendario
