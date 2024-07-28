@@ -27,7 +27,6 @@ docker run --name autogasmexico -e POSTGRES_USER=autogasmexico -e POSTGRES_PASSW
 # TODO
 
 - Agregar log de PDFS y emails procesados
-
 - Agregar nuevo schema que permita almacenar el XML procesado (CFDI)
   - UID de la factura
   - Tipo de factura
