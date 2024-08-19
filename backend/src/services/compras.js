@@ -1,7 +1,24 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const findProveedor = async (rfc) =>  {    
+const findCfdi = async (cfdi) =>  {
+  console.log("Cfdi",cfdi);
+  const abastecimientos = await prisma.abastecimientos.findFirst({
+    where: {
+      cfdi,
+    },
+    select: {
+      abastecimiento_id: true,
+    },
+  });
+
+  console.log("abastecimientos",abastecimientos)
+  if (abastecimientos == null) return false;
+
+  return true;
+}
+
+const findProveedor = async (rfc) =>  {
   const proveedores = await prisma.proveedores.findFirst({
     where: {
       rfc,
@@ -58,4 +75,4 @@ const getPermiso = (texto) => {
   return permiso;
 }
 
-module.exports = { getDensidad, getPermiso }
+module.exports = { getDensidad, getPermiso, findCfdi }

@@ -18,6 +18,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import NuevaCompraModal from '@/components/organisms/NuevaCompraModal';
 import EditarCompraModal from '@/components/organisms/EditarCompraModal';
+import EditarPermisoModal from '@/components/organisms/EditarPermisoModal'
 import DetalleCompraModal from '@/components/organisms/DetalleCompraModal';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
@@ -25,9 +26,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import SettingsIcon from '@mui/icons-material/Settings';
 import {es} from 'date-fns/locale'
 import { esES } from '@mui/material/locale';
 import axios from 'axios';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -51,6 +54,12 @@ export default function Compras() {
   const [isEditCompraModalOpen, setIsEditPCompraModalOpen] = useState(false);
   const [compraToEdit, setCompraToEdit] = useState({});
   const [compraIdd, setCompraIdd] = useState(0);
+
+
+  const [isSettingCompraModalOpen, setIsSettingPCompraModalOpen] = useState(false);
+  const [compraToSetting, setCompraToSetting] = useState({});
+
+
   const [litrosTotales, setLitrosTotales] = useState(0);
   const [densidadTotales, setDensidadTotales] = useState(0);
   const [totalTotales, setTotalTotales] = useState(0);
@@ -159,6 +168,8 @@ export default function Compras() {
     let total = 0;
     let densidadT = 0;
 
+    console.log("c",compras)
+
     for(let w=0; w<compras.length;w++) {
       litrosT += compras[w].cantidad;
       densidadT += parseInt(compras[w].cantidad*compras[w].densidad)
@@ -178,43 +189,52 @@ export default function Compras() {
     {
       field: 'folio',
       headerName: 'Folio',
-      flex: 1.2,
+      flex: 0.8,
+    },
+    // },
+    // {
+    //   field: 'concepto',
+    //   headerName: 'Concepto',
+    //   sortable: false,
+    //   flex: 2.2,
+    // },
+    {
+      field: 'proveedor',
+      headerName: 'Proveedor',
+      sortable: false,
+      flex: 1.8,
     },
     {
-      field: 'fecha_emision2',
-      headerName: 'Fecha de emisión',
-      flex: 1,
+      field: 'permiso',
+      headerName: 'Permiso proveedor',
+      sortable: false,
+      flex: 1.8,
+    },
+    {
+      field: 'permisoComprador',
+      headerName: 'Permiso comprador',
+      sortable: false,
+      flex: 1.8,
     },
     {
       field: 'cantidad',
-      headerName: 'Cantidad',
+      headerName: 'Litros',
       sortable: false,
       flex: 0.7,
     },
     {
-      field: 'concepto',
-      headerName: 'Concepto',
-      sortable: false,
-      flex: 2.2,
-    },
-    {
-      field: 'preciounitario2',
-      headerName: 'Precio unitario',
+      field: 'kilos',
+      headerName: 'Kilos',
       sortable: false,
       flex: 1,
     },
-    {
-      field: 'importe2',
-      headerName: 'Importe',
-      sortable: false,
-      flex: 1,
-    },
-    {
-      field: 'ivaaplicado2',
-      headerName: 'Iva',
-      sortable: false,
-      flex: 1,
-    },
+    // },
+    // {
+    //   field: 'preciounitario2',
+    //   headerName: 'Precio unitario',
+    //   sortable: false,
+    //   flex: 1,
+    // },
     {
       field: 'preciovent2',
       headerName: 'Total',
@@ -222,10 +242,31 @@ export default function Compras() {
       flex: 1,
     },
     {
+      field: 'fecha_emision2',
+      headerName: 'Fecha de emisión',
+      flex: 1,
+    },
+    {
+      field: 'settings',
+      headerName: '',
+      sortable: false,
+      flex: 0.1,
+      renderCell: (params) => (
+        <SettingsIcon
+          className={styles.btnAccion}
+          onClick={() => {
+            setCompraIdd(params.row.abastecimiento_id);
+            setCompraToSetting(params.row);
+            setIsSettingPCompraModalOpen(true);
+          }}
+        />
+      ),
+    },
+    {
       field: 'edit',
       headerName: '',
       sortable: false,
-      flex: 0.2,
+      flex: 0.1,
       renderCell: (params) => (
         <CreateIcon
           className={styles.btnAccion}
@@ -241,7 +282,7 @@ export default function Compras() {
       field: 'view',
       headerName: '',
       sortable: false,
-      flex: 0.2,
+      flex: 0.1,
       renderCell: (params) => (
         <VisibilityIcon
           className={styles.btnAccion}
@@ -257,7 +298,7 @@ export default function Compras() {
       field: 'delete',
       headerName: '',
       sortable: false,
-      flex: 0.2,
+      flex: 0.1,
       renderCell: (params) => (
         <DeleteIcon
           className={styles.btnAccion}
@@ -307,8 +348,10 @@ export default function Compras() {
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
           console.log("Aux",comprasAux);
           for(let j=0;j<comprasAux.length;j++) {
-            const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
-  
+            //const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+            const ff = comprasAux[j].fecha_emision+"";
+            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+
             if(fechaInicio!==fechaHasta) {
               if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
                 listResult.push(comprasAux[j]);
@@ -322,12 +365,74 @@ export default function Compras() {
         }
         else
           setCompras(listResult);
+
+        setTimeout(()=> {
+          cargarTotales(listResult);
+        },500);
+
+        setTimeout(()=> {
+          document.querySelector("input[name=fechaAnio]").value=""
+        },1000);
       },1000)
     }
+    else
     {
       setCompras(comprasAux);
+      setTimeout(()=> {
+        cargarTotales(comprasAux);
+      },500);
     }
-    
+	};
+
+  const onChangeDateAnio = (item) => {
+    if(item!==null) {
+
+      let anio = item.$y;
+      let fechaIni = "01/01/"+anio;
+      let fechaFin = "31/12/"+anio;
+
+      setTimeout(()=>{
+        const fechaInicio = convertDate(fechaIni);
+        const fechaHasta = convertDate(fechaFin);
+        let listResult = [];
+
+        if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
+          console.log("Aux",comprasAux);
+          for(let j=0;j<comprasAux.length;j++) {
+            //const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+            const ff = comprasAux[j].fecha_emision+"";
+            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+
+            if(fechaInicio!==fechaHasta) {
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
+                listResult.push(comprasAux[j]);
+            }
+            else {
+              if(fechaInicio===dateEmi)
+                listResult.push(comprasAux[j]);
+            }
+          }
+          setCompras(listResult);
+        }
+        else
+          setCompras(listResult);
+
+        setTimeout(()=> {
+          cargarTotales(listResult);
+        },500);
+
+        setTimeout(()=> {
+          document.querySelector("input[name=fecha_desde]").value="";
+        },1000);
+      },1000)
+    }
+    else
+    {
+      setCompras(comprasAux);
+      setTimeout(()=> {
+        cargarTotales(comprasAux);
+      },500);
+    }
 	};
 
   const cambiarFechaNormal = (fecha) => {
@@ -378,10 +483,9 @@ export default function Compras() {
         setTextError('El XML de compras fue importado');
         setShowAlert(true);
         setTimeout(()=>{setShowAlert(false); data(compras);},3000)
-        
       })
       .catch((error) => {
-        setTextError('El XML no es de compras');
+        setTextError('El XML no es de compras o el UUID ya existe');
         setShowAlert(true);
         setTimeout(()=>{setShowAlert(false);},3000)
       });
@@ -467,11 +571,15 @@ export default function Compras() {
                       if(comprasAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<comprasAux.length;j++) {
-                          let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " + comprasAux[j].preciovent).toLowerCase();
+                          console.log(comprasAux[j]);
+                          const permiso = comprasAux[j].permisos?comprasAux[j].permisos.permiso:"No asignado";
+                          let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
+                          console.log(busqueda)
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(comprasAux[j]);
                         }
                         setCompras(listResult);
+                        cargarTotales(listResult);
                       }
                      }}
                   />
@@ -484,9 +592,9 @@ export default function Compras() {
               <Grid item xs={1}>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={2}>
                 <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Mes y año de filtro:</strong></p>
+                  <p><strong>Fecha de filtro:</strong></p>
                   <LocalizationProvider locale={es} adapterLocale={es} dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
@@ -503,6 +611,24 @@ export default function Compras() {
                     />
                   </LocalizationProvider>
                 </div>
+              </Grid>
+
+              <Grid item xs={2} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
+                  <div className={`${styles.ItemFecha}`}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        className='fechaDesde'
+                        required
+                        placeholder="Año"
+                        label="Año"
+                        id="fechaAnio"
+                        name="fechaAnio"
+                        //defaultValue={values.fecha_emision}
+                        onChange={onChangeDateAnio}
+                        views={['year']}
+                      />
+                    </LocalizationProvider>
+                  </div>
               </Grid>
 
               <Grid item xs={4} align="right">
@@ -534,6 +660,9 @@ export default function Compras() {
         rows={compras.map((compra) => ({
           ...compra,
           id: compra.abastecimiento_id,
+          proveedor: compra.proveedores.name,
+          permisoComprador: compra.permisos?compra.permisos.permiso:"No asignado",
+          kilos: formatter2.format(compra.cantidad*compra.densidad).replace(',','').replace('.00','')+"kg",
           fecha_emision2: cambiarFechaNormal(compra.fecha_emision),
           preciounitario2:formatter.format(compra.preciounitario),
           importe2: formatter.format(compra.importe),
@@ -559,34 +688,44 @@ export default function Compras() {
       </div>
 
       <div>
-      <NuevaCompraModal
-        isOpen={isAgregarCompraModalOpen}
-        onClose={() => {
-          setIsAgregarCompraModalOpen(false);
-          data(compras);
-        }}
-      />
+        <NuevaCompraModal
+          isOpen={isAgregarCompraModalOpen}
+          onClose={() => {
+            setIsAgregarCompraModalOpen(false);
+            data(compras);
+          }}
+        />
 
-      <EditarCompraModal
-        abastecimientoIdd={compraIdd}
-        abastecimientoData={compraToEdit}
-        isOpen={isEditCompraModalOpen}
-        onClose={() => {
-          setIsEditPCompraModalOpen(false);
-          data(compras);
-        }}
-      />
+        <EditarPermisoModal
+          abastecimientoIdd={compraIdd}
+          abastecimientoData={compraToSetting}
+          isOpen={isSettingCompraModalOpen}
+          onClose={() => {
+            setIsSettingPCompraModalOpen(false);
+            data(compras);
+          }}
+        />
 
-      <DetalleCompraModal
-        abastecimientoIdd={compraIdd}
-        abastecimientoData={compraToDetalle}
-        isOpen={isDetalleCompraModalOpen}
-        onClose={() => {
-          setIsDetallePCompraModalOpen(false);
-          data(compras);
-        }}
-      />
-    </div>
+        <EditarCompraModal
+          abastecimientoIdd={compraIdd}
+          abastecimientoData={compraToEdit}
+          isOpen={isEditCompraModalOpen}
+          onClose={() => {
+            setIsEditPCompraModalOpen(false);
+            data(compras);
+          }}
+        />
+
+        <DetalleCompraModal
+          abastecimientoIdd={compraIdd}
+          abastecimientoData={compraToDetalle}
+          isOpen={isDetalleCompraModalOpen}
+          onClose={() => {
+            setIsDetallePCompraModalOpen(false);
+            data(compras);
+          }}
+        />
+      </div>
   </main>
   );
 }

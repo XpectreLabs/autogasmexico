@@ -4,6 +4,8 @@ const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
   currency: "USD"
 })
+const dayjs = require ("dayjs");
+
 
 let dataJson = {
   "Version": "1.012",
@@ -48,6 +50,9 @@ let dataJson = {
 }
 
 const generarJson = async (data,date) =>  {
+
+  const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
+
   dataJson.Version = data.version;
   dataJson.RfcContribuyente = data.rfccontribuyente;
   dataJson.RfcRepresentanteLegal = data.rfcrepresentantelegal;
@@ -67,8 +72,8 @@ const generarJson = async (data,date) =>  {
   dataJson.Producto[0].ComposDePropanoEnGasLP = data.composdepropanoengaslp;
   dataJson.Producto[0].ComposDeButanoEnGasLP = data.composdebutanoengaslp;
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = data.volumenexistenciasees;
-  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = data.fechayhoraestamedicionmes;
-  dataJson.Producto[0].Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion),
+  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = fechaEM;
+  dataJson.Producto[0].Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.Producto[0].Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.BitacoraMensual[0].NumeroRegistro = data.numeroregistro;
   dataJson.BitacoraMensual[0].FechaYHoraEvento = date;
@@ -81,7 +86,7 @@ const generarJson = async (data,date) =>  {
 
 
 
-async function listRecepciones(user_id,fechaInicio, fechaFin) {
+async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
   let Recepciones = {
     "TotalRecepcionesMes": 0,
     "SumaVolumenRecepcionMes": {
@@ -104,6 +109,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin) {
     ],
     where: {
       user_id,
+      permiso_id,
       active: 1,
       fecha_emision: {
         gte: new Date(fi), // Start of date range

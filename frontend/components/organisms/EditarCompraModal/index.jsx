@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './EditarCompra.module.css';
@@ -22,6 +22,46 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   const [textError,setTextError] = React.useState("");
   const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [listPermisos,setListPermisos] = React.useState([]);
+
+
+  function data() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        setListPermisos(data.listPermisos);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
 
   const convertirFecha = (fecha) => {
     return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
@@ -30,6 +70,10 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   if(abastecimientoData.fecha_emision!==undefined){
     abastecimientoData.fecha_emision = dayjs(convertirFecha(abastecimientoData.fecha_emision2));
   }
+
+  useEffect(() => {
+    data();
+  }, []);
 
   console.log("Dta",abastecimientoData);
   return (
@@ -89,6 +133,10 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           delete values.preciovent2;
           delete values.ivaaplicado2;
           delete values.proveedores;
+          delete values.proveedor;
+          delete values.kilos;
+          delete values.permisos;
+          delete values.permisoComprador;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -252,6 +300,26 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     onBlur={handleBlur}
                     size="small"
                   />
+
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
+                    required
+                    value={values.permiso_id}
+                    onChange={handleChange}
+                    defaultValue={values.permiso_id}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Permiso venta *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id} selected={permiso.permiso_id===abastecimientoData.permiso_id?true:false}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
+
                   <TextField
                     className={`InputModal`}
                     required

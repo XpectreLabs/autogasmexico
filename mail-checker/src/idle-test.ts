@@ -82,6 +82,8 @@ imap.once("ready", () => {
                       if(data.message==="success") {
                         console.log("La factura de venta ha sido guardada");
                       }
+                      else if(data.message==="schema")
+                        console.log("Error:"+data.error);
                     })
                     .catch(error => {
                       console.log("Posiblemente no es factura de venta");
@@ -102,6 +104,8 @@ imap.once("ready", () => {
                       if(data.message==="success") {
                         console.log("La factura de compra ha sido guardada");
                       }
+                      else if(data.message==="schema")
+                        console.log("Error:"+data.error);
                     })
                     .catch(error => {
                       console.log("Posiblemente no es factura de compra");

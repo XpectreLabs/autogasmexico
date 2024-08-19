@@ -6,16 +6,16 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
-const sch = require('../schemas/compras.js');
+const sch = require('../schemas/inventario.js');
 const fileUpload = require('express-fileupload');
 const xmlJs = require('xml-js');
 const fs = require('fs');
-const fnProveedores = require('../services/proveedores');
-const fnCompras = require('../services/compras');
+const fnProveedores = require('../services/proveedores.js');
+const fnCompras = require('../services/compras.js');
 
 router.use(fileUpload())
 
-router.post('/',jwtV.verifyToken, async (req, res, next) => {
+/*router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
@@ -44,72 +44,376 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   else
     return res.status(400).json({ message:"schema", error: "Ya existe una compra registrada con este UUID"});
 
-});
+});*/
 
-router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
-  const { error } = sch.schemaId.validate(req.params);
+router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, async (req, res, next) => {
+
+  const { error } = sch.schemaCreate.validate(req.params);
   if (error) {
     console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
-  if (req.params.userId !== null) {
-    const id = req.params.userId;
+  const mesRecibido = parseInt(req.params.mes+"");
+  console.log("Mes enviado: "+mesRecibido);
+  console.log("Tipo: "+typeof(req.params.permiso_id))
 
-    if(await validateUser(parseInt(id))) {
-      const listCompras = await prisma.abastecimientos.findMany({
-        orderBy: [
-          {
-            fecha_emision: 'desc',
-          },
-        ],
-        where: {
-          user_id: parseInt(id),
-          active: 1,
-        },
-        select: {
-          abastecimiento_id: true,
-          proveedor_id: true,
-          permiso_id: true,
-          folio: true,
-          fecha_emision: true,
-          cantidad: true,
-          concepto: true,
-          preciounitario: true,
-          importe: true,
-          ivaaplicado: true,
-          densidad: true,
-          permiso: true,
-          tipo_modena_id: true,
-          cfdi: true,
-          tipoCfdi: true,
-          preciovent: true,
-          aclaracion: true,
-          tipocomplemento: true,
-          unidaddemedida: true,
-          proveedores: {
-            select: {
-              name: true,
-              rfc: true,
-            },
-          },
-          permisos: {
-            select: {
-              permiso_id: true,
-              permiso: true
-            }
-          }
-        },
-      });
-      res.status(200).json({ message:"success", listCompras });
+  let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
+  let mesesNombre = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+  const anio = parseInt(req.params.anio);
+  let listInventario = [];
+  let totalInvIni=0, totalCompras =0, totalVentas=0, totalInvFi=0;
+
+  const user_id = parseInt(req.params.user_id)
+  const permiso_id = parseInt(req.params.permiso_id)
+
+  console.log("Yes 0 -> "+mesRecibido);
+  if(mesRecibido===0) {
+    console.log("Yes 1");
+    for(let j=0; j<12; j++) {
+      console.log("Yes 2");
+      let diaBisiesto = j==1?anio%4===0?1:0:0;
+      let diasMes = meses[j]+diaBisiesto;
+      const mes = (j+1)<10?("0"+(j+1)):(j+1);
+      const fechaInicio = anio+"-"+mes+"-"+"01";
+      const fechaFin = anio+"-"+mes+"-"+diasMes;
+      const totalCompra = await totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id);
+      const totalVenta = await totalEntregas(user_id,fechaInicio, fechaFin,permiso_id);
+      let inventarioInicial,inventarioFinal;
+      let diferencia = 0;
+      let diferenciaReportada = 0;
+      let inventarioFisico = 0;
+      let porcentajeDiferencia = 0;
+      let bitacora = "";
+      let bitacora_inventario_id="";
+
+      if(j===0)
+        inventarioInicial=0;
+      else
+        inventarioInicial = permiso_id===1?listInventario[j-1].inventarioFisico:listInventario[j-1].inventarioFinal;
+
+      const sumaIC = inventarioInicial + totalCompra;
+      inventarioFinal = sumaIC - totalVenta;
+
+      //console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
+      //console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
+
+      totalInvIni+=inventarioInicial;
+      totalCompras += totalCompra;
+      totalVentas += totalVenta;
+      totalInvFi += inventarioFinal;
+
+      let item;
+
+      if(permiso_id===1) {
+        const fB = await findBitacora(fechaInicio);
+        //console.log("fb",fB)
+  
+        if(fB!==0) {
+          bitacora_inventario_id =  fB.bitacora_inventario_id;
+          diferenciaReportada = fB.diferencia;
+          bitacora = fB.nota;
+        }
+
+        inventarioFisico = sumaIC - totalVenta + diferenciaReportada;
+        diferencia = inventarioFisico - inventarioFinal;
+        porcentajeDiferencia = parseFloat(diferencia) / parseFloat(totalVenta);
+        porcentajeDiferencia = isNaN(porcentajeDiferencia)?0:porcentajeDiferencia===Infinity?0:porcentajeDiferencia;
+
+        //console.log(diferencia,totalVenta);
+        //console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
+
+        item = {
+          "id": j,
+          "mes": mesesNombre[j]+" "+anio,
+          "inventarioInicial": inventarioInicial,
+          "compras": totalCompra,
+          "ventas": totalVenta,
+          "inventarioFinal": inventarioFinal,
+          "inventarioFisico": inventarioFisico,
+          "diferencia": diferencia,
+          "porcentajeDiferencia": porcentajeDiferencia,
+          "nota": bitacora,
+          "fecha":fechaInicio,
+          "bitacora_inventario_id": bitacora_inventario_id
+        }
+      }
+      else {
+        item = {
+          "id": j,
+          "mes": mesesNombre[j]+" "+anio,
+          "inventarioInicial": inventarioInicial,
+          "compras": totalCompra,
+          "ventas": totalVenta,
+          "inventarioFinal": inventarioFinal,
+          "fecha":fechaInicio
+        }
+      }
+      listInventario.push(item);
     }
-    else
-      res.status(400).json({ message:"Id invalido", error: "Solicitud no válida, el ID no existe" });
+
+    let item;
+
+    if(permiso_id===1) {
+      item = {
+        "id": 12,
+        "mes": "TOTALES",
+        "inventarioInicial": 0,
+        "compras": totalCompras,
+        "ventas": totalVentas,
+        "inventarioFinal": 0,
+        "inventarioFisico": "",
+        "diferencia": "",
+        "porcentajeDiferencia":"",
+        "nota": "",
+        "fecha":"",
+        "bitacora_inventario_id": ""
+      }
+    }
+    else {
+      item = {
+        "id": 12,
+        "mes": "TOTALES",
+        "inventarioInicial": 0,
+        "compras": totalCompras,
+        "ventas": totalVentas,
+        "inventarioFinal": 0,
+        "fecha":""
+      }
+    }
+
+    listInventario.push(item);
   }
+  else {
+    let diaBisiesto = anio%4===0?1:0;
+    let diasMes = meses[mesRecibido-1]+diaBisiesto;
+    const mes = (mesRecibido)<10?("0"+mesRecibido):mesRecibido;
+
+
+    //mesRecibido
+    for(let j=0; j<diasMes; j++) {
+      const dia = (j+1)<10?("0"+(j+1)):(j+1);
+
+      const fechaInicio = anio+"-"+mes+"-"+dia;
+      const fechaFin = anio+"-"+mes+"-"+dia;
+      const totalCompra = await totalRecepcion(user_id, fechaInicio, fechaFin, permiso_id);
+      const totalVenta = await totalEntregas(user_id, fechaInicio, fechaFin, permiso_id);
+      let inventarioInicial,inventarioFinal;
+      let diferencia = 0;
+      let diferenciaReportada = 0;
+      let inventarioFisico = 0;
+      let porcentajeDiferencia = 0;
+      let bitacora = "";
+      let bitacora_inventario_id="";
+
+      if(j===0)
+        inventarioInicial=0;
+      else
+        inventarioInicial = permiso_id===1?listInventario[j-1].inventarioFisico:listInventario[j-1].inventarioFinal;
+
+      const sumaIC = inventarioInicial + totalCompra;
+      inventarioFinal = sumaIC - totalVenta;
+
+      //console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
+      //console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
+
+      totalInvIni+=inventarioInicial;
+      totalCompras += totalCompra;
+      totalVentas += totalVenta;
+      totalInvFi += inventarioFinal;
+
+      let item;
+
+      if(permiso_id===1) {
+        const fB = await findBitacora(fechaInicio);
+        //console.log("fb",fB)
+  
+        if(fB!==0) {
+          bitacora_inventario_id =  fB.bitacora_inventario_id;
+          diferenciaReportada = fB.diferencia;
+          bitacora = fB.nota;
+        }
+
+        inventarioFisico = sumaIC - totalVenta + diferenciaReportada;
+        
+        console.log("inventarioInicial: "+inventarioInicial);
+        console.log("totalCompra: "+totalCompra);
+        console.log("totalVenta: "+totalVenta);
+        console.log("inventarioFinal: "+inventarioFinal);
+        console.log("inventarioFisico: "+inventarioFisico);
+
+        diferencia = inventarioFisico - inventarioFinal;
+        porcentajeDiferencia = parseFloat(diferencia) / parseFloat(totalVenta);
+        porcentajeDiferencia = isNaN(porcentajeDiferencia)?0:porcentajeDiferencia===Infinity?0:porcentajeDiferencia;
+
+        //console.log(diferencia,totalVenta);
+        //console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
+
+        item = {
+          "id": j,
+          "mes": dia+"/"+mes+"/"+anio,
+          "inventarioInicial": inventarioInicial,
+          "compras": totalCompra,
+          "ventas": totalVenta,
+          "inventarioFinal": inventarioFinal,
+          "inventarioFisico": inventarioFisico,
+          "diferencia": diferencia,
+          "porcentajeDiferencia": porcentajeDiferencia,
+          "nota": bitacora,
+          "fecha":fechaInicio,
+          "bitacora_inventario_id": bitacora_inventario_id
+        }
+      }
+      else {
+        item = {
+          "id": j,
+          "mes": dia+"/"+mes+"/"+anio,
+          "inventarioInicial": inventarioInicial,
+          "compras": totalCompra,
+          "ventas": totalVenta,
+          "inventarioFinal": inventarioFinal,
+          "fecha":fechaInicio
+        }
+      }
+      listInventario.push(item);
+    }
+
+
+    let item;
+
+    if(permiso_id===1) {
+      item = {
+        "id": diasMes,
+        "mes": "TOTALES",
+        "inventarioInicial": 0,
+        "compras": totalCompras,
+        "ventas": totalVentas,
+        "inventarioFinal": 0,
+        "inventarioFisico": "",
+        "diferencia": "",
+        "porcentajeDiferencia":"",
+        "nota": "",
+        "fecha":"",
+        "bitacora_inventario_id": ""
+      }
+    }
+    else {
+      item = {
+        "id": diasMes,
+        "mes": "TOTALES",
+        "inventarioInicial": 0,
+        "compras": totalCompras,
+        "ventas": totalVentas,
+        "inventarioFinal": 0,
+        "fecha":""
+      }
+    }
+
+    listInventario.push(item);
+  }
+
+
+
+
+  //console.log(listInventario);
+
+  res.status(200).json({ message:"success",listInventario});
 });
 
 
-router.post('/cargarXML', async (req, res, next) => {
+
+async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
+  const fi = (fechaInicio+"").substring(0,10);
+  const ff = (fechaFin+"").substring(0,10);
+
+  const listIngresos = await prisma.abastecimientos.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      user_id,
+      permiso_id:permiso_id,
+      active: 1,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range}
+      }
+    },
+    select: {
+      cantidad: true,
+    },
+  });
+
+  let totalImporteTotal=0;
+
+  //console.log("Len"+listIngresos.length);
+  for(let j=0; j<listIngresos.length; j++){
+    totalImporteTotal+=listIngresos[j].cantidad;
+  }
+
+  return totalImporteTotal;
+}
+
+
+
+async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
+  const fi = (fechaInicio+"").substring(0,10);
+  const ff = (fechaFin+"").substring(0,10);
+
+  const listCompras = await prisma.ventas.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      user_id,
+      active: 1,
+      permiso_id,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range
+      }
+    },
+    select: {
+      cantidad: true
+    },
+   });
+
+  let totalImporteTotal=0;
+
+  for(let j=0; j<listCompras.length; j++){
+    totalImporteTotal+=listCompras[j].cantidad;
+  }
+  return totalImporteTotal;
+}
+
+
+async function findBitacora(fecha_reporte) {
+
+  fecha_reporte = new Date(fecha_reporte);
+
+  const dataBitacora = await prisma.bitacoras_inventario.findFirst({
+    where: {
+      fecha_reporte,
+      active: 1,
+    },
+    select: {
+      bitacora_inventario_id: true,
+      nota: true,
+      diferencia: true
+    },
+   });
+
+   //console.log("dataBitacora",dataBitacora)
+   if (dataBitacora == null) return 0;
+
+  return dataBitacora;
+}
+/*router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
   console.log(req.body.user_id);
@@ -204,7 +508,6 @@ router.post('/cargarXML', async (req, res, next) => {
 router.post('/cargarXMLCorreo', async (req, res, next) => {
   //console.log(req.body.user_id);
           return new Promise(async (resolve,reject)=>{
-            try {
             //req.body.dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
             //console.log(req.body.dataJson);
             //console.log(req.body)
@@ -279,50 +582,11 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                     },
                   });
 
-                  await prisma.seguimiento_facturas_correo.create({
-                    data: {
-                      folio: dataR.folio,
-                      cfdi: dataR.cfdi,
-                      tipo_status: 1,
-                      nota: "Procesada",
-                      tipo_factura_id: 1,
-                      date: date,
-                    },
-                  });
-
                   return res.status(200).send({ message : 'success' })
                 }
-                else {
-                  await prisma.seguimiento_facturas_correo.create({
-                    data: {
-                      folio: dataR.folio,
-                      cfdi: dataR.cfdi,
-                      tipo_status: 2,
-                      nota: "El UUDI de la compra  ya se habia registrado",
-                      tipo_factura_id: 1,
-                      date: date,
-                    },
-                  });
+                else
                   return res.status(400).json({ message:"schema", error: 'El UUDI de la compra  ya se habia registrado' });
-                }
             }
-          } catch (e) {
-            const folio = req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio?req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio:"Folio no encontrado";
-            const cfdi = req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID?req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID:"UUID no encontrado";
-            let date = new Date().toISOString();
-
-            await prisma.seguimiento_facturas_correo.create({
-              data: {
-                folio,
-                cfdi,
-                tipo_status: 2,
-                nota: "Error en la obtención de datos de la factura",
-                tipo_factura_id: 1,
-                date: date,
-              },
-            });
-            return res.status(400).json({ message:"schema", error: 'Error en la obtención de datos de la factura' });
-          }
         })
 });
 
@@ -493,7 +757,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
     },
   });
   res.status(200).json({message:"success"});
-});
+});*/
 
 
 async function validateUser(user_id) {

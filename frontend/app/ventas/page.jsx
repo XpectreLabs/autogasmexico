@@ -169,16 +169,21 @@ export default function Ventas() {
     {
       field: 'folio',
       headerName: 'Folio',
-      flex: 1.2,
+      flex: 0.7,
     },
     {
-      field: 'fecha_emision2',
-      headerName: 'Fecha de emisión',
-      flex: 1,
+      field: 'cliente',
+      headerName: 'Cliente',
+      flex: 1.5,
+    },
+    {
+      field: 'permiso',
+      headerName: 'Permiso',
+      flex: 1.5,
     },
     {
       field: 'cantidad',
-      headerName: 'Cantidad',
+      headerName: 'Litros',
       sortable: false,
       flex: 0.7,
     },
@@ -186,30 +191,36 @@ export default function Ventas() {
       field: 'concepto',
       headerName: 'Concepto',
       sortable: false,
-      flex: 2.2,
+      flex: 1.5,
     },
-    {
-      field: 'preciounitario2',
-      headerName: 'Precio unitario',
-      sortable: false,
-      flex: 1,
-    },
-    {
-      field: 'importe2',
-      headerName: 'Importe',
-      sortable: false,
-      flex: 1,
-    },
-    {
-      field: 'ivaaplicado2',
-      headerName: 'Iva',
-      sortable: false,
-      flex: 1,
-    },
+    // {
+    //   field: 'preciounitario2',
+    //   headerName: 'Precio unitario',
+    //   sortable: false,
+    //   flex: 1,
+    // },
+    // },
+    // {
+    //   field: 'importe2',
+    //   headerName: 'Importe',
+    //   sortable: false,
+    //   flex: 1,
+    // },
+    // {
+    //   field: 'ivaaplicado2',
+    //   headerName: 'Iva',
+    //   sortable: false,
+    //   flex: 1,
+    // },
     {
       field: 'preciovent2',
       headerName: 'Total',
       sortable: false,
+      flex: 0.8,
+    },
+    {
+      field: 'fecha_emision2',
+      headerName: 'Fecha de emisión',
       flex: 1,
     },
     {
@@ -278,7 +289,8 @@ export default function Ventas() {
   };
 
   const convertDate = (date) => {
-    return Date.parse(changedateformat(date));
+    //alert(changedateformat(date));
+    return Date.parse(new Date(changedateformat(date)));
   };
 
   const onChangeDate = (item) => {
@@ -294,13 +306,15 @@ export default function Ventas() {
       setTimeout(()=>{
         const fechaInicio = convertDate(fechaIni);
         const fechaHasta = convertDate(fechaFin);
-
+        //alert(fechaIni+"->"+fechaInicio+" ---- "+fechaFin+"->"+fechaHasta);
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
           console.log("Aux",IngresosAux);
           for(let j=0;j<IngresosAux.length;j++) {
-            const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+            const ff = IngresosAux[j].fecha_emision+"";
+            //const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
 
             if(fechaInicio!==fechaHasta) {
               if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
@@ -315,10 +329,76 @@ export default function Ventas() {
         }
         else
           setIngresos(listResult);
+
+        setTimeout(()=> {
+          cargarTotales(listResult);
+        },500);
+
+        setTimeout(()=> {
+          document.querySelector("input[name=fechaAnio]").value=""
+        },1000);
       },1000)
     }
+    else
     {
       setIngresos(IngresosAux);
+
+      setTimeout(()=> {
+        cargarTotales(IngresosAux);
+      },500);
+    }
+	};
+
+
+  const onChangeDateAnio = (item) => {
+    if(item!==null) {
+      let anio = item.$y;
+      let fechaIni = "01/01/"+anio;
+      let fechaFin = "31/12/"+anio;
+
+      setTimeout(()=>{
+        const fechaInicio = convertDate(fechaIni);
+        const fechaHasta = convertDate(fechaFin);
+        //alert(fechaIni+"->"+fechaInicio+" ---- "+fechaFin+"->"+fechaHasta);
+        let listResult = [];
+
+        if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
+          console.log("Aux",IngresosAux);
+          for(let j=0;j<IngresosAux.length;j++) {
+            const ff = IngresosAux[j].fecha_emision+"";
+            //const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
+            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+
+            if(fechaInicio!==fechaHasta) {
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
+                listResult.push(IngresosAux[j]);
+            }
+            else {
+              if(fechaInicio===dateEmi)
+                listResult.push(IngresosAux[j]);
+            }
+          }
+          setIngresos(listResult);
+        }
+        else
+          setIngresos(listResult);
+
+        setTimeout(()=> {
+          cargarTotales(listResult);
+        },500);
+
+        setTimeout(()=> {
+          document.querySelector("input[name=fecha_desde]").value="";
+        },1000);
+      },1000)
+    }
+    else
+    {
+      setIngresos(IngresosAux);
+
+      setTimeout(()=> {
+        cargarTotales(IngresosAux);
+      },500);
     }
 	};
 
@@ -333,7 +413,6 @@ export default function Ventas() {
     const formData = new FormData();
     formData.append('file', event.target.files[0]);
     formData.append('user_id',user_id);
-    
 
     axios.post('http://localhost:3001/api/v1/ingresos/cargarXML', formData)
       .then((response) => {
@@ -419,7 +498,7 @@ export default function Ventas() {
         setTimeout(()=>{setShowAlert(false); data();},3000)
       })
       .catch((error) => {
-        setTextError('El XML no es de ventas');
+        setTextError('El XML no es de ventas o el UUID ya existe');
         setShowAlert(true);
         setTimeout(()=>{setShowAlert(false); data();},3000)
       });
@@ -504,11 +583,14 @@ export default function Ventas() {
                       if(IngresosAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<IngresosAux.length;j++) {
-                          let busqueda = (IngresosAux[j].folio + " " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
+                          let permisoB =  IngresosAux[j].permisos.permiso;
+
+                          let busqueda = (IngresosAux[j].folio + " " + permisoB +" " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(IngresosAux[j]);
                         }
                         setIngresos(listResult);
+                        cargarTotales(listResult);
                       }
                      }}
                   />
@@ -522,9 +604,9 @@ export default function Ventas() {
 
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={2}>
                 <div className={`${styles.ItemFecha}`}>
-                  <p><strong>Mes y año de filtro:</strong></p>
+                  <p><strong>Fecha de filtro:</strong></p>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
@@ -539,6 +621,24 @@ export default function Ventas() {
                     />
                   </LocalizationProvider>
                 </div>
+              </Grid>
+
+              <Grid item xs={2} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
+                  <div className={`${styles.ItemFecha}`}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        className='fechaDesde'
+                        required
+                        placeholder="Año"
+                        label="Año"
+                        id="fechaAnio"
+                        name="fechaAnio"
+                        //defaultValue={values.fecha_emision}
+                        onChange={onChangeDateAnio}
+                        views={['year']}
+                      />
+                    </LocalizationProvider>
+                  </div>
               </Grid>
 
               <Grid item xs={4} align="right">

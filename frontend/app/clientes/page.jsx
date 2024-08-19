@@ -255,6 +255,7 @@ export default function Clientes() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
+            <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px"}}><strong>Lista de clientes</strong></p>
             <Grid container spacing={0}>
               <Grid item xs={7} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
                 <Paper

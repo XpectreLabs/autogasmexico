@@ -6,8 +6,7 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
-const reporteS = require('../services/reportes.js');
-const sch = require('../schemas/reportes.js');
+const sch = require('../schemas/bitacoras.js');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
@@ -19,35 +18,20 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   let date = new Date().toISOString();
   console.log("Data");
   console.log(req.body);
-  console.log((req.body.fecha_inicio+"".substring(0.10))+" "+(req.body.fecha_terminacion+"".substring(0.10)));
-  //const listRecepcions = await listRecepciones(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
-  //const listEntregs =  await listEntregas(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
 
-  //console.log(listRecepcions);
-  //delete req.body.permiso_id;
-  //delete req.body.user_id;
-  //delete req.body.tipo_reporte_id;
-  delete req.body.numpermiso
-
-
-  await prisma.reportes.create({
+  await prisma.bitacoras_inventario.create({
     data: {
       ...req.body,
-      tipoevento:  parseFloat(req.body.tipoevento),
-      composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
-      composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
-      permiso_id: parseInt(req.body.permiso_id),
+      fecha_reporte: new Date(req.body.fecha_reporte),
       user_id: parseInt(req.body.user_id),
       date: date,
       active: 1,
-    }, 
+    },
   });
-
-  const dataJson = await reporteS.generarJson(req.body,date);
-  res.status(200).json({ message:"success", dataJson });
+  res.status(200).json({ message:"success" });
 });
 
-router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
+/*router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
     console.log(error.details[0].message);
@@ -69,7 +53,7 @@ router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
     else
       res.status(400).json({ message:"Id invalido", error: "Solicitud no válida, el ID no existe" });
   }
-});
+});*/
 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
@@ -78,33 +62,19 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
-  const id = parseInt(req.body.reporte_id);
-  let date = new Date().toISOString();
-
-  delete req.body.numpermiso;
-
-  console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
-  //console.log("fechayhoraestamedicionmes",);
-
-  console.log("Edit",req.body)
-
-  await prisma.reportes.update({
+  await prisma.bitacoras_inventario.update({
     where: {
-      reporte_id: parseInt(id),
+      bitacora_inventario_id: parseInt(req.body.bitacora_inventario_id),
     },
     data: {
       ...req.body,
-      tipoevento:  parseFloat(req.body.tipoevento),
-      composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
-      composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
-      permiso_id: parseInt(req.body.permiso_id),
     },
   });
 
-  const dataJson = await reporteS.generarJson(req.body,date);
-  res.status(200).json({ message:"success", dataJson });
+  res.status(200).json({ message:"success" });
 });
 
+/*
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdReporte.validate(req.body);
   if (error) {
@@ -122,7 +92,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
     },
   });
   res.status(200).json({message:"success"});
-});
+});*/
 
 
 async function validateUser(user_id) {

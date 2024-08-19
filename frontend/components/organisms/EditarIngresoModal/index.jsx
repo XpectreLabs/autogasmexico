@@ -13,14 +13,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'; 
 
 
 export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [listPermisos,setListPermisos] = React.useState([]);
+  const [listPermisos,setListPermisos] = React.useState([]); 
   const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 

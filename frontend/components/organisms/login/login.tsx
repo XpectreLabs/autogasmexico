@@ -44,13 +44,15 @@ export const Login = ({setPage}:{setPage:Function}) => {
           })
           .then((resp) => resp.json())
           .then(function(data) {
-            setLoading(false);
-
             if(data.message==="success") {
               setShowAlert(false);
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
               localStorage.setItem('token',  data.token);
-              router.push("/proveedores")
+              router.push("/compras");
+
+              setTimeout(()=> {
+                setLoading(false);
+              },500)
             }
             else if(data.message==="Los datos de acceso son incorrectos") {
               setTextError(data.message);

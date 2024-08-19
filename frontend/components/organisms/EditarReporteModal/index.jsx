@@ -32,7 +32,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
     }
 
     if(reporteData.fecha_inicio!==undefined){
-      reporteData.fechayhoraestamedicionmes = dayjs(reporteData.fechayhoraestamedicionmes);
+      //reporteData.fechayhoraestamedicionmes = dayjs(reporteData.fechayhoraestamedicionmes);
       reporteData.fecha_inicio = dayjs(convertirFecha(reporteData.fecha_inicio2));
       reporteData.fecha_terminacion = dayjs(convertirFecha(reporteData.fecha_terminacion2));
     }
@@ -202,12 +202,24 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           delete values.date2;
           delete values.active;
 
+          console.log("f",values.fechayhoraestamedicionmes)
+          //alert(values.fechayhoraestamedicionmes)
+          //alert(dayjs(values.fechayhoraestamedicionmes))
+          //alert(new Date(values.fechayhoraestamedicionmes))
 
+          let temp = values.fechayhoraestamedicionmes;
+
+          //values.fechayhoraestamedicionmes = dayjs(values.fechayhoraestamedicionmes).subtract(1, 'day');
+          //alert(values.fechayhoraestamedicionmes)
+          
+          //values.fechayhoraestamedicionmes = (fechayhoraestamedicionmes+"").substr(0,10);
+          
           const data = {...values,reporte_id,numpermiso};
+          //values.fechayhoraestamedicionmes = temp;
           setLoading(true);
 
           //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', permiso_id: 1,  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
-          console.log("v",data);
+          console.log("vEdit",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -515,8 +527,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                         label="Fecha y hora de estas mediciones"
                         id="fechayhoraestamedicionmes"
                         name="fechayhoraestamedicionmes"
-                        value={values.fechayhoraestamedicionmes}
-                        //defaultValue={values.fecha_emision}
+                        value={dayjs(values.fechayhoraestamedicionmes)}
                         onChange={(value) => {
                           setFieldValue('fechayhoraestamedicionmes', value, true);
                         }}

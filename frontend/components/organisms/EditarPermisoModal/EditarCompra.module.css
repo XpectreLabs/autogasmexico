@@ -1,5 +1,5 @@
 .Modal {
-  width: 700px !important;
+  width: 450px !important;
   position: absolute;
   top: 0%;
   left: 0px;
@@ -111,7 +111,7 @@
 
 .select2 {
   display: inline-block;
-  width: 49.5% !important;
+  width: 100% !important;
   border: 1px solid #000;
   margin-bottom: 8px !important;
   vertical-align: top;

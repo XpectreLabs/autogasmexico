@@ -74,6 +74,10 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
                       <p>{abastecimientoData.densidad}</p>
                     </div>
                     <div>
+                      <p><strong>Kilos:</strong></p>
+                      <p>{abastecimientoData.kilos}</p>
+                    </div>
+                    <div>
                       <p><strong>Permiso:</strong></p>
                       <p>{abastecimientoData.permiso}</p>
                     </div>
@@ -98,7 +102,11 @@ export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData
 
                     <div>
                       <p><strong>Proveedor:</strong></p>
-                      <p>{abastecimientoData.proveedores?abastecimientoData.proveedores.name:''}</p>
+                      <p>{abastecimientoData.proveedor}</p>
+                    </div>
+                    <div>
+                      <p><strong>Permiso venta:</strong></p>
+                      <p>{abastecimientoData.permisoComprador}</p>
                     </div>
 
                     <div></div>

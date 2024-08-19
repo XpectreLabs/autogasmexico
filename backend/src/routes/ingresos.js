@@ -13,9 +13,9 @@ const fs = require('fs');
 router.use(fileUpload());
 const fnClientes = require('../services/clients');
 const fnCompras = require('../services/compras');
+const fnIngresos = require('../services/ingresos');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
-
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
     console.log(error.details[0].message);
@@ -24,17 +24,23 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
   let date = new Date().toISOString();
 
-  await prisma.ventas.create({
-    data: {
-      ...req.body,
-      permiso_id:parseInt(req.body.permiso_id),
-      client_id:parseInt(req.body.client_id),
-      user_id: parseInt(req.body.user_id),
-      date: date,
-      active: 1,
-    },
-  });
-  res.status(200).json({ message:"success" });
+  if(!(await fnIngresos.findCfdiI(req.body.cfdi))) {
+    await prisma.ventas.create({
+      data: {
+        ...req.body,
+        permiso_id:parseInt(req.body.permiso_id),
+        client_id:parseInt(req.body.client_id),
+        user_id: parseInt(req.body.user_id),
+        date: date,
+        active: 1,
+      },
+    });
+    res.status(200).json({ message:"success" });
+  }
+  else
+    return res.status(400).json({ message:"schema", error: "Ya existe una venta registrada con este UUID"});
+
+
 });
 
 router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
@@ -354,18 +360,23 @@ router.post('/cargarXML', async (req, res, next) => {
 
               console.log(dataR);
 
-              const nV = await prisma.ventas.create({
-                data: {
-                  ...dataR,
-                  client_id:parseInt(client_id),
-                  user_id: parseInt(req.body.user_id),
-                  date: date,
-                  active: 1,
-                },
-              });
+              if(!(await fnIngresos.findCfdiI(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
+                const nV = await prisma.ventas.create({
+                  data: {
+                    ...dataR,
+                    client_id:parseInt(client_id),
+                    user_id: parseInt(req.body.user_id),
+                    date: date,
+                    active: 1,
+                  },
+                });
 
-              console.log(nV);
-            return res.status(200).send({ message : 'success',dataJson })
+                console.log(nV);
+                return res.status(200).send({ message : 'success',dataJson })
+              }
+              else
+                return res.status(400).json({ message:"schema", error: 'El UUDI de la venta  ya se habia registrado' });
+
           }
         })
 
@@ -377,6 +388,7 @@ router.post('/cargarXML', async (req, res, next) => {
 router.post('/cargarXMLCorreo', async (req, res, next) => {
 
           return new Promise(async (resolve,reject)=>{
+            try {
             //dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
             console.log(req.body.dataJson);
 
@@ -494,21 +506,65 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
 
               console.log(dataR);
 
-              const nV = await prisma.ventas.create({
-                data: {
-                  ...dataR,
-                  client_id:parseInt(client_id),
-                  user_id: 1,
-                  date: date,
-                  active: 1,
-                },
-              });
+              if(!(await fnIngresos.findCfdiI(req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
+                const nV = await prisma.ventas.create({
+                  data: {
+                    ...dataR,
+                    client_id:parseInt(client_id),
+                    user_id: 1,
+                    date: date,
+                    active: 1,
+                  },
+                });
 
-              console.log(nV);
-            return res.status(200).send({ message : 'success' })
+                await prisma.seguimiento_facturas_correo.create({
+                  data: {
+                    folio: dataR.folio,
+                    cfdi: dataR.cfdi,
+                    tipo_status: 1,
+                    nota: "Procesada",
+                    tipo_factura_id: 2,
+                    date: date,
+                  },
+                });
+
+                return res.status(200).send({ message : 'success' })
+              }
+              else {
+                await prisma.seguimiento_facturas_correo.create({
+                  data: {
+                    folio: dataR.folio,
+                    cfdi: dataR.cfdi,
+                    tipo_status: 2,
+                    nota: "El UUDI de la venta  ya se habia registrado",
+                    tipo_factura_id: 2,
+                    date: date,
+                  },
+                });
+                return res.status(400).json({ message:"schema", error: 'El UUDI de la venta  ya se habia registrado' });
+              }
           }
-        })
 
+        } catch (e) {
+          const folio = req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio?req.body.dataJson['cfdi:Comprobante']['_attributes'].Folio:"Folio no encontrado";
+          const cfdi = req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID?req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID:"UUID no encontrado";
+          let date = new Date().toISOString();
+
+          await prisma.seguimiento_facturas_correo.create({
+            data: {
+              folio,
+              cfdi,
+              tipo_status: 2,
+              nota: "Error en la obtención de datos de la factura",
+              tipo_factura_id: 2,
+              date: date,
+            },
+          });
+          return res.status(400).json({ message:"schema", error: 'Error en la obtención de datos de la factura' });
+        }
+
+
+        })
         //return res.status(200).send({ message : 'success',dataJson })
 });
 

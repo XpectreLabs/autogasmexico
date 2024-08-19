@@ -12,20 +12,21 @@ datasource db {
 }
 
 model users {
-  user_id           Int         @id @default(autoincrement())
-  username          String      @db.VarChar(100)
-  firstname         String      @db.VarChar(100)
-  lastname          String      @db.VarChar(120)
-  password          String      @db.VarChar(120)
-  email             String?     @db.VarChar(150)
-  date              DateTime?   @db.Date
-  type_user         Int         @db.SmallInt @default(2)
-  active            Int?        @db.SmallInt @default(1)
-  proveedores       proveedores[]
-  clients           clients[]
-  abastecimientos   abastecimientos[]
-  ventas            ventas[]
-  reportes          reportes[]
+  user_id               Int         @id @default(autoincrement())
+  username              String      @db.VarChar(100)
+  firstname             String      @db.VarChar(100)
+  lastname              String      @db.VarChar(120)
+  password              String      @db.VarChar(120)
+  email                 String?     @db.VarChar(150)
+  date                  DateTime?   @db.Date
+  type_user             Int         @db.SmallInt @default(2)
+  active                Int?        @db.SmallInt @default(1)
+  proveedores           proveedores[]
+  clients               clients[]
+  abastecimientos       abastecimientos[]
+  ventas                ventas[]
+  reportes              reportes[]
+  bitacoras_inventario  bitacoras_inventario[]
 }
 
 model proveedores {
@@ -86,6 +87,7 @@ model abastecimientos {
   tipocomplemento       String      @db.VarChar(100)
   unidaddemedida        String      @db.VarChar(60)
   permiso               String?     @db.VarChar(100)
+  permiso_id            Int?        @db.SmallInt
   user_id               Int         @db.Integer
   date                  DateTime    @db.Date
   active                Int         @db.SmallInt
@@ -93,6 +95,7 @@ model abastecimientos {
   users                 users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_abastecimiento")
   tipos_monedas         tipos_monedas? @relation(fields: [tipo_modena_id], references: [tipo_modena_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_modena_id")
   condiciones_pagos     condiciones_pagos? @relation(fields: [condicion_pago_id], references: [condicion_pago_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_condicion_pago_id")
+  permisos               cat_permisos? @relation(fields: [permiso_id], references: [permiso_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_id_fk_permiso_id_compras")
 }
 
 
@@ -150,6 +153,7 @@ model ventas {
 model cat_permisos {
   permiso_id    Int     @id @default(autoincrement()) @db.SmallInt
   permiso       String @db.VarChar(100)
+  abastecimientos abastecimientos[]
   ventas        ventas[]
   reportes      reportes[]
 }
@@ -195,3 +199,29 @@ model tipos_reporte {
   tipo_reporte        String @db.VarChar(100)
   reportes            reportes[]
 }
+
+
+
+
+model bitacoras_inventario {
+  bitacora_inventario_id     Int         @id @default(autoincrement())
+  nota                       String      @db.VarChar(500)
+  diferencia                 Float?      @db.Real
+  fecha_reporte              DateTime    @db.Date
+  tipo_bitacora              Int        @db.SmallInt
+  user_id                    Int         @db.Integer
+  date                       DateTime    @db.Date
+  active                     Int         @db.SmallInt
+  users                      users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_bitacora")
+}
+
+model seguimiento_facturas_correo {
+  seguimiento_id      Int         @id @default(autoincrement())
+  folio               String?     @db.VarChar(100)
+  cfdi                String?     @db.VarChar(150)
+  tipo_status         Int         @db.SmallInt
+  nota                String?      @db.VarChar(100)
+  tipo_factura_id     Int         @db.SmallInt
+  date                DateTime    @db.Date
+}
+

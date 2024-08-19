@@ -12,7 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
-import * as Yup from "yup"; 
+import * as Yup from "yup";
 
 export default function NuevoIngresoModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);

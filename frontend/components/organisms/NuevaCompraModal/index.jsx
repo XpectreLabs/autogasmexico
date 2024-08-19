@@ -21,6 +21,45 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
   const [textError,setTextError] = React.useState("");
   const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'' , preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [listPermisos,setListPermisos] = React.useState([]);
+
+  function data() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        setListPermisos(data.listPermisos);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
 
   //12/07/2024
   function cambiarFechaNormal(fecha) {
@@ -64,31 +103,15 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
           break;
       }
     }
-    /*
-    const getPermiso = (texto) => {
-  let permiso = "";
-    if(texto.includes("LP/")||texto.includes("H/")) {
-      const posicion = texto.includes("LP/")?texto.indexOf("LP/"):texto.indexOf("H/");
-
-      for(let j=posicion; j<texto.length; j++) {
-        if(texto[j]!==','&&texto[j]!=='-')
-          permiso+=texto[j];
-        else
-          break;
-      }
-    }
-  return permiso;
-}
-    */
-
-
 
     console.log(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value));
 
     setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value)), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad), permiso: cadPermiso,  preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
-    //setDensidad(cad);
-    //document.querySelector("#densidad").value = cad;
   }
+
+  useEffect(() => {
+    data();
+  }, []);
 
   return (
     <Formik
@@ -303,8 +326,28 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
+
+                  <NativeSelect
+                    className={`Fecha ${styles.select2}`}
+                    required
+                    value={values.permiso_id}
+                    onChange={handleChange}
+                    defaultValue={0}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Permiso para venta *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
+
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -318,7 +361,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   />
 
                 <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -331,7 +374,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -344,7 +387,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio de compra"
                     id="preciovent"
@@ -357,7 +400,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="UUID"
                     id="cfdi"
@@ -369,7 +412,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -381,7 +424,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -393,7 +436,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"

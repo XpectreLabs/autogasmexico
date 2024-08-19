@@ -257,6 +257,8 @@ export default function Perfil() {
               <Grid item xs={2}>
               </Grid>
               <Grid item xs={10}>
+                <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>Mi perfil</strong></p>
+
                 <div className={styles.center}>
                   {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Message:</strong><br />{textError}</p>):null}
 
