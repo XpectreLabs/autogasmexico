@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './Index.module.css';
@@ -10,32 +9,35 @@ import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from "yup";
 
-export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,cargarDataPorPermiso,anio,permiso_id,tipo_bitacora,mes,dia }) {
+ 
+export default function EditarBitacoraDiariaModal({ isOpen, onClose, bitacoraData,bitacoraIdd }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({nota:'',diferencia:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
-  console.log(fecha_reporte)
-
+  console.log("Dta",bitacoraData);
   return (
     <Formik
         enableReinitialize={true}
-        initialValues={initialValues}
+        initialValues={{...bitacoraData}}
         validationSchema={Yup.object().shape({
           nota: Yup.string()
             .min(3, "La nota es muy corto")
             .required("La nota es requerido"),
-          diferencia: Yup.number()
-            .min(1, "La diferencia debe tener minimo 1 digito")
-            .required("La diferencia es requerida"),
-          //fecha_reporte: Yup.date()
-            //.required("* Fecha de reporte"),
         })}
         onSubmit={(values, actions) => {
-          const user_id = localStorage.getItem('user_id');
           const scriptURL = "http://localhost:3001/api/v1/bitacoras";
+          const bitacora_inventario_id = bitacoraIdd;
+          //const id = bitacoraIdd;
+          delete values.id;
+          delete values.mes;
+          delete values.inventarioInicial;
+          delete values.compras;
+          delete values.ventas;
+          delete values.inventarioFinal;
+          delete values.inventarioFisico;
+          delete values.fecha;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -43,13 +45,13 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
           const permiso = values.permiso+"";
           const phone = values.phone;
           const email = values.email;*/
-          const data = {...values,user_id, fecha_reporte,tipo_bitacora,permiso_id};
+          const data = {...values,bitacora_inventario_id};
+          console.log(data);
           setLoading(true);
 
-          //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
           console.log("v",data);
           fetch(scriptURL, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(data),
             headers: {
               'Accept': 'application/json',
@@ -64,10 +66,8 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
 
             if(data.message==="success") {
               setTypeOfMessage("success");
-              setTextError("Los datos de la bitacora fueron guardados");
-              setInitialValues(({nota:'', diferencia:''}));
+              setTextError("Los datos de la bitacora fueron actualizados");
               setShowAlert(true);
-              cargarDataPorPermiso(permiso_id,anio,mes,dia)
 
               setTimeout(()=>{onClose();},2000)
             }
@@ -106,12 +106,11 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
                   open={isOpen}
                   onClose={onClose}
                   className={styles.Modal}
-                  title="Agregar bitacora"
+                  title="Editar bitacora"
               >
                 <Form id="formAddCompra" className={styles.form} onSubmit={handleSubmit}>
-                  <h2 className={styles.Title}>Agregar bitacora</h2>
+                  <h2 className={styles.Title}>Editar bitacora</h2>
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
                     placeholder="Nota"
                     required
                     id="nota"
@@ -122,39 +121,9 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Litros de diferencia"
-                    id="diferencia"
-                    label="Litros de diferencia"
-                    name="diferencia"
-                    value={values.diferencia}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      format="DD/MM/YYYY"
-                      required
-                      className={`InputModal Fecha `}
-                      placeholder="Fecha de reporte"
-                      label="Fecha de reporte"
-                      id="fecha_reporte"
-                      name="fecha_reporte"
-                      //defaultValue={values.fecha_emision}
-                      onChange={(value) => {
-                        setFieldValue('fecha_reporte', value, true);
-                      }}
-                    />
-                  </LocalizationProvider> */}
-
-                  {(errors.nota || errors.diferencia)?(<div className={styles.errors}>
+                    {(errors.nota)?(<div className={styles.errors}>
                       <p><strong>Errores:</strong></p>
                       {errors.nota? (<p>{errors.nota}</p>):null}
-                      {errors.diferencia? (<p>{errors.diferencia}</p>):null}
                       {/* {errors.fecha_reporte? (<p>{errors.fecha_reporte}</p>):null} */}
                     </div>):null}
 

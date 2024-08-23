@@ -12,6 +12,7 @@ const xmlJs = require('xml-js');
 const fs = require('fs');
 const fnProveedores = require('../services/proveedores.js');
 const fnCompras = require('../services/compras.js');
+const { isNull } = require("util");
 
 router.use(fileUpload())
 
@@ -46,7 +47,7 @@ router.use(fileUpload())
 
 });*/
 
-router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, async (req, res, next) => {
+router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken, async (req, res, next) => {
 
   const { error } = sch.schemaCreate.validate(req.params);
   if (error) {
@@ -55,6 +56,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
   }
 
   const mesRecibido = parseInt(req.params.mes+"");
+  const diaRecibido = parseInt(req.params.dia+"");
   console.log("Mes enviado: "+mesRecibido);
   console.log("Tipo: "+typeof(req.params.permiso_id))
 
@@ -83,6 +85,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
       let inventarioInicial,inventarioFinal;
       let diferencia = 0;
       let diferenciaReportada = 0;
+      let diferenciaReportadaR = 0;
       let inventarioFisico = 0;
       let porcentajeDiferencia = 0;
       let bitacora = "";
@@ -107,13 +110,22 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
       let item;
 
       if(permiso_id===1) {
-        const fB = await findBitacora(fechaInicio);
+        const fB = await findBitacora(fechaFin,1,permiso_id);
+        const tB = await totalEnBitacora(fechaInicio,fechaFin,permiso_id);
+        //const fB = await totalEnBitacora(fechaInicio,fechaFin);
         //console.log("fb",fB)
-  
+
         if(fB!==0) {
+          console.log("tb: "+tB);
+          console.log("Dif: "+fB.diferencia);
+          console.log("Diferencia: "+(parseFloat(tB)-parseFloat(fB.diferencia)))
           bitacora_inventario_id =  fB.bitacora_inventario_id;
-          diferenciaReportada = fB.diferencia;
+          diferenciaReportada = parseFloat(tB);
+          diferenciaReportadaR = parseFloat(fB.diferencia);
           bitacora = fB.nota;
+        }
+        else {
+          diferenciaReportada = parseFloat(tB);
         }
 
         inventarioFisico = sumaIC - totalVenta + diferenciaReportada;
@@ -133,13 +145,22 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
           "inventarioFinal": inventarioFinal,
           "inventarioFisico": inventarioFisico,
           "diferencia": diferencia,
+          "diferenciaR": diferenciaReportadaR,
           "porcentajeDiferencia": porcentajeDiferencia,
           "nota": bitacora,
-          "fecha":fechaInicio,
-          "bitacora_inventario_id": bitacora_inventario_id
+          "fecha":fechaFin,
+          "bitacora_inventario_id": bitacora_inventario_id,
+          "tipo_bitacora":1
         }
       }
       else {
+        const fB = await findBitacora(fechaFin,1,permiso_id);
+
+        if(fB!==0) {
+          bitacora_inventario_id =  fB.bitacora_inventario_id;
+          bitacora = fB.nota;
+        }
+
         item = {
           "id": j,
           "mes": mesesNombre[j]+" "+anio,
@@ -147,7 +168,10 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
           "compras": totalCompra,
           "ventas": totalVenta,
           "inventarioFinal": inventarioFinal,
-          "fecha":fechaInicio
+          "bitacora_inventario_id": bitacora_inventario_id,
+          "nota": bitacora,
+          "fecha":fechaFin,
+          "tipo_bitacora":1
         }
       }
       listInventario.push(item);
@@ -168,7 +192,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
         "porcentajeDiferencia":"",
         "nota": "",
         "fecha":"",
-        "bitacora_inventario_id": ""
+        "bitacora_inventario_id": "",
+        "tipo_bitacora":1
       }
     }
     else {
@@ -179,7 +204,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
         "compras": totalCompras,
         "ventas": totalVentas,
         "inventarioFinal": 0,
-        "fecha":""
+        "fecha":"",
+        "tipo_bitacora":1
       }
     }
 
@@ -190,10 +216,15 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
     let diasMes = meses[mesRecibido-1]+diaBisiesto;
     const mes = (mesRecibido)<10?("0"+mesRecibido):mesRecibido;
 
-
     //mesRecibido
     for(let j=0; j<diasMes; j++) {
-      const dia = (j+1)<10?("0"+(j+1)):(j+1);
+      let dia = (j+1)<10?("0"+(j+1)):(j+1);
+
+      if(diaRecibido!==0){
+        const diaP = diaRecibido<10?("0"+diaRecibido):diaRecibido;
+        dia = diaP;
+      }
+
 
       const fechaInicio = anio+"-"+mes+"-"+dia;
       const fechaFin = anio+"-"+mes+"-"+dia;
@@ -226,9 +257,9 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
       let item;
 
       if(permiso_id===1) {
-        const fB = await findBitacora(fechaInicio);
+        const fB = await findBitacora(fechaFin,2,permiso_id);
         //console.log("fb",fB)
-  
+
         if(fB!==0) {
           bitacora_inventario_id =  fB.bitacora_inventario_id;
           diferenciaReportada = fB.diferencia;
@@ -236,7 +267,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
         }
 
         inventarioFisico = sumaIC - totalVenta + diferenciaReportada;
-        
+
         console.log("inventarioInicial: "+inventarioInicial);
         console.log("totalCompra: "+totalCompra);
         console.log("totalVenta: "+totalVenta);
@@ -259,13 +290,22 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
           "inventarioFinal": inventarioFinal,
           "inventarioFisico": inventarioFisico,
           "diferencia": diferencia,
+          "diferenciaR": diferencia,
           "porcentajeDiferencia": porcentajeDiferencia,
           "nota": bitacora,
-          "fecha":fechaInicio,
-          "bitacora_inventario_id": bitacora_inventario_id
+          "fecha":fechaFin,
+          "bitacora_inventario_id": bitacora_inventario_id,
+          "tipo_bitacora":2
         }
       }
       else {
+        const fB = await findBitacora(fechaFin,2,permiso_id);
+
+        if(fB!==0) {
+          bitacora_inventario_id =  fB.bitacora_inventario_id;
+          bitacora = fB.nota;
+        }
+
         item = {
           "id": j,
           "mes": dia+"/"+mes+"/"+anio,
@@ -273,14 +313,24 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
           "compras": totalCompra,
           "ventas": totalVenta,
           "inventarioFinal": inventarioFinal,
-          "fecha":fechaInicio
+          "fecha":fechaFin,
+          "tipo_bitacora":2,
+          "nota": bitacora,
+          "bitacora_inventario_id": bitacora_inventario_id,
         }
       }
       listInventario.push(item);
+
+      if(diaRecibido!==0)
+        break;
     }
 
 
     let item;
+
+    if(diaRecibido!==0){
+      diasMes = 2;
+    }
 
     if(permiso_id===1) {
       item = {
@@ -295,7 +345,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
         "porcentajeDiferencia":"",
         "nota": "",
         "fecha":"",
-        "bitacora_inventario_id": ""
+        "bitacora_inventario_id": "",
+        "tipo_bitacora":2
       }
     }
     else {
@@ -306,7 +357,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes',jwtV.verifyToken, asyn
         "compras": totalCompras,
         "ventas": totalVentas,
         "inventarioFinal": 0,
-        "fecha":""
+        "fecha":"",
+        "tipo_bitacora":2
       }
     }
 
@@ -392,13 +444,15 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
 }
 
 
-async function findBitacora(fecha_reporte) {
+async function findBitacora(fecha_reporte,tipo_bitacora,permiso_id) {
 
   fecha_reporte = new Date(fecha_reporte);
 
   const dataBitacora = await prisma.bitacoras_inventario.findFirst({
     where: {
       fecha_reporte,
+      tipo_bitacora,
+      permiso_id,
       active: 1,
     },
     select: {
@@ -412,6 +466,32 @@ async function findBitacora(fecha_reporte) {
    if (dataBitacora == null) return 0;
 
   return dataBitacora;
+}
+
+
+async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
+
+  //fecha_reporte = new Date(fecha_reporte);
+
+  const dataBitacora = await prisma.bitacoras_inventario.aggregate({
+    _sum: {
+      diferencia: true,
+    },
+    where: {
+      permiso_id,
+      active: 1,
+      fecha_reporte: {
+        gte: new Date(fecha_inicio), // Start of date range
+			  lte: new Date(fecha_terminacion), // End of date range
+      }
+    },
+   });
+
+   const sumT = dataBitacora._sum.diferencia!=null?dataBitacora._sum.diferencia:0;
+   console.log("Resultado s: "+sumT)
+   console.log('Suma:' + dataBitacora._sum.diferencia)
+
+  return sumT;
 }
 /*router.post('/cargarXML', async (req, res, next) => {
   let dataJson;

@@ -1,31 +1,23 @@
 'use client';
 
 import React from 'react';
-import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './Index.module.css';
 import Modal from '@mui/material/Modal';
 import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
-import dayjs from 'dayjs';
 
- 
+
 export default function EditarBitacoraModal({ isOpen, onClose, bitacoraData,bitacoraIdd }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
-  const [listPermisos,setListPermisos] = React.useState([]);
-
 
   console.log("Dta",bitacoraData);
+  bitacoraData.diferencia = bitacoraData.diferenciaR;
   return (
     <Formik
         enableReinitialize={true}
@@ -51,6 +43,7 @@ export default function EditarBitacoraModal({ isOpen, onClose, bitacoraData,bita
           delete values.inventarioFisico;
           delete values.porcentajeDiferencia;
           delete values.fecha;
+          delete values.diferenciaR;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;

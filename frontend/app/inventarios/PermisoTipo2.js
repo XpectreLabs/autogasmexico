@@ -4,6 +4,9 @@ import styles from './index.module.css';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
+import CreateIcon from '@mui/icons-material/Create';
+import NuevaBitacoraDiariaModal from '@/components/organisms/NuevaBitacoraDiariaModal';
+import EditarBitacoraDiariaModal from '@/components/organisms/EditarBitacoraDiariaModal';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -14,6 +17,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function PermisoTipo2(props) {
+  const [isAgregarInventarioModalOpen, setisAgregarInventarioModalOpen] = useState(false);
+  const [isEditInventarioModalOpen, setIsEditPInventarioModalOpen] = useState(false);
+  const [inventarioToEdit, setInventarioToEdit] = useState({});
+  const [inventarioIdd, setInventarioIdd] = useState(0);
+  const [fecha, setFecha] = useState("");
+  const [tipoBitacora,setTipoBitacora] = useState(0);
+
   const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     currency: "USD"
@@ -46,6 +56,36 @@ export default function PermisoTipo2(props) {
       headerName: 'Inventario final',
       sortable: false,
       flex: 1.8,
+    },
+    {
+      field: 'nota',
+      headerName: 'Bitacora',
+      sortable: false,
+      flex: 2.4,
+    },
+    {
+      field: 'edit',
+      headerName: '',
+      sortable: false,
+      flex: 0.2,
+      renderCell: (params) => (
+        <CreateIcon
+          className={styles.btnAccion}
+          onClick={() => {
+            console.log("params",params.row.fecha);
+            setFecha(params.row.fecha)
+            setFecha(params.row.fecha)
+            setTipoBitacora(params.row.tipo_bitacora)
+            if(params.row.bitacora_inventario_id!=="") {
+              setInventarioIdd(params.row.bitacora_inventario_id);
+              setInventarioToEdit(params.row);
+               setIsEditPInventarioModalOpen(true)
+            }
+            else
+              setisAgregarInventarioModalOpen(true);
+          }}
+        />
+      ),
     }
   ];
 
@@ -66,14 +106,39 @@ export default function PermisoTipo2(props) {
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 32,
             },
           },
         }}
-        pageSizeOptions={[20]}
+        pageSizeOptions={[32]}
         disableRowSelectionOnClick
       />
       {Object.keys(props.listTipo2).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}
+      <div>
+        <NuevaBitacoraDiariaModal
+          cargarDataPorPermiso={props.cargarDataPorPermiso}
+          permiso_id="2"
+          anio={props.anioC}
+          mes={props.mesC}
+          dia={props.diaC}
+          fecha_reporte={fecha}
+          tipo_bitacora={tipoBitacora}
+          isOpen={isAgregarInventarioModalOpen}
+          onClose={() => {
+            setisAgregarInventarioModalOpen(false);
+          }}
+        />
+
+        <EditarBitacoraDiariaModal
+          bitacoraIdd={inventarioIdd}
+          bitacoraData={inventarioToEdit}
+          isOpen={isEditInventarioModalOpen}
+          onClose={() => {
+            props.cargarDataPorPermiso("2",props.anioC,props.mesC,props.diaC);
+            setIsEditPInventarioModalOpen(false);
+          }}
+        />
+      </div>
     </main>
   );
 }

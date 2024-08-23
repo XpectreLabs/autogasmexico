@@ -2,9 +2,10 @@ const joi = require('joi');
 
 const schemaCreate = joi.object({
   nota: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,500}$')).required(),
-  diferencia: joi.number().required(),
+  diferencia: joi.number(),
   fecha_reporte: joi.date().required(),
   tipo_bitacora: joi.number().min(1).required(),
+  permiso_id: joi.number().min(1).required(),
   user_id: joi.number().min(1).required(),
 });
 
@@ -15,7 +16,8 @@ const schemaCreate = joi.object({
  const schemaUpdate = joi.object({
   bitacora_inventario_id: joi.number().min(1).required(),
   nota: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,500}$')).required(),
-  diferencia: joi.number().required(),
+  diferencia: joi.number(),
+  tipo_bitacora: joi.number().min(1).required(),
  });
 
 //  const schemaIdReporte = joi.object({

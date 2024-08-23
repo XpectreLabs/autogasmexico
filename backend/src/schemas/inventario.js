@@ -4,6 +4,7 @@ const schemaCreate = joi.object({
   user_id: joi.number().min(1).required(),
   anio: joi.number().required(),
   mes: joi.number().required(),
+  dia: joi.number().required(),
   permiso_id: joi.number().min(1).required(),
 });
 

@@ -23,6 +23,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
     data: {
       ...req.body,
       fecha_reporte: new Date(req.body.fecha_reporte),
+      permiso_id: parseInt(req.body.permiso_id),
       user_id: parseInt(req.body.user_id),
       date: date,
       active: 1,

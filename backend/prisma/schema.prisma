@@ -151,11 +151,12 @@ model ventas {
 
 
 model cat_permisos {
-  permiso_id    Int     @id @default(autoincrement()) @db.SmallInt
-  permiso       String @db.VarChar(100)
-  abastecimientos abastecimientos[]
-  ventas        ventas[]
-  reportes      reportes[]
+  permiso_id              Int     @id @default(autoincrement()) @db.SmallInt
+  permiso                 String @db.VarChar(100)
+  abastecimientos         abastecimientos[]
+  ventas                  ventas[]
+  reportes                reportes[]
+  bitacoras_inventario    bitacoras_inventario[]
 }
 
 model reportes {
@@ -209,10 +210,12 @@ model bitacoras_inventario {
   diferencia                 Float?      @db.Real
   fecha_reporte              DateTime    @db.Date
   tipo_bitacora              Int        @db.SmallInt
+  permiso_id                 Int?        @db.SmallInt
   user_id                    Int         @db.Integer
   date                       DateTime    @db.Date
   active                     Int         @db.SmallInt
   users                      users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_bitacora")
+  cat_permisos               cat_permisos? @relation(fields: [permiso_id], references: [permiso_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permiso_id_fk_permiso_id_bitacora")
 }
 
 model seguimiento_facturas_correo {

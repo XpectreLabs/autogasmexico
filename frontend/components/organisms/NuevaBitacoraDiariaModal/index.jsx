@@ -10,11 +10,11 @@ import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from "yup";
 
-export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,cargarDataPorPermiso,anio,permiso_id,tipo_bitacora,mes,dia }) {
+export default function NuevaBitacoraDiariaModal({ isOpen, onClose, fecha_reporte,cargarDataPorPermiso,anio,permiso_id,tipo_bitacora,mes,dia }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({nota:'',diferencia:''}));
+  const [initialValues, setInitialValues] = useState(({nota:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   console.log(fecha_reporte)
@@ -27,9 +27,6 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
           nota: Yup.string()
             .min(3, "La nota es muy corto")
             .required("La nota es requerido"),
-          diferencia: Yup.number()
-            .min(1, "La diferencia debe tener minimo 1 digito")
-            .required("La diferencia es requerida"),
           //fecha_reporte: Yup.date()
             //.required("* Fecha de reporte"),
         })}
@@ -64,8 +61,8 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
 
             if(data.message==="success") {
               setTypeOfMessage("success");
-              setTextError("Los datos de la bitacora fueron guardados");
-              setInitialValues(({nota:'', diferencia:''}));
+              setTextError("La bitacora fue guardado");
+              setInitialValues(({nota:''}));
               setShowAlert(true);
               cargarDataPorPermiso(permiso_id,anio,mes,dia)
 
@@ -111,7 +108,6 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
                 <Form id="formAddCompra" className={styles.form} onSubmit={handleSubmit}>
                   <h2 className={styles.Title}>Agregar bitacora</h2>
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
                     placeholder="Nota"
                     required
                     id="nota"
@@ -121,19 +117,6 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
                     onChange={handleChange}
                     onBlur={handleBlur}
                     size="small"
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Litros de diferencia"
-                    id="diferencia"
-                    label="Litros de diferencia"
-                    name="diferencia"
-                    value={values.diferencia}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
                   />
                   {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
@@ -151,10 +134,9 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
                     />
                   </LocalizationProvider> */}
 
-                  {(errors.nota || errors.diferencia)?(<div className={styles.errors}>
+                  {(errors.nota)?(<div className={styles.errors}>
                       <p><strong>Errores:</strong></p>
                       {errors.nota? (<p>{errors.nota}</p>):null}
-                      {errors.diferencia? (<p>{errors.diferencia}</p>):null}
                       {/* {errors.fecha_reporte? (<p>{errors.fecha_reporte}</p>):null} */}
                     </div>):null}
 

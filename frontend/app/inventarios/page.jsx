@@ -17,6 +17,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import PermisoTipo1 from './PermisoTipo1';
 import PermisoTipo2 from './PermisoTipo2';
 import PermisoTipo3 from './PermisoTipo3';
+import dayjs from 'dayjs';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,15 +29,17 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Inventarios() {
   const router = useRouter();
-  const [showAlert,setShowAlert] = React.useState(false);
-  const [textError,setTextError] = React.useState("");
-  const [listPermisos,setListPermisos] = React.useState([]);
-  const [tipoPermiso,setTipoPermiso] = React.useState("1");
-  const [listTipo1,setListTipo1] = React.useState([]);
-  const [listTipo2,setListTipo2] = React.useState([]);
-  const [listTipo3,setListTipo3] = React.useState([]);
-  const [anioC,SetAnioC] = React.useState("");
-  const [mesC,SetMesC] = React.useState(0);
+  const [showAlert,setShowAlert] = useState(false);
+  const [textError,setTextError] = useState("");
+  const [listPermisos,setListPermisos] = useState([]);
+  const [tipoPermiso,setTipoPermiso] = useState("1");
+  const [listTipo1,setListTipo1] = useState([]);
+  const [listTipo2,setListTipo2] = useState([]);
+  const [listTipo3,setListTipo3] = useState([]);
+  const [anioC,SetAnioC] = useState("");
+  const [mesC,SetMesC] = useState(0);
+  const [diaC,SetDiaC] = useState(0);
+  const [fechaC,setFechaC] = useState(null);
 
   function getListPermiso() {
     const user_id = localStorage.getItem('user_id');
@@ -77,9 +80,9 @@ export default function Inventarios() {
 
 
 
-  function cargarDataPorPermiso(permiso_id,anio, mesEnvio=0) {
+  function cargarDataPorPermiso(permiso_id,anio, mesEnvio=0, diaEnvio=0) {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/inventarios/"+user_id+"/inventarios/"+permiso_id+"/"+anio+"/"+mesEnvio;
+    const scriptURL = "http://localhost:3001/api/v1/inventarios/"+user_id+"/inventarios/"+permiso_id+"/"+anio+"/"+mesEnvio+"/"+diaEnvio;
 
     fetch(scriptURL, {
       method: 'GET',
@@ -129,7 +132,7 @@ export default function Inventarios() {
       const anio = document.querySelector("input[name=fecha_desde]").value;
       setTipoPermiso(permiso);
       SetAnioC(anio)
-      cargarDataPorPermiso(permiso,anio,mesC);
+      cargarDataPorPermiso(permiso,anio,mesC,diaC);
     }
     else {
       setTextError("Debe de seleccionar el año");
@@ -149,7 +152,7 @@ export default function Inventarios() {
       const permiso = document.querySelector("#permiso_id").value;
       setTipoPermiso(permiso+"");
       SetAnioC(anio);
-      cargarDataPorPermiso(permiso,anio,mesC);
+      cargarDataPorPermiso(permiso,anio,mesC,diaC);
     }
     /*
     if(item!==null) {
@@ -213,12 +216,64 @@ export default function Inventarios() {
         SetMesC(mes);
         setTipoPermiso(permiso+"");
         SetAnioC(anio);
-        cargarDataPorPermiso(permiso,anio,mes);
+
+        const mesCC = mes<10?("0"+mes):mes;
+        //let diaO = document.querySelector("input[name=fechaDia]").value;
+        //diaO = diaO?diaO:"01";
+        const fechaCN = dayjs(anio+"-"+mesCC+"-01");
+
+        console.log(fechaCN);
+        SetDiaC(0);
+        //setFechaC(null);
+        setFechaC(fechaCN);
+
+        cargarDataPorPermiso(permiso,anio,mes,0);
       }
+      else
+        alert("Debe de ingresar año");
     }
     else {
       !isNaN(anio)?cargarDataPorPermiso(permiso,anio):null;
       SetMesC(0);
+    }
+  };
+
+
+  const onChangeDateDia = (item) => {
+    const permiso = document.querySelector("#permiso_id").value;
+    const anio = parseInt(document.querySelector("input[name=fecha_desde]").value);
+
+    //console.log(item);
+    //alert(item.$D+" mes -> "+mesC);
+
+    if(item!==null) {
+      const dia = parseInt(item.$D+"");
+
+      if(!isNaN(anio)&&mesC!==0) {
+        SetDiaC(dia);
+        setTipoPermiso(permiso+"");
+        SetAnioC(anio);
+        cargarDataPorPermiso(permiso,anio,mesC,dia);
+      }
+      else
+        alert("Debe de ingresar año y mes");
+    }
+    else {
+      !isNaN(anio)?cargarDataPorPermiso(permiso,anio,mesC):null;
+      SetDiaC(0);
+
+      if(mesC!==0) {
+        const mesCC = mesC<10?("0"+mesC):mesC;
+        const fechaCN = dayjs(anio+"-"+mesCC+"-01");
+        console.log("R",fechaCN);
+        setTimeout(()=> {
+          setFechaC(fechaCN);
+          setFechaC(fechaCN);
+        },800)
+      }
+      else
+        setFechaC(null);
+
     }
   };
 
@@ -320,8 +375,9 @@ export default function Inventarios() {
                         label="Dia"
                         id="fechaDia"
                         name="fechaDia"
-                        //defaultValue={values.fecha_emision}
-                        onChange={onChangeDate}
+                        defaultValue={fechaC!=null?fechaC:null}
+                        value={fechaC!=null?fechaC:null}
+                        onChange={onChangeDateDia}
                         views={['day']}
                       />
                     </LocalizationProvider>
@@ -355,7 +411,7 @@ export default function Inventarios() {
 
       {showAlert?(<p className={`${styles.message} slideLeft`}>{textError}</p>):null}
 
-      {tipoPermiso==="1"?<PermisoTipo1 cargarDataPorPermiso={cargarDataPorPermiso} listTipo1={listTipo1} anioC={anioC} />:tipoPermiso==="2"?<PermisoTipo2 listTipo2={listTipo2} />:<PermisoTipo3 listTipo3={listTipo3} />}
+      {tipoPermiso==="1"?<PermisoTipo1 cargarDataPorPermiso={cargarDataPorPermiso} listTipo1={listTipo1} anioC={anioC} mesC={mesC} diaC={diaC} />:tipoPermiso==="2"?<PermisoTipo2 cargarDataPorPermiso={cargarDataPorPermiso} listTipo2={listTipo2}  anioC={anioC} mesC={mesC} diaC={diaC} />:<PermisoTipo3  cargarDataPorPermiso={cargarDataPorPermiso} listTipo3={listTipo3}  listTipo2={listTipo2} anioC={anioC} mesC={mesC} diaC={diaC} />}
 
     </main>
   );

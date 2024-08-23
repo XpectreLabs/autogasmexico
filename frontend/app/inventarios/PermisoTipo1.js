@@ -5,7 +5,6 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
 import CreateIcon from '@mui/icons-material/Create';
-import AddIcon from '@mui/icons-material/Add';
 import NuevaBitacoraModal from '@/components/organisms/NuevaBitacoraModal';
 import EditarBitacoraModal from '@/components/organisms/EditarBitacoraModal';
 
@@ -23,6 +22,7 @@ export default function PermisoTipo1(props) {
   const [inventarioToEdit, setInventarioToEdit] = useState({});
   const [inventarioIdd, setInventarioIdd] = useState(0);
   const [fecha, setFecha] = useState("");
+  const [tipoBitacora,setTipoBitacora] = useState(0);
 
   const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
@@ -93,6 +93,7 @@ export default function PermisoTipo1(props) {
             console.log("params",params.row.fecha);
             setFecha(params.row.fecha)
             setFecha(params.row.fecha)
+            setTipoBitacora(params.row.tipo_bitacora)
             if(params.row.bitacora_inventario_id!=="") {
               setInventarioIdd(params.row.bitacora_inventario_id);
               setInventarioToEdit(params.row);
@@ -125,11 +126,11 @@ export default function PermisoTipo1(props) {
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 32,
             },
           },
         }}
-        pageSizeOptions={[20]}
+        pageSizeOptions={[32]}
         disableRowSelectionOnClick
       />
       {Object.keys(props.listTipo1).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}
@@ -139,7 +140,10 @@ export default function PermisoTipo1(props) {
           cargarDataPorPermiso={props.cargarDataPorPermiso}
           permiso_id="1"
           anio={props.anioC}
+          mes={props.mesC}
+          dia={props.diaC}
           fecha_reporte={fecha}
+          tipo_bitacora={tipoBitacora}
           isOpen={isAgregarInventarioModalOpen}
           onClose={() => {
             setisAgregarInventarioModalOpen(false);
@@ -151,7 +155,7 @@ export default function PermisoTipo1(props) {
           bitacoraData={inventarioToEdit}
           isOpen={isEditInventarioModalOpen}
           onClose={() => {
-            props.cargarDataPorPermiso("1",props.anioC);
+            props.cargarDataPorPermiso("1",props.anioC,props.mesC,props.diaC);
             setIsEditPInventarioModalOpen(false);
           }}
         />
