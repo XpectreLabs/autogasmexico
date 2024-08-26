@@ -840,7 +840,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });*/
 
 
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -853,6 +853,6 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 module.exports = router;

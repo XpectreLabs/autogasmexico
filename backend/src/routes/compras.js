@@ -12,6 +12,7 @@ const xmlJs = require('xml-js');
 const fs = require('fs');
 const fnProveedores = require('../services/proveedores');
 const fnCompras = require('../services/compras');
+const fnUsuatio = require('../services/users.js');
 
 router.use(fileUpload())
 
@@ -56,7 +57,7 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
       const listCompras = await prisma.abastecimientos.findMany({
         orderBy: [
           {
@@ -369,7 +370,7 @@ router.get('/:userId/list', async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
       const listCompras = await prisma.abastecimientos.findMany({
         where: {
           user_id: parseInt(id),
@@ -496,7 +497,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -509,6 +510,6 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 module.exports = router;

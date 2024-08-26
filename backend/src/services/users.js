@@ -27,5 +27,20 @@ function getPasswordEncrypted(password) {// Must be 16 characters
   return (crypted)
 }
 
+async function validateUser(user_id) {
+  console.log("validateUser_> "+user_id);
+  const users = await prisma.users.findFirst({
+    where: {
+      user_id
+    },
+    select: {
+      user_id: true,
+    },
+  });
 
-module.exports = { findUser,getPasswordEncrypted }
+  if (users == null) return false;
+
+  return true;
+}
+
+module.exports = { findUser,getPasswordEncrypted,validateUser }

@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
 const sch = require('../schemas/ingresos.js');
+const fnUsuatio = require('../services/users.js');
 
 router.get('/:userId/permisos',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
@@ -18,7 +19,7 @@ router.get('/:userId/permisos',jwtV.verifyToken, async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
       const listPermisos = await prisma.cat_permisos.findMany({
         orderBy: [
           {
@@ -33,8 +34,7 @@ router.get('/:userId/permisos',jwtV.verifyToken, async (req, res, next) => {
   }
 });
 
-
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -47,6 +47,6 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 module.exports = router;

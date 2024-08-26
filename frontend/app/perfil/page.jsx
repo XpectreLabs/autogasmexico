@@ -6,11 +6,6 @@ import Navbar from '@/components/molecules/Navbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -94,42 +89,7 @@ export default function Perfil() {
 
   return (
     <main className={styles.main} style={{ opacity: 1 }}>
-      <Grid container spacing={2} className={styles.BorderBottom}>
-        <Grid item xs={2}>
-          <Item className={styles.DeleteBorder}>
-            <figure className={styles.Logo}>
-              <img src="img/logo.jpg" alt="" />
-            </figure>
-          </Item>
-        </Grid>
-        <Grid item xs={10}>
-          <Item className={styles.DeleteBorder} align="left">
-            <Grid container spacing={2}>
-              <Grid item xs={11} align="left">
-                <Navbar activeMain="5" />
-              </Grid>
-              <Grid item xs={1} align="right">
-                <Paper sx={{ width: 320, maxWidth: '100%' }}>
-                  <MenuList  className={styles.ListNav}>
-                    <MenuItem className={styles.BtnLogIn}>
-                      <div
-                        role="button"
-                        onClick={() => {
-                          Logout();
-                        }}
-                      >
-                        <ListItemIcon>
-                          <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon>
-                      </div>
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Item>
-        </Grid>
-      </Grid>
+      <Navbar activeMain="5" />
 
       <Formik
         enableReinitialize={true}

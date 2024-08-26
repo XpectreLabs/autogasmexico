@@ -8,11 +8,7 @@ import Navbar from '@/components/molecules/Navbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useRouter } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -27,10 +23,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import SettingsIcon from '@mui/icons-material/Settings';
-import {es} from 'date-fns/locale'
-import { esES } from '@mui/material/locale';
 import axios from 'axios';
-
+import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+dayjs.locale('es');
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -495,47 +491,8 @@ export default function Compras() {
     <main
       className={styles.main}
     >
-      <Grid container spacing={2} className={styles.BorderBottom}>
-        <Grid item xs={2}>
-          <Item className={styles.DeleteBorder}>
-            <figure className={styles.Logo}>
-              <img src="img/logo.jpg" alt="" />
-            </figure>
-          </Item>
-        </Grid>
-        <Grid item xs={10}>
-          <Item className={styles.DeleteBorder}>
-            <Grid container spacing={2}>
-              <Grid item xs={11} align="left">
-                <Navbar activeMain="2" />
-              </Grid>
-              <Grid item xs={1} align="right">
-                <Paper sx={{ width: 320, maxWidth: '100%' }}>
-                  <MenuList  className={styles.ListNav}>
-                    <MenuItem className={styles.BtnLogIn}>
-                      <div
-                        role="button"
-                        onClick={() => {
-                          localStorage.setItem('user_id', "");
-                          localStorage.setItem('token', "");
-                          router.push('/');
-                        }}
-                      >
-                        <ListItemIcon>
-                          <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon>
-                      </div>
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Item>
-        </Grid>
-      </Grid>
+        <Navbar activeMain="2" />
 
-
-      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
@@ -551,7 +508,6 @@ export default function Compras() {
             </Grid>
           </Item>
         </Grid>
-
 
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
@@ -595,7 +551,7 @@ export default function Compras() {
               <Grid item xs={2}>
                 <div className={`${styles.ItemFecha}`}>
                   <p><strong>Fecha de filtro:</strong></p>
-                  <LocalizationProvider locale={es} adapterLocale={es} dateAdapter={AdapterDayjs}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       className='fechaDesde'
                       required
@@ -604,7 +560,6 @@ export default function Compras() {
                       id="fecha_desde"
                       name="fecha_desde"
                       DateTimeFormat={ Intl.DateTimeFormat }
-                      locale='es-ES'
                       //defaultValue={values.fecha_emision}
                       onChange={onChangeDate}
                       views={['month','year']}
@@ -652,7 +607,7 @@ export default function Compras() {
             </Grid>
           </Item>
         </Grid>
-      </Grid>
+      
 
       {showAlert?(<p className={`${styles.message} slideLeft`}>{textError}</p>):null}
 

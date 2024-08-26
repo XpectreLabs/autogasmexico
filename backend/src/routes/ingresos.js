@@ -14,6 +14,7 @@ router.use(fileUpload());
 const fnClientes = require('../services/clients');
 const fnCompras = require('../services/compras');
 const fnIngresos = require('../services/ingresos');
+const fnUsuatio = require('../services/users.js');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
@@ -53,7 +54,7 @@ router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
       const listIngresos = await prisma.ventas.findMany({
         orderBy: [
           {
@@ -118,7 +119,7 @@ router.get('/:userId/list', async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
 
       const listIngresos = await prisma.ventas.findMany({
         where: {
@@ -613,7 +614,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -626,6 +627,6 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 module.exports = router;

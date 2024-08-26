@@ -8,16 +8,11 @@ import Navbar from '@/components/molecules/Navbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useRouter } from 'next/navigation';
 import { DataGrid } from '@mui/x-data-grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import NuevoProveedorModal from '@/components/organisms/NuevoProveedorModal';
 import EditarProveedorModal from '@/components/organisms/EditarProveedorModal';
-
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
@@ -212,44 +207,7 @@ export default function Proveedores() {
     <main
       className={styles.main}
     >
-      <Grid container spacing={2} className={styles.BorderBottom}>
-        <Grid item xs={2}>
-          <Item className={styles.DeleteBorder}>
-            <figure className={styles.Logo}>
-              <img src="img/logo.jpg" alt="" />
-            </figure>
-          </Item>
-        </Grid>
-        <Grid item xs={10}>
-          <Item className={styles.DeleteBorder}>
-            <Grid container spacing={2}>
-              <Grid item xs={11} align="left">
-                <Navbar activeMain="0" />
-              </Grid>
-              <Grid item xs={1} align="right">
-                <Paper sx={{ width: 320, maxWidth: '100%' }}>
-                  <MenuList  className={styles.ListNav}>
-                    <MenuItem className={styles.BtnLogIn}>
-                      <div
-                        role="button"
-                        onClick={() => {
-                          localStorage.setItem('user_id', "");
-                          localStorage.setItem('token', "");
-                          router.push('/');
-                        }}
-                      >
-                        <ListItemIcon>
-                          <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon>
-                      </div>
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Item>
-        </Grid>
-      </Grid>
+      <Navbar activeMain="0" />
 
       <Grid container spacing={2}>
         <Grid item xs={12}>

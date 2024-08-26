@@ -106,11 +106,11 @@ export default function PermisoTipo3(props) {
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 32,
             },
           },
         }}
-        pageSizeOptions={[20]}
+        pageSizeOptions={[32]}
         disableRowSelectionOnClick
       />
       {Object.keys(props.listTipo3).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}

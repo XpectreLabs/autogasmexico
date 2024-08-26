@@ -8,6 +8,7 @@ require('dotenv').config();
 const jwtV = require('../services/auth.js');
 const reporteS = require('../services/reportes.js');
 const sch = require('../schemas/reportes.js');
+const fnUsuatio = require('../services/users.js');
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
@@ -57,7 +58,7 @@ router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fnUsuatio.validateUser(parseInt(id))) {
       const listReportes = await prisma.reportes.findMany({
         where: {
           user_id: parseInt(id),
@@ -125,7 +126,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -138,7 +139,7 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 
 

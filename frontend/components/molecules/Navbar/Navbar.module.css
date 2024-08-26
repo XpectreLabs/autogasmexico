@@ -15,6 +15,11 @@
   font-size: 20px;
 }
 
+.BorderBottom {
+  box-shadow: 0px 1px 0px 0px #b7b7b7;
+  margin-bottom: 10px;
+}
+
 .ListNav {
   box-shadow: none !important;
 }
@@ -29,8 +34,8 @@
 }
 
 .ListNav li:hover, .ListNav li.activo {
-  color: #fff !important;
-  background: #303092 !important;
+  color: #fff;
+  background: #303092;
   -webkit-transition: all 300ms ease-out;
   -moz-transition: all 300ms ease-out;
   -ms-transition: all 300ms ease-out;
@@ -42,4 +47,28 @@
 
 .ListNav li:hover svg, .ListNav li.activo svg {
   color: #fff;
+}
+
+
+
+.Logo {
+  margin-bottom: 25px;
+}
+
+.Logo img {
+  width: 170px;
+}
+
+.BtnLogIn svg {
+  font-size: 30px;
+  margin-top: -11px;
+}
+
+.BtnLogIn:hover {
+  color: #083636 !important;
+  background: none !important;
+}
+
+.BtnLogIn:hover svg {
+  color: #083636 !important;
 }

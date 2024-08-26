@@ -5,7 +5,7 @@
   padding-top: 1.4rem;
 }
 
-.BorderBottom {
+/*.BorderBottom {
   box-shadow: 0px 1px 0px 0px #b7b7b7;
 }
 
@@ -15,7 +15,7 @@
 
 .Logo img {
   width: 100px;
-}
+}*/
 
 .main button {
   width: 100px;
@@ -27,7 +27,7 @@
   padding: 0px !important;
 }
 
-.BtnLogIn svg {
+/*.BtnLogIn svg {
   font-size: 30px;
   margin-top: -11px;
 }
@@ -39,7 +39,7 @@
 
 .BtnLogIn:hover svg {
   color: #083636;
-}
+}*/
 
 .center {
   max-width: 550px;

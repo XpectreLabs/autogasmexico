@@ -5,19 +5,17 @@ import Navbar from '@/components/molecules/Navbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useRouter } from 'next/navigation';
 import NativeSelect from '@mui/material/NativeSelect';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import PermisoTipo1 from './PermisoTipo1';
-import PermisoTipo2 from './PermisoTipo2';
-import PermisoTipo3 from './PermisoTipo3';
+import PermisoTipo1 from './PermisoTipo1.jsx';
+import PermisoTipo2 from './PermisoTipo2.jsx';
+import PermisoTipo3 from './PermisoTipo3.jsx';
 import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+dayjs.locale('es');
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -154,54 +152,6 @@ export default function Inventarios() {
       SetAnioC(anio);
       cargarDataPorPermiso(permiso,anio,mesC,diaC);
     }
-    /*
-    if(item!==null) {
-      let anio = item.$y;
-      let mes = item.$M+1;
-      let diaBisiesto = mes==2?anio%4===0?1:0:0;
-      let diasMes = meses[mes-1]+diaBisiesto;
-      mes = mes<10?("0"+mes):mes;
-      let fechaIni = "01/"+mes+"/"+anio;
-      let fechaFin = diasMes+"/"+mes+"/"+anio;
-
-      setTimeout(()=>{
-        const fechaInicio = convertDate(fechaIni);
-        const fechaHasta = convertDate(fechaFin);
-        let listResult = [];
-
-        if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",comprasAux);
-          for(let j=0;j<comprasAux.length;j++) {
-            //const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
-            const ff = comprasAux[j].fecha_emision+"";
-            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
-
-            if(fechaInicio!==fechaHasta) {
-              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-                listResult.push(comprasAux[j]);
-            }
-            else {
-              if(fechaInicio===dateEmi)
-                listResult.push(comprasAux[j]);
-            }
-          }
-          setCompras(listResult);
-        }
-        else
-          setCompras(listResult);
-
-        setTimeout(()=> {
-          cargarTotales(listResult);
-        },500);
-      },1000)
-    }
-    else
-    {
-      setCompras(comprasAux);
-      setTimeout(()=> {
-        cargarTotales(comprasAux);
-      },500);
-    }*/
 	};
 
 
@@ -209,6 +159,7 @@ export default function Inventarios() {
     const permiso = document.querySelector("#permiso_id").value;
     const anio = parseInt(document.querySelector("input[name=fecha_desde]").value);
 
+    console.log("mes",item);
     if(item!==null) {
       const mes = parseInt(item.$M+"")+1;
 
@@ -218,15 +169,11 @@ export default function Inventarios() {
         SetAnioC(anio);
 
         const mesCC = mes<10?("0"+mes):mes;
-        //let diaO = document.querySelector("input[name=fechaDia]").value;
-        //diaO = diaO?diaO:"01";
         const fechaCN = dayjs(anio+"-"+mesCC+"-01");
 
         console.log(fechaCN);
         SetDiaC(0);
-        //setFechaC(null);
         setFechaC(fechaCN);
-
         cargarDataPorPermiso(permiso,anio,mes,0);
       }
       else
@@ -242,9 +189,6 @@ export default function Inventarios() {
   const onChangeDateDia = (item) => {
     const permiso = document.querySelector("#permiso_id").value;
     const anio = parseInt(document.querySelector("input[name=fecha_desde]").value);
-
-    //console.log(item);
-    //alert(item.$D+" mes -> "+mesC);
 
     if(item!==null) {
       const dia = parseInt(item.$D+"");
@@ -285,51 +229,37 @@ export default function Inventarios() {
     <main
       className={styles.main}
     >
-      <Grid container spacing={2} className={styles.BorderBottom}>
-        <Grid item xs={2}>
-          <Item className={styles.DeleteBorder}>
-            <figure className={styles.Logo}>
-              <img src="img/logo.jpg" alt="" />
-            </figure>
-          </Item>
-        </Grid>
-        <Grid item xs={10}>
-          <Item className={styles.DeleteBorder}>
-            <Grid container spacing={2}>
-              <Grid item xs={11} align="left">
-                <Navbar activeMain="7" />
-              </Grid>
-              <Grid item xs={1} align="right">
-                <Paper sx={{ width: 320, maxWidth: '100%' }}>
-                  <MenuList  className={styles.ListNav}>
-                    <MenuItem className={styles.BtnLogIn}>
-                      <div
-                        role="button"
-                        onClick={() => {
-                          localStorage.setItem('user_id', "");
-                          localStorage.setItem('token', "");
-                          router.push('/');
-                        }}
-                      >
-                        <ListItemIcon>
-                          <PowerSettingsNewIcon fontSize="small" />
-                        </ListItemIcon>
-                      </div>
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Item>
-        </Grid>
-      </Grid>
+      <Navbar activeMain="7" />
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
             <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px"}}><strong>Inventarios</strong></p>
             <Grid container spacing={0}>
-              <Grid item xs={3}> </Grid>
+              <Grid item xs={2}> </Grid>
+
+              <Grid item xs={3} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
+                  <NativeSelect
+                      className={`Fecha ${styles.select2}`}
+                      style={{marginLeft:"20px"}}
+                      required
+                      onChange={onChangePermiso}
+                      defaultValue={0}
+                      inputProps={{
+                        id:"permiso_id",
+                        name:"permiso_id"
+                      }}
+                    >
+                      {listPermisos.map((permiso) => {
+                        return (
+                          <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
+                        );
+                      })}
+                  </NativeSelect>
+                </Grid>
+
+                <Grid item xs={1}> </Grid>
+
                 <Grid item xs={1} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
                   <div className={`${styles.ItemFecha}`}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -383,27 +313,6 @@ export default function Inventarios() {
                     </LocalizationProvider>
                   </div>
                 </Grid>
-
-                <Grid item xs={3} style={{marginTop: '15px', marginBottom: '8px'}} align="right">
-                  <NativeSelect
-                      className={`Fecha ${styles.select2}`}
-                      style={{marginLeft:"20px"}}
-                      required
-                      onChange={onChangePermiso}
-                      defaultValue={0}
-                      inputProps={{
-                        id:"permiso_id",
-                        name:"permiso_id"
-                      }}
-                    >
-                      {listPermisos.map((permiso) => {
-                        return (
-                          <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
-                        );
-                      })}
-                    </NativeSelect>
-                  </Grid>
-
             </Grid>
           </Item>
         </Grid>

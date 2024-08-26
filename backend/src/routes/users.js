@@ -48,7 +48,7 @@ router.get('/:userId/usuarios',jwtV.verifyToken, async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fn.validateUser(parseInt(id))) {
       const listaUsuarios = await prisma.users.findMany({
         where: {
           type_user: 2,
@@ -72,7 +72,7 @@ router.get('/:userId/usuario', async (req, res, next) => {
   if (req.params.userId !== null) {
     const id = req.params.userId;
 
-    if(await validateUser(parseInt(id))) {
+    if(await fn.validateUser(parseInt(id))) {
       const dataUsuario = await prisma.users.findMany({
         where: {
           user_id: parseInt(id),
@@ -185,8 +185,7 @@ router.put('/changePassword', async (req, res, next) => {
   }
 });
 
-
-async function validateUser(user_id) {
+/*async function validateUser(user_id) {
   const users = await prisma.users.findFirst({
     where: {
       user_id
@@ -199,6 +198,6 @@ async function validateUser(user_id) {
   if (users == null) return false;
 
   return true;
-}
+}*/
 
 module.exports = router;
