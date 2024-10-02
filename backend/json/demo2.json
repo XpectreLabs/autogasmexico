@@ -1,0 +1,188 @@
+{
+  "Version": "1.016", //Programador
+  "RfcContribuyente": "AME050309Q32", //Modal reporte
+  "RfcRepresentanteLegal": "IAJA7201074W4",//Modal reporte
+  "RfcProveedor": "APR9609194H4", //Modal reporte
+  "Caracter": "Permisionario", //Por permiso _> Modal reporte
+  "ModalidadPermiso": "PER45",//Por permiso _> Modal reporte
+  "NumPermiso": "LP/22811/COM/2019", //Select del permiso
+  "ClaveInstalacion": "CMN-0001", ///Por permiso (Fraccion inicial)_> Modal reporte
+  "DescripcionInstalacion": "CMN-Comercialización", //Por permiso _> Modal reporte
+  "NumeroPozos": 0,//Por permiso
+  "NumeroTanques": 1,//Por permiso
+  "NumeroDuctosEntradaSalida": 0,//Por permiso
+  "NumeroDuctosTransporteDistribucion": 0,//Por permiso
+  "NumeroDispensarios": 0,//Por permiso
+  "Producto": [
+    {
+      "Tanque": [
+        {
+          "ClaveIdentificacionTanque": "TQS-CMN-0001",//Por permiso (Fraccion inicial)_> Modal reporte
+          "Localizaciony/oDescripcionTanque": "TANQUE VIRTUAL DE ALMACENAMIENTO", //Por permiso
+          "VigenciaCalibracionTanque": "2022-01-01", //Por permiso
+          "CapacidadTotalTanque": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "CapacidadOperativaTanque": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "CapacidadUtilTanque": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "CapacidadFondajeTanque": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "CapacidadGasTalon": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "VolumenMinimoOperacion": {
+            "ValorNumerico": 0.000, //Por permiso
+            "UnidadDeMedida": "UM03" //Por permiso
+          },
+          "EstadoTanque": "O", //Por permiso
+          "Existencias": {
+            "VolumenExistenciasAnterior": 0.4, //Generado facturas compras
+            "VolumenAcumOpsRecepcion": {
+              "ValorNumerico": 4700.0, // facturas compra
+              "UnidadDeMedida": "UM03" // fijo
+            },
+            "HoraRecepcionAcumulado": "23:59:59-06:00",// modal reporte
+            "HoraEntregaAcumulado": "23:59:59-06:00",// modal reporte
+            "VolumenAcumOpsEntrega": {
+              "ValorNumerico": 18800.0,// facturas compra
+              "UnidadDeMedida": "UM03"// facturas compra
+            },
+            "VolumenExistencias": -14099.6, // facturas compra
+            "FechaYHoraEstaMedicion": "2024-08-01T23:59:59-06:00",// facturas compra
+            "FechaYHoraMedicionAnterior": "2024-07-31T23:59:59-06:00"// facturas compra
+          },
+          "Medidores": [
+            {
+              "SistemaMedicionTanque": "SME-TQS-CMN-0001", //Por permiso
+              "LocalizODescripSistMedicionTanque": "No aplica al tratarse del tanque virtual TQS-CMN-0001", //Por permiso
+              "VigenciaCalibracionSistMedicionTanque": "2025-01-01", //Por permiso
+              "IncertidumbreMedicionSistMedicionTanque": 0.010 //Por permiso
+            }
+          ],
+          "Recepciones": {
+            "TotalRecepciones": 1, // facturas compra
+            "SumaVolumenRecepcion": {
+              "ValorNumerico": 4700.000, // facturas compra
+              "UnidadDeMedida": "UM03" // facturas compra
+            },
+            "TotalDocumentos": 1, // facturas compra
+            "SumaCompras": 32994.000, // facturas compra
+            "Recepcion": [
+              {
+                "NumeroDeRegistro": 116, //Numero de factura que van de compras
+                "VolumenInicialTanque": {
+                  "ValorNumerico": 0.0,   //Modal reporte
+                  "UnidadDeMedida": "UM03"  //Modal reporte
+                },
+                "VolumenFinalTanque": 80,  //Modal reporte
+                "VolumenRecepcion": {
+                  "ValorNumerico": 4700,  // facturas compra
+                  "UnidadDeMedida": "UM03"  //fijo
+                },
+                "Temperatura": 18, // Modal reporte
+                "PresionAbsoluta": 6.0, //Modal reporte
+                "FechaYHoraInicioRecepcion": "2024-08-01T23:59:00-06:00", //Modal reporte
+                "FechaYHoraFinalRecepcion": "2024-08-01T23:59:00-06:00", //Modal reporte
+                "Complemento": {
+                  "TipoComplemento": "Comercializacion", //factura
+                  "Nacional": [
+                    {
+                      "RfcClienteOProveedor": "MGA0811143L7", , //factura
+                      "NombreClienteOProveedor": "MER MAC GAS SA DE CV", , //factura
+                      "PermisoClienteOProveedor": "LP/14920/DIST/PLA/2016", , //factura
+                      "CFDIs": [
+                        {
+                          "Cfdi": "9B81E9DE-D48B-45C2-ACE3-12C94D079745", , //factura
+                          "TipoCfdi": "Ingreso", , //factura
+                          "PrecioVentaOCompraOContrap": 32994.0, , //factura
+                          "FechaYHoraTransaccion": "2024-08-01T23:59:00-06:00", , //factura
+                          "VolumenDocumentado": {
+                            "ValorNumerico": 4700.0, , //factura
+                            "UnidadDeMedida": "UM03" , //factura
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "Aclaracion": "SIN OBSERVACIONES" //factura
+                }
+              }
+            ]
+          },
+          "Entregas": {
+            "TotalEntregas": 1,//factura
+            "SumaVolumenEntregado": {
+              "ValorNumerico": 4700.000,//factura
+              "UnidadDeMedida": "UM03"//factura
+            },
+            "TotalDocumentos": 1,//factura
+            "SumaVentas": 0.000,//factura
+            "Entrega": [
+              {
+                "NumeroDeRegistro": 116, //total de factura ventas hasta ahora
+                "Temperatura": 23, //Modal reporte
+                "PresionAbsoluta": 7.0, //Modal reporte
+                "FechaYHoraInicialEntrega": "2024-08-01T23:59:00-06:00", //Modal reporte
+                "FechaYHoraFinalEntrega": "2024-08-01T23:59:00-06:00", //Modal reporte
+                "VolumenInicialTanque": {
+                  "ValorNumerico": 0.0, //Modal reporte
+                  "UnidadDeMedida": "UM03" //Fijo
+                },
+                "VolumenFinalTanque": 0.0, //Modal reporte
+                "VolumenEntregado": {
+                  "ValorNumerico": 0.0, //Modal reporte
+                  "UnidadDeMedida": "UM03"
+                },
+                "Complemento": {
+                  "TipoComplemento": "Comercializacion", //factura
+                  "Nacional": [
+                    {
+                      "RfcClienteOProveedor": "AME050309Q32", //factura
+                      "NombreClienteOProveedor": "AUTOGAS MEXICO SA DE CV", //factura
+                      "PermisoClienteOProveedor": "LP/14766/DIST/PLA/2016", //factura
+                      "CFDIs": [
+                        {
+                          "Cfdi": "0373A897-9AFA-4FE0-8ED2-E4C85A1DC125", //factura
+                          "TipoCfdi": "Ingreso", //factura
+                          "FechaYHoraTransaccion": "2024-08-01T23:59:00-06:00", //factura
+                          "VolumenDocumentado": {
+                            "ValorNumerico": 4700.0, //factura
+                            "UnidadDeMedida": "UM03" //factura
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "Aclaracion": "SIN OBSERVACIONES" //factura
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "ClaveProducto": "PR12",  //fijo
+      "ComposDePropanoEnGasLP": 60.0, //modal reporte
+      "ComposDeButanoEnGasLP": 40.0//modal reporte
+    }
+  ],
+  "Bitacora": [
+    {
+      "NumeroRegistro": 2033, //progranadp
+      "FechaYHoraEvento": "2024-08-14T21:17:34-06:00", //interno
+      "UsuarioResponsable": "AIBARRA",  //modal reporte
+      "TipoEvento": 5, //modal reporte
+      "DescripcionEvento": "Consulta Informacion" //modal reporte
+    }
+  ],
+  "FechaYHoraCorte": "2024-08-01T23:59:59-06:00" //modal reporte
+}

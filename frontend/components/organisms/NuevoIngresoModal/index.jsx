@@ -393,7 +393,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
                     id:"client_id",
                     name:"client_id"
                   }}
-                >
+                > 
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
                   <option value={2}>GAS DE APAN SA DE CV</option>

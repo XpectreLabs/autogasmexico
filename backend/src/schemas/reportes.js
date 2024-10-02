@@ -1,7 +1,6 @@
 const joi = require('joi');
 
 const schemaCreate = joi.object({
-  version: joi.string().pattern(new RegExp('^[a-zA-Z0-9-. ]{3,100}$')).required(),
   rfccontribuyente: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')).required(),
   rfcrepresentantelegal: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')).required(),
   rfcproveedor: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')).required(),
@@ -19,9 +18,7 @@ const schemaCreate = joi.object({
   claveproducto: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
   composdepropanoengaslp: joi.number().required(),
   composdebutanoengaslp: joi.number().required(),
-  volumenexistenciasees: joi.number().required(),
   fechayhoraestamedicionmes: joi.date().required(),
-  numeroregistro: joi.number().required(),
   usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   tipoevento: joi.number().required(),
   descripcionevento: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
@@ -54,7 +51,6 @@ const schemaUpdate = joi.object({
   claveproducto: joi.string().pattern(new RegExp('^[a-zA-Z0-9- ]{3,100}$')).required(),
   composdepropanoengaslp: joi.number().required(),
   composdebutanoengaslp: joi.number().required(),
-  volumenexistenciasees: joi.number().required(),
   fechayhoraestamedicionmes: joi.date().required(),
   numeroregistro: joi.number().required(),
   usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),

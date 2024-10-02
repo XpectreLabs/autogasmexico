@@ -9,6 +9,7 @@ const jwtV = require('../services/auth.js');
 const reporteS = require('../services/reportes.js');
 const sch = require('../schemas/reportes.js');
 const fnUsuatio = require('../services/users.js');
+const dayjs = require ("dayjs");
 
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
@@ -18,9 +19,16 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   }
 
   let date = new Date().toISOString();
-  console.log("Data");
-  console.log(req.body);
-  console.log((req.body.fecha_inicio+"".substring(0.10))+" "+(req.body.fecha_terminacion+"".substring(0.10)));
+  //console.log("Data");
+  //console.log(req.body);
+  console.log((req.body.fecha_inicio+"").slice(0,10)+" "+(req.body.fecha_terminacion+"").substring(0,10));
+  const fechaI=(req.body.fecha_inicio+"").slice(0,10);
+  const fechas = await reporteS.obtenerMesAnterior(fechaI);
+  const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  const volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+  
+  //obtenerFecha(fechaI)
   //const listRecepcions = await listRecepciones(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
   //const listEntregs =  await listEntregas(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
 
@@ -30,10 +38,14 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   //delete req.body.tipo_reporte_id;
   delete req.body.numpermiso
 
+  const consecutivos = await reporteS.obtenerConsecutivos();
 
   await prisma.reportes.create({
     data: {
       ...req.body,
+      volumenexistenciasees: parseFloat(volumenexistenciasees),
+      version: consecutivos.version,
+      numeroregistro: consecutivos.numeroregistro,
       tipoevento:  parseFloat(req.body.tipoevento),
       composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
       composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
@@ -44,7 +56,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
     }, 
   });
 
-  const dataJson = await reporteS.generarJson(req.body,date);
+  const dataJson = await reporteS.generarJson(req.body,date,consecutivos.version,consecutivos.numeroregistro,volumenexistenciasees);
   res.status(200).json({ message:"success", dataJson });
 });
 
@@ -78,7 +90,9 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
+  console.log("2");
 
+  console.log(req.body.version)
   const id = parseInt(req.body.reporte_id);
   let date = new Date().toISOString();
 
@@ -89,12 +103,19 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 
   console.log("Edit",req.body)
 
+  const fechaI=(req.body.fecha_inicio+"").slice(0,10);
+  const fechas = await reporteS.obtenerMesAnterior(fechaI);
+  const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  const volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+
   await prisma.reportes.update({
     where: {
       reporte_id: parseInt(id),
     },
     data: {
       ...req.body,
+      volumenexistenciasees: parseFloat(volumenexistenciasees),
       tipoevento:  parseFloat(req.body.tipoevento),
       composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
       composdebutanoengaslp: parseFloat(req.body.composdebutanoengaslp),
@@ -102,7 +123,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     },
   });
 
-  const dataJson = await reporteS.generarJson(req.body,date);
+  const dataJson = await reporteS.generarJson(req.body,date,"","",volumenexistenciasees);
   res.status(200).json({ message:"success", dataJson });
 });
 

@@ -172,8 +172,8 @@ export default function Navbar({activeMain}) {
                             </MenuItem>
                           </Link>
 
-                          <Link href="/usuarios" onClick={()=>{setActive(6)}}>
-                            <MenuItem onClick={handleClose} className={active===6?"activo":null}>
+                          <Link href="/permisos" onClick={()=>{setActive(8)}}>
+                            <MenuItem onClick={handleClose} className={active===8?"activo":null}>
                               Permisos
                             </MenuItem>
                           </Link>

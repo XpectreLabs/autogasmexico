@@ -6,7 +6,6 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 const dayjs = require ("dayjs");
 
-
 let dataJson = {
   "Version": "1.012",
   "RfcContribuyente": "AME050309Q32",
@@ -49,11 +48,10 @@ let dataJson = {
   ]
 }
 
-const generarJson = async (data,date) =>  {
-
+const generarJson = async (data,date,version="",numeroregistro="",volumenexistenciasees=0.0) =>  {
   const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
 
-  dataJson.Version = data.version;
+  dataJson.Version = version?version:data.version;
   dataJson.RfcContribuyente = data.rfccontribuyente;
   dataJson.RfcRepresentanteLegal = data.rfcrepresentantelegal;
   dataJson.RfcProveedor = data.rfcproveedor;
@@ -71,14 +69,14 @@ const generarJson = async (data,date) =>  {
   dataJson.Producto[0].ClaveProducto = data.claveproducto;
   dataJson.Producto[0].ComposDePropanoEnGasLP = data.composdepropanoengaslp;
   dataJson.Producto[0].ComposDeButanoEnGasLP = data.composdebutanoengaslp;
-  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = data.volumenexistenciasees;
+  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = parseFloat(volumenexistenciasees).toFixed(2);
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = fechaEM;
   dataJson.Producto[0].Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.Producto[0].Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
-  dataJson.BitacoraMensual[0].NumeroRegistro = data.numeroregistro;
+  dataJson.BitacoraMensual[0].NumeroRegistro = numeroregistro?numeroregistro:data.numeroregistro;
   dataJson.BitacoraMensual[0].FechaYHoraEvento = date;
   dataJson.BitacoraMensual[0].UsuarioResponsable = data.usuarioresponsable;
-  dataJson.BitacoraMensual[0].TipoEvento = data.tipoevento;
+  dataJson.BitacoraMensual[0].TipoEvento = parseInt(data.tipoevento);
   dataJson.BitacoraMensual[0].DescripcionEvento = data.descripcionevento;
 
   return dataJson;
@@ -286,4 +284,100 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   return Entregas;
 }
 
-module.exports = { generarJson }
+
+async function totalRecepciones(fechaInicio, fechaFin,permiso_id) {
+  const fi = (fechaInicio+"").substring(0,10);
+  const ff = (fechaFin+"").substring(0,10);
+
+  const listIngresos = await prisma.abastecimientos.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      permiso_id,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range}
+      }
+    },
+    select: {
+      cantidad: true,
+    },
+  });
+
+  let totalCantidad=0.0;
+
+  for(let j=0; j<listIngresos.length; j++)
+    totalCantidad+=parseFloat(listIngresos[j].cantidad);
+
+  return totalCantidad.toFixed(2);
+}
+
+async function totalEntregas(fechaInicio, fechaFin,permiso_id) {
+  const fi = (fechaInicio+"").substring(0,10);
+  const ff = (fechaFin+"").substring(0,10);
+
+  const listCompras = await prisma.ventas.findMany({
+    orderBy: [
+      {
+        fecha_emision: 'asc',
+      },
+    ],
+    where: {
+      active: 1,
+      permiso_id,
+      fecha_emision: {
+        gte: new Date(fi), // Start of date range
+			  lte: new Date(ff), // End of date range
+      }
+    },
+    select: {
+      cantidad: true
+    },
+   });
+
+
+  let totalCantidad=0;
+
+  for(let j=0; j<listCompras.length; j++){
+    totalCantidad+=listCompras[j].cantidad;
+  }
+
+  return totalCantidad.toFixed(2);
+}
+
+
+
+const obtenerConsecutivos = async () =>  {
+  const total = await prisma.reportes.aggregate({
+    _count: {
+      reporte_id: true,
+    },
+  })
+
+  let data = {
+    version: "1."+(parseInt(total._count.reporte_id)+1),
+    numeroregistro: (parseInt(total._count.reporte_id)+1)
+  }
+  console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1));
+  return data;
+}
+
+const obtenerMesAnterior = async (fecha) =>  {
+  let mesAnteriorInicio=dayjs(fecha).subtract(1, "month").format("YYYY-MM-DD");
+  let diasMesAnterior= dayjs(mesAnteriorInicio).daysInMonth();
+  let mesAnterior = dayjs(mesAnteriorInicio).month()+1;
+  mesAnterior=mesAnterior<10?"0"+mesAnterior:mesAnterior;
+  let anioAnterior = dayjs(mesAnteriorInicio).year();
+  let mesAnteriorFinal = anioAnterior+"-"+mesAnterior+"-"+diasMesAnterior;
+
+  let data = {
+    fechaInicio: mesAnteriorInicio,
+    fechaFinal: mesAnteriorFinal
+  }
+  return data;
+}
+
+module.exports = { generarJson,obtenerConsecutivos,obtenerMesAnterior,totalRecepciones,totalEntregas }

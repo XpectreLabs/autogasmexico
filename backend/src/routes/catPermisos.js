@@ -6,8 +6,31 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const jwtV = require('../services/auth.js');
-const sch = require('../schemas/ingresos.js');
+const sch = require('../schemas/cat_permisos.js');
 const fnUsuatio = require('../services/users.js');
+
+
+router.put('/',jwtV.verifyToken, async (req, res, next) => {
+  const { error } = sch.schemaUpdate.validate(req.body);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).json({ message:"schema",error: error.details[0].message });
+  }
+
+  const id = parseInt(req.body.permiso_id);
+
+  await prisma.cat_permisos.update({
+    where: {
+      permiso_id: parseInt(id),
+    },
+    data: {
+      ...req.body,
+      //proveedor_id:parseInt(req.body.proveedor_id),
+      //permiso_id:parseInt(req.body.permiso_id),
+    },
+  });
+  res.status(200).json({ message:"success"});
+});
 
 router.get('/:userId/permisos',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);

@@ -20,7 +20,6 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({permiso_id:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
 
@@ -104,7 +103,6 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
           console.log(data);
           setLoading(true);
 
-          setInitialValues(({permiso_id:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -123,7 +121,6 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("El permiso comprador fue actualizado");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)

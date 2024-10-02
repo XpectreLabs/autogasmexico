@@ -21,7 +21,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+  const [initialValues, setInitialValues] = useState(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:'',tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
 
@@ -65,6 +65,21 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         console.log("data r",data);
         if(data.message==="success") {
           setListPermisos(data.listPermisos);
+          console.log("data.listPermisos",data.listPermisos);
+
+          let {
+            caracter,
+            modalidadpermiso,
+            claveinstalacion,
+            descripcioninstalacion,
+            numeropozos,
+            numerotanques,
+            numeroductosentradasalida,
+            numeroductostransportedistribucion,
+            numerodispensarios
+          } = data.listPermisos[0];
+
+          setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter, modalidadpermiso, permiso_id: 1,  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:'',tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
         }
         else if(data.message==="schema") {
           setTextError(data.error);
@@ -166,6 +181,26 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       });
     }
 
+    const cambioPermiso = (e) => {
+      let {
+        caracter,
+        modalidadpermiso,
+        claveinstalacion,
+        descripcioninstalacion,
+        numeropozos,
+        numerotanques,
+        numeroductosentradasalida,
+        numeroductostransportedistribucion,
+        numerodispensarios
+      } = listPermisos[parseInt(e.target.value)-1];
+
+      setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter, modalidadpermiso, permiso_id: 1,  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:'',tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+    }
+
+    const handleChange = () => {
+      alert("jaja");
+    }
+
     useEffect(() => {
       data();
     }, []);
@@ -174,9 +209,6 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         enableReinitialize={true}
         initialValues={initialValues}
         validationSchema={Yup.object().shape({
-          version: Yup.string()
-            .min(3, "El folio es muy corto")
-            .required("El folio es requerido"),
           rfccontribuyente: Yup.string()
             .min(10, "El Rfc del contribuyente es muy corto")
             .required("El  Rfc del contribuyente es requerido"),
@@ -220,13 +252,8 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           composdebutanoengaslp: Yup.number()
             .min(1, "El compos de butano en gas lp debe tener minimo 1 digito")
             .required("El compos de butano en gas lp es requerido"),
-          volumenexistenciasees: Yup.number()
-            .required("El volumen existencias es requerido"),
           fechayhoraestamedicionmes: Yup.date()
             .required("Fecha y hora esta mediciones mes"),
-          numeroregistro: Yup.number()
-            .min(1, "El numero de registro debe tener minimo 1 digito")
-            .required("El numero de registro  es requerido"),
           usuarioresponsable: Yup.string()
             .min(3, "El usuario responsable es muy corto")
             .required("El usuario responsable es requerido"),
@@ -295,7 +322,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           const data = {...values,user_id,tipo_reporte_id,numpermiso};
           setLoading(true);
 
-          //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+          //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',fechayhoraestamedicionmes:'',usuarioresponsable:'',tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
           console.log("v",data);
 
           fetch(scriptURL, {
@@ -318,7 +345,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron guardados");
-              setInitialValues(({version:'1.0',rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+              setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'APR9609194H4',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:'',tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -362,7 +389,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
               >
                 <Form id="formNewReport" className={styles.form} onSubmit={handleSubmit}>
                   <h2 className={styles.Title}>Nuevo reporte</h2>
-                  <TextField
+                  {/* <TextField
                     className={`InputModal ${styles.Mr}`}
                     placeholder="Versión"
                     required
@@ -373,7 +400,26 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     size="small"
-                  />
+                  /> */}
+                  <NativeSelect
+                    className={`Fecha ${styles.select2} ${styles.Mr}`}
+                    required
+                    value={values.permiso_id}
+                    onChange={handleChange}
+                    onBlur={cambioPermiso}
+                    defaultValue={0}
+                    inputProps={{
+                      id:"permiso_id",
+                      name:"permiso_id"
+                    }}
+                  >
+                    <option aria-label="None" value="">Número de permiso *</option>
+                    {listPermisos.map((permiso) => {
+                      return (
+                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
+                      );
+                    })}
+                  </NativeSelect>
                   <TextField
                     className={`InputModal`}
                     placeholder="Rfc contribuyente"
@@ -437,28 +483,9 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
-                  <NativeSelect
-                    className={`Fecha ${styles.select2}`}
-                    required
-                    value={values.permiso_id}
-                    onChange={handleChange}
-                    defaultValue={0}
-                    inputProps={{
-                      id:"permiso_id",
-                      name:"permiso_id"
-                    }}
-                  >
-                    <option aria-label="None" value="">Número de permiso *</option>
-                    {listPermisos.map((permiso) => {
-                      return (
-                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
-                      );
-                    })}
-                  </NativeSelect>
-
-
-                <TextField
-                    className={`InputModal`}
+                  
+                  <TextField
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Clave de instalación"
                     id="claveinstalacion"
@@ -470,7 +497,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Descripción de instalación"
                     id="descripcioninstalacion"
@@ -482,7 +509,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Número de pozos"
                     id="numeropozos"
@@ -495,7 +522,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Número de tanques"
                     id="numerotanques"
@@ -508,7 +535,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Número ductos entrada salida"
                     id="numeroductosentradasalida"
@@ -521,7 +548,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Número ductos transparente distribución"
                     id="numeroductostransportedistribucion"
@@ -534,7 +561,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Número dispensarios"
                     id="numerodispensarios"
@@ -548,7 +575,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                   />
 
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Clave producto"
                     id="claveproducto"
@@ -560,7 +587,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Compos de propano en gas lp"
                     id="composdepropanoengaslp"
@@ -573,7 +600,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Compos de butano en gas lp"
                     id="composdebutanoengaslp"
@@ -585,8 +612,8 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                     type='number'
                   />
-                  <TextField
-                    className={`InputModal`}
+                  {/* <TextField
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Volumen de existencia mensual"
                     id="volumenexistenciasees"
@@ -597,7 +624,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                     type='number'
-                  />
+                  /> */}
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
                       <DateTimePicker
@@ -614,7 +641,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     </DemoContainer>
                   </LocalizationProvider>
 
-                  <TextField
+                  {/* <TextField
                     className={`InputModal`}
                     required
                     placeholder="Número de registro"
@@ -626,9 +653,9 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                     type='number'
-                  />
+                  /> */}
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Usuario responsable"
                     id="usuarioresponsable"
@@ -640,7 +667,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo evento"
                     id="tipoevento"
@@ -652,7 +679,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Descripción de evento"
                     id="descripcionevento"
@@ -668,7 +695,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     <DatePicker
                       format="DD/MM/YYYY"
                       required
-                      className={`InputModal Fecha`}
+                      className={`InputModal Fecha ${styles.Mr}`}
                       placeholder="Fecha inicio reporte"
                       label="Fecha inicio reporte"
                       id="fecha_inicio"
@@ -684,7 +711,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     <DatePicker
                       format="DD/MM/YYYY"
                       required
-                      className={`InputModal Fecha ${styles.Mr}`}
+                      className={`InputModal Fecha`}
                       placeholder="Fecha terminación reporte"
                       label="Fecha terminación reporte"
                       id="fecha_terminacion"
@@ -696,10 +723,8 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     />
                   </LocalizationProvider>
 
-
-                  {(errors.version || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id || errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.volumenexistenciasees || errors.fechayhoraestamedicionmes || errors.numeroregistro || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
+                  {(errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id || errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.fechayhoraestamedicionmes || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
-                        {errors.version? (<p>{errors.version}</p>):null}
                         {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
                         {errors.rfcrepresentantelegal? (<p>{errors.rfcrepresentantelegal}</p>):null}
                         {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
@@ -716,9 +741,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                         {errors.claveproducto? (<p>{errors.claveproducto}</p>):null}
                         {errors.composdepropanoengaslp? (<p>{errors.composdepropanoengaslp}</p>):null}
                         {errors.composdebutanoengaslp? (<p>{errors.composdebutanoengaslp}</p>):null}
-                        {errors.volumenexistenciasees? (<p>{errors.volumenexistenciasees}</p>):null}
                         {errors.fechayhoraestamedicionmes? (<p>{errors.fechayhoraestamedicionmes}</p>):null}
-                        {errors.numeroregistro? (<p>{errors.numeroregistro}</p>):null}
                         {errors.usuarioresponsable? (<p>{errors.usuarioresponsable}</p>):null}
                         {errors.tipoevento? (<p>{errors.tipoevento}</p>):null}
                         {errors.descripcionevento? (<p>{errors.descripcionevento}</p>):null}

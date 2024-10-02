@@ -23,6 +23,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
+  const [values, setValues] = React.useState({});
 
 
   function data() {
@@ -75,7 +76,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
     data();
   }, []);
 
-  console.log("Dta",abastecimientoData);
+
   return (
     <Formik
         enableReinitialize={true}
@@ -189,7 +190,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
             console.log(error.message);
             console.error('Error!', error.message);
           });
-        }}
+        }}      
       >
         {({
           values,
@@ -423,7 +424,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                   />
 
-                <p>a {values.proveedor_id}</p>
                 <NativeSelect
                   className={`Fecha ${styles.select}`}
                   required

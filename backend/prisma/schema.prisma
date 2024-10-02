@@ -151,8 +151,32 @@ model ventas {
 
 
 model cat_permisos {
-  permiso_id              Int     @id @default(autoincrement()) @db.SmallInt
-  permiso                 String @db.VarChar(100)
+  permiso_id                                Int         @id @default(autoincrement()) @db.SmallInt
+  permiso                                   String      @db.VarChar(100)
+  nombre_permiso                            String?     @db.VarChar(100)
+  caracter                                  String?     @db.VarChar(100)
+  modalidadpermiso                          String?     @db.VarChar(100)
+  claveinstalacion                          String?     @db.VarChar(100)
+  descripcioninstalacion                    String?     @db.VarChar(100)
+  numeropozos                               Int?        @db.SmallInt
+  numerotanques                             Int?        @db.SmallInt
+  numeroductosentradasalida                 Int?        @db.SmallInt
+  numeroductostransportedistribucion        Int?        @db.SmallInt
+  numerodispensarios                        Int?        @db.SmallInt
+  claveidentificaciontanque                 String?     @db.VarChar(100)
+  localizacionyodescripciontanque           String?     @db.VarChar(200)
+  vigenciacalibraciontanque                 DateTime?   @db.Date
+  valornumericocapacidadtotaltanque         Float       @default(0.000) @db.Real
+  valornumericocapacidadoperativatanque     Float       @default(0.000) @db.Real
+  valornumericocapacidadutiltanque          Float       @default(0.000) @db.Real
+  valornumericocapacidadfondajetanque       Float       @default(0.000) @db.Real
+  valornumericovolumenminimooperacion       Float       @default(0.000) @db.Real
+  estadotanque                              String?     @db.VarChar(20)
+  sistemamediciontanque                     String?     @db.VarChar(100)
+  localizodescripsistmediciontanque         String?     @db.VarChar(200)
+  vigenciacalibracionsistmediciontanque     DateTime?   @db.Date
+  incertidumbremedicionsistmediciontanque   Float       @default(0.000) @db.Real
+  active                                    Int?        @default(1) @db.SmallInt
   abastecimientos         abastecimientos[]
   ventas                  ventas[]
   reportes                reportes[]

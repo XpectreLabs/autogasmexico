@@ -8,7 +8,8 @@ require('dotenv').config();
 const fileUpload = require('express-fileupload');
 const xmlJs = require('xml-js');
 const fs = require('fs');
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const authRoutes = require('./src/routes/auth');
 const usuariosRoutes = require('./src/routes/users');
@@ -20,6 +21,7 @@ const catPermisoRoutes = require('./src/routes/catPermisos');
 const reportesRoutes = require('./src/routes/reportes');
 const inventariosRoutes = require('./src/routes/inventarios');
 const bitacorasRoutes = require('./src/routes/bitacoras');
+const { version } = require('os');
 
 router.use(express.static('public'));
 router.use(express.urlencoded({ extended: false }));
@@ -49,6 +51,24 @@ router.use(fileUpload())
   console.log(result1);
   return res.status(200).send({ message : 'File upload', result1 });
 });*/
+
+
+router.get('/obtenerVersionSiguiente', async  (req, res) => {
+  const total = await prisma.reportes.aggregate({
+    _count: {
+      reporte_id: true,
+    },
+  })
+
+  let data = {
+    version: "1."+(parseInt(total._count.reporte_id)+1),
+    numeroRegistro: (parseInt(total._count.reporte_id)+1)
+  }
+  console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1))  ;
+  return res.status(200).send({ message : 'Exito', data });
+});
+
+
 
 router.listen(3001, () => {
   console.log('Aplicación ejecutandose ....');
