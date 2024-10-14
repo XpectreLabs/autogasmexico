@@ -217,7 +217,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
     const mes = (mesRecibido)<10?("0"+mesRecibido):mesRecibido;
 
     //mesRecibido
-    for(let j=0; j<diasMes; j++) {
+    for(let j=0; j<diasMes-2; j++) {
       let dia = (j+1)<10?("0"+(j+1)):(j+1);
 
       if(diaRecibido!==0){
@@ -378,6 +378,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
 async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
   const fi = (fechaInicio+"").substring(0,10);
   const ff = (fechaFin+"").substring(0,10);
+
+  console.log(fi,ff);
 
   const listIngresos = await prisma.abastecimientos.findMany({
     orderBy: [

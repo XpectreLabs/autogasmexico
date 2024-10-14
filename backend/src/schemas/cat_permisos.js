@@ -6,6 +6,7 @@ const joi = require('joi');
 
 const schemaUpdate = joi.object({
   permiso_id: joi.number().min(1).required(),
+  inventario_inicial: joi.number().required(),
   caracter: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   nombre_permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F ]{3,100}$')).required(),
   modalidadpermiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),

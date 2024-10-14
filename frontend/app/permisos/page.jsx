@@ -32,7 +32,7 @@ export default function Perfil() {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({nombre_permiso:'',caracter: '',modalidadpermiso: '',claveinstalacion: '',descripcioninstalacion: '',numeropozos: '',numerotanques: '',numeroductosentradasalida: '',numeroductostransportedistribucion: '',numerodispensarios:  '',claveidentificaciontanque:  '',localizacionyodescripciontanque:  '',valornumericocapacidadtotaltanque:  '',valornumericocapacidadoperativatanque:  '',valornumericocapacidadutiltanque: '',valornumericocapacidadfondajetanque: '',valornumericovolumenminimooperacion:  '',estadotanque: '',sistemamediciontanque: '',localizodescripsistmediciontanque: '', incertidumbremedicionsistmediciontanque: ''}));
+  const [initialValues, setInitialValues] = useState(({nombre_permiso:'', inventario_inicial:'' ,caracter: '',modalidadpermiso: '',claveinstalacion: '',descripcioninstalacion: '',numeropozos: '',numerotanques: '',numeroductosentradasalida: '',numeroductostransportedistribucion: '',numerodispensarios:  '',claveidentificaciontanque:  '',localizacionyodescripciontanque:  '',valornumericocapacidadtotaltanque:  '',valornumericocapacidadoperativatanque:  '',valornumericocapacidadutiltanque: '',valornumericocapacidadfondajetanque: '',valornumericovolumenminimooperacion:  '',estadotanque: '',sistemamediciontanque: '',localizodescripsistmediciontanque: '', incertidumbremedicionsistmediciontanque: ''}));
   const [loadingData, setLoadingData] = React.useState(false);
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
@@ -87,6 +87,7 @@ export default function Perfil() {
       else {
         setTextError(data.message);
         setShowAlert(true);
+        Logout();
       }
 
       setTimeout(()=>{
@@ -94,6 +95,7 @@ export default function Perfil() {
       },3000)
     })
     .catch(error => {
+      
       console.log(error.message);
       console.error('Error!', error.message);
     });
@@ -209,11 +211,13 @@ export default function Perfil() {
 
       <Formik
         enableReinitialize={true}
-        initialValues={...initialValues}
+        initialValues={initialValues}
         validationSchema={Yup.object().shape({
           nombre_permiso: Yup.string()
           .min(3, "El nombre del permiso es muy corto")
           .required("El nombre del permiso es requerido"),
+          inventario_inicial: Yup.number()
+          .required("El numero de pozos es requerido"),
           caracter: Yup.string()
             .min(3, "El caracter es muy corto")
             .required("El caracter es requerido"),
@@ -365,6 +369,19 @@ export default function Perfil() {
                     <TextField
                       className={`InputModal`}
                       required
+                      placeholder="Inventario inicial"
+                      id="inventario_inicial"
+                      label="Inventario inicial"
+                      name="inventario_inicial"
+                      value={values.inventario_inicial}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
                       placeholder="Carácter"
                       id="caracter"
                       label="Carácter"
@@ -375,7 +392,7 @@ export default function Perfil() {
                       size="small"
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Modalidad de permiso"
                       id="modalidadpermiso"
@@ -387,7 +404,7 @@ export default function Perfil() {
                       size="small"
                     />
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Clave de instalación"
                       id="claveinstalacion"
@@ -399,7 +416,7 @@ export default function Perfil() {
                       size="small"
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Descripción de instalación"
                       id="descripcioninstalacion"
@@ -411,7 +428,7 @@ export default function Perfil() {
                       size="small"
                     />
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Número de pozos"
                       id="numeropozos"
@@ -424,7 +441,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Número de tanques"
                       id="numerotanques"
@@ -437,7 +454,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Número ductos entrada salida"
                       id="numeroductosentradasalida"
@@ -450,7 +467,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Número ductos transparente distribución"
                       id="numeroductostransportedistribucion"
@@ -463,7 +480,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Número dispensarios"
                       id="numerodispensarios"
@@ -476,7 +493,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Clave identificación tanque"
                       id="claveidentificaciontanque"
@@ -489,7 +506,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Localización y/o descripción tanque"
                       id="localizacionyodescripciontanque"
@@ -505,7 +522,7 @@ export default function Perfil() {
                       <DatePicker
                         format="DD/MM/YYYY"
                         required
-                        className={`InputModal Fecha ${styles.Mr}`}
+                        className={`InputModal Fecha`}
                         placeholder="Vigencia calibración tanque"
                         label="Vigencia calibración tanque"
                         id="vigenciacalibraciontanque"
@@ -519,7 +536,7 @@ export default function Perfil() {
                     </LocalizationProvider>
 
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Valor numerico de capacidad total tanque"
                       id="valornumericocapacidadtotaltanque"
@@ -532,7 +549,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Valor numerico de capacidad operativa tanque"
                       id="valornumericocapacidadoperativatanque"
@@ -546,7 +563,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Valor numerico de capacidad util tanque"
                       id="valornumericocapacidadutiltanque"
@@ -559,7 +576,7 @@ export default function Perfil() {
                       type='number'
                     />
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Valor numerico de capacidad fondaje tanque"
                       id="valornumericocapacidadfondajetanque"
@@ -573,7 +590,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Valor numerico de volumen minimo operación"
                       id="valornumericovolumenminimooperacion"
@@ -587,7 +604,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Estado tanque"
                       id="estadotanque"
@@ -600,7 +617,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal`}
+                      className={`InputModal ${styles.Mr}`}
                       required
                       placeholder="Sistema medición tanque"
                       id="sistemamediciontanque"
@@ -613,7 +630,7 @@ export default function Perfil() {
                     />
 
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Localiz o descripción sist medicion tanque"
                       id="localizodescripsistmediciontanque"
@@ -629,7 +646,7 @@ export default function Perfil() {
                       <DatePicker
                         format="DD/MM/YYYY"
                         required
-                        className={`InputModal Fecha`}
+                        className={`InputModal Fecha ${styles.Mr}`}
                         placeholder="Vigencia calibración sist medicion tanque"
                         label="Vigencia calibración sist medicion tanque"
                         id="vigenciacalibracionsistmediciontanque"
@@ -643,7 +660,7 @@ export default function Perfil() {
                     </LocalizationProvider>
 
                     <TextField
-                      className={`InputModal ${styles.Mr}`}
+                      className={`InputModal`}
                       required
                       placeholder="Incertidumbre medición sist medición tanque"
                       id="incertidumbremedicionsistmediciontanque"
@@ -740,8 +757,9 @@ export default function Perfil() {
                     /> */}
 
                     <div className={styles.errors}>
-                        <p><strong>{(errors.nombre_permiso || errors.caracter || errors.modalidadpermiso || errors.claveinstalacion || errors.descripcioninstalacion || errors.numeropozos || errors.numerotanques || errors.numeroductosentradasalida || errors.numeroductostransportedistribucion || errors.numerodispensarios || errors.claveidentificaciontanque || errors.localizacionyodescripciontanque || errors.vigenciacalibraciontanque || errors.valornumericocapacidadtotaltanque || errors.valornumericocapacidadoperativatanque || errors.valornumericocapacidadutiltanque || errors.valornumericocapacidadfondajetanque || errors.valornumericovolumenminimooperacion || errors.estadotanque || errors.sistemamediciontanque || errors.localizodescripsistmediciontanque || errors.vigenciacalibracionsistmediciontanque || errors.incertidumbremedicionsistmediciontanque)?`Errores:`:null}</strong></p>
+                        <p><strong>{(errors.nombre_permiso || errors.inventario_inicial || errors.caracter || errors.modalidadpermiso || errors.claveinstalacion || errors.descripcioninstalacion || errors.numeropozos || errors.numerotanques || errors.numeroductosentradasalida || errors.numeroductostransportedistribucion || errors.numerodispensarios || errors.claveidentificaciontanque || errors.localizacionyodescripciontanque || errors.vigenciacalibraciontanque || errors.valornumericocapacidadtotaltanque || errors.valornumericocapacidadoperativatanque || errors.valornumericocapacidadutiltanque || errors.valornumericocapacidadfondajetanque || errors.valornumericovolumenminimooperacion || errors.estadotanque || errors.sistemamediciontanque || errors.localizodescripsistmediciontanque || errors.vigenciacalibracionsistmediciontanque || errors.incertidumbremedicionsistmediciontanque)?`Errores:`:null}</strong></p>
                         {errors.nombre_permiso? (<p>{errors.nombre_permiso}</p>):null}
+                        {errors.inventario_inicial? (<p>{errors.inventario_inicial}</p>):null}
                         {errors.caracter? (<p>{errors.caracter}</p>):null}
                         {errors.modalidadpermiso? (<p>{errors.modalidadpermiso}</p>):null}
                         {errors.claveinstalacion? (<p>{errors.claveinstalacion}</p>):null}

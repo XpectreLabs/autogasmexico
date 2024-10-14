@@ -49,7 +49,8 @@ let dataJson = {
 }
 
 const generarJson = async (data,date,version="",numeroregistro="",volumenexistenciasees=0.0) =>  {
-  const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
+  //const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
+  const fechaEM = dayjs(data.fechayhoraestamedicionmes).format('YYYY-MM-DDTH:m:ssSSS[Z]');
 
   dataJson.Version = version?version:data.version;
   dataJson.RfcContribuyente = data.rfccontribuyente;

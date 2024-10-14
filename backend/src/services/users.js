@@ -12,12 +12,14 @@ async function findUser(username, password) {
     },
     select: {
       user_id: true,
+      firstname: true,
+      lastname: true
     },
   });
 
   if (users == null) return 0;
 
-  return users.user_id;
+  return users;
 }
 
 function getPasswordEncrypted(password) {// Must be 16 characters

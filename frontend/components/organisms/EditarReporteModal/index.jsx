@@ -574,6 +574,27 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                   </LocalizationProvider>
 
 
+
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      views={['month','year']}
+                      required
+                      className={`InputModal Fecha`}
+                      placeholder="Fecha del reporte"
+                      label="Fecha del reporte"
+                      id="fecha_reporte"
+                      name="fecha_reporte"
+                      value={dayjs(values.fecha_reporte)}
+                      onChange={(value) => {
+                        setFieldValue('fecha_reporte', value, true);
+                        //onChangeDate(value)
+                      }}
+
+                      // onChange={onChangeDate}
+                    />
+                  </LocalizationProvider>
+
+
                   {(errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.fechayhoraestamedicionmes || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}

@@ -110,15 +110,44 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
 });
 
 
+
+const procesarXmls = async (req, res) => {
+  for(let j=0;j<Object.keys(req.files.file).length;j++)
+  { 
+      let EDFile = req.files.file[j];
+  
+      await EDFile.mv (`./xmls//${EDFile.name}`,err => {
+        if(err) return res.status(500).send({ message : err })
+
+        new  Promise(async (resolve,reject)=>{
+          dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+          //console.log(dataJson);
+          //listData.push(dataJson)
+          await fnCompras.guardarDataJson(dataJson,req.body.user_id);
+        })
+      })
+  }
+}
+
 router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
-  console.log(req.body.user_id);
-  let EDFile = req.files.file;
-  EDFile.mv (`./xmls//${EDFile.name}`,err => {
+  /*console.log(req.body.user_id);
+  console.log(typeof(req.files))
+  console.log(req.files);
+  console.log(Object.keys(req.files.file).length)*/
+
+  await procesarXmls(req, res);
+  return res.status(200).send({ message : 'success',dataJson })
+
+  /*for(let j=0;j<Object.keys(req.files.file).length;j++)
+  {
+      let EDFile = req.files.file[j];
+  
+      await EDFile.mv (`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
-          return new Promise(async (resolve,reject)=>{
+          return  new  Promise(async (resolve,reject)=>{
             dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
             console.log(dataJson);
 
@@ -180,6 +209,8 @@ router.post('/cargarXML', async (req, res, next) => {
                   tipo_modena_id: 1
                 }
 
+                console.log("dataR",dataR);
+
                 if(!(await fnCompras.findCfdi(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
                   await prisma.abastecimientos.create({
                     data: {
@@ -191,13 +222,20 @@ router.post('/cargarXML', async (req, res, next) => {
                     },
                   });
 
-                  return res.status(200).send({ message : 'success',dataJson })
+                  banGuardado = true;
                 }
                 else
                   return res.status(400).json({ message:"schema", error: 'El UUDI de la compra  ya se habia registrado' });
             }
         })
+        console.log("a->")
     })
+  }
+
+  if(banGuardado) {
+    return res.status(200).send({ message : 'success',dataJson })
+
+  }*/
 });
 
 

@@ -47,6 +47,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
             if(data.message==="success") {
               setShowAlert(false);
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
+              localStorage.setItem('nameUser', data.name);
               localStorage.setItem('token',  data.token);
               router.push("/compras");
 
@@ -132,6 +133,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
                   </Form>
 
                   <a onClick={ ()=> {setPage("2"); }} className={styles.Link}>Recuperar contraseña</a>
+
                 </div>
               </>
             );

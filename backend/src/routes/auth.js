@@ -20,10 +20,10 @@ router.post('/login', async (req, res, next) => {
 
     console.log("Password"+req.body.username, password)
 
-    if (user > 0) {
+    console.log("user",user,(user > 0))
+    if (user !== 0) {
       const token = generateAccessToken(jwt, user);
-      console.log(token)
-      res.status(200).json({ message:"success", user_id: user, token: token });
+      res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), token: token });
     } else {
       let messageError = 'Los datos de acceso son incorrectos';
       console.log(messageError);

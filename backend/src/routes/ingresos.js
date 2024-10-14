@@ -233,11 +233,36 @@ router.get('/:userId/listPermisoNulosVentas/:fecha_inicio/:fecha_terminacion', a
   return res.status(200).send({ message : 'success',listIngresosSinPermisos })
 });
 
+const procesarXmls = async (req, res) => {
+  for(let j=0;j<Object.keys(req.files.file).length;j++)
+  { 
+      let EDFile = req.files.file[j];
+  
+      await EDFile.mv (`./xmls//${EDFile.name}`,err => {
+        if(err) return res.status(500).send({ message : err })
+
+        new Promise(async (resolve,reject)=>{
+          dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
+          await fnIngresos.guardarDataJson(dataJson,req.body.user_id);
+        }) 
+      })
+  }
+}
+
 router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
-  console.log(req.body.user_id);
+  try {
+    await procesarXmls(req, res);
+    return res.status(200).send({ message : 'success',dataJson })  
+  }
+  catch (e) {
+    return res.status(500).send({ message : "error" })
+  }
+
+  /*console.log(req.body.user_id);
   let EDFile = req.files.file;
+
   EDFile.mv (`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
@@ -382,7 +407,7 @@ router.post('/cargarXML', async (req, res, next) => {
         })
 
         //return res.status(200).send({ message : 'success',dataJson })
-    })
+    })*/
 });
 
 

@@ -194,3 +194,7 @@ input[type="file"] {
   color: #fff !important;
   background: #303092 !important;
 }
+
+.no-asignado {
+  background: #eeffce;  
+}

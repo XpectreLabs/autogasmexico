@@ -440,7 +440,14 @@ export default function Compras() {
     //event.preventDefault();
     const user_id = localStorage.getItem('user_id');
     const formData = new FormData();
-    formData.append('file', event.target.files[0]);
+    //console.log(event.target)
+    //console.log("Subida");
+    //console.log(event.target.files.length);
+    //console.log(event.target.files);
+
+    for(let j=0; j<event.target.files.length;j++)
+      formData.append('file', event.target.files[j]);
+    
     formData.append('user_id',user_id);
     
 
@@ -476,9 +483,18 @@ export default function Compras() {
         console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal)
         console.log("Permiso: null")*/
 
-        setTextError('El XML de compras fue importado');
-        setShowAlert(true);
-        setTimeout(()=>{setShowAlert(false); data(compras);},3000)
+        const totalI = document.getElementsByClassName("fila").length;
+
+        setTimeout(()=>{data();},500)
+
+        setTimeout(()=>{
+          const totalF = document.getElementsByClassName("fila").length;
+          setTextError(totalI!=totalF?'Importación realizada correctamente':'El XML no es de compras o el UUID ya existe');
+          setShowAlert(true);
+
+          setTimeout(()=>{setShowAlert(false);},3000)
+        },5000)
+
       })
       .catch((error) => {
         setTextError('El XML no es de compras o el UUID ya existe');
@@ -591,7 +607,7 @@ export default function Compras() {
                   <label htmlFor="file" className="custom-file-upload">
                     <span><strong>+</strong></span> IMPORTAR XML
                   </label>
-                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload}/>
+                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload} multiple/>
                 </form>
 
                 <Button
@@ -634,6 +650,16 @@ export default function Compras() {
         }}
         pageSizeOptions={[20]}
         disableRowSelectionOnClick
+        getCellClassName={(params) => {
+          if (params.field === 'permisoComprador' && params.value == "No asignado") {
+            return 'no-asignado';
+          }
+
+          if (params.field === 'folio') {
+            return 'fila';
+          }
+          //return params.value >= 15 ? 'hot' : 'cold';
+        }}
       />
       {Object.keys(compras).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}
 

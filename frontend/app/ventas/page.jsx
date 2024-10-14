@@ -409,8 +409,14 @@ export default function Ventas() {
     //event.preventDefault();
     const user_id = localStorage.getItem('user_id');
     const formData = new FormData();
-    formData.append('file', event.target.files[0]);
+    //formData.append('file', event.target.files[0]);
+    //formData.append('user_id',user_id);
+
+    for(let j=0; j<event.target.files.length;j++)
+      formData.append('file', event.target.files[j]);
+    
     formData.append('user_id',user_id);
+
 
     axios.post('http://localhost:3001/api/v1/ingresos/cargarXML', formData)
       .then((response) => {
@@ -490,15 +496,23 @@ export default function Ventas() {
         console.log("Domicilio: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor)
         console.log("Permiso: null")*/
 
+        const totalI = document.getElementsByClassName("fila").length;
 
-        setTextError('El XML de ventas fue importado');
-        setShowAlert(true);
-        setTimeout(()=>{setShowAlert(false); data();},3000)
+        setTimeout(()=>{data();},500)
+
+        setTimeout(()=>{
+          const totalF = document.getElementsByClassName("fila").length;
+          setTextError(totalI!=totalF?'Importación realizada correctamente':'El XML no es de ventas o el UUID ya existe');
+          setShowAlert(true);
+          setShowAlert(true);
+
+          setTimeout(()=>{setShowAlert(false);},3000)
+        },5000)
       })
       .catch((error) => {
         setTextError('El XML no es de ventas o el UUID ya existe');
         setShowAlert(true);
-        setTimeout(()=>{setShowAlert(false); data();},3000)
+        setTimeout(()=>{ data();},6000)
       });
   };
 
@@ -607,7 +621,7 @@ export default function Ventas() {
                   <label htmlFor="file" className="custom-file-upload">
                     <span><strong>+</strong></span> IMPORTAR XML
                   </label>
-                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload}/>
+                  <input id="file" type="file" name="file" accept='text/xml' onChange={handleUpload} multiple/>
                 </form>
 
                 <Button
@@ -674,6 +688,12 @@ export default function Ventas() {
         }}
         pageSizeOptions={[20]}
         disableRowSelectionOnClick
+        getCellClassName={(params) => {
+          if (params.field === 'folio') {
+            return 'fila';
+          }
+          //return params.value >= 15 ? 'hot' : 'cold';
+        }}
       />
       {Object.keys(ingresos).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}
 

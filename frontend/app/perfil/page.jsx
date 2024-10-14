@@ -57,7 +57,7 @@ export default function Perfil() {
       console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
-        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
+        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
         setShowAlert(false);
       }
       else if(data.message==="schema") {
@@ -266,9 +266,9 @@ export default function Perfil() {
                     <TextField
                       placeholder="Usuario"
                       required
-                      id="usuario"
-                      name="usuario"
-                      value={values.firstname}
+                      id="username"
+                      name="username"
+                      value={values.username}
                       size="small"
                       onChange={handleChange}
                       onBlur={handleBlur}

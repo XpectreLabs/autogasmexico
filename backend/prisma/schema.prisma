@@ -154,6 +154,7 @@ model cat_permisos {
   permiso_id                                Int         @id @default(autoincrement()) @db.SmallInt
   permiso                                   String      @db.VarChar(100)
   nombre_permiso                            String?     @db.VarChar(100)
+  inventario_inicial                        Float?      @db.Real
   caracter                                  String?     @db.VarChar(100)
   modalidadpermiso                          String?     @db.VarChar(100)
   claveinstalacion                          String?     @db.VarChar(100)
@@ -204,6 +205,7 @@ model reportes {
   composdebutanoengaslp                 Float       @db.Real
   volumenexistenciasees                 Float       @db.Real
   fechayhoraestamedicionmes             DateTime    @db.Timestamptz
+  fecha_reporte                         DateTime?   @db.Timestamptz
   numeroregistro                        Int         @db.Integer
   usuarioresponsable                    String      @db.VarChar(150)
   tipoevento                            Int         @db.Integer

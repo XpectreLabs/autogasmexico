@@ -440,6 +440,8 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   <option value={2}>MER MAC GAS</option>
                   <option value={3}>TRANSCAMELLO</option>
                   <option value={4}>ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV</option>
+                  <option value={5}>MER MAC GAS</option>
+                  <option value={6}>OVI GAS</option>
                 </NativeSelect>
 
 
