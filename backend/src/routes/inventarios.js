@@ -10,7 +10,7 @@ const sch = require('../schemas/inventario.js');
 const fileUpload = require('express-fileupload');
 const xmlJs = require('xml-js');
 const fs = require('fs');
-const fnProveedores = require('../services/proveedores.js');
+const fnPermisos = require('../services/permisos.js');
 const fnCompras = require('../services/compras.js');
 const { isNull } = require("util");
 
@@ -71,8 +71,12 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
   const permiso_id = parseInt(req.params.permiso_id)
 
   console.log("Yes 0 -> "+mesRecibido);
+  console.log("permiso_id",permiso_id)
+
+  const inv_ini = await fnPermisos.findInventarioInicial(permiso_id);
+
   if(mesRecibido===0) {
-    console.log("Yes 1");
+    console.log("Yes 1: ",anio);
     for(let j=0; j<12; j++) {
       console.log("Yes 2");
       let diaBisiesto = j==1?anio%4===0?1:0:0;
@@ -82,6 +86,9 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
       const fechaFin = anio+"-"+mes+"-"+diasMes;
       const totalCompra = await totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id);
       const totalVenta = await totalEntregas(user_id,fechaInicio, fechaFin,permiso_id);
+
+      
+
       let inventarioInicial,inventarioFinal;
       let diferencia = 0;
       let diferenciaReportada = 0;
@@ -91,8 +98,20 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
       let bitacora = "";
       let bitacora_inventario_id="";
 
-      if(j===0)
+      if(j===0) {
         inventarioInicial=0;
+        if(anio==2022&&j==0)
+          inventarioInicial+=inv_ini;
+        else if(anio>2022&&j==0) {
+          const fechaInicio="2022-01-01";
+          const fechaFin = (anio-1)+"-12-31";
+          const totalCompra = await totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id);
+          const totalVenta = await totalEntregas(user_id,fechaInicio, fechaFin,permiso_id);
+
+          inventarioInicial+=(totalCompra-totalVenta)+inv_ini;
+        }  
+      }
+        
       else
         inventarioInicial = permiso_id===1?listInventario[j-1].inventarioFisico:listInventario[j-1].inventarioFinal;
 

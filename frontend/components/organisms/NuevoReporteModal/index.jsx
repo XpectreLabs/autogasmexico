@@ -21,7 +21,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+  const [initialValues, setInitialValues] = useState(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
   const [fechaInicioReporte,setFechaInicioReporte] = React.useState("");
@@ -40,14 +40,15 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       return "";
     }
 
-    const descargarJSON = (dataJson) => {
-      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
+    const descargarJSON = (dataJson,nombre_archivo) => {
+      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json;charset=utf-8' });
       const jsonURL = URL.createObjectURL(jsonData);
       const link = document.createElement('a');
-      const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
+      //const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
 
+      //const fecha = "M_1E868758-9393-47A9-AA94-4229A61C1804_PAL7202161U0_GEO9806184R6_2020-11-30_REF-0001_REF_JSON"
       link.href = jsonURL;
-      link.download = `${fecha}.json`;
+      link.download = `${nombre_archivo}.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -83,9 +84,9 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             numeroductosentradasalida,
             numeroductostransportedistribucion,
             numerodispensarios
-          } = data.listPermisos[0];
+          } = data.listPermisos[parseInt(localStorage.getItem('permiso_id'))-1];
 
-          setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id: 1,  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+          setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
         }
         else if(data.message==="schema") {
           setTextError(data.error);
@@ -200,7 +201,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         numerodispensarios
       } = listPermisos[parseInt(e.target.value)-1];
 
-      setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id: 1,  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+      setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
     }
 
     const handleChange = () => {
@@ -208,7 +209,6 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
     }
 
     const onChangeDate = (item) => {
-      
       if(item!==null) {
         let anio = item.$y;
         let mes = item.$M+1;
@@ -350,6 +350,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           const fechayhoraestamedicionmes = new Date(fechaTerminacionReporte+"T23:59:00");
           const fecha_inicio = new Date(fechaInicioReporte);
           const fecha_terminacion = new Date(fechaTerminacionReporte);
+
           const data = {...values,user_id,tipo_reporte_id,numpermiso,fechayhoraestamedicionmes,fecha_inicio,fecha_terminacion};
           setLoading(true);
 
@@ -372,11 +373,11 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
             if(data.message==="success") {
               console.log("dataRe",data);
-              descargarJSON(data.dataJson);
+              descargarJSON(data.dataJson,data.nombre_archivo);
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron guardados");
-              setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id: 1,  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+              setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)

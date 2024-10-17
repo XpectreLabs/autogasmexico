@@ -19,7 +19,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'' , preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
 
@@ -173,7 +173,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
           const data = {...values,user_id,tipo_modena_id};
           setLoading(true);
 
-          //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+          //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
@@ -192,7 +192,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron guardados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -336,7 +336,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     inputProps={{
                       id:"permiso_id",
                       name:"permiso_id"
-                    }}
+                    }} 
                   >
                     <option aria-label="None" value="">Permiso para venta *</option>
                     {listPermisos.map((permiso) => {

@@ -24,10 +24,13 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
   const [textError,setTextError] = React.useState("");
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
+  const [fechaInicioReporte,setFechaInicioReporte] = React.useState(convertirFecha(reporteData.fecha_inicio2));
+  const [fechaTerminacionReporte,setFechaTerminacionReporte] = React.useState(convertirFecha(reporteData.fecha_terminacion2));
 
+  
 
-    const convertirFecha = (fecha) => {
-      return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
+    function convertirFecha (fecha) {
+      return fecha!==undefined?(fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2)):"";
     }
 
     if(reporteData.fecha_inicio!==undefined){
@@ -45,14 +48,14 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
       return "";
     }
 
-    const descargarJSON = (dataJson) => {
-      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json' });
+    const descargarJSON = (dataJson,nombre_archivo) => {
+      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json;charset=utf-8' });
       const jsonURL = URL.createObjectURL(jsonData);
       const link = document.createElement('a');
-      const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
+      //const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
 
       link.href = jsonURL;
-      link.download = `${fecha}.json`;
+      link.download = `${nombre_archivo}.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -101,6 +104,25 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
         console.error('Error!', error.message);
       });
     }
+
+    const onChangeDate = (item) => {
+      if(item!==null) {
+        let anio = item.$y;
+        let mes = item.$M+1;
+        let diaBisiesto = mes==2?anio%4===0?1:0:0;
+        let diasMes = meses[mes-1]+diaBisiesto;
+        mes = mes<10?("0"+mes):mes;
+        let fechaIni = anio+"-"+mes+"-01";
+        let fechaFin = anio+"-"+mes+"-"+diasMes;
+
+        setFechaInicioReporte(fechaIni)
+        setFechaTerminacionReporte(fechaFin);
+
+        /*alert(fechaIni+" "+fechaFin);
+        alert(new Date(fechaIni)+" "+new Date(fechaFin))
+        alert(new Date(fechaFin+"T23:59:00"))*/
+      }
+    };
 
     useEffect(() => {
       data();
@@ -156,8 +178,8 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           composdebutanoengaslp: Yup.number()
             .min(1, "El compos de butano en gas lp debe tener minimo 1 digito")
             .required("El compos de butano en gas lp es requerido"),
-          fechayhoraestamedicionmes: Yup.date()
-            .required("* Fecha y hora esta mediciones mes"),
+          // fechayhoraestamedicionmes: Yup.date()
+          //   .required("* Fecha y hora esta mediciones mes"),
           usuarioresponsable: Yup.string()
             .min(3, "El usuario responsable es muy corto")
             .required("El usuario responsable es requerido"),
@@ -167,10 +189,10 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           descripcionevento: Yup.string()
             .min(3, "La descripción del evento es muy corto")
             .required("La descripción del evento es requerido"),
-          fecha_inicio: Yup.date()
-            .required("* Fecha de inicio"),
-          fecha_terminacion: Yup.date()
-            .required("* Fecha de terminación"),
+          // fecha_inicio: Yup.date()
+          //   .required("* Fecha de inicio"),
+          // fecha_terminacion: Yup.date()
+          //   .required("* Fecha de terminación"),
         })}
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
@@ -199,14 +221,17 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           //alert(dayjs(values.fechayhoraestamedicionmes))
           //alert(new Date(values.fechayhoraestamedicionmes))
 
-          let temp = values.fechayhoraestamedicionmes;
-
+          //let temp = values.fechayhoraestamedicionmes;
           //values.fechayhoraestamedicionmes = dayjs(values.fechayhoraestamedicionmes).subtract(1, 'day');
           //alert(values.fechayhoraestamedicionmes)
-          
           //values.fechayhoraestamedicionmes = (fechayhoraestamedicionmes+"").substr(0,10);
           
-          const data = {...values,reporte_id,numpermiso};
+          const fechaInicioReporteF = fechaInicioReporte?fechaInicioReporte:convertirFecha(reporteData.fecha_inicio2);
+          const fechaTerminacionReporteF = fechaTerminacionReporte?fechaTerminacionReporte:convertirFecha(reporteData.fecha_terminacion2);
+          const fechayhoraestamedicionmes = new Date(fechaTerminacionReporteF+"T23:59:00");
+          const fecha_inicio = new Date(fechaInicioReporteF);
+          const fecha_terminacion = new Date(fechaTerminacionReporteF);
+          const data = {...values,reporte_id,numpermiso,fechayhoraestamedicionmes,fecha_inicio,fecha_terminacion};
           //values.fechayhoraestamedicionmes = temp;
           setLoading(true);
 
@@ -228,7 +253,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
 
             if(data.message==="success") {
               console.log("dataRe",data);
-              descargarJSON(data.dataJson);
+              descargarJSON(data.dataJson,data.nombre_archivo);
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron actualizados");
@@ -487,7 +512,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     size="small"
                     type='number'
                   />
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
                       <DateTimePicker
                         className={`AjusteFecha`}
@@ -501,9 +526,9 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                         }}
                       />
                     </DemoContainer>
-                  </LocalizationProvider>
+                  </LocalizationProvider> */}
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Usuario responsable"
                     id="usuarioresponsable"
@@ -515,7 +540,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Tipo evento"
                     id="tipoevento"
@@ -527,7 +552,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Descripción de evento"
                     id="descripcionevento"
@@ -539,7 +564,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     size="small"
                   />
 
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       format="DD/MM/YYYY"
                       required
@@ -571,7 +596,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                         setFieldValue('fecha_terminacion', value, true);
                       }}
                     />
-                  </LocalizationProvider>
+                  </LocalizationProvider> */}
 
 
 
@@ -587,38 +612,35 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                       value={dayjs(values.fecha_reporte)}
                       onChange={(value) => {
                         setFieldValue('fecha_reporte', value, true);
-                        //onChangeDate(value)
+                        onChangeDate(value)
                       }}
-
-                      // onChange={onChangeDate}
                     />
                   </LocalizationProvider>
 
-
-                  {(errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.fechayhoraestamedicionmes || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento || errors.fecha_inicio || errors.fecha_terminacion)?(<div className={styles.errors}>
-                        <p><strong>Errores:</strong></p>
-                        {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
-                        {errors.rfcrepresentantelegal? (<p>{errors.rfcrepresentantelegal}</p>):null}
-                        {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
-                        {errors.caracter? (<p>{errors.caracter}</p>):null}
-                        {errors.modalidadpermiso? (<p>{errors.modalidadpermiso}</p>):null}
-                        {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
-                        {errors.claveinstalacion? (<p>{errors.claveinstalacion}</p>):null}
-                        {errors.descripcioninstalacion? (<p>{errors.descripcioninstalacion}</p>):null}
-                        {errors.numeropozos? (<p>{errors.numeropozos}</p>):null}
-                        {errors.numerotanques? (<p>{errors.numerotanques}</p>):null}
-                        {errors.numeroductosentradasalida? (<p>{errors.numeroductosentradasalida}</p>):null}
-                        {errors.numeroductostransportedistribucion? (<p>{errors.numeroductostransportedistribucion}</p>):null}
-                        {errors.numerodispensarios? (<p>{errors.numerodispensarios}</p>):null}
-                        {errors.claveproducto? (<p>{errors.claveproducto}</p>):null}
-                        {errors.composdepropanoengaslp? (<p>{errors.composdepropanoengaslp}</p>):null}
-                        {errors.composdebutanoengaslp? (<p>{errors.composdebutanoengaslp}</p>):null}
-                        {errors.fechayhoraestamedicionmes? (<p>{errors.fechayhoraestamedicionmes}</p>):null}
-                        {errors.usuarioresponsable? (<p>{errors.usuarioresponsable}</p>):null}
-                        {errors.tipoevento? (<p>{errors.tipoevento}</p>):null}
-                        {errors.descripcionevento? (<p>{errors.descripcionevento}</p>):null}
-                        {errors.fecha_inicio? (<p>{errors.fecha_inicio}</p>):null}
-                        {errors.fecha_terminacion? (<p>{errors.fecha_terminacion}</p>):null}
+                  {(errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor || errors.caracter || errors.modalidadpermiso || errors.permiso_id|| errors.claveinstalacion|| errors.descripcioninstalacion|| errors.numeropozos|| errors.numerotanques|| errors.numeroductosentradasalida|| errors.numeroductostransportedistribucion|| errors.numerodispensarios|| errors.claveproducto|| errors.composdepropanoengaslp || errors.composdebutanoengaslp || errors.usuarioresponsable || errors.tipoevento || errors.descripcionevento)?(<div className={styles.errors}>
+                      <p><strong>Errores:</strong></p>
+                      {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
+                      {errors.rfcrepresentantelegal? (<p>{errors.rfcrepresentantelegal}</p>):null}
+                      {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
+                      {errors.caracter? (<p>{errors.caracter}</p>):null}
+                      {errors.modalidadpermiso? (<p>{errors.modalidadpermiso}</p>):null}
+                      {errors.permiso_id? (<p>{errors.permiso_id}</p>):null}
+                      {errors.claveinstalacion? (<p>{errors.claveinstalacion}</p>):null}
+                      {errors.descripcioninstalacion? (<p>{errors.descripcioninstalacion}</p>):null}
+                      {errors.numeropozos? (<p>{errors.numeropozos}</p>):null}
+                      {errors.numerotanques? (<p>{errors.numerotanques}</p>):null}
+                      {errors.numeroductosentradasalida? (<p>{errors.numeroductosentradasalida}</p>):null}
+                      {errors.numeroductostransportedistribucion? (<p>{errors.numeroductostransportedistribucion}</p>):null}
+                      {errors.numerodispensarios? (<p>{errors.numerodispensarios}</p>):null}
+                      {errors.claveproducto? (<p>{errors.claveproducto}</p>):null}
+                      {errors.composdepropanoengaslp? (<p>{errors.composdepropanoengaslp}</p>):null}
+                      {errors.composdebutanoengaslp? (<p>{errors.composdebutanoengaslp}</p>):null}
+                      {/* {errors.fechayhoraestamedicionmes? (<p>{errors.fechayhoraestamedicionmes}</p>):null} */}
+                      {errors.usuarioresponsable? (<p>{errors.usuarioresponsable}</p>):null}
+                      {errors.tipoevento? (<p>{errors.tipoevento}</p>):null}
+                      {errors.descripcionevento? (<p>{errors.descripcionevento}</p>):null}
+                      {/* {errors.fecha_inicio? (<p>{errors.fecha_inicio}</p>):null}
+                      {errors.fecha_terminacion? (<p>{errors.fecha_terminacion}</p>):null} */}
                     </div>):null}
 
                     <div className={styles.ContentLoadding}>

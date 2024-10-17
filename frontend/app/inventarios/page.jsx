@@ -250,11 +250,13 @@ export default function Inventarios() {
                         name:"permiso_id"
                       }}
                     >
-                      {listPermisos.map((permiso) => {
+                      {/* {listPermisos.map((permiso) => {
                         return (
                           <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
+                        
                         );
-                      })}
+                      })} */}
+                      <option value={localStorage.getItem('permiso_id')}>{localStorage.getItem('permiso')}</option>
                   </NativeSelect>
                 </Grid>
 

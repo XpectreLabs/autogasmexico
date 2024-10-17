@@ -49,7 +49,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
               localStorage.setItem('nameUser', data.name);
               localStorage.setItem('token',  data.token);
-              router.push("/compras");
+              router.push("/seleccionar_permiso");
 
               setTimeout(()=> {
                 setLoading(false);

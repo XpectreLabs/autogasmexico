@@ -78,7 +78,7 @@ export default function Perfil() {
           data.listPermisos[j].vigenciacalibracionsistmediciontanque = dayjs(obtenerFecha(data.listPermisos[j].vigenciacalibracionsistmediciontanque));
         }       
 
-        setInitialValues(data.listPermisos[0]);
+        setInitialValues(data.listPermisos[parseInt(localStorage.getItem('permiso_id'))-1]);
       }
       else if(data.message==="schema") {
         setTextError(data.error);
@@ -199,7 +199,7 @@ export default function Perfil() {
                     >
                       {listPermisos.map((permiso) => {
                         return (
-                          <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
+                          <option value={permiso.permiso_id} selected={permiso.permiso_id===parseInt(localStorage.getItem('permiso_id'))?true:false}>{permiso.permiso}</option>
                         );
                       })}
                   </NativeSelect>

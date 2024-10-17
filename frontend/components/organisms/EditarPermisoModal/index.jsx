@@ -3,19 +3,14 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import styles from './EditarCompra.module.css';
 import Modal from '@mui/material/Modal';
 import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
 import dayjs from 'dayjs';
 
- 
 export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData,abastecimientoIdd }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
@@ -68,6 +63,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
 
   if(abastecimientoData.fecha_emision!==undefined){
     abastecimientoData.fecha_emision = dayjs(convertirFecha(abastecimientoData.fecha_emision2));
+    abastecimientoData.permiso_id=abastecimientoData.permiso_id?abastecimientoData.permiso_id:localStorage.getItem('permiso_id');
   }
 
   useEffect(() => {

@@ -5,6 +5,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: "USD"
 })
 const dayjs = require ("dayjs");
+const fnPermisos = require('../services/permisos');
 
 let dataJson = {
   "Version": "1.012",
@@ -26,15 +27,15 @@ let dataJson = {
     {
       "ClaveProducto": "PR12",
       "ComposDePropanoEnGasLP": 60.0,
-      "ComposDeButanoEnGasLP": 40.0,
+      "ComposDeButanoEnGasLP": 20.0,
       "ReporteDeVolumenMensual": {
         "ControlDeExistencias": {
           "VolumenExistenciasMes": 0.0,
           "FechaYHoraEstaMedicionMes": "2023-09-30T23:59:59-06:00"
         },
+        "Recepciones": {},
+        "Entregas": {},
       },
-      "Recepciones": {},
-      "Entregas": {},
     }
   ],
   "BitacoraMensual": [
@@ -48,17 +49,20 @@ let dataJson = {
   ]
 }
 
-const generarJson = async (data,date,version="",numeroregistro="",volumenexistenciasees=0.0) =>  {
+const generarJson = async (data,date,version="",numeroregistro="",volumenexistenciasees=0.0,numpermiso="") =>  {
   //const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
   const fechaEM = dayjs(data.fechayhoraestamedicionmes).format('YYYY-MM-DDTH:m:ssSSS[Z]');
+  console.log(numpermiso);
 
+  console.log("ja", (parseFloat(data.composdepropanoengaslp).toFixed(2)))
+  console.log("data.numpermiso",data.numpermiso);
   dataJson.Version = version?version:data.version;
   dataJson.RfcContribuyente = data.rfccontribuyente;
   dataJson.RfcRepresentanteLegal = data.rfcrepresentantelegal;
   dataJson.RfcProveedor = data.rfcproveedor;
   dataJson.Caracter = data.caracter;
   dataJson.ModalidadPermiso = data.modalidadpermiso;
-  dataJson.NumPermiso = data.numpermiso;
+  dataJson.NumPermiso = numpermiso;
   dataJson.ClaveInstalacion = data.claveinstalacion;
   dataJson.DescripcionInstalacion = data.descripcioninstalacion;
   dataJson.NumeroPozos = data.numeropozos;
@@ -68,12 +72,12 @@ const generarJson = async (data,date,version="",numeroregistro="",volumenexisten
   dataJson.NumeroDispensarios = data.numerodispensarios;
   dataJson.FechaYHoraReporteMes = date;
   dataJson.Producto[0].ClaveProducto = data.claveproducto;
-  dataJson.Producto[0].ComposDePropanoEnGasLP = data.composdepropanoengaslp;
-  dataJson.Producto[0].ComposDeButanoEnGasLP = data.composdebutanoengaslp;
-  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = parseFloat(volumenexistenciasees).toFixed(2);
+  dataJson.Producto[0].ComposDePropanoEnGasLP = parseFloat(parseFloat(data.composdepropanoengaslp).toFixed(1));
+  dataJson.Producto[0].ComposDeButanoEnGasLP = parseFloat(parseFloat(data.composdebutanoengaslp).toFixed(1));
+  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = parseFloat(parseFloat(volumenexistenciasees).toFixed(2));
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = fechaEM;
-  dataJson.Producto[0].Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
-  dataJson.Producto[0].Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
+  dataJson.Producto[0].ReporteDeVolumenMensual.Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
+  dataJson.Producto[0].ReporteDeVolumenMensual.Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.BitacoraMensual[0].NumeroRegistro = numeroregistro?numeroregistro:data.numeroregistro;
   dataJson.BitacoraMensual[0].FechaYHoraEvento = date;
   dataJson.BitacoraMensual[0].UsuarioResponsable = data.usuarioresponsable;
@@ -142,6 +146,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
   let totalCantidad=0;
   let totalImporteTotal=0;
   let Complemento = [];
+  let ban=false;
 
   for(let j=0; j<listIngresos.length; j++){
     totalCantidad+=listIngresos[j].cantidad;
@@ -161,7 +166,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
           "PrecioVentaOCompraOContrap": listIngresos[j].preciovent,
           "FechaYHoraTransaccion": listIngresos[j].fecha_emision,
           "VolumenDocumentado": {
-            "ValorNumerico": listIngresos[j].cantidad,
+            "ValorNumerico": parseFloat(parseFloat(listIngresos[j].cantidad).toFixed(2)),
             "UnidadDeMedida": listIngresos[j].unidaddemedida
           }
         }
@@ -169,12 +174,21 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
     ],
       "Aclaracion": listIngresos[j].aclaracion
     };
+    ban=true;
+    Complemento.push(item);
+  }
+
+  if(!ban) {
+    let item = {
+      "TipoComplemento": "Comercializacion",
+      "Aclaracion": "Generación de Volumetrico Sin Recepciones"
+    };
     Complemento.push(item);
   }
   Recepciones.TotalRecepcionesMes = listIngresos.length;
   Recepciones.TotalDocumentosMes = listIngresos.length;
-  Recepciones.SumaVolumenRecepcionMes.ValorNumerico = formatter.format(totalCantidad).replace(',','');
-  Recepciones.ImporteTotalRecepcionesMensual = formatter.format(totalImporteTotal).replace(',','');
+  Recepciones.SumaVolumenRecepcionMes.ValorNumerico = parseFloat(parseFloat(formatter.format(totalCantidad).replace(',','')).toFixed(2)) ;
+  Recepciones.ImporteTotalRecepcionesMensual = parseFloat(parseFloat(formatter.format(totalImporteTotal).replace(',','')).toFixed(2));
   Recepciones.Complemento = Complemento;
 
   return Recepciones;
@@ -245,6 +259,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   let totalCantidad=0;
   let totalImporteTotal=0;
   let Complemento = [];
+  let ban=false;
 
   for(let j=0; j<listCompras.length; j++){
     totalCantidad+=listCompras[j].cantidad;
@@ -264,7 +279,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
               "PrecioVentaOCompraOContrap": listCompras[j].preciovent,
                   "FechaYHoraTransaccion": listCompras[j].fecha_emision,
               "VolumenDocumentado": {
-                "ValorNumerico": listCompras[j].cantidad,
+                "ValorNumerico": parseFloat(parseFloat(listCompras[j].cantidad).toFixed(2)),
                 "UnidadDeMedida": listCompras[j].unidaddemedida
               }
             }
@@ -275,11 +290,21 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     };
 
     Complemento.push(item);
+    ban=true;
   }
+
+  if(!ban) {
+    let item = {
+      "TipoComplemento": "Comercializacion",
+      "Aclaracion": "Generación de Volumetrico Sin Entregas"
+    };
+    Complemento.push(item);
+  }
+
   Entregas.TotalEntregasMes = listCompras.length;
   Entregas.TotalDocumentosMes = listCompras.length;
-  Entregas.SumaVolumenEntregadoMes.ValorNumerico = formatter.format(totalCantidad).replace(',','');
-  Entregas.ImporteTotalEntregasMes = formatter.format(totalImporteTotal).replace(',','');
+  Entregas.SumaVolumenEntregadoMes.ValorNumerico = parseFloat(parseFloat(formatter.format(totalCantidad).replace(',','')).toFixed(2));
+  Entregas.ImporteTotalEntregasMes = parseFloat(parseFloat(formatter.format(totalImporteTotal).replace(',','')).toFixed(2));
   Entregas.Complemento = Complemento;
 
   return Entregas;
@@ -312,6 +337,11 @@ async function totalRecepciones(fechaInicio, fechaFin,permiso_id) {
 
   for(let j=0; j<listIngresos.length; j++)
     totalCantidad+=parseFloat(listIngresos[j].cantidad);
+
+  const inv_ini = await fnPermisos.findInventarioInicial(permiso_id);
+  console.log("inv_ini",inv_ini);
+
+  totalCantidad+=inv_ini;
 
   return totalCantidad.toFixed(2);
 }
@@ -359,7 +389,8 @@ const obtenerConsecutivos = async () =>  {
   })
 
   let data = {
-    version: "1."+(parseInt(total._count.reporte_id)+1),
+    //version: "1."+(parseInt(total._count.reporte_id)+1),
+    version: "1.0",
     numeroregistro: (parseInt(total._count.reporte_id)+1)
   }
   console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1));
@@ -374,6 +405,10 @@ const obtenerMesAnterior = async (fecha) =>  {
   let anioAnterior = dayjs(mesAnteriorInicio).year();
   let mesAnteriorFinal = anioAnterior+"-"+mesAnterior+"-"+diasMesAnterior;
 
+  mesAnteriorInicio=new Date("2022-01-01");
+  console.log("2022-01-01",mesAnteriorFinal)
+  console.log(mesAnteriorInicio,mesAnteriorFinal)
+  console.log("anioAnterior",anioAnterior)
   let data = {
     fechaInicio: mesAnteriorInicio,
     fechaFinal: mesAnteriorFinal

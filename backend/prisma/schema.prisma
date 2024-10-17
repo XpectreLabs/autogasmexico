@@ -215,6 +215,8 @@ model reportes {
   tipo_reporte_id                       Int?        @db.SmallInt
   user_id                               Int         @db.Integer
   date                                  DateTime    @db.Date
+  nombre_archivo_json                   String?     @db.VarChar(140)
+  nombre_archivo_status                 String?     @db.VarChar(300)
   active                                Int?        @db.SmallInt
   users                                 users? @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id_reporte")
   tipos_reporte                         tipos_reporte? @relation(fields: [tipo_reporte_id ], references: [tipo_reporte_id ], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_reporte_id_report")

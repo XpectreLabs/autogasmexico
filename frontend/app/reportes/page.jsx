@@ -22,6 +22,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import axios from 'axios';
 import 'dayjs/locale/es';
 dayjs.locale('es');
 
@@ -48,6 +49,7 @@ export default function Compras() {
   const [ReporteIdd, setIngresodd] = useState(0);
   const [isDetalleReporteModalOpen, setIsDetallePReporteModalOpen] = useState(false);
   const [reporteToDetalle, setReporteToDetalle] = useState({});
+  const [reporteId, setReporteID ] = useState([]);
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -142,6 +144,32 @@ export default function Compras() {
     });
   }
 
+
+  const handleUpload = (event) => {
+    //event.preventDefault();
+    //const user_id = localStorage.getItem('user_id');
+    const formData = new FormData();
+    //console.log(event.target)
+    //console.log("Subida");
+    //console.log(event.target.files.length);
+    //console.log(event.target.files);
+
+    for(let j=0; j<event.target.files.length;j++)
+      formData.append('file', event.target.files[j]);
+    
+    formData.append('reporte_id',reporteId);
+
+    axios.post('http://localhost:3001/api/v1/reportes/cargarPDF', formData)
+      .then((response) => {
+        setTimeout(()=>{data();},500)
+      })
+      .catch((error) => {
+        /*setTextError('El XML no es de compras o el UUID ya existe');
+        setShowAlert(true);
+        setTimeout(()=>{setShowAlert(false);},3000)*/
+      });
+  };
+
   useEffect(() => {
     loadingData===false?data():null;
   }, []);
@@ -153,40 +181,51 @@ export default function Compras() {
       flex: 0.5,
     },
     {
-      field: 'rfccontribuyente',
-      headerName: 'Rfc contribuyente',
-      flex: 1,
+      field: 'nombre_archivo_json',
+      headerName: 'Reporte',
+      flex: 4,
+      renderCell: (params) => 
+        <a onClick={()=>{alert("ja")}}>{params.row.nombre_archivo_json}</a>,
     },
+    // {
+    //   field: 'rfcproveedor',
+    //   headerName: 'Rfc proveedor',
+    //   sortable: false,
+    //   flex: 1,
+    // },
+    // {
+    //   field: 'claveinstalacion',
+    //   headerName: 'Clave instalación',
+    //   sortable: false,
+    //   flex: 1,
+    // },
     {
-      field: 'rfcproveedor',
-      headerName: 'Rfc proveedor',
+      field: 'nombre_archivo_status',
+      headerName: 'Archivo de aceptación',
       sortable: false,
-      flex: 1,
+      flex: 2.7,
+      renderCell: (params) => params.row.nombre_archivo_status?<a href={"http://localhost:3001/pdfs/"+params.row.nombre_archivo_status} target='_blank'>{params.row.nombre_archivo_status}</a>:<a onClick={()=>{setReporteID(params.row.reporte_id);document.querySelector("#file").click()}}>Subir archivo de aceptación</a>
     },
-    {
-      field: 'claveinstalacion',
-      headerName: 'Clave instalación',
-      sortable: false,
-      flex: 1,
-    },
-    {
-      field: 'usuarioresponsable',
-      headerName: 'Usuario responsable',
-      sortable: false,
-      flex: 1.7,
-    },
-    {
-      field: 'fecha_inicio2',
-      headerName: 'Fecha inicio',
-      sortable: false,
-      flex: 0.8,
-    },
-    {
-      field: 'fecha_terminacion2',
-      headerName: 'Fecha termación',
-      sortable: false,
-      flex: 1,
-    },
+    // {
+    //   field: 'usuarioresponsable',
+    //   headerName: 'Usuario responsable',
+    //   sortable: false,
+    //   flex: 1.7,
+    // },
+
+    
+    // {
+    //   field: 'fecha_inicio2',
+    //   headerName: 'Fecha inicio',
+    //   sortable: false,
+    //   flex: 0.8,
+    // },
+    // {
+    //   field: 'fecha_terminacion2',
+    //   headerName: 'Fecha termación',
+    //   sortable: false,
+    //   flex: 1,
+    // },
     {
       field: 'date2',
       headerName: 'Fecha realización',
@@ -312,6 +351,15 @@ export default function Compras() {
       className={styles.main}
     >
       <Navbar activeMain="4" />
+
+      
+      
+      <form onSubmit={handleUpload} style={{display:'none'}}>
+        <label htmlFor="file" className="custom-file-upload">
+          <span><strong>+</strong></span> IMPORTAR
+        </label>
+        <input id="file" type="file" name="file" accept='application/pdf' onChange={handleUpload}/>
+      </form>
 
       <Grid container spacing={2}>
         <Grid item xs={12}>

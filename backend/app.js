@@ -24,6 +24,8 @@ const bitacorasRoutes = require('./src/routes/bitacoras');
 const { version } = require('os');
 
 router.use(express.static('public'));
+
+router.use(express.static('public'));
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 router.use(cors());

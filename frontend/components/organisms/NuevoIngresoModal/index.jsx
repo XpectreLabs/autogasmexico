@@ -19,7 +19,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
   const [listPermisos,setListPermisos] = React.useState([]);
-  const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+  const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:localStorage.getItem('permiso_id'),folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   function data() {

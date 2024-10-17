@@ -69,122 +69,128 @@ export default function Navbar({activeMain}) {
             <Grid container spacing={2}>
               <Grid item xs={11} align="left">
                 
+                {
+                  activeMain<12?(
+                    <>
+                        <Paper sx={{ width: 97, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
+                          <MenuList  className={styles.ListNav}>
+                            <Link href="/compras" onClick={()=>{setActive(2)}}>
+                              <MenuItem className={active===2?"activo":null}>
+                                Compras
+                              </MenuItem>
+                            </Link>
+                          </MenuList>
+                        </Paper>
 
-              <Paper sx={{ width: 97, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
-            <MenuList  className={styles.ListNav}>
-              <Link href="/compras" onClick={()=>{setActive(2)}}>
-                <MenuItem className={active===2?"activo":null}>
-                  Compras
-                </MenuItem>
-              </Link>
-            </MenuList>
-          </Paper>
+                        <Paper sx={{ width: 80, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
+                          <MenuList  className={styles.ListNav}>
+                            <Link href="/ventas" onClick={()=>{setActive(3)}}>
+                              <MenuItem className={active===3?"activo":null}>
+                                Ventas
+                              </MenuItem>
+                            </Link>
+                          </MenuList>
+                        </Paper>
 
-          <Paper sx={{ width: 80, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
-            <MenuList  className={styles.ListNav}>
-              <Link href="/ventas" onClick={()=>{setActive(3)}}>
-                <MenuItem className={active===3?"activo":null}>
-                  Ventas
-                </MenuItem>
-              </Link>
-            </MenuList>
-          </Paper>
+                        <Paper sx={{ width: 110, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
+                          <MenuList  className={styles.ListNav}>
+                            <Link href="/inventarios" onClick={()=>{setActive(7)}}>
+                              <MenuItem className={active===7?"activo":null}>
+                                Inventarios
+                              </MenuItem>
+                            </Link>
+                          </MenuList>
+                        </Paper>
 
-          <Paper sx={{ width: 110, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
-            <MenuList  className={styles.ListNav}>
-              <Link href="/inventarios" onClick={()=>{setActive(7)}}>
-                <MenuItem className={active===7?"activo":null}>
-                  Inventarios
-                </MenuItem>
-              </Link>
-            </MenuList>
-          </Paper>
-
-          <Paper sx={{ width: 145, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
-            <MenuList  className={styles.ListNav}>
-              <Link href="/reportes" onClick={()=>{setActive(4)}}>
-                <MenuItem className={active===4?"activo":null}>
-                  Reportes JSON
-                </MenuItem>
-              </Link>
-            </MenuList>
-          </Paper>
+                        <Paper sx={{ width: 145, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
+                          <MenuList  className={styles.ListNav}>
+                            <Link href="/reportes" onClick={()=>{setActive(4)}}>
+                              <MenuItem className={active===4?"activo":null}>
+                                Reportes JSON
+                              </MenuItem>
+                            </Link>
+                          </MenuList>
+                        </Paper>
 
 
-            <div style={{width: 170, maxWidth: '100%', display:"inline-block"}}>
-              <Button
-                style={{color: "#000", width: 170}}
-                ref={anchorRef}
-                id="composition-button"
-                aria-controls={open ? 'composition-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-              >
-                Configuraciones
-              </Button>
-              <Popper
-                style={{background:"#ffffff", zIndex: "9",}}
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                placement="bottom-start"
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin:
-                        placement === 'bottom-start' ? 'left top' : 'left bottom',
-                    }}
-                  >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList
-                          autoFocusItem={open}
-                          id="composition-menu"
-                          aria-labelledby="composition-button"
-                          onKeyDown={handleListKeyDown}
+                      <div style={{width: 170, maxWidth: '100%', display:"inline-block"}}>
+                        <Button
+                          style={{color: "#000", width: 170}}
+                          ref={anchorRef}
+                          id="composition-button"
+                          aria-controls={open ? 'composition-menu' : undefined}
+                          aria-expanded={open ? 'true' : undefined}
+                          aria-haspopup="true"
+                          onClick={handleToggle}
                         >
-                          <Link href="/proveedores" onClick={()=>{setActive(0)}}>
-                            <MenuItem onClick={handleClose} className={active===0?"activo":null}>
-                              Proveedores
-                            </MenuItem>
-                          </Link>
+                          Configuraciones
+                        </Button>
+                        <Popper
+                          style={{background:"#ffffff", zIndex: "9",}}
+                          open={open}
+                          anchorEl={anchorRef.current}
+                          role={undefined}
+                          placement="bottom-start"
+                          transition
+                          disablePortal
+                        >
+                          {({ TransitionProps, placement }) => (
+                            <Grow
+                              {...TransitionProps}
+                              style={{
+                                transformOrigin:
+                                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                              }}
+                            >
+                              <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                  <MenuList
+                                    autoFocusItem={open}
+                                    id="composition-menu"
+                                    aria-labelledby="composition-button"
+                                    onKeyDown={handleListKeyDown}
+                                  >
+                                    <Link href="/proveedores" onClick={()=>{setActive(0)}}>
+                                      <MenuItem onClick={handleClose} className={active===0?"activo":null}>
+                                        Proveedores
+                                      </MenuItem>
+                                    </Link>
 
-                          <Link href="/clientes" onClick={()=>{setActive(1)}}>
-                            <MenuItem onClick={handleClose} className={active===1?"activo":null}>
-                              Clientes
-                            </MenuItem>
-                          </Link>
+                                    <Link href="/clientes" onClick={()=>{setActive(1)}}>
+                                      <MenuItem onClick={handleClose} className={active===1?"activo":null}>
+                                        Clientes
+                                      </MenuItem>
+                                    </Link>
 
-                          <Link href="/perfil" onClick={()=>{setActive(5)}}>
-                            <MenuItem onClick={handleClose} className={active===5?"activo":null}>
-                              Perfil
-                            </MenuItem>
-                          </Link>
+                                    <Link href="/perfil" onClick={()=>{setActive(5)}}>
+                                      <MenuItem onClick={handleClose} className={active===5?"activo":null}>
+                                        Perfil
+                                      </MenuItem>
+                                    </Link>
 
-                          <Link href="/usuarios" onClick={()=>{setActive(6)}}>
-                            <MenuItem onClick={handleClose} className={active===6?"activo":null}>
-                              Usuarios
-                            </MenuItem>
-                          </Link>
+                                    <Link href="/usuarios" onClick={()=>{setActive(6)}}>
+                                      <MenuItem onClick={handleClose} className={active===6?"activo":null}>
+                                        Usuarios
+                                      </MenuItem>
+                                    </Link>
 
-                          <Link href="/permisos" onClick={()=>{setActive(8)}}>
-                            <MenuItem onClick={handleClose} className={active===8?"activo":null}>
-                              Permisos
-                            </MenuItem>
-                          </Link>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </div>
-            </Grid>
+                                    <Link href="/permisos" onClick={()=>{setActive(8)}}>
+                                      <MenuItem onClick={handleClose} className={active===8?"activo":null}>
+                                        Permisos
+                                      </MenuItem>
+                                    </Link>
+                                  </MenuList>
+                                </ClickAwayListener>
+                              </Paper>
+                            </Grow>
+                          )}
+                        </Popper>
+                      </div>
+                    </>
+                  ):null
+                }
+                
+              </Grid>
 
               <Grid item xs={1} align="right">
                 <Paper sx={{ width: 320, maxWidth: '100%' }}>

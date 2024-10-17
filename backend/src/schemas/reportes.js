@@ -53,6 +53,7 @@ const schemaUpdate = joi.object({
   composdepropanoengaslp: joi.number().required(),
   composdebutanoengaslp: joi.number().required(),
   fechayhoraestamedicionmes: joi.date().required(),
+  fecha_reporte: joi.date().required(),
   numeroregistro: joi.number().required(),
   usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   tipoevento: joi.number().required(),
