@@ -16,10 +16,11 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({firstname:'',lastname:'', email:'',username:'',password:'',confirmPassword:''}));
+  const [initialValues, setInitialValues] = useState(({firstname:'',lastname:'', email:'',username:'',rfccontribuyente:'',password:'',confirmPassword:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
 
+  console.log("userData",userData);
   userData.email = userData.email==="Sin email"?"":userData.email;
 
   return (
@@ -33,6 +34,9 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
           lastname: Yup.string()
             .min(3, "Los apellidos tener minimo 3 digitos")
             .required("Los apellidos es requerido"),
+          rfccontribuyente: Yup.string()
+            .min(10, "El Rfc del contribuyente es muy corto")
+            .required("El  Rfc del contribuyente es requerido"),
           email: Yup.string()
             .email("El email es incorrecto"),
           password: Yup.string()
@@ -153,7 +157,17 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
                     onBlur={handleBlur}
                     size="small"
                   />
-
+                  <TextField
+                    placeholder="RFC Contribuyente"
+                    required
+                    label="RFC Contribuyente"
+                    id="rfccontribuyente"
+                    value={values.rfccontribuyente}
+                    name="rfccontribuyente"
+                    size="small"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
                   <TextField
                     placeholder="Nombre de usuario"
                     id="username"

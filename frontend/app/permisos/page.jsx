@@ -149,9 +149,6 @@ export default function Perfil() {
 
   const onChangePermiso = (tipo) =>{
     const permiso = tipo.target.value
-
-    //alert(permiso);
-    //alert(listPermisos[permiso]);
     console.log(listPermisos[permiso-1]);
     setInitialValues(listPermisos[permiso-1]);
     /*if(document.querySelector("input[name=fecha_desde]").value!==''){
@@ -197,11 +194,12 @@ export default function Perfil() {
                         name:"permiso_id"
                       }}
                     >
-                      {listPermisos.map((permiso) => {
+                      {/* {listPermisos.map((permiso) => {
                         return (
                           <option value={permiso.permiso_id} selected={permiso.permiso_id===parseInt(localStorage.getItem('permiso_id'))?true:false}>{permiso.permiso}</option>
                         );
-                      })}
+                      })} */}
+                      <option value={localStorage.getItem('permiso_id')}>{localStorage.getItem('permiso')}</option>
                   </NativeSelect>
                 </Grid>
             </Grid>

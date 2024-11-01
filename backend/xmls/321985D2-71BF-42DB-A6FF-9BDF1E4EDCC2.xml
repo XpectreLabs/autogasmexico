@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante Certificado="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" CondicionesDePago="Pago en una sola exhibición" Fecha="2021-07-17T10:34:09" Folio="A9448 / 5513" FormaPago="99" LugarExpedicion="02300" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000503891231" Sello="z6hOw1IC4t0n7SR2O/KR08L4MmA1wRazyhL2GvxsrwbUOXJXbLqPjn2qxy7ZOYYVGPp0QLX9yzgCuLPCxVZPVflbz2NzGDxTdp5daHixAl57zq6D3LpilA3U/rG9ZOuHSM28oFuzpkXHz7wJGiOoR0CQkrBMr9r/sq2oFvGw0Ri9TrknZ3W0HeChoSlTs3hF24FLCguPhA8SHrdmnOQMVXD5Jr8JLuvIAXV4TRAPPFG2jwRwnueLcUcDQjFk+NYA2Er+83KGWF5xo7/muzCjP3UcS9ubNoHDJ2uCthXWEvDZb9IhG20fd2HEALIQu7oslDo2Na+QBiCvw8frdgIz9Q==" SubTotal="430.17" TipoDeComprobante="I" Total="499.00" Version="3.3" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="PULL &amp; BEAR MEXICO, S.A. DE C.V." RegimenFiscal="601" Rfc="P&amp;B0108104K7"/>
+    <cfdi:Receptor Nombre="Autogas Mexico S.A de C. V" Rfc="AME050309Q32" UsoCFDI="G01"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1.0000" ClaveProdServ="53101500" ClaveUnidad="EA" Descripcion="Jeans push up blancos algodón" Importe="430.17" NoIdentificacion="0468130742736" Unidad="EA" ValorUnitario="430.17">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="430.17" Importe="68.83" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="68.83">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="68.83" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    
+<cfdi:Complemento><tfd:TimbreFiscalDigital FechaTimbrado="2021-07-17T10:36:05" NoCertificadoSAT="00001000000505600468" RfcProvCertif="EME000602QR9" SelloCFD="z6hOw1IC4t0n7SR2O/KR08L4MmA1wRazyhL2GvxsrwbUOXJXbLqPjn2qxy7ZOYYVGPp0QLX9yzgCuLPCxVZPVflbz2NzGDxTdp5daHixAl57zq6D3LpilA3U/rG9ZOuHSM28oFuzpkXHz7wJGiOoR0CQkrBMr9r/sq2oFvGw0Ri9TrknZ3W0HeChoSlTs3hF24FLCguPhA8SHrdmnOQMVXD5Jr8JLuvIAXV4TRAPPFG2jwRwnueLcUcDQjFk+NYA2Er+83KGWF5xo7/muzCjP3UcS9ubNoHDJ2uCthXWEvDZb9IhG20fd2HEALIQu7oslDo2Na+QBiCvw8frdgIz9Q==" SelloSAT="l5aHbuNNIV+P6yggd9nB7Uf13hyoRHZi3AdNBfk6oJYJjazhVpjK6uaC4+LGx7ZWa2iOC+XT5wWutd9c5MF5rM7mUWy5m/kw1XNbl60Wciw/y0f2/9HTWtAou2kQ0nU06HFYtLLpsZMZzJg9Jd/pF3GUg/lxqaqB/xTgq/LnC02MiJm1zeO2/0iINxQawmu5o+3PdLoa8aO5ppM0ULbsQb1d1b+Bzba8EgY+avzIWn3ShjYJ0pW1OAXcSAtv3su2SDIVeTKn0XX+IG/3bYUSpin64jfzhZJvZ5iTFd8qCNr7oXSfMfxKetdw+9uz5Z90AmOMw8K/BzPTaguGSOJN4Q==" UUID="321985D2-71BF-42DB-A6FF-9BDF1E4EDCC2" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/></cfdi:Complemento><cfdi:Addenda>
+        <INDITEX xmlns="http://repository.edicomnet.com/schemas/mx/cfd/addenda" xsi:schemaLocation="http://repository.edicomnet.com/schemas/mx/cfd/addenda http://repository.edicomnet.com/schemas/mx/cfd/addenda/INDITEX.xsd">
+            <Tienda>
+                <codigoTienda>09448</codigoTienda>
+                <nombreTienda>E_PB MEXICO</nombreTienda>
+            </Tienda>
+            <TPV>1</TPV>
+            <TipoDocumento>05</TipoDocumento>
+            <numeroTicket>A9448 / 5513</numeroTicket>
+            <fechaTicket>2021-07-17</fechaTicket>
+            <horaTicket>10:34:09+02:00</horaTicket>
+            <condicionesDePago>Pago en una sola exhibición</condicionesDePago>
+            <formaDePago>99</formaDePago>
+            <interlocutor tipoInterlocutor="emisor">
+                <datosIdentificacion>
+                    <nombre>PULL &amp; BEAR MEXICO, S.A. DE C.V.</nombre>
+                    <correo>contact@pullandbear.com</correo>
+                    <rfc>P&amp;B0108104K7</rfc>
+                </datosIdentificacion>
+                <datosDomicilio>
+                    <calle>C/ PONIENTE 146, Nº 730, COLONIA INDUSTRIAL VALLEJO, ALCALDÍA AZCAPOTZALCO</calle>
+                    <pais>MEXICO</pais>
+                    <codigoPostal>02300</codigoPostal>
+                </datosDomicilio>
+                <otrosDatos>
+                    <telefono>0</telefono>
+                </otrosDatos>
+            </interlocutor>
+            <interlocutor tipoInterlocutor="receptor">
+                <datosIdentificacion>
+                    <nombre>Autogas Mexico S.A de C. V</nombre>
+                    <correo>facturas@miskuentas.com</correo>
+                    <rfc>AME050309Q32</rfc>
+                </datosIdentificacion>
+                <datosDomicilio>
+                    <calle>Carr cuautepec-tepeapulco km2.4 Santa Rita</calle>
+                    <localidad>Cuautepec De Hinojosa</localidad>
+                    <estado>Cuautepec De Hinojosa</estado>
+                    <pais>MEXICO</pais>
+                    <codigoPostal>43740</codigoPostal>
+                </datosDomicilio>
+            </interlocutor>
+            <concepto numConcepto="1">
+                <datosConcepto>
+                    <temporada>1</temporada>
+                    <seccion>1</seccion>
+                    <tipoProducto>0</tipoProducto>
+                    <cantidad>1</cantidad>
+                    <unidadVenta>EA</unidadVenta>
+                    <valorUnitario>430.17</valorUnitario>
+                    <importe>430.17</importe>
+                    <codigoBarras>0468130742736</codigoBarras>
+                    <descripcion>Jeans push up blancos algodón</descripcion>
+                </datosConcepto>
+                <impuesto tipoImpuesto="002">
+                    <tasaImpuesto>0.16</tasaImpuesto>
+                    <importeImpuesto>68.83</importeImpuesto>
+                    <categoriaImpuesto>trasladado</categoriaImpuesto>
+                </impuesto>
+            </concepto>
+            <subTotal>430.17</subTotal>
+            <totalImpuestos>68.83</totalImpuestos>
+            <importeTotal>499</importeTotal>
+            <importeTotalDivisa>
+                <importeTotal>499</importeTotal>
+                <divisa>MXN</divisa>
+            </importeTotalDivisa>
+            <totalUnidades>1</totalUnidades>
+            <metodoPago>
+                <descripcion>99</descripcion>
+                <importePago>499</importePago>
+                <divisaPago>MXN</divisaPago>
+            </metodoPago>
+            <E-Commerce>
+                <order_id>20079258599</order_id>
+                <shipping_address>
+                    <nombre>Autogas Mexico S.A de C. V</nombre>
+                    <direccion>CAMINO REAL DE LA PLATA, ZONA PLATEADA, 100-102</direccion>
+                    <cp>42083</cp>
+                    <pais>MEXICO</pais>
+                </shipping_address>
+                <contact_details>
+                    <direccion_web>www.pullbear.com</direccion_web>
+                    <telefono>0</telefono>
+                    <e_Mail>contact@pullandbear.com</e_Mail>
+                </contact_details>
+                <id_cadena>2</id_cadena>
+                <order_barcode>9941020079258599009448</order_barcode>
+            </E-Commerce>
+        </INDITEX>
+    </cfdi:Addenda></cfdi:Comprobante>

@@ -6,6 +6,7 @@ const schemaCreate = joi.object({
   lastName: joi.string().pattern(new RegExp('^[a-zA-Z\u00C0-\u017F ]{3,100}$')).required(),
   password: joi.string().min(3).required(),
   email: joi.string().email().optional().allow(null, ""),
+  rfccontribuyente: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')).required(),
 });
 
 const schemaId = joi.object({
@@ -18,6 +19,9 @@ const schemaUpdate = joi.object({
   lastname: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F ]{3,100}$')).required(),
   email: joi.string().email().optional().allow(null, ""),
   password: joi.string().optional().allow(null, ""),
+  rfccontribuyente: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')).required(),
+  rfcrepresentantelegal: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')),
+  rfcproveedor: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{10,100}$')),
 });
 
 const schemaEmail = joi.object({

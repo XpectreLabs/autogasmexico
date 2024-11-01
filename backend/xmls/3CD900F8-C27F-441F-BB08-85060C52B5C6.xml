@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2021-10-10T18:27:59" Folio="2700201119770091121" FormaPago="04" LugarExpedicion="11520" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000502595719" Sello="GIy0CMXqeOgx4ow4KLij2nX0RNkdwKNxZZMKJG2yzO0WCKhv3GuLOZABXT32ieCg/4/IE4uE0kV0h6EvPKj2AD0VXgB+pJwSLrheZ/g4yZt2uWstrzjZu8KC3xGs6ScfcxNfycIM0lXo4lqdESSCPUcx+VX+58txArmfEmhuXhVDTkSxQjLhKeA9WxjYMuB+vIhwciyQLqs5EybiEiYYFiARijm8Asu03B1csfELlmwhIbwV2McFjywU3h8bPLooOwaAianVzQ2GuUBsqWmhlgeM1z48Uh3ohv/7RF/thiHwTDjZgv4HxsFsp2dZhO5icpGhVe5GPxtnRAhWLSRWow==" SubTotal="6808.62" TipoDeComprobante="I" Total="7898.01" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="Baseco, S.A.P.I. de C.V." RegimenFiscal="601" Rfc="BAS0108275N9" />
+    <cfdi:Receptor Nombre="Autogas México S.A. de C.V." Rfc="AME050309Q32" UsoCFDI="G03" />
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102400" ClaveUnidad="H87" Descripcion="MENS 3PK TRAVEL BAG" Importe="689.66" NoIdentificacion="7506527715876" Unidad="UNIT" ValorUnitario="689.66">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="689.66" Importe="110.35" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1001395" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53111901" ClaveUnidad="H87" Descripcion="SIREK" Importe="2499.14" NoIdentificacion="8719853800973" Unidad="UNIT" ValorUnitario="2499.14">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="2499.14" Importe="399.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1001189" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53101802" ClaveUnidad="H87" Descripcion="TRANSPARENT RIPSTOP" Importe="3447.41" NoIdentificacion="8719853737835" Unidad="UNIT" ValorUnitario="3447.41">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="3447.41" Importe="551.59" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1000248" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53101802" ClaveUnidad="H87" Descripcion="90S DENIM JACKET" Importe="172.41" NoIdentificacion="8719852870694" Unidad="UNIT" ValorUnitario="172.41">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="172.41" Importe="27.59" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="1089.39">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="1089.39" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    
+<cfdi:Complemento><tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="3CD900F8-C27F-441F-BB08-85060C52B5C6" FechaTimbrado="2021-10-10T18:28:00" SelloCFD="GIy0CMXqeOgx4ow4KLij2nX0RNkdwKNxZZMKJG2yzO0WCKhv3GuLOZABXT32ieCg/4/IE4uE0kV0h6EvPKj2AD0VXgB+pJwSLrheZ/g4yZt2uWstrzjZu8KC3xGs6ScfcxNfycIM0lXo4lqdESSCPUcx+VX+58txArmfEmhuXhVDTkSxQjLhKeA9WxjYMuB+vIhwciyQLqs5EybiEiYYFiARijm8Asu03B1csfELlmwhIbwV2McFjywU3h8bPLooOwaAianVzQ2GuUBsqWmhlgeM1z48Uh3ohv/7RF/thiHwTDjZgv4HxsFsp2dZhO5icpGhVe5GPxtnRAhWLSRWow==" NoCertificadoSAT="00001000000505600468" SelloSAT="BMp/6Mn/J1xiPmWfVFpbllXDEHd14GFEDnl1PAhdRRGbcxwINdrPBKtI16Q9ma6RKsU5/qL4UzdKBCsJwZQRAkkYM9c6kOg9k+iF31cN78uIBLC3p82B5LWCFJD8fdAHrTvNEaG4YdBHtgbRbMuWk0+d2/y/+/3kkcYNLfPekyBliHwLHSjTn3BSEr0pxW6Kx+I+6K9785Q22YrTrNa+A2lz7tglwg6TUn8irl6S1nLKpMcGmocSjoN0YJefFZ0AZ9bCMhrv8qkSBpxx1NXylYrE2x3iz0GDtwIBBOpiC6Fm7HUf/mFhHLlvOtC4apDjW6KZxKRxsxtC++FDjHr0zQ==" RfcProvCertif="EME000602QR9" /></cfdi:Complemento></cfdi:Comprobante>

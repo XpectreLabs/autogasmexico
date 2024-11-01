@@ -94,6 +94,8 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
           delete values.kilos;
           delete values.permisos;
           delete values.permisoComprador;
+          delete values.permiso;
+          delete values.permiso_cre;
 
           const data = {...values,abastecimiento_id,tipo_modena_id};
           console.log(data);

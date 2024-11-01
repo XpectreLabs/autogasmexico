@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/aerolineas http://www.sat.gob.mx/sitio_internet/cfd/aerolineas/aerolineas.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:aerolineas="http://www.sat.gob.mx/aerolineas" Version="3.3" Serie="AA" Folio="1110379" Fecha="2021-10-21T06:21:26" Sello="buWuhayCA/2gO7qx7BJQuJN7pcG++9sIp1quLuLYgNc0woNC2w0A1iSGA4EpdlS+2IUL1PGsr+LGCev0BBksxVIZI9VLDrEWJh3+k9Fuu1kmKL2yuVKkv9N3u2wRcxy3iWZxFjxDaO/kQ0G0Sx70PTCwmUiYrMDXBGFfEQ+oMDCTui1fV8wx1y09G52oVE/UcPAwlLPx5c1EGJHhB7PNecdF5B0XSMFOswZfB6+neGhCnxF2CCWiVBhJjaRmzOadHo8TmUcnfTEL9RVZtIo/A8myYbnpa310mIP38jkHdbiqqJMpduyNXjyHhyF8F2xiTrKAt366S+IquR1g7dA5FA==" FormaPago="04" NoCertificado="00001000000505910315" Certificado="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" SubTotal="11475.00" Moneda="MXN" TipoCambio="1" Total="11851.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="06600">
+  <cfdi:Emisor Rfc="AAI580414GA9" Nombre="American Airlines Inc" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="Autogas México SA de CV" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="78111500" NoIdentificacion="0012305891540" Cantidad="1.00" ClaveUnidad="E48" Unidad="No aplica" Descripcion="Tarifa del boleto 0012305891540 comprado el día 2021/10/17" ValorUnitario="9377.00" Importe="9377.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2350.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="376.00" />
+          <cfdi:Traslado Base="7027.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78111500" NoIdentificacion="0012305891540" Cantidad="1.00" ClaveUnidad="E48" Unidad="No aplica" Descripcion="TUA + Otros cargos" ValorUnitario="2098.00" Importe="2098.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2098.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="376.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="376.00" />
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <aerolineas:Aerolineas Version="1.0" TUA="1235.00">
+      <aerolineas:OtrosCargos TotalCargos="863.00">
+        <aerolineas:Cargo CodigoCargo="AY" Importe="116.00" />
+        <aerolineas:Cargo CodigoCargo="US2" Importe="394.00" />
+        <aerolineas:Cargo CodigoCargo="XA" Importe="82.00" />
+        <aerolineas:Cargo CodigoCargo="XY" Importe="145.00" />
+        <aerolineas:Cargo CodigoCargo="YC" Importe="126.00" />
+      </aerolineas:OtrosCargos>
+    </aerolineas:Aerolineas>
+    <tfd:TimbreFiscalDigital UUID="087fca64-6b14-4f81-b9fa-4475901485b7" FechaTimbrado="2021-10-21T08:21:28" Version="1.1" SelloCFD="buWuhayCA/2gO7qx7BJQuJN7pcG++9sIp1quLuLYgNc0woNC2w0A1iSGA4EpdlS+2IUL1PGsr+LGCev0BBksxVIZI9VLDrEWJh3+k9Fuu1kmKL2yuVKkv9N3u2wRcxy3iWZxFjxDaO/kQ0G0Sx70PTCwmUiYrMDXBGFfEQ+oMDCTui1fV8wx1y09G52oVE/UcPAwlLPx5c1EGJHhB7PNecdF5B0XSMFOswZfB6+neGhCnxF2CCWiVBhJjaRmzOadHo8TmUcnfTEL9RVZtIo/A8myYbnpa310mIP38jkHdbiqqJMpduyNXjyHhyF8F2xiTrKAt366S+IquR1g7dA5FA==" NoCertificadoSAT="00001000000505563741" SelloSAT="odTGzk/kWVGwGr8D6JAjVEi33qJyV29FQ4aRCrmByePF1ccqhqOdR7caeJ6MJt8vxNPbaKrhnV8POrMdHi2J8DU7hLD9LbINQI7p98WUFmgvasbtgh70ALdRl/QE0O5gFCaOdpOvM91/aTn2htL2ih01vUS63irJyQNmReD1NzVio3nCggikFy9JDE7P6ZsxakZ9YiQiJFEM4jHJo4GaVxos9XWjGacs3suTqlm+OaaeNnMi8bCOYBWzqpePRyvI0sOgurQgdv30F5qOVwetkC+9w978VzuwzvQMDjVCXIMtM42kvxLwuLP9q6IQaEytccc3pVlZBSYSa37/0n5kfA==" RfcProvCertif="MIS1112095W0" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" />
+  </cfdi:Complemento>
+  <cfdi:Addenda xmlns:ecfd="http://www.edxsolutions.com/schemas/strict" xsi:schemaLocation="http://www.edxsolutions.com/schemas/strict http://www.edxsolutions.com/schemas/strict/ecfd.xsd">
+    <ecfd:ECFD version="1.0">
+      <ecfd:Documento ID="T33AA1110379">
+        <ecfd:Encabezado>
+          <ecfd:IdDoc>
+            <ecfd:NroAprob>122017</ecfd:NroAprob>
+            <ecfd:AnoAprob>2017</ecfd:AnoAprob>
+            <ecfd:Tipo>33</ecfd:Tipo>
+            <ecfd:Serie>AA</ecfd:Serie>
+            <ecfd:Folio>1110379</ecfd:Folio>
+            <ecfd:Estado>ORIGINAL</ecfd:Estado>
+            <ecfd:FechaEmis>2021-10-21T06:21:26</ecfd:FechaEmis>
+            <ecfd:FormaPago>PUE</ecfd:FormaPago>
+            <ecfd:MedioPago>04</ecfd:MedioPago>
+            <ecfd:LugarExpedicion>06600</ecfd:LugarExpedicion>
+            <ecfd:FechaFolioFiscalOrig>0001-01-01T00:00:00</ecfd:FechaFolioFiscalOrig>
+            <ecfd:MontoFolioFiscalOrig>0</ecfd:MontoFolioFiscalOrig>
+          </ecfd:IdDoc>
+          <ecfd:ExEmisor>
+            <ecfd:RFCEmisor>AAI580414GA9</ecfd:RFCEmisor>
+            <ecfd:NmbEmisor>American Airlines Inc</ecfd:NmbEmisor>
+            <ecfd:DomFiscal>
+              <ecfd:Calle>Paseo de la Reforma</ecfd:Calle>
+              <ecfd:NroExterior>300</ecfd:NroExterior>
+              <ecfd:NroInterior>Piso 2</ecfd:NroInterior>
+              <ecfd:Colonia>Juárez</ecfd:Colonia>
+              <ecfd:Municipio>Cuauhtemoc</ecfd:Municipio>
+              <ecfd:Estado>CDMX</ecfd:Estado>
+              <ecfd:Pais>Méx</ecfd:Pais>
+              <ecfd:CodigoPostal>06600</ecfd:CodigoPostal>
+            </ecfd:DomFiscal>
+            <ecfd:LugarExped>
+              <ecfd:Calle>Paseo de la Reforma</ecfd:Calle>
+              <ecfd:NroExterior>300</ecfd:NroExterior>
+              <ecfd:NroInterior>Piso 2</ecfd:NroInterior>
+              <ecfd:Colonia>Juárez</ecfd:Colonia>
+              <ecfd:Municipio>Cuauhtemoc</ecfd:Municipio>
+              <ecfd:Estado>CDMX</ecfd:Estado>
+              <ecfd:Pais>México</ecfd:Pais>
+              <ecfd:CodigoPostal>06600</ecfd:CodigoPostal>
+            </ecfd:LugarExped>
+          </ecfd:ExEmisor>
+          <ecfd:ExReceptor>
+            <ecfd:RFCRecep>AME050309Q32</ecfd:RFCRecep>
+            <ecfd:NmbRecep>Autogas México SA de CV</ecfd:NmbRecep>
+            <ecfd:UsoCFDI>G03</ecfd:UsoCFDI>
+            <ecfd:DomFiscalRcp>
+              <ecfd:Calle>Carr. Cuautepec - Tepeapulco</ecfd:Calle>
+              <ecfd:NroExterior>km 2.4</ecfd:NroExterior>
+              <ecfd:Colonia>Santa Rita</ecfd:Colonia>
+              <ecfd:Localidad>Cuautepec de Hinojosa</ecfd:Localidad>
+              <ecfd:Municipio>Cuautepec de Hinojosa</ecfd:Municipio>
+              <ecfd:Estado>HID</ecfd:Estado>
+              <ecfd:Pais>MEX</ecfd:Pais>
+              <ecfd:CodigoPostal>43740</ecfd:CodigoPostal>
+            </ecfd:DomFiscalRcp>
+          </ecfd:ExReceptor>
+          <ecfd:Totales>
+            <ecfd:Moneda>MXN</ecfd:Moneda>
+            <ecfd:FctConv>1</ecfd:FctConv>
+            <ecfd:SubTotal>11475.00</ecfd:SubTotal>
+            <ecfd:MntDcto>0.00</ecfd:MntDcto>
+            <ecfd:MntImp>376.00</ecfd:MntImp>
+            <ecfd:VlrPagar>11851.00</ecfd:VlrPagar>
+            <ecfd:VlrPalabras>(Once mil ochocientos cincuenta y un pesos 00/100 M.N.)</ecfd:VlrPalabras>
+          </ecfd:Totales>
+          <ecfd:ExImpuestos>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+            <ecfd:TasaImp>0.160000</ecfd:TasaImp>
+            <ecfd:MontoImp>376.00</ecfd:MontoImp>
+          </ecfd:ExImpuestos>
+          <ecfd:ExImpuestos>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+            <ecfd:TasaImp>0.000000</ecfd:TasaImp>
+            <ecfd:MontoImp>0.00</ecfd:MontoImp>
+          </ecfd:ExImpuestos>
+        </ecfd:Encabezado>
+        <ecfd:Detalle>
+          <ecfd:NroLinDet>1</ecfd:NroLinDet>
+          <ecfd:CdgItem>
+            <ecfd:TpoCodigo>EAN</ecfd:TpoCodigo>
+            <ecfd:VlrCodigo>0012305891540</ecfd:VlrCodigo>
+          </ecfd:CdgItem>
+          <ecfd:DscLang>ES</ecfd:DscLang>
+          <ecfd:ClaveProdServ>78111500</ecfd:ClaveProdServ>
+          <ecfd:DscItem>Tarifa del boleto 0012305891540 comprado el día 2021/10/17</ecfd:DscItem>
+          <ecfd:QtyItem>1.00</ecfd:QtyItem>
+          <ecfd:ClaveUnidad>E48</ecfd:ClaveUnidad>
+          <ecfd:UnmdItem>No aplica</ecfd:UnmdItem>
+          <ecfd:PrcBrutoItem>9377.00</ecfd:PrcBrutoItem>
+          <ecfd:PrcNetoItem>9377.00</ecfd:PrcNetoItem>
+          <ecfd:DescuentoMonto>0.00</ecfd:DescuentoMonto>
+          <ecfd:ImpuestosDet>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TasaImp>0.160000</ecfd:TasaImp>
+            <ecfd:MontoImp>376.00</ecfd:MontoImp>
+            <ecfd:MontoBaseImp>2350.00</ecfd:MontoBaseImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+          </ecfd:ImpuestosDet>
+          <ecfd:ImpuestosDet>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TasaImp>0.000000</ecfd:TasaImp>
+            <ecfd:MontoImp>0.00</ecfd:MontoImp>
+            <ecfd:MontoBaseImp>7027.00</ecfd:MontoBaseImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+          </ecfd:ImpuestosDet>
+          <ecfd:MontoNetoItem>9377.00</ecfd:MontoNetoItem>
+        </ecfd:Detalle>
+        <ecfd:Detalle>
+          <ecfd:NroLinDet>2</ecfd:NroLinDet>
+          <ecfd:CdgItem>
+            <ecfd:TpoCodigo>EAN</ecfd:TpoCodigo>
+            <ecfd:VlrCodigo>0012305891540</ecfd:VlrCodigo>
+          </ecfd:CdgItem>
+          <ecfd:DscLang>ES</ecfd:DscLang>
+          <ecfd:ClaveProdServ>78111500</ecfd:ClaveProdServ>
+          <ecfd:DscItem>TUA + Otros cargos</ecfd:DscItem>
+          <ecfd:QtyItem>1.00</ecfd:QtyItem>
+          <ecfd:ClaveUnidad>E48</ecfd:ClaveUnidad>
+          <ecfd:UnmdItem>No aplica</ecfd:UnmdItem>
+          <ecfd:PrcBrutoItem>2098.00</ecfd:PrcBrutoItem>
+          <ecfd:PrcNetoItem>2098.00</ecfd:PrcNetoItem>
+          <ecfd:DescuentoMonto>0.00</ecfd:DescuentoMonto>
+          <ecfd:ImpuestosDet>
+            <ecfd:TipoImp>002</ecfd:TipoImp>
+            <ecfd:TasaImp>0.000000</ecfd:TasaImp>
+            <ecfd:MontoImp>0.00</ecfd:MontoImp>
+            <ecfd:MontoBaseImp>2098.00</ecfd:MontoBaseImp>
+            <ecfd:TipoFactor>Tasa</ecfd:TipoFactor>
+          </ecfd:ImpuestosDet>
+          <ecfd:MontoNetoItem>2098.00</ecfd:MontoNetoItem>
+        </ecfd:Detalle>
+        <ecfd:TimeStamp>2021-10-21T08:21:27</ecfd:TimeStamp>
+      </ecfd:Documento>
+      <ecfd:Personalizados>
+        <ecfd:campoString name="Personalizado01">JIMENEZ/ANGEL LUIS</ecfd:campoString>
+        <ecfd:campoString name="Personalizado02">86102601</ecfd:campoString>
+        <ecfd:campoString name="Personalizado03">CWUQHW</ecfd:campoString>
+        <ecfd:campoString name="Personalizado04" />
+        <ecfd:campoString name="Personalizado05">MEX/PHX</ecfd:campoString>
+        <ecfd:campoString name="Personalizado06">AA/502</ecfd:campoString>
+        <ecfd:campoString name="Personalizado07">20/10/2021 03:05:00 p. m.</ecfd:campoString>
+        <ecfd:campoString name="Personalizado08" />
+        <ecfd:campoString name="Personalizado09">PHX/SAN</ecfd:campoString>
+        <ecfd:campoString name="Personalizado10">AA/559</ecfd:campoString>
+        <ecfd:campoString name="Personalizado11">20/10/2021 07:25:00 p. m.</ecfd:campoString>
+        <ecfd:campoString name="Personalizado12" />
+        <ecfd:campoString name="Personalizado13" />
+        <ecfd:campoString name="Personalizado14" />
+        <ecfd:campoString name="Personalizado15" />
+        <ecfd:campoString name="Personalizado16" />
+        <ecfd:campoString name="Personalizado17" />
+        <ecfd:campoString name="Personalizado18" />
+        <ecfd:campoString name="Personalizado19" />
+        <ecfd:campoString name="Personalizado20" />
+        <ecfd:campoString name="Personalizado21" />
+        <ecfd:campoString name="Personalizado22" />
+        <ecfd:campoString name="Personalizado23" />
+        <ecfd:campoString name="Personalizado24" />
+        <ecfd:campoString name="Personalizado25" />
+        <ecfd:campoString name="Personalizado26" />
+        <ecfd:campoString name="Personalizado27" />
+        <ecfd:campoString name="Personalizado28" />
+        <ecfd:campoString name="Personalizado29" />
+        <ecfd:campoString name="Personalizado30" />
+        <ecfd:campoString name="Personalizado31" />
+        <ecfd:campoString name="NumeroTicket">0012305891540</ecfd:campoString>
+        <ecfd:campoString name="TotalRef">11851.00</ecfd:campoString>
+        <ecfd:campoString name="Propina">0.0000</ecfd:campoString>
+        <ecfd:campoString name="Email">facturas@miskuentas.com</ecfd:campoString>
+        <ecfd:campoString name="Fuente">pticket33</ecfd:campoString>
+        <ecfd:campoString name="RegimenFiscal">601</ecfd:campoString>
+        <ecfd:campoString name="LugarDeExpedicion">06600</ecfd:campoString>
+      </ecfd:Personalizados>
+    </ecfd:ECFD>
+  </cfdi:Addenda>
+</cfdi:Comprobante>

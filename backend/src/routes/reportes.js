@@ -23,7 +23,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   }
 
   console.log("fecha actual: "+new Date());
-  let date = dayjs(new Date()).format('YYYY-MM-DDTH:mm:ss.SSS[Z]');;
+  let date = dayjs(new Date()).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm');
   console.log(new Date().toISOString(),date)
   //console.log("Data");
   //console.log(req.body);
@@ -33,6 +33,8 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
   const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
   const volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+
+  console.log("Data",totalRecepcionesMP,totalEntregasMP,volumenexistenciasees)
 
   const uuid = uuidv4();
 
@@ -119,8 +121,8 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const id = parseInt(req.body.reporte_id);
   let date = new Date().toISOString();
 
- 
-  delete req.body.numpermiso;
+  let numpermiso = req.body.numpermiso;
+  delete req.body.numpermiso
 
   console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
   //console.log("fechayhoraestamedicionmes",);
@@ -131,7 +133,9 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const fechas = await reporteS.obtenerMesAnterior(fechaI);
   const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
   const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
-  const volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+  let volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+  let num_modificaciones = (parseInt(req.body.num_modificaciones)+1)
+  const version = "1."+num_modificaciones;
 
   await prisma.reportes.update({
     where: {
@@ -139,6 +143,8 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     },
     data: {
       ...req.body,
+      version,
+      num_modificaciones,
       volumenexistenciasees: parseFloat(volumenexistenciasees),
       tipoevento:  parseFloat(req.body.tipoevento),
       composdepropanoengaslp: parseFloat(req.body.composdepropanoengaslp),
@@ -147,7 +153,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
     },
   });
 
-  const dataJson = await reporteS.generarJson(req.body,date,"","",volumenexistenciasees);
+  const dataJson = await reporteS.generarJson(req.body,date,version,"",volumenexistenciasees,numpermiso);
   res.status(200).json({ message:"success", dataJson, "nombre_archivo":nombre_archivo_json });
 });
 

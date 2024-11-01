@@ -87,8 +87,6 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
       const totalCompra = await totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id);
       const totalVenta = await totalEntregas(user_id,fechaInicio, fechaFin,permiso_id);
 
-      
-
       let inventarioInicial,inventarioFinal;
       let diferencia = 0;
       let diferenciaReportada = 0;
@@ -408,7 +406,7 @@ async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
     ],
     where: {
       user_id,
-      permiso_id:permiso_id,
+      //permiso_id:permiso_id,
       active: 1,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
@@ -436,6 +434,8 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   const fi = (fechaInicio+"").substring(0,10);
   const ff = (fechaFin+"").substring(0,10);
 
+  
+
   const listCompras = await prisma.ventas.findMany({
     orderBy: [
       {
@@ -445,7 +445,7 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     where: {
       user_id,
       active: 1,
-      permiso_id,
+      //permiso_id,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
 			  lte: new Date(ff), // End of date range
@@ -457,6 +457,8 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
    });
 
   let totalImporteTotal=0;
+
+  console.log(fi,listCompras);
 
   for(let j=0; j<listCompras.length; j++){
     totalImporteTotal+=listCompras[j].cantidad;

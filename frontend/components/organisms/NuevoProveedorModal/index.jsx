@@ -14,7 +14,7 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
+  const [initialValues, setInitialValues] = useState(({name:' ',rfc:'', direccion:'',tipo_situacion_fiscal:'601', permiso_cre:'',  email:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   return (
@@ -33,8 +33,8 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
           tipo_situacion_fiscal: Yup.string()
             .min(3, "El tipo de situación fiscal es muy corto")
             .required("El tipo de situación fiscal es requerido"),
-          phone: Yup.string()
-            .min(3, "El teléfono es muy corto"),
+          permiso_cre: Yup.string()
+            .min(10, "El permiso CRE es muy corto"),
           email: Yup.string()
             .email("El email es incorrecto"),
         })}
@@ -45,12 +45,10 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
           const rfc = values.rfc;
           const direccion = values.direccion;
           const tipo_situacion_fiscal = values.tipo_situacion_fiscal;
-          const phone = values.phone;
+          const permiso_cre = values.permiso_cre;
           const email = values.email;
-          const data = {name, rfc, direccion, tipo_situacion_fiscal, phone, email,user_id};
+          const data = {name, rfc, direccion, tipo_situacion_fiscal, permiso_cre, email,user_id};
           setLoading(true);
-
-          setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
 
           fetch(scriptURL, {
             method: 'POST',
@@ -69,9 +67,8 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos del proveedor fueron guardados");
-              setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
+              setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'601', permiso_cre:'',  email:''}));
               setShowAlert(true);
-
               setTimeout(()=>{onClose();},2000)
             }
             else if(data.message==="schema") {
@@ -156,15 +153,14 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    placeholder="Teléfono"
-                    id="phone"
-                    label="Teléfono"
-                    name="phone"
-                    value={values.phone}
+                    placeholder="Permiso CRE"
+                    id="permiso_cre"
+                    label="Permiso CRE"
+                    name="permiso_cre"
+                    value={values.permiso_cre}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     size="small"
-                    type='number'
                   />
                   <TextField
                     placeholder="Email"
@@ -177,13 +173,13 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
                     size="small"
                   />
 
-                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.phone || errors.email)?(<div className={styles.errors}>
+                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.permiso_cre || errors.email)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.name? (<p>{errors.name}</p>):null}
                         {errors.rfc? (<p>{errors.rfc}</p>):null}
                         {errors.direccion? (<p>{errors.direccion}</p>):null}
                         {errors.tipo_situacion_fiscal? (<p>{errors.tipo_situacion_fiscal}</p>):null}
-                        {errors.phone? (<p>{errors.phone}</p>):null}
+                        {errors.permiso_cre? (<p>{errors.permiso_cre}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
                     </div>):null}
 

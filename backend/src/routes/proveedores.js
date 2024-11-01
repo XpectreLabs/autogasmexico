@@ -18,13 +18,15 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
   let date = new Date().toISOString();
   console.log(date);
+  console.log("Permiso",req.body.permiso_cre);
   await prisma.proveedores.create({
     data: {
       name: req.body.name,
       rfc: req.body.rfc,
       direccion: req.body.direccion?req.body.direccion:null,
       tipo_situacion_fiscal: req.body.tipo_situacion_fiscal,
-      phone: req.body.phone?req.body.phone:null,
+      permiso_cre: req.body.permiso_cre?req.body.permiso_cre:null,
+      phone: null,
       email: req.body.email?req.body.email:null,
       user_id: parseInt(req.body.user_id),
       date: date,
@@ -48,7 +50,7 @@ router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
       const listProveedores = await prisma.proveedores.findMany({
         orderBy: [
           {
-            date: 'desc',
+            proveedor_id: 'asc',
           },
         ],
         where: {
@@ -62,8 +64,44 @@ router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
           direccion: true,
           tipo_situacion_fiscal: true,
           phone: true,
+          permiso_cre: true,
           email: true,
           date: true,
+        },
+      });
+      res.status(200).json({ message:"success", listProveedores });
+    }
+    else
+      res.status(400).json({ message:"Id invalido", error: "Solicitud no válida, el ID no existe" });
+  }
+});
+
+
+
+router.get('/:userId/listaproveedores',jwtV.verifyToken, async (req, res, next) => {
+  const { error } = sch.schemaId.validate(req.params);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).json({ message:"schema",error: error.details[0].message });
+  }
+
+  if (req.params.userId !== null) {
+    const id = req.params.userId;
+
+    if(await fnUsuatio.validateUser(parseInt(id))) {
+      const listProveedores = await prisma.proveedores.findMany({
+        orderBy: [
+          {
+            proveedor_id: 'asc',
+          },
+        ],
+        where: {
+          user_id: parseInt(id),
+          active: 1,
+        },
+        select: {
+          proveedor_id: true,
+          name: true,
         },
       });
       res.status(200).json({ message:"success", listProveedores });
@@ -91,7 +129,8 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
       rfc: req.body.rfc,
       direccion: req.body.direccion?req.body.direccion:null,
       tipo_situacion_fiscal: req.body.tipo_situacion_fiscal,
-      phone: req.body.phone?req.body.phone:null,
+      permiso_cre: req.body.permiso_cre?req.body.permiso_cre:null,
+      phone: null,
       email: req.body.email?req.body.email:null,
     },
   });

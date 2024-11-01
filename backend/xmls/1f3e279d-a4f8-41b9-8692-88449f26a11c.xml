@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="M" Folio="181668" Fecha="2021-09-19T23:00:59" Sello="TjK2O6eSEzs2OwiMXk7lGKq2DsumWZ3OYuxowaDG+X/QbzBSaG/j6zjBOW4MVGF4m4KyQhKTLV2uaMZWpdAHpkByLb5kIUJ4BGYZWzbI5vaLprcI2x9aw9kfgxdAvuGB7mcAAsgUm0OdO3dgRg2CXTA5pQ+7egcSvj3MHqHZXZcH8RyGuYqteziTPgFbIKiYzqgbbQP7FH3lvCimlB5N2LR+nsGXlhadZmaohqFMGYROpVobBC0L0mQYX7g3BVCW5g/cStlbQkTRo5Qf9yEpR7Az1LkENAwksPq821Q5t8YYxRY2wE5NJ536EgVCprsnn92Pso7m2IfkZv3pW4hmag==" FormaPago="01" NoCertificado="00001000000503921820" Certificado="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" SubTotal="23848.17" Moneda="MXN" Total="27663.68" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="43740">
+  <cfdi:Emisor Rfc="AME050309Q32" Nombre="Autogas Mexico sa de cv" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="XAXX010101000" Nombre="Publico en general" UsoCFDI="G03"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274550" Cantidad="53.053020" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.129245" Importe="590.44">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="590.443524" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="94.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274551" Cantidad="80.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.12925" Importe="890.34">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="890.344827" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="142.45"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274552" Cantidad="58.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.129310" Importe="645.49">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="645.500000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="103.28"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274553" Cantidad="48.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465416" Importe="550.33">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="550.344827" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="88.05"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274554" Cantidad="31.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465483" Importe="355.42">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="355.431034" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="56.86"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274555" Cantidad="53.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465471" Importe="607.66">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="607.672413" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="97.22"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274556" Cantidad="9.900153" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224068" Importe="111.11">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="111.120682" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="17.77"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274557" Cantidad="20.699692" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224321" Importe="232.33">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="232.336198" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="37.17"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274558" Cantidad="23.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224347" Importe="258.15">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="258.155172" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="41.30"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274559" Cantidad="19.199692" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224138" Importe="215.49">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="215.499991" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274560" Cantidad="15.300307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.223957" Importe="171.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="171.732756" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274561" Cantidad="9.199692" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224288" Importe="103.25">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="103.258611" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.52"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274562" Cantidad="15.300307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.223957" Importe="171.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="171.732756" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274563" Cantidad="91.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465494" Importe="1043.35">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1043.362068" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="166.93"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274564" Cantidad="34.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465588" Importe="389.82">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="389.827586" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="62.37"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274565" Cantidad="15.300307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.223957" Importe="171.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="171.732756" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274566" Cantidad="7.599846" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.223911" Importe="85.29">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="85.301719" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.64"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274567" Cantidad="90.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465555" Importe="1031.89">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1031.896551" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="165.10"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274568" Cantidad="63.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465555" Importe="722.32">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="722.327586" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="115.57"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274569" Cantidad="75.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465466" Importe="859.90">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="859.913793" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="137.58"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274570" Cantidad="26.800307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224125" Importe="300.80">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="300.810342" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="48.12"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274571" Cantidad="46.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224130" Importe="516.30">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="516.310344" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="82.60"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274572" Cantidad="26.800307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224125" Importe="300.80">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="300.810342" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="48.12"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274573" Cantidad="19.199692" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224138" Importe="215.49">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="215.499991" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274574" Cantidad="38.400153" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224174" Importe="431.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="431.008613" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="68.96"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274575" Cantidad="15.300307" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.223957" Importe="171.72">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="171.732756" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.47"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274576" Cantidad="39.900153" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.224017" Importe="447.83">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="447.844820" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="71.65"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274577" Cantidad="61.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465573" Importe="699.39">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="699.396551" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="111.90"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274578" Cantidad="78.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465512" Importe="894.30">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="894.310344" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="143.08"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274579" Cantidad="83.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465542" Importe="951.63">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="951.637931" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="152.26"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274580" Cantidad="44.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465454" Importe="504.47">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="504.482758" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="80.71"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274581" Cantidad="80.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.4655" Importe="917.24">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="917.241379" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="146.75"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274582" Cantidad="60.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.4655" Importe="687.93">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="687.931034" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="110.06"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274583" Cantidad="38.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465526" Importe="435.68">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="435.689655" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="69.71"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274584" Cantidad="38.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465526" Importe="435.68">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="435.689655" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="69.71"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274585" Cantidad="56.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465535" Importe="642.06">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="642.068965" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="102.73"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274586" Cantidad="30.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465666" Importe="343.96">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="343.965517" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="55.03"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274587" Cantidad="109.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465504" Importe="1249.73">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1249.741379" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="199.95"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274588" Cantidad="70.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465571" Importe="802.58">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="802.586206" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="128.41"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274589" Cantidad="57.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465438" Importe="653.52">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="653.534482" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="104.56"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274590" Cantidad="53.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465471" Importe="607.66">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="607.672413" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="97.22"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274591" Cantidad="51.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465490" Importe="584.73">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="584.741379" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="93.55"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274592" Cantidad="60.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.4655" Importe="687.93">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="687.931034" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="110.06"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274593" Cantidad="71.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465492" Importe="814.04">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="814.051724" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="130.24"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2016-274594" Cantidad="30.000000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="11.465666" Importe="343.96">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="343.965517" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="55.03"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="3815.51">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3815.51"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="1f3e279d-a4f8-41b9-8692-88449f26a11c" FechaTimbrado="2021-09-20T00:01:10" RfcProvCertif="DIG130917F9A" SelloCFD="TjK2O6eSEzs2OwiMXk7lGKq2DsumWZ3OYuxowaDG+X/QbzBSaG/j6zjBOW4MVGF4m4KyQhKTLV2uaMZWpdAHpkByLb5kIUJ4BGYZWzbI5vaLprcI2x9aw9kfgxdAvuGB7mcAAsgUm0OdO3dgRg2CXTA5pQ+7egcSvj3MHqHZXZcH8RyGuYqteziTPgFbIKiYzqgbbQP7FH3lvCimlB5N2LR+nsGXlhadZmaohqFMGYROpVobBC0L0mQYX7g3BVCW5g/cStlbQkTRo5Qf9yEpR7Az1LkENAwksPq821Q5t8YYxRY2wE5NJ536EgVCprsnn92Pso7m2IfkZv3pW4hmag==" NoCertificadoSAT="00001000000411500203" SelloSAT="PUato2T3ZcCEDrTA+yWN2J/fDpWlexibu95ttEdnTfUYew9odQVC57uoPo7N2AS3ztMLacX0ArpDjfLJsNg0eXX3vsiwXOHILrxVNstlQQmz8NRxvUfwrYX3Zyd/T4FImTAkwn8x1dN1NwPAX8jaUiyxd9CAcwXgahf8J9G3pkVlbWgWAUxKsZgHBLnxr3stsgkhbHPSfMAyHydKW2Nczm2xgshIZYaAfDx75c7eU9TX2X9qZcAvfMTA1bEjf8T7NpFMD5V5Uo/Ue6rV1Zcxo1CvzYItnbzfQL3yNwEkwv1GjwPu20vX/WI0kxUaoyuQNy1/Rz3xQ55f3kFkcosAHQ=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

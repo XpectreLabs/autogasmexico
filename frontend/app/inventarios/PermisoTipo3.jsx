@@ -25,7 +25,7 @@ export default function PermisoTipo3(props) {
   const [tipoBitacora,setTipoBitacora] = useState(0);
 
   const formatter = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
     currency: "USD"
   })
 
@@ -97,10 +97,10 @@ export default function PermisoTipo3(props) {
       <DataGrid
         rows={props.listTipo3.map((permiso) => ({
           ...permiso,
-          inventarioInicial: formatter.format(permiso.inventarioInicial),
-          compras: formatter.format(permiso.compras),
-          ventas: formatter.format(permiso.ventas),
-          inventarioFinal: formatter.format(permiso.inventarioFinal),
+          inventarioInicial: formatter.format(parseInt(permiso.inventarioInicial)),
+          compras: formatter.format(parseInt(permiso.compras)),
+          ventas: formatter.format(parseInt(permiso.ventas)),
+          inventarioFinal: formatter.format(parseInt(permiso.inventarioFinal)),
         }))}
         columns={columns}
         initialState={{

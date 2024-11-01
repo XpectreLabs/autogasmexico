@@ -14,6 +14,7 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [intentos, setIntentos] = React.useState(0);
   //alert(localStorage.getItem('email_user'));
   return (
     <Formik
@@ -24,22 +25,23 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
         }}
         validationSchema={Yup.object().shape({
           recoveryCode: Yup.string()
-            .min(8, "The recovery code have a minimum of 8 characters")
-            .required("*The recovery code is requiered"),
+            .min(8, "El código de recuperación tiene un mínimo de 8 caracteres.")
+            .required("*El código de recuperación es requerido"),
           password: Yup.string()
-            .min(3, "The password must have a minimum of 3 characters.")
-            .required("*The password is requiered"),
+            .min(8, "La contraseña debe tener un mínimo de 8 caracteres.")
+            .required("*La nueva contraseña es requerida"),
           confirmPassword:  Yup.string()
-            .oneOf([Yup.ref('password')],"Passwords and password repeat must be the same.")
-            .min(3, 'The confirm password must have a minimum of 3 characters.')
-            .required("* The confirm password is requiered."),
+            .oneOf([Yup.ref('password')],"La contraseña y la repetición de contraseña deben ser las mismas.")
+            .min(3, 'La confirmación de la contraseña debe tener un mínimo de 8 caracteres.')
+            .required("* La confirmación de la contraseña es requerida."),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/users/changePassword";
+          const scriptURL = "http://localhost:3001/api/v1/usuarios/changePassword";
           const recoveryCode = values.recoveryCode;
           const password = values.password;
           const id_user_change = localStorage.getItem('id_user_change');
-          const data = { recoveryCode, id_user_change, password};
+          let clave = localStorage.getItem('clave');
+          const data = { recoveryCode, id_user_change, password, clave };
           setLoading(true);
 
           fetch(scriptURL, {
@@ -56,17 +58,28 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
 
             if(data.message==="success") {
               setTypeOfMessage("success");
-              setTextError("Password has been changed");
+              setTextError("La contraseña se ha cambiado");
               setShowAlert(true);
               setTimeout(()=>{setPage("1")},3000)
             }
             else if(data.message==="schema") {
               setTextError(data.error);
               setShowAlert(true);
+
+              setTimeout(()=>{setShowAlert(false)},3000)
             }
             else {
               setTextError(data.message);
+              if(intentos>2) {
+                setTextError("Haz superado el número de intentos");
+                setTimeout(()=>{setPage("1")},3000)
+              }
+              else
+                setIntentos(intentos+1);
+              
               setShowAlert(true);
+
+              setTimeout(()=>{setShowAlert(false)},3000)
             }
             //setTimeout(()=>{setShowAlert(false)},3000)
           })
@@ -85,15 +98,15 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
           return (
             <>
               <div className='fadeIn'>
-                <a onClick={ ()=> { setPage("1");} } className={styles.Link}>Back</a>
+                <a onClick={ ()=> { setPage("1");} } className={styles.Link}>{"<"} Regresar</a>
 
                 <div>
                   <figure className={styles.Logo}>
-                    <img src="https://assets.website-files.com/640e73434d6821d825eadf94/640e8406f661a7392010e264_Vectors-Wrapper.svg" alt="" />
+                    <img src="img/logo.jpg" alt="" />
                   </figure>
                 </div>
 
-                {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Message:</strong><br />{textError}</p>):null}
+                {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Mensaje:</strong><br />{textError}</p>):null}
 
                 <Form
                   className={styles.form}
@@ -103,21 +116,21 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
                   onSubmit={handleSubmit}
                 >
                     <TextField
-                      placeholder="Recovery code"
+                      placeholder="Código de recuperación"
                       required
                       id="recoveryCode"
-                      label="Recovery code"
+                      label="Código de recuperación"
                       name="recoveryCode"
                       size="small"
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                     <TextField
-                      placeholder="New password"
+                      placeholder="Nueva contraseña"
                       type="Password"
                       required
                       id="password"
-                      label="New password"
+                      label="Nueva contraseña"
                       name="password"
                       size="small"
                       onChange={handleChange}
@@ -125,11 +138,11 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
                     />
 
                     <TextField
-                      placeholder="Repeat password"
+                      placeholder="Confirmación la contraseña"
                       type="Password"
                       required
                       id="confirmPassword"
-                      label="Confirm password"
+                      label="Confirmación la contraseña"
                       name="confirmPassword"
                       size="small"
                       onChange={handleChange}
@@ -150,7 +163,7 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
                     <input
                       className={styles.Btn}
                       type="submit"
-                      value="Change"
+                      value="Cambiar"
                     />
                   </Form>
                 </div>

@@ -12,11 +12,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import NativeSelect from '@mui/material/NativeSelect';
 import dayjs from 'dayjs';
 import { compareAsc, format } from "date-fns";
 import * as Yup from "yup";
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 export default function EditReporteModal({ isOpen, onClose, reporteData,reporteIdd }) {
   const [loading, setLoading] = React.useState(false);
@@ -26,8 +27,6 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
   const [listPermisos,setListPermisos] = React.useState([]);
   const [fechaInicioReporte,setFechaInicioReporte] = React.useState(convertirFecha(reporteData.fecha_inicio2));
   const [fechaTerminacionReporte,setFechaTerminacionReporte] = React.useState(convertirFecha(reporteData.fecha_terminacion2));
-
-  
 
     function convertirFecha (fecha) {
       return fecha!==undefined?(fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2)):"";
@@ -48,17 +47,18 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
       return "";
     }
 
-    const descargarJSON = (dataJson,nombre_archivo) => {
-      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json;charset=utf-8' });
-      const jsonURL = URL.createObjectURL(jsonData);
-      const link = document.createElement('a');
-      //const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
+    const descargarJSON = async (dataJson,nombre_archivo) => {
+      const zip = new JSZip();
+      const archivo = nombre_archivo+".json";
+      const jsonString = JSON.stringify(dataJson, null, 2);
+      zip.file(archivo, jsonString);
 
-      link.href = jsonURL;
-      link.download = `${nombre_archivo}.json`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      try {
+        const content = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+        saveAs(content, nombre_archivo+".zip");
+      } catch (err) {
+        console.error("Error al generar el ZIP:", err);
+      }
     }
 
     function data() {
@@ -301,7 +301,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
               >
                 <Form id="formNewReport" className={styles.form} onSubmit={handleSubmit}>
                   <h2 className={styles.Title}>Editar reporte</h2>
-                  <NativeSelect
+                  {/* <NativeSelect
                     className={`Fecha ${styles.select2} ${styles.Mr}`}
                     required
                     value={values.permiso_id}
@@ -512,21 +512,6 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     size="small"
                     type='number'
                   />
-                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
-                      <DateTimePicker
-                        className={`AjusteFecha`}
-                        placeholder="Fecha y hora de estas mediciones"
-                        label="Fecha y hora de estas mediciones"
-                        id="fechayhoraestamedicionmes"
-                        name="fechayhoraestamedicionmes"
-                        value={dayjs(values.fechayhoraestamedicionmes)}
-                        onChange={(value) => {
-                          setFieldValue('fechayhoraestamedicionmes', value, true);
-                        }}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider> */}
                   <TextField
                     className={`InputModal ${styles.Mr}`}
                     required
@@ -562,49 +547,13 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
                     onChange={handleChange}
                     onBlur={handleBlur}
                     size="small"
-                  />
-
-                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      format="DD/MM/YYYY"
-                      required
-                      className={`InputModal Fecha ${styles.Mr}`}
-                      placeholder="Fecha inicio reporte"
-                      label="Fecha inicio reporte"
-                      id="fecha_inicio"
-                      name="fecha_inicio"
-                      value={values.fecha_inicio}
-                      //defaultValue={values.fecha_emision}
-                      onChange={(value) => {
-                        setFieldValue('fecha_inicio', value, true);
-                      }}
-                    />
-                  </LocalizationProvider>
-
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      format="DD/MM/YYYY"
-                      required
-                      className={`InputModal Fecha`}
-                      placeholder="Fecha terminación reporte"
-                      label="Fecha terminación reporte"
-                      id="fecha_terminacion"
-                      name="fecha_terminacion"
-                      value={values.fecha_terminacion}
-                      //defaultValue={values.fecha_emision}
-                      onChange={(value) => {
-                        setFieldValue('fecha_terminacion', value, true);
-                      }}
-                    />
-                  </LocalizationProvider> */}
-
-
+                  /> */}
 
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       views={['month','year']}
                       required
-                      className={`InputModal Fecha`}
+                      className={`Fecha`}
                       placeholder="Fecha del reporte"
                       label="Fecha del reporte"
                       id="fecha_reporte"

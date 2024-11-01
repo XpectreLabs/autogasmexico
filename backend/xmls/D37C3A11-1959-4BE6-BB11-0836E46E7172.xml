@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cfdi:Comprobante Version="3.3" Serie="FRF" Folio="11005" Fecha="2021-07-15T20:40:34" Sello="DqARHs/KoEGNQOV7+pz/LeF2Ej5yHImKrbDy6rALSfFH1jn+LlCmGIYYo8LQYhz1HHK4kNf6/8yTxUgomcxi/MbtqDs5/K7B54NE28rtCeE7IGW3jkcEixvZ9E6yyJd3/K5kuyEd/Wgd/opcOSul84yrxoFHVhoGaP05GeW4mp840SjBxj34o1E0kSEEpRhXUgXartIMCeOJE6Q+t0wQXaRuNxt1Glh8nLdjPk9yOUretB0FQ8cwnqxd2bQ2QLa8mCA6ym7SGYYULsjy3gqBD/zbtM0gA4Zz/yvmr/Sj9wSxCgG1ecNlUaLeE8SLhHhOGFJ8H8L1vXpYX2OIPxHWQw==" FormaPago="04" NoCertificado="00001000000507080106" Certificado="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" SubTotal="339.66" Moneda="MXN" Total="394.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="06600" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " xmlns:ine="http://www.sat.gob.mx/ine" xmlns:donat="http://www.sat.gob.mx/donat" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:detallista="http://www.sat.gob.mx/detallista" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:iedu="http://www.sat.gob.mx/iedu" xmlns:pago10="http://www.sat.gob.mx/Pagos" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cfdi:Emisor Rfc="EKM1404018J1" Nombre="ERIC KAYSER MÉXICO, S.A.P.I. DE C.V." RegimenFiscal="601"/>
+    <cfdi:Receptor Rfc="AME050309Q32" Nombre="Autogas México SA de CV" UsoCFDI="G03"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="OREJA" ValorUnitario="33.620689" Importe="33.620689">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="33.620689" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="5.37931"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="PLIE CHOC OSC" ValorUnitario="38.793103" Importe="38.793103">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="38.793103" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="6.206896"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="CROISSANT" ValorUnitario="29.310344" Importe="29.310344">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="29.310344" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4.689655"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="TARTA DE MANZANA" ValorUnitario="57.75862" Importe="57.75862">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="57.75862" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9.241379"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="AGUA NATURAL" ValorUnitario="28.448275" Importe="28.448275">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="28.448275" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4.551724"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="CHOCOLATIN" ValorUnitario="34.482758" Importe="34.482758">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="34.482758" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="5.517241"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="TE CHAI LATTE" ValorUnitario="50" Importe="50">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="8"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ClaveProdServ="90101501" Cantidad="1" ClaveUnidad="E48" Descripcion="FINANCIER FRAMBUESA" ValorUnitario="67.241379" Importe="67.241379">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="67.241379" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="10.75862"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="54.34">
+        <cfdi:Traslados>
+            <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="54.34"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="D37C3A11-1959-4BE6-BB11-0836E46E7172" FechaTimbrado="2021-07-15T20:40:34" RfcProvCertif="EFA100217SU5" SelloCFD="DqARHs/KoEGNQOV7+pz/LeF2Ej5yHImKrbDy6rALSfFH1jn+LlCmGIYYo8LQYhz1HHK4kNf6/8yTxUgomcxi/MbtqDs5/K7B54NE28rtCeE7IGW3jkcEixvZ9E6yyJd3/K5kuyEd/Wgd/opcOSul84yrxoFHVhoGaP05GeW4mp840SjBxj34o1E0kSEEpRhXUgXartIMCeOJE6Q+t0wQXaRuNxt1Glh8nLdjPk9yOUretB0FQ8cwnqxd2bQ2QLa8mCA6ym7SGYYULsjy3gqBD/zbtM0gA4Zz/yvmr/Sj9wSxCgG1ecNlUaLeE8SLhHhOGFJ8H8L1vXpYX2OIPxHWQw==" NoCertificadoSAT="00001000000504041684" SelloSAT="HTAOta5HF4QhivJP/RSUtWQB7NCvNgzR5tAtfqjYuUszSmi3tJwaYC9vTbIwVRHP23Vhx80WTAW8OrdbN922Q+DtM3t7yUGn6AcB4OQspx5ORvFcZo46KSJVVHy+f1f+j33vj/pLJ32qqwZcrtWO7NEFVIyRVAn3JAcE4+Mi0NyU3IbNybIu6dMOO8m6ex04Lns2JvvdZYV4TeGeYdWZggIk13vPpphcj00tbZEmPC6sWdC3DRjc3QJdI6AfiUF2jHEVwFEN9qMKBdkttB6eJ8o5UlpaGhcPUDpDqrTg1tBxsmOKChNYo1EdATeFVqImvVurdKYuQtx30opnIFT4GQ=="/></cfdi:Complemento></cfdi:Comprobante>

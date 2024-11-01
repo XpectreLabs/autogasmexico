@@ -21,12 +21,12 @@ this.enviar_mail = (codigo,email) => {
     let mail_options = {
         from: 'recovery@xpectrelabs.com',
         to: email,
-        subject: 'Password recovery request',
+        subject: 'Solicitud de recuperación de contraseña',
         html: `
         <table border="0" cellpadding="0" cellspacing="0" width="600px" background-color="#2d3436" bgcolor="#2d3436">
         <tr height="200px">
             <td bgcolor="" width="600px">
-                <h1 style="color: #fff; text-align:center">Password recovery code</h1>
+                <h1 style="color: #fff; text-align:center">Código de recuperación de contraseña</h1>
                 <p  style="color: #fff; text-align:center">
                     <span style="color: #e1f292">${codigo}</span> 
                 </p>
@@ -34,7 +34,7 @@ this.enviar_mail = (codigo,email) => {
         </tr>
         <tr bgcolor="#fff">
             <td style="text-align:center">
-                <p style="color: #000">If you did not request this, ignore</p>
+                <p style="color: #000">Si no lo solicitaste, ignóralo</p>
             </td>
         </tr>
         </table>

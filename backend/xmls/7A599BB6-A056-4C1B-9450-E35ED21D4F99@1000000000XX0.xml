@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2021-10-13T11:54:06" Folio="2700202071899101021" FormaPago="04" LugarExpedicion="11520" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000502595719" Sello="W1claRx4nnUXrLlkpcHfznEY4so3X1HYYRo6Vcp4WLjJ3dt+aY835lhJMela+vJtCV7vRn+ZlLYhHrXBHlpqkbQKqynaCjC/N3kVZeuExB93eLysbLLqZrzczzFbL+G589ZS3be3Lj4qnwB/mfbO2DVgDOCmDmXBU6vOGtWxfQpz8kess/ZXT7RV3oDaIrFcKcguK4RnilWaRixDSJsEhCmXyw/B6oH6n548iiVnJqgwvt4bK+SNakwMdP6F+NjtCgGYRwa8XHylwNTZuslleiETKbFxlR/KxJrpm850wsjpEDrjBvexqepoxoDVV2yWIfDP80BShHTnDjrt0ZbZRg==" SubTotal="2469.83" TipoDeComprobante="I" Total="2865.00" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="Baseco, S.A.P.I. de C.V." RegimenFiscal="601" Rfc="BAS0108275N9" />
+    <cfdi:Receptor Nombre="Autogas México S.A. de C.V." Rfc="AME050309Q32" UsoCFDI="G03" />
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102400" ClaveUnidad="H87" Descripcion="MENS 3PK FLAT KNIT N" Importe="404.31" NoIdentificacion="058665530684" Unidad="UNIT" ValorUnitario="404.31">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="404.31" Importe="64.69" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  1600  1002908" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102303" ClaveUnidad="H87" Descripcion="MODERN BRIEF" Importe="283.62" NoIdentificacion="7506501910341" Unidad="UNIT" ValorUnitario="283.62">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="283.62" Importe="45.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1003971" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102304" ClaveUnidad="H87" Descripcion="LGHT LINED BRALETTE" Importe="749.14" NoIdentificacion="011335227581" Unidad="UNIT" ValorUnitario="749.14">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="749.14" Importe="119.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1006081" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102304" ClaveUnidad="H87" Descripcion="LGHT LINED BRALETTE" Importe="749.14" NoIdentificacion="7506501931667" Unidad="UNIT" ValorUnitario="749.14">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="749.14" Importe="119.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1005271" />
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="53102303" ClaveUnidad="H87" Descripcion="HIPSTER" Importe="283.62" NoIdentificacion="7506501906283" Unidad="UNIT" ValorUnitario="283.62">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="283.62" Importe="45.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+            <cfdi:InformacionAduanera NumeroPedimento="21  51  3862  1002926" />
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="395.17">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="395.17" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    
+<cfdi:Complemento><tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="7A599BB6-A056-4C1B-9450-E35ED21D4F99" FechaTimbrado="2021-10-13T11:54:07" SelloCFD="W1claRx4nnUXrLlkpcHfznEY4so3X1HYYRo6Vcp4WLjJ3dt+aY835lhJMela+vJtCV7vRn+ZlLYhHrXBHlpqkbQKqynaCjC/N3kVZeuExB93eLysbLLqZrzczzFbL+G589ZS3be3Lj4qnwB/mfbO2DVgDOCmDmXBU6vOGtWxfQpz8kess/ZXT7RV3oDaIrFcKcguK4RnilWaRixDSJsEhCmXyw/B6oH6n548iiVnJqgwvt4bK+SNakwMdP6F+NjtCgGYRwa8XHylwNTZuslleiETKbFxlR/KxJrpm850wsjpEDrjBvexqepoxoDVV2yWIfDP80BShHTnDjrt0ZbZRg==" NoCertificadoSAT="00001000000505600468" SelloSAT="JyFUxb7KIzHG8e/a33G+7vJ5abmarzTzfeGP2j6BpAAfEnHqkMR2aNe0Ob+uTTayVu4F1Pc6xIyCEjEepxur9DENCWQnUKjoep/lN2UzZ5O/4DQFYbPGCvl8fDg2cP02b8dvUr2+npnfzYMkD49gyXxSA7xZmpqjLYsHZtn5LEHoGD+ySyOI6sllA9DwggqagnvzwKUnSFcHz2KIeZlkLygF9ccQtTijlJSeKrJ4/+qJxj/r6W1xzy/a4tqMOmdKAsU5XxkorHMAPqO+PD1kkAjUr8L/MSB831qol0puOU47JqwCG4BgWNmLX40uiFg4KtL7QpyayRcHES7aGNSm7w==" RfcProvCertif="EME000602QR9" /></cfdi:Complemento></cfdi:Comprobante>

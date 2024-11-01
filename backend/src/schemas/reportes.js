@@ -20,7 +20,7 @@ const schemaCreate = joi.object({
   composdebutanoengaslp: joi.number().required(),
   fechayhoraestamedicionmes: joi.date().required(),
   fecha_reporte: joi.date().required(),
-  usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
+  usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F/ ]{3,100}$')).required(),
   tipoevento: joi.number().required(),
   descripcionevento: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   fecha_inicio: joi.date().required(),
@@ -55,7 +55,7 @@ const schemaUpdate = joi.object({
   fechayhoraestamedicionmes: joi.date().required(),
   fecha_reporte: joi.date().required(),
   numeroregistro: joi.number().required(),
-  usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
+  usuarioresponsable: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F/ ]{3,100}$')).required(),
   tipoevento: joi.number().required(),
   descripcionevento: joi.string().pattern(new RegExp('^[a-zA-Z0-9 ]{3,100}$')).required(),
   fecha_inicio: joi.date().required(),
@@ -63,6 +63,7 @@ const schemaUpdate = joi.object({
   tipo_reporte_id: joi.number().min(1).required(),
   reporte_id: joi.number().min(1).required(),
   user_id: joi.number().min(1).required(),
+  num_modificaciones: joi.number().required(),
 });
 
  const schemaIdReporte = joi.object({

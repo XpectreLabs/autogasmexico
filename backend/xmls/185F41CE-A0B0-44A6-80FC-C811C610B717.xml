@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante Certificado="MIIGEDCCA/igAwIBAgIUMDAwMDEwMDAwMDA1MDM4OTAzMTkwDQYJKoZIhvcNAQELBQAwggGEMSAwHgYDVQQDDBdBVVRPUklEQUQgQ0VSVElGSUNBRE9SQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxKjAoBgkqhkiG9w0BCQEWG2NvbnRhY3RvLnRlY25pY29Ac2F0LmdvYi5teDEmMCQGA1UECQwdQVYuIEhJREFMR08gNzcsIENPTC4gR1VFUlJFUk8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQQ0lVREFEIERFIE1FWElDTzETMBEGA1UEBwwKQ1VBVUhURU1PQzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMVwwWgYJKoZIhvcNAQkCE01yZXNwb25zYWJsZTogQURNSU5JU1RSQUNJT04gQ0VOVFJBTCBERSBTRVJWSUNJT1MgVFJJQlVUQVJJT1MgQUwgQ09OVFJJQlVZRU5URTAeFw0yMDA0MjgyMDI1NTRaFw0yNDA0MjgyMDI1NTRaMIHeMSYwJAYDVQQDEx1aQVJBIE1FWElDTyBDT05UUkFUTyAxIEEgRU4gUDEmMCQGA1UEKRMdWkFSQSBNRVhJQ08gQ09OVFJBVE8gMSBBIEVOIFAxJjAkBgNVBAoTHVpBUkEgTUVYSUNPIENPTlRSQVRPIDEgQSBFTiBQMSUwIwYDVQQtExxaTUM5NjA4MDE1MzggLyBPT01FNzIwNzA0QURBMR4wHAYDVQQFExUgLyBPT01FNzIwNzA0SERGU1JEMDMxHTAbBgNVBAsTFFpBUkEgTUVYSUNPIENPTlRSQVRPMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhP28HPZ9MYXTPJhCXh+ujq9btnoZLs1IkyBSJ+/jNR+laeMMLpbVZTROm7LGHB9Cd6++cLKuRf2F1owyrlagA1VzDX4idTp9PD1FzoatqvCLBpCTHSGfHP6GD4YsNQDcZlIBUu8iqqUsiGOULezYibWjSTTb1VxVUmijVmY0iYrcnstg6rQ9GBmfhXOXhGmCmonsrXr92Gmkr5nDg4WKizKzQ4mDXtq3DrWL8cBLuqWIPT7JCi+ScGEslNOK5B7252S6GTg4H2Jk/Dm0inutQkAeQ1cnPv9v90BScY5n4JALMIpBblQSCTknM6MdlFUmZTKhQEPVIsVK2rk7bXvIWQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAi9IQpJlWg6Kj4JVpeJff4UqO3b8xCrWzBuSckjr75icpeiInXuqFLu2cqz4+/pFKIjBRd+MPTTMtqwdNHb0nEE42APYTbYVpn9HGVC3XrrVTCtFaoaaW4IXv03T29i3ZVUGweHsfmyjpw3G/5sJFyNiOnDXMS6VMsDySoVe9lhg2swSWyE0Kd8YdJDbIy2keke5L9hWKeZgkw1cxqaARCokZabeKygLCboy3isQ6ngIJmMgdoxPX+RKSQPgM2GrfJb1aDOpbogRt8CrmuLPTq6UheWS2DsV/ExPYhibuTVisCbZmAu9R7BddxTRELq52SWoIMv1r00uFTYE4GlD6lmeDNyCZuu9rkWXBRJdZPzSoCORVIN7suiKiDPm8mJGQT+Pw32ESIzmX8k4n/u1hL/sfXz+PdmuYHpMkFIE5+et//5CM6fSeyr5etf1eO/5B9r4KX2t7QTp5z0RPFC0TQudQ1f/o/MEYkxtUXUpFoqrivmredsVNdXtxGZKfm+Mj9POo+S+sv06aGOEAPUNfwgiSifbweP/Bq6naVEMCgB0mvllRQv+Wd9KjMJfVEFbEIV3qA7R3SDA1yC0T2JOYYYNj4eDaBioN1sedOaTVG0HUALt4iK/wFAHwsO2ApQ5vXxNLxWM5HE9wYLLcWvkEPlY46sG8Z/t82uL7brDGx+c=" CondicionesDePago="Pago en una sola exhibición" Fecha="2021-10-26T13:31:34" Folio="09741103L9741 / 87136" FormaPago="01" LugarExpedicion="02300" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000503890319" Sello="gFDOZaKK+DWGK7UukuV+Iuzqq0fQDoqjYhKbD787CnA7KDHitO67RFFa6EgkFftvvqbxqFA1Uu26HYiS0XOqFMtH+d7+Q9YloVNrAIXbgQic88MPDw5IBILS/+u85pjP3YyMeOcKE6agQsYkKIoa3IH6qIRwS35XZTRzYujx9+rPO6qXJE8DexblYdrCDwC4S2ydC2Q3GQZjxkeQxNRZduRa5VF+/jmYUGMgfgC2Wt6lwMbNLwpXNgAPZ4DZWObCJx0qJT3oyEPBpCcN04eHIKoIGZw/alW+JVpPtMnIHzwiftudrhL8+pJ3Hvr5416+jB8bAk1i0InxClqfxGVeLQ==" SubTotal="1979.31" TipoDeComprobante="I" Total="2296.00" Version="3.3" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="ZARA MEXICO CONTRATO 1, A EN P" RegimenFiscal="601" Rfc="ZMC960801538"/>
+    <cfdi:Receptor Nombre="AUTOGAS MEXICO S.A DE C.V" Rfc="AME050309Q32" UsoCFDI="G03"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1.0000" ClaveProdServ="01010101" ClaveUnidad="EA" Descripcion="BOLSOS" Importe="688.79" NoIdentificacion="1623881000103" Unidad="EA" ValorUnitario="688.79">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="688.79" Importe="110.21" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.0000" ClaveProdServ="53101500" ClaveUnidad="EA" Descripcion="PANTALON" Importe="516.38" NoIdentificacion="0503946580302" Unidad="EA" ValorUnitario="516.38">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="516.38" Importe="82.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.0000" ClaveProdServ="53101500" ClaveUnidad="EA" Descripcion="PANTALON" Importe="516.38" NoIdentificacion="0364321980036" Unidad="EA" ValorUnitario="516.38">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="516.38" Importe="82.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.0000" ClaveProdServ="53103000" ClaveUnidad="EA" Descripcion="CAMISETA" Importe="257.76" NoIdentificacion="0442483080003" Unidad="EA" ValorUnitario="257.76">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="257.76" Importe="41.24" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="316.69">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="316.69" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    
+<cfdi:Complemento><tfd:TimbreFiscalDigital FechaTimbrado="2021-10-26T13:32:02" NoCertificadoSAT="00001000000505600468" RfcProvCertif="EME000602QR9" SelloCFD="gFDOZaKK+DWGK7UukuV+Iuzqq0fQDoqjYhKbD787CnA7KDHitO67RFFa6EgkFftvvqbxqFA1Uu26HYiS0XOqFMtH+d7+Q9YloVNrAIXbgQic88MPDw5IBILS/+u85pjP3YyMeOcKE6agQsYkKIoa3IH6qIRwS35XZTRzYujx9+rPO6qXJE8DexblYdrCDwC4S2ydC2Q3GQZjxkeQxNRZduRa5VF+/jmYUGMgfgC2Wt6lwMbNLwpXNgAPZ4DZWObCJx0qJT3oyEPBpCcN04eHIKoIGZw/alW+JVpPtMnIHzwiftudrhL8+pJ3Hvr5416+jB8bAk1i0InxClqfxGVeLQ==" SelloSAT="kkV3XalxBRaKedRrvLiYFefspN5goFox1ExcwWuMhiIHC4W/1Hxalx+bpJ8QuxKdlWCQH2r5rUui+ctYYtETzKtOlNykH/lcfawzXWafQmADOrQ3qgn20ovitwJSohJl+qPiFpWBQcMv8Pl78VPDIIOsCkOgeruEmuRzAe72ihL/31eHEp1P7gGu3KafMajQsaBBXDNZ59y2aZ3L5Jn/3shqBeybwQEsrQbMaKkOvSO/iGuV9X59SBVUpJHP+B1HdS3UrYnRgONRtq+0oHjZLph0EppAh7bChlYRtasx64QDk42oVkp79ZLdbhkBDTunz2BjsuG3H4eg2uhBweVleg==" UUID="185F41CE-A0B0-44A6-80FC-C811C610B717" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/></cfdi:Complemento><cfdi:Addenda>
+        <INDITEX xmlns="http://repository.edicomnet.com/schemas/mx/cfd/addenda" xsi:schemaLocation="http://repository.edicomnet.com/schemas/mx/cfd/addenda http://repository.edicomnet.com/schemas/mx/cfd/addenda/INDITEX.xsd">
+            <Tienda>
+                <codigoTienda>09741</codigoTienda>
+                <nombreTienda>E_Z MEXICO</nombreTienda>
+            </Tienda>
+            <TPV>1</TPV>
+            <TipoDocumento>03</TipoDocumento>
+            <numeroTicket>L9741 / 87136</numeroTicket>
+            <fechaTicket>2021-10-26</fechaTicket>
+            <horaTicket>13:31:34+02:00</horaTicket>
+            <condicionesDePago>Pago en una sola exhibición</condicionesDePago>
+            <formaDePago>01</formaDePago>
+            <interlocutor tipoInterlocutor="emisor">
+                <datosIdentificacion>
+                    <nombre>ZARA MEXICO CONTRATO 1, A EN P</nombre>
+                    <correo>contact.mx@zara.com</correo>
+                    <rfc>ZMC960801538</rfc>
+                </datosIdentificacion>
+                <datosDomicilio>
+                    <calle>C/ Poniente 146, nº 730, Colonia Industrial Vallejo, Delegación Azcapotzalco</calle>
+                    <pais>MEXICO</pais>
+                    <codigoPostal>02300</codigoPostal>
+                </datosDomicilio>
+            </interlocutor>
+            <interlocutor tipoInterlocutor="receptor">
+                <datosIdentificacion>
+                    <nombre>AUTOGAS MEXICO S.A DE C.V</nombre>
+                    <correo>FACTURAS@MISKUENTAS.COM</correo>
+                    <rfc>AME050309Q32</rfc>
+                </datosIdentificacion>
+                <datosDomicilio>
+                    <pais>MEXICO</pais>
+                </datosDomicilio>
+            </interlocutor>
+            <concepto numConcepto="1">
+                <datosConcepto>
+                    <seccion>1</seccion>
+                    <tipoProducto>0</tipoProducto>
+                    <cantidad>1</cantidad>
+                    <unidadVenta>EA</unidadVenta>
+                    <valorUnitario>688.79</valorUnitario>
+                    <importe>688.79</importe>
+                    <codigoBarras>1623881000103</codigoBarras>
+                    <descripcion>BOLSOS</descripcion>
+                </datosConcepto>
+                <impuesto tipoImpuesto="002">
+                    <tasaImpuesto>0.16</tasaImpuesto>
+                    <importeImpuesto>110.21</importeImpuesto>
+                    <categoriaImpuesto>trasladado</categoriaImpuesto>
+                </impuesto>
+            </concepto>
+            <concepto numConcepto="2">
+                <datosConcepto>
+                    <seccion>1</seccion>
+                    <tipoProducto>0</tipoProducto>
+                    <cantidad>1</cantidad>
+                    <unidadVenta>EA</unidadVenta>
+                    <valorUnitario>516.38</valorUnitario>
+                    <importe>516.38</importe>
+                    <codigoBarras>0503946580302</codigoBarras>
+                    <descripcion>PANTALON</descripcion>
+                </datosConcepto>
+                <impuesto tipoImpuesto="002">
+                    <tasaImpuesto>0.16</tasaImpuesto>
+                    <importeImpuesto>82.62</importeImpuesto>
+                    <categoriaImpuesto>trasladado</categoriaImpuesto>
+                </impuesto>
+            </concepto>
+            <concepto numConcepto="3">
+                <datosConcepto>
+                    <seccion>1</seccion>
+                    <tipoProducto>0</tipoProducto>
+                    <cantidad>1</cantidad>
+                    <unidadVenta>EA</unidadVenta>
+                    <valorUnitario>516.38</valorUnitario>
+                    <importe>516.38</importe>
+                    <codigoBarras>0364321980036</codigoBarras>
+                    <descripcion>PANTALON</descripcion>
+                </datosConcepto>
+                <impuesto tipoImpuesto="002">
+                    <tasaImpuesto>0.16</tasaImpuesto>
+                    <importeImpuesto>82.62</importeImpuesto>
+                    <categoriaImpuesto>trasladado</categoriaImpuesto>
+                </impuesto>
+            </concepto>
+            <concepto numConcepto="4">
+                <datosConcepto>
+                    <seccion>1</seccion>
+                    <tipoProducto>0</tipoProducto>
+                    <cantidad>1</cantidad>
+                    <unidadVenta>EA</unidadVenta>
+                    <valorUnitario>257.76</valorUnitario>
+                    <importe>257.76</importe>
+                    <codigoBarras>0442483080003</codigoBarras>
+                    <descripcion>CAMISETA</descripcion>
+                </datosConcepto>
+                <impuesto tipoImpuesto="002">
+                    <tasaImpuesto>0.16</tasaImpuesto>
+                    <importeImpuesto>41.24</importeImpuesto>
+                    <categoriaImpuesto>trasladado</categoriaImpuesto>
+                </impuesto>
+            </concepto>
+            <subTotal>1979.31</subTotal>
+            <totalImpuestos>316.69</totalImpuestos>
+            <importeTotal>2296</importeTotal>
+            <importeTotalDivisa>
+                <importeTotal>2296</importeTotal>
+                <divisa>MXN</divisa>
+            </importeTotalDivisa>
+            <totalUnidades>4</totalUnidades>
+            <metodoPago>
+                <descripcion>01</descripcion>
+                <importePago>2296</importePago>
+                <divisaPago>MXN</divisaPago>
+            </metodoPago>
+            <E-Commerce>
+                <order_id>0</order_id>
+                <contact_details>
+                    <direccion_web>www.zara.com</direccion_web>
+                    <e_Mail>contact.mx@zara.com</e_Mail>
+                </contact_details>
+                <id_cadena>1</id_cadena>
+                <order_barcode>0</order_barcode>
+            </E-Commerce>
+        </INDITEX>
+    </cfdi:Addenda></cfdi:Comprobante>

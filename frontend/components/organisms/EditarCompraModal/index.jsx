@@ -20,11 +20,9 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
-  const [values, setValues] = React.useState({});
-
+  const [listaProveedores,setListaProveedores] = React.useState([]);
 
   function data() {
     const user_id = localStorage.getItem('user_id');
@@ -64,6 +62,45 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
     });
   }
 
+  function listProveedores() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/proveedores/"+user_id+"/listaproveedores";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        console.log("data.listProveedores",data.listProveedores);
+        setListaProveedores(data.listProveedores);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
   const convertirFecha = (fecha) => {
     return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
   }
@@ -74,6 +111,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
 
   useEffect(() => {
     data();
+    listProveedores();
   }, []);
 
 
@@ -138,6 +176,8 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           delete values.kilos;
           delete values.permisos;
           delete values.permisoComprador;
+          delete values.permiso;
+          delete values.permiso_cre;
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;
@@ -149,7 +189,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           console.log(data);
           setLoading(true);
 
-          setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
           console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
@@ -168,7 +207,6 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron actualizados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -289,21 +327,9 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                     size="small"
                     type='number'
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    placeholder="Permiso"
-                    required
-                    id="permiso"
-                    label="Permiso"
-                    name="permiso"
-                    value={values.permiso}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
 
                   <NativeSelect
-                    className={`Fecha ${styles.select2}`}
+                    className={`Fecha ${styles.select2} ${styles.Mr}`}
                     required
                     value={values.permiso_id}
                     onChange={handleChange}
@@ -436,12 +462,11 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
                   }}
                 >
                   <option aria-label="None" value="">Proveedor *</option>
-                  <option value={1}>DISTRIBUIDORA POTOSINA</option>
-                  <option value={2}>MER MAC GAS</option>
-                  <option value={3}>TRANSCAMELLO</option>
-                  <option value={4}>ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV</option>
-                  <option value={5}>MER MAC GAS</option>
-                  <option value={6}>OVI GAS</option>
+                  {listaProveedores.map((proveedor) => {
+                      return (
+                        <option value={proveedor.proveedor_id} selected={proveedor.proveedor_id===abastecimientoData.proveedor_id?true:false}>{proveedor.name}</option>
+                      );
+                    })}
                 </NativeSelect>
 
 

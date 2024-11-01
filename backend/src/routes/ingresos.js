@@ -40,8 +40,6 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   }
   else
     return res.status(400).json({ message:"schema", error: "Ya existe una venta registrada con este UUID"});
-
-
 });
 
 router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
@@ -434,7 +432,8 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                   data: {
                     name: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre,
                     rfc: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc,
-                    direccion: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor,
+                    //direccion: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor?req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor:"",
+                    direccion: "Sin registrar",
                     tipo_situacion_fiscal: req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor,
                     phone: null,
                     email: null,

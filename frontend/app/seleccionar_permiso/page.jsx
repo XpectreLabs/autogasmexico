@@ -21,7 +21,7 @@ export default function Perfil() {
   const router = useRouter();
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [permiso,setPermiso] = useState("1");
+  const [permiso,setPermiso] = useState("3");
   const [listPermisos,setListPermisos] = useState([]);
 
   function Logout() {
@@ -74,7 +74,6 @@ export default function Perfil() {
   }
 
   const btnSeleccionar = () =>{
-    console.log();
     localStorage.setItem('permiso_id', permiso);
     localStorage.setItem('permiso', listPermisos[permiso-1].permiso);
     router.push("/compras");
@@ -108,6 +107,7 @@ export default function Perfil() {
                       }}
                     >
                       {listPermisos.map((permiso) => {
+                        if(permiso.permiso_id===3)
                         return (
                           <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
                         );

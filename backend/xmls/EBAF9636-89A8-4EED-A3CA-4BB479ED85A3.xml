@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:detallista="http://www.sat.gob.mx/detallista" xmlns:donat="http://www.sat.gob.mx/donat" xmlns:iedu="http://www.sat.gob.mx/iedu" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:ine="http://www.sat.gob.mx/ine" xmlns:pago10="http://www.sat.gob.mx/Pagos" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2021-10-10T12:16:00" Folio="18096" FormaPago="30" LugarExpedicion="42083" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000502350676" Sello="dA8H+3Xb6HPlk/W8YG2FXL+IonqF5ZWG2TPpz2DIALA9q8yyvwwa4iQdfnZK8Y/0pQdoU2GCBc3wCJMzRR/zZY2/f7leR1ALpgcsPL8puB7wwav2KdFr7G+Z5ynVWtgVDlivYQEVx+wiKJIBGRqygM2LhHPj/rNQYE1yI1EHYQoen7xe4uD2CfFw0/IR87KK5wja344MYcf9wvbzg/02smSEjaTb0jXDSSYI+6b3ulgZ/qMEleygEcfJKZzPheTUOXrpD0CjTb1rubgkcYuN/sF9jRfHdujyLm99yDfkul6U7iKn/ZA6vyyobzWgndEV0AG2hPaPM5IMWVdNjrDftg==" Serie="CPHB33" SubTotal="1648.00" TipoDeComprobante="I" Total="1952.88" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd ">
+    <cfdi:Emisor Nombre="CAMINO REAL PACHUCA SA DE CV" RegimenFiscal="623" Rfc="CRP090511HY5"/>
+    <cfdi:Receptor Nombre="AUTOGAS MEXICO S.A DE C.V" Rfc="AME050309Q32" UsoCFDI="G03"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1" ClaveProdServ="90111501" ClaveUnidad="ROM" Descripcion="Habitacion" Importe="1648" Unidad="Habitación" ValorUnitario="1648">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="1648" Importe="263.68" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="263.68">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="263.68" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <implocal:ImpuestosLocales TotaldeRetenciones="0" TotaldeTraslados="41.2" version="1.0">
+            <implocal:TrasladosLocales ImpLocTrasladado="ISH" Importe="41.2" TasadeTraslado="2.50"/>
+        </implocal:ImpuestosLocales>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2021-10-10T12:16:01" NoCertificadoSAT="00001000000504041684" RfcProvCertif="EFA100217SU5" SelloCFD="dA8H+3Xb6HPlk/W8YG2FXL+IonqF5ZWG2TPpz2DIALA9q8yyvwwa4iQdfnZK8Y/0pQdoU2GCBc3wCJMzRR/zZY2/f7leR1ALpgcsPL8puB7wwav2KdFr7G+Z5ynVWtgVDlivYQEVx+wiKJIBGRqygM2LhHPj/rNQYE1yI1EHYQoen7xe4uD2CfFw0/IR87KK5wja344MYcf9wvbzg/02smSEjaTb0jXDSSYI+6b3ulgZ/qMEleygEcfJKZzPheTUOXrpD0CjTb1rubgkcYuN/sF9jRfHdujyLm99yDfkul6U7iKn/ZA6vyyobzWgndEV0AG2hPaPM5IMWVdNjrDftg==" SelloSAT="H/vwiQjIf98JoxiK1MBrAdJ3ko3dqFn/rh29i9nJAMohbhHlYtzKFwq8Q38pm8QE/O07P6iJJBccbJgBpMnrJbSN/aBakPMNusrBYzxSkj45PbD6bLi6ccfh6D1hCh3DspCQUAKspYLTRthXOqYY5P4kTd9tzrRVC+O/XgI3PrTyDn2CxpVaQcfnLd9/R8MIJuxj2RGQ6VB+Qbc12tSErgB1wA+72Gav59JArsH+jZfITlBxzwTm5/MkOt3F8mbCto+zpkPJ3AConU+qZjN9sZDaJm+Z11NtjDbXIrpbAcHxqnspAq+aZts8hn4Gm8UYCMdwuesVtdEsDb3u8a0m5Q==" UUID="EBAF9636-89A8-4EED-A3CA-4BB479ED85A3" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+</cfdi:Complemento>
+<cfdi:Addenda>
+<addendaFacto:addendaFacto xmlns:addendaFacto="http://www.facto.addendaFacto.net/addendaFacto33" xsi:schemaLocation="http://www.facto.addendaFacto.net/addendaFacto33 http://www.next-technologies.com.mx/AddendaFacto.xsd">
+  <addendaFacto:hospedaje>
+    <addendaFacto:folio>137694</addendaFacto:folio>
+    <addendaFacto:huesped>Ibarra, Angel</addendaFacto:huesped>
+    <addendaFacto:habitacion>1108</addendaFacto:habitacion>
+    <addendaFacto:chekIn>2021-10-09</addendaFacto:chekIn>
+    <addendaFacto:chekOut>2021-10-10</addendaFacto:chekOut>
+    <addendaFacto:numeroNoches>0</addendaFacto:numeroNoches>
+    <addendaFacto:numeroReferencia/>
+    <addendaFacto:fiscalBillFolio>18153</addendaFacto:fiscalBillFolio>
+    <addendaFacto:fiscalBillSerie>CPHB</addendaFacto:fiscalBillSerie>
+  </addendaFacto:hospedaje>
+  <addendaFacto:granTotal>1952.88</addendaFacto:granTotal>
+</addendaFacto:addendaFacto>
+</cfdi:Addenda>
+</cfdi:Comprobante>

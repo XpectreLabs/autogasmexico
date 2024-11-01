@@ -46,8 +46,13 @@ export const Login = ({setPage}:{setPage:Function}) => {
           .then(function(data) {
             if(data.message==="success") {
               setShowAlert(false);
+              console.log("data",data)
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
               localStorage.setItem('nameUser', data.name);
+              localStorage.setItem('type_user', data.type_user);
+              localStorage.setItem('rfccontribuyente', data.rfccontribuyente);
+              localStorage.setItem('rfcproveedor', data.rfcproveedor);
+              localStorage.setItem('rfcrepresentantelegal', data.rfcrepresentantelegal);
               localStorage.setItem('token',  data.token);
               router.push("/seleccionar_permiso");
 

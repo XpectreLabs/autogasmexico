@@ -16,21 +16,22 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import NativeSelect from '@mui/material/NativeSelect';
 import * as Yup from "yup";
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 export default function NuevoReporteModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+  const [initialValues, setInitialValues] = useState(({rfccontribuyente:localStorage.getItem('rfccontribuyente'),rfcrepresentantelegal:localStorage.getItem('rfcrepresentantelegal'), rfcproveedor:localStorage.getItem('rfcproveedor'),caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
   const [fechaInicioReporte,setFechaInicioReporte] = React.useState("");
   const [fechaTerminacionReporte,setFechaTerminacionReporte] = React.useState("");
-
-
   let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
-
-
+  
+  // Establecer encabezados para la descarga
+  
     const obtenerPermiso = (permiso_id) => {
       for(let j=0; j<listPermisos.length;j++)
       {
@@ -40,18 +41,28 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       return "";
     }
 
-    const descargarJSON = (dataJson,nombre_archivo) => {
-      const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json;charset=utf-8' });
+    const descargarJSON = async (dataJson,nombre_archivo) => {
+      const zip = new JSZip();
+      const archivo = nombre_archivo+".json";
+
+      /*const jsonData = new Blob([JSON.stringify(dataJson)], { type: 'application/json;charset=utf-8' });
       const jsonURL = URL.createObjectURL(jsonData);
       const link = document.createElement('a');
-      //const fecha = new Date().toLocaleString('en-GB', {hour12: false,}).replaceAll("/","").replaceAll(",","").replaceAll(":","").replaceAll(" ","");
-
-      //const fecha = "M_1E868758-9393-47A9-AA94-4229A61C1804_PAL7202161U0_GEO9806184R6_2020-11-30_REF-0001_REF_JSON"
       link.href = jsonURL;
-      link.download = `${nombre_archivo}.json`;
+      link.download = `${archivo}`;
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
+      document.body.removeChild(link);*/
+
+      const jsonString = JSON.stringify(dataJson, null, 2);
+      zip.file(archivo, jsonString);
+
+      try {
+        const content = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+        saveAs(content, nombre_archivo+".zip");
+      } catch (err) {
+        console.error("Error al generar el ZIP:", err);
+      }
     }
 
     function data() {
@@ -86,7 +97,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             numerodispensarios
           } = data.listPermisos[parseInt(localStorage.getItem('permiso_id'))-1];
 
-          setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+          setInitialValues(({rfccontribuyente:localStorage.getItem('rfccontribuyente'),rfcrepresentantelegal:localStorage.getItem('rfcrepresentantelegal'), rfcproveedor:localStorage.getItem('rfcproveedor'),caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
         }
         else if(data.message==="schema") {
           setTextError(data.error);
@@ -201,7 +212,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         numerodispensarios
       } = listPermisos[parseInt(e.target.value)-1];
 
-      setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+      setInitialValues(({rfccontribuyente:localStorage.getItem('rfccontribuyente'),rfcrepresentantelegal:localStorage.getItem('rfcrepresentantelegal'), rfcproveedor:localStorage.getItem('rfcproveedor'),caracter, modalidadpermiso, permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion,descripcioninstalacion,numeropozos,numerotanques,numeroductosentradasalida,numeroductostransportedistribucion,numerodispensarios,claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
     }
 
     const handleChange = () => {
@@ -377,7 +388,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
               setTypeOfMessage("success");
               setTextError("Los datos del reporte fueron guardados");
-              setInitialValues(({rfccontribuyente:'AME050309Q32',rfcrepresentantelegal:'IAJA7201074W4', rfcproveedor:'GATJ8708253I1',caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
+              setInitialValues(({rfccontribuyente:localStorage.getItem('rfccontribuyente'),rfcrepresentantelegal:localStorage.getItem('rfcrepresentantelegal'), rfcproveedor:localStorage.getItem('rfcproveedor'),caracter:'permisionario', modalidadpermiso:'PER45', permiso_id:localStorage.getItem('permiso_id'),  claveinstalacion:'CMN-0001',descripcioninstalacion:'CMN-Comercialización',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'PR12',composdepropanoengaslp:'60.0',composdebutanoengaslp:'40.0',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -433,217 +444,218 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   /> */}
-                  <NativeSelect
-                    className={`Fecha ${styles.select2} ${styles.Mr}`}
-                    required
-                    value={values.permiso_id}
-                    onChange={handleChange}
-                    onBlur={cambioPermiso}
-                    defaultValue={0}
-                    inputProps={{
-                      id:"permiso_id",
-                      name:"permiso_id"
-                    }}
-                  >
-                    <option aria-label="None" value="">Número de permiso *</option>
-                    {listPermisos.map((permiso) => {
-                      return (
-                        <option value={permiso.permiso_id}>{permiso.permiso}</option>
-                      );
-                    })}
-                  </NativeSelect>
-                  <TextField
-                    className={`InputModal`}
-                    placeholder="Rfc contribuyente"
-                    required
-                    id="rfccontribuyente"
-                    label="Rfc contribuyente"
-                    name="rfccontribuyente"
-                    value={values.rfccontribuyente}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                  <div style={{display:"none"}}>
+                    <NativeSelect
+                      className={`Fecha ${styles.select2} ${styles.Mr}`}
+                      required
+                      value={values.permiso_id}
+                      onChange={handleChange}
+                      onBlur={cambioPermiso}
+                      defaultValue={0}
+                      inputProps={{
+                        id:"permiso_id",
+                        name:"permiso_id"
+                      }}
+                    >
+                      <option aria-label="None" value="">Número de permiso *</option>
+                      {listPermisos.map((permiso) => {
+                        return (
+                          <option value={permiso.permiso_id}>{permiso.permiso}</option>
+                        );
+                      })}
+                    </NativeSelect>
+                    <TextField
+                      className={`InputModal`}
+                      placeholder="Rfc contribuyente"
+                      required
+                      id="rfccontribuyente"
+                      label="Rfc contribuyente"
+                      name="rfccontribuyente"
+                      value={values.rfccontribuyente}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
 
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    placeholder="Rfc de representante legal"
-                    required
-                    id="rfcrepresentantelegal"
-                    label="Rfc de representante legal"
-                    name="rfcrepresentantelegal"
-                    value={values.rfcrepresentantelegal}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      placeholder="Rfc de representante legal"
+                      required
+                      id="rfcrepresentantelegal"
+                      label="Rfc de representante legal"
+                      name="rfcrepresentantelegal"
+                      value={values.rfcrepresentantelegal}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
 
-                  <TextField
-                    className={`InputModal`}
-                    placeholder="Rfc de proveedor"
-                    required
-                    id="rfcproveedor"
-                    label="Rfc de proveedor"
-                    name="rfcproveedor"
-                    value={values.rfcproveedor}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
+                    <TextField
+                      className={`InputModal`}
+                      placeholder="Rfc de proveedor"
+                      required
+                      id="rfcproveedor"
+                      label="Rfc de proveedor"
+                      name="rfcproveedor"
+                      value={values.rfcproveedor}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
 
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Carácter"
-                    id="caracter"
-                    label="Carácter"
-                    name="caracter"
-                    value={values.caracter}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Modalidad de permiso"
-                    id="modalidadpermiso"
-                    label="Modalidad de permiso"
-                    name="modalidadpermiso"
-                    value={values.modalidadpermiso}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Clave de instalación"
-                    id="claveinstalacion"
-                    label="Clave de instalación"
-                    name="claveinstalacion"
-                    value={values.claveinstalacion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Descripción de instalación"
-                    id="descripcioninstalacion"
-                    label="Descripción de instalación"
-                    name="descripcioninstalacion"
-                    value={values.descripcioninstalacion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Número de pozos"
-                    id="numeropozos"
-                    label="Número de pozos"
-                    name="numeropozos"
-                    value={values.numeropozos}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Número de tanques"
-                    id="numerotanques"
-                    label="Número de tanques"
-                    name="numerotanques"
-                    value={values.numerotanques}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Número ductos entrada salida"
-                    id="numeroductosentradasalida"
-                    label="Número ductos entrada salida"
-                    name="numeroductosentradasalida"
-                    value={values.numeroductosentradasalida}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Número ductos transparente distribución"
-                    id="numeroductostransportedistribucion"
-                    label="Número ductos transparente distribución"
-                    name="numeroductostransportedistribucion"
-                    value={values.numeroductostransportedistribucion}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Número dispensarios"
-                    id="numerodispensarios"
-                    label="Número dispensarios"
-                    name="numerodispensarios"
-                    value={values.numerodispensarios}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Carácter"
+                      id="caracter"
+                      label="Carácter"
+                      name="caracter"
+                      value={values.caracter}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Modalidad de permiso"
+                      id="modalidadpermiso"
+                      label="Modalidad de permiso"
+                      name="modalidadpermiso"
+                      value={values.modalidadpermiso}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
+                    
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Clave de instalación"
+                      id="claveinstalacion"
+                      label="Clave de instalación"
+                      name="claveinstalacion"
+                      value={values.claveinstalacion}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Descripción de instalación"
+                      id="descripcioninstalacion"
+                      label="Descripción de instalación"
+                      name="descripcioninstalacion"
+                      value={values.descripcioninstalacion}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Número de pozos"
+                      id="numeropozos"
+                      label="Número de pozos"
+                      name="numeropozos"
+                      value={values.numeropozos}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Número de tanques"
+                      id="numerotanques"
+                      label="Número de tanques"
+                      name="numerotanques"
+                      value={values.numerotanques}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Número ductos entrada salida"
+                      id="numeroductosentradasalida"
+                      label="Número ductos entrada salida"
+                      name="numeroductosentradasalida"
+                      value={values.numeroductosentradasalida}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Número ductos transparente distribución"
+                      id="numeroductostransportedistribucion"
+                      label="Número ductos transparente distribución"
+                      name="numeroductostransportedistribucion"
+                      value={values.numeroductostransportedistribucion}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Número dispensarios"
+                      id="numerodispensarios"
+                      label="Número dispensarios"
+                      name="numerodispensarios"
+                      value={values.numerodispensarios}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
 
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Clave producto"
-                    id="claveproducto"
-                    label="Clave producto"
-                    name="claveproducto"
-                    value={values.claveproducto}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Compos de propano en gas lp"
-                    id="composdepropanoengaslp"
-                    label="Compos de propano en gas lp"
-                    name="composdepropanoengaslp"
-                    value={values.composdepropanoengaslp}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Compos de butano en gas lp"
-                    id="composdebutanoengaslp"
-                    label="Compos de butano en gas lp"
-                    name="composdebutanoengaslp"
-                    value={values.composdebutanoengaslp}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                    type='number'
-                  />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Clave producto"
+                      id="claveproducto"
+                      label="Clave producto"
+                      name="claveproducto"
+                      value={values.claveproducto}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Compos de propano en gas lp"
+                      id="composdepropanoengaslp"
+                      label="Compos de propano en gas lp"
+                      name="composdepropanoengaslp"
+                      value={values.composdepropanoengaslp}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
+                    <TextField
+                      className={`InputModal`}
+                      required
+                      placeholder="Compos de butano en gas lp"
+                      id="composdebutanoengaslp"
+                      label="Compos de butano en gas lp"
+                      name="composdebutanoengaslp"
+                      value={values.composdebutanoengaslp}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                      type='number'
+                    />
                   {/* <TextField
                     className={`InputModal ${styles.Mr}`}
                     required
@@ -691,79 +703,79 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
                     size="small"
                     type='number'
                   /> */}
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Usuario responsable"
-                    id="usuarioresponsable"
-                    label="Usuario responsable"
-                    name="usuarioresponsable"
-                    value={values.usuarioresponsable}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal`}
-                    required
-                    placeholder="Tipo evento"
-                    id="tipoevento"
-                    label="Tipo evento"
-                    name="tipoevento"
-                    value={values.tipoevento}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    required
-                    placeholder="Descripción de evento"
-                    id="descripcionevento"
-                    label="Descripción de evento"
-                    name="descripcionevento"
-                    value={values.descripcionevento}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
-
-                  {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      format="DD/MM/YYYY"
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
                       required
-                      className={`InputModal Fecha ${styles.Mr}`}
-                      placeholder="Fecha inicio reporte"
-                      label="Fecha inicio reporte"
-                      id="fecha_inicio"
-                      name="fecha_inicio"
-                      //defaultValue={values.fecha_emision}
-                      onChange={(value) => {
-                        setFieldValue('fecha_inicio', value, true);
-                      }}
+                      placeholder="Usuario responsable"
+                      id="usuarioresponsable"
+                      label="Usuario responsable"
+                      name="usuarioresponsable"
+                      value={values.usuarioresponsable}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
                     />
-                  </LocalizationProvider>
-
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      format="DD/MM/YYYY"
+                    <TextField
+                      className={`InputModal`}
                       required
-                      className={`InputModal Fecha`}
-                      placeholder="Fecha terminación reporte"
-                      label="Fecha terminación reporte"
-                      id="fecha_terminacion"
-                      name="fecha_terminacion"
-                      onChange={(value) => {
-                        setFieldValue('fecha_terminacion', value, true);
-                      }}
+                      placeholder="Tipo evento"
+                      id="tipoevento"
+                      label="Tipo evento"
+                      name="tipoevento"
+                      value={values.tipoevento}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
                     />
-                  </LocalizationProvider> */}
+                    <TextField
+                      className={`InputModal ${styles.Mr}`}
+                      required
+                      placeholder="Descripción de evento"
+                      id="descripcionevento"
+                      label="Descripción de evento"
+                      name="descripcionevento"
+                      value={values.descripcionevento}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      size="small"
+                    />
 
+                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        required
+                        className={`InputModal Fecha ${styles.Mr}`}
+                        placeholder="Fecha inicio reporte"
+                        label="Fecha inicio reporte"
+                        id="fecha_inicio"
+                        name="fecha_inicio"
+                        //defaultValue={values.fecha_emision}
+                        onChange={(value) => {
+                          setFieldValue('fecha_inicio', value, true);
+                        }}
+                      />
+                    </LocalizationProvider>
+
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        required
+                        className={`InputModal Fecha`}
+                        placeholder="Fecha terminación reporte"
+                        label="Fecha terminación reporte"
+                        id="fecha_terminacion"
+                        name="fecha_terminacion"
+                        onChange={(value) => {
+                          setFieldValue('fecha_terminacion', value, true);
+                        }}
+                      />
+                    </LocalizationProvider> */}
+                  </div>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       views={['month','year']}
                       required
-                      className={`InputModal Fecha`}
+                      className={` Fecha`}
                       placeholder="Fecha del reporte"
                       label="Fecha del reporte"
                       id="fecha_reporte"

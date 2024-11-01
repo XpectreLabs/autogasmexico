@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:aieps="http://www.sat.gob.mx/acreditamiento" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2021-07-31T22:21:41" Folio="175826" FormaPago="01" LugarExpedicion="43740" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000503921820" Sello="h/q7I6PLg1zhNAd/SgCckOi6EPpJt74h6IMT2AAAHh+aLN99gfYa4FVbvbQmfzgNPvU/CRsclcvsXrTzkyz55nDauM0fmYtI/1Jun5ee+n4PrNRDf9N/5soHxWfpSwt/p5iNHoyPh1ZANhxCY+8z7DfENl7xuc0SV7YU5Jl3DAcVpQjntGAzBtTwSWNZmooUV4mmsf9727fHkr/ZYNFgHP6E5NGRbrwPZr81rFIFCmrQD32gP2A9K320EPVrJNxp/lnHSBsHP+1uKz6QaO5sNZlpgqcIHCjetFjAl31bc9dy5kCVkpTkgU5H8MkWT5zzsvVUtbOEMsOevdsHy6Rtcg==" Serie="M" SubTotal="268995.04" TipoDeComprobante="I" Total="312034.2" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+  <cfdi:Emisor Nombre="AUTOGAS MEXICO SA DE CV" RegimenFiscal="601" Rfc="AME050309Q32"/>
+  <cfdi:Receptor Nombre="Publico en general" Rfc="XAXX010101000" UsoCFDI="P01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1600.011980" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="13365.62" NoIdentificacion="LP/14766/DIST/PLA/2016-271200" ValorUnitario="8.35345">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="13365.617315" Importe="2138.49" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="3176.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="27187.65" NoIdentificacion="LP/14766/DIST/PLA/2016-271290" ValorUnitario="8.560346">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="27187.655172" Importe="4350.02" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1700.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="14200.85" NoIdentificacion="LP/14766/DIST/PLA/2016-271291" ValorUnitario="8.353447">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="14200.862068" Importe="2272.13" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="50.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="417.67" NoIdentificacion="LP/14766/DIST/PLA/2016-271292" ValorUnitario="8.3534">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="417.672413" Importe="66.82" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="5540.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="51531.54" NoIdentificacion="LP/14766/DIST/PLA/2016-271355" ValorUnitario="9.301723">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="51531.551724" Importe="8245.04" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="5410.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="45192.15" NoIdentificacion="LP/14766/DIST/PLA/2016-271652" ValorUnitario="8.353449">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45192.155172" Importe="7230.74" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="3173.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="27736.39" NoIdentificacion="LP/14766/DIST/PLA/2016-271754" ValorUnitario="8.741380">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="27736.396551" Importe="4437.82" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="5520.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="45873.09" NoIdentificacion="LP/14766/DIST/PLA/2016-272014" ValorUnitario="8.310344">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45873.103448" Importe="7339.69" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="3150.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="27128.01" NoIdentificacion="LP/14766/DIST/PLA/2016-272103" ValorUnitario="8.612069">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="27128.017241" Importe="4340.48" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="2000.000000" ClaveProdServ="15111510" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" Importe="16362.07" NoIdentificacion="LP/14766/DIST/PLA/2016-272181" ValorUnitario="8.181035">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="16362.068965" Importe="2617.93" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="43039.16">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="43039.16" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FechaTimbrado="2021-07-31T23:21:43" NoCertificadoSAT="00001000000412961981" RfcProvCertif="FCG840618N51" SelloCFD="h/q7I6PLg1zhNAd/SgCckOi6EPpJt74h6IMT2AAAHh+aLN99gfYa4FVbvbQmfzgNPvU/CRsclcvsXrTzkyz55nDauM0fmYtI/1Jun5ee+n4PrNRDf9N/5soHxWfpSwt/p5iNHoyPh1ZANhxCY+8z7DfENl7xuc0SV7YU5Jl3DAcVpQjntGAzBtTwSWNZmooUV4mmsf9727fHkr/ZYNFgHP6E5NGRbrwPZr81rFIFCmrQD32gP2A9K320EPVrJNxp/lnHSBsHP+1uKz6QaO5sNZlpgqcIHCjetFjAl31bc9dy5kCVkpTkgU5H8MkWT5zzsvVUtbOEMsOevdsHy6Rtcg==" SelloSAT="OMuU8rzbs+0198OE0bXsgQGFDipCG+lEKj6fjpDATcb/zpjcUALSz6YUi+/+r81LOB5CfSDfOMBg/S8vFvOoJdWan+FlzDmpOBgKVBhItpkHxLjP/f8AAQW5CR2j0Q86twSfB34XFBapQ53w8EJPJV40ve89DcuEituPoAOp1UrE1xslqrG8RBV9WC4weDNnoqDelu5AodKegWYAY0IzRVbzHwGbB05SjSNLTHRo4pFzJQAWXdeTC1qxUpLqo1mUBfr0nIQkimvtgeoQf5zsbjKgJtCQ9c8p2Ezyit4GFqw3uh7dq+tMtW0PqvIPQ59D5K4Q8T0Jvr2dgLSH4szh0g==" UUID="61EE8B99-859B-4B7A-A252-467EB5181803" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/></cfdi:Complemento></cfdi:Comprobante>

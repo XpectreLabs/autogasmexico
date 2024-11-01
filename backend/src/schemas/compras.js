@@ -14,7 +14,7 @@ const schemaCreate = joi.object({
   //unidad: joi.number().optional().allow(null, ""),
   concepto: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F/.:(), ]{3,300}$')).required(),
   densidad: joi.number().required(),
-  permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
+  //permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
   permiso_id: joi.number().min(1).required(),
 
   preciounitario: joi.number().required(),
@@ -49,7 +49,7 @@ const schemaUpdate = joi.object({
   //unidad: joi.number().optional().allow(null, ""),
   concepto: joi.string().pattern(new RegExp('^[a-zA-Z0-9\u00C0-\u017F/.:(), ]{3,500}$')).required(),
   densidad: joi.number().required(),
-  permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
+  //permiso: joi.string().pattern(new RegExp('^[a-zA-Z0-9/ ]{4,100}$')).required(),
   permiso_id: joi.number().min(1).required(),
   preciounitario: joi.number().required(),
   importe: joi.number().required(),

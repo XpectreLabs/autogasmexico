@@ -74,83 +74,117 @@ const getPermiso = (texto) => {
           break;
       }
     }
+
+  console.log("permiso",permiso)
   return permiso;
 }
 
 
-const guardarDataJson = async (dataJson,user_id) => {
+const guardarDataJson = async (dataJson,user_id,permiso_id) => {
   //console.log(dataJson);
+  permiso_id=parseInt(permiso_id);
+  
   const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
+  const UsoCFDI = dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].UsoCFDI;
 
+  console.log("UsoCFDI",UsoCFDI,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID);
+  
   if(rfc==='AME050309Q32')
     return 2;
   else {
-    let proveedor_id = await fnProveedores.findProveedor(rfc);
-    let date = new Date().toISOString();
+    if(UsoCFDI==="G01") 
+    {
+      let proveedor_id = await fnProveedores.findProveedor(rfc);
+      let date = new Date().toISOString();
 
-    console.log("rfc",rfc);
-    //console.log("ID",proveedor_id)
+      console.log("rfc",rfc);
+      //console.log("ID",proveedor_id)
 
-    if(proveedor_id===0) {
-      const nuevo = await prisma.proveedores.create({
-        data: {
-          name: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre,
-          rfc: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc,
-          direccion: null,
-          tipo_situacion_fiscal: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal,
-          phone: null,
-          email: null,
-          user_id: parseInt(user_id),
-          date: date,
-          active: 1,
-        },
-      });
-      console.log("Nuevo proveedor",nuevo);
-      proveedor_id = nuevo.proveedor_id;
-    }
-
-      const fecha = new Date((dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
-      const concepto = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
-
-      const dens = getDensidad(concepto);
-      const permiso = getPermiso(concepto);
-      console.log("Rd",dens)
-
-      const densidad = parseFloat(dens===''?0:dens);
-
-      const dataR = {
-        proveedor_id,
-        folio: dataJson['cfdi:Comprobante']['_attributes'].Folio,
-        fecha_emision: fecha,
-        cantidad: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad),
-        concepto,
-        densidad,
-        permiso,
-        preciounitario: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
-        importe: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
-        ivaaplicado: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados),
-        cfdi: dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
-        tipoCfdi: 'Ingreso',
-        preciovent: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].Total),
-        aclaracion: 'SIN OBSERVACIONES',
-        tipocomplemento: 'Comercializacion',
-        unidaddemedida: 'UM03',
-        tipo_modena_id: 1
-      }
-
-      if(!(await findCfdi(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
-        await prisma.abastecimientos.create({
+      //Ya no se guardna proveedores
+      /*if(proveedor_id===0) {
+        const nuevo = await prisma.proveedores.create({
           data: {
-            ...dataR,
-            proveedor_id:parseInt(proveedor_id),
+            name: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre,
+            rfc: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc,
+            direccion: null,
+            tipo_situacion_fiscal: dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal,
+            phone: null,
+            email: null,
             user_id: parseInt(user_id),
             date: date,
             active: 1,
           },
         });
+        //console.log("Nuevo proveedor",nuevo);
+        proveedor_id = nuevo.proveedor_id;
+      }*/
+
+        const valido = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes']?true:false;
+        
+        if(valido&&proveedor_id!==0) {      
+          let cantidad = (dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad).toUpperCase();
+
+          if(parseInt(cantidad)>4)
+          {
+            const unidad = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Unidad;
+            if(unidad==="KG"||unidad==="KILOS"||unidad==="KILO")
+              cantidad/=0.50;
+
+            const fecha = new Date((dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
+            const concepto = dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion?dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion:"Sin descrip"
+
+            const dens = getDensidad(concepto);
+            //const permiso = getPermiso(concepto);
+            //console.log("Rd",dens)
+
+            const densidad = parseFloat(dens===''?0:dens);
+
+            console.log("Cantidad",parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad));
+            const dataR = {
+              proveedor_id,
+              folio: dataJson['cfdi:Comprobante']['_attributes'].Folio,
+              fecha_emision: fecha,
+              cantidad: parseFloat(cantidad),
+              concepto,
+              densidad,
+              permiso:null,
+              preciounitario: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario),
+              importe: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].SubTotal),
+              ivaaplicado: parseFloat(dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados),
+              cfdi: dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID,
+              tipoCfdi: 'Ingreso',
+              preciovent: parseFloat(dataJson['cfdi:Comprobante']['_attributes'].Total),
+              aclaracion: 'SIN OBSERVACIONES',
+              tipocomplemento: 'Comercializacion',
+              unidaddemedida: 'UM03',
+              tipo_modena_id: 1,
+              permiso_id
+            }
+
+            if(!(await findCfdi(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
+              await prisma.abastecimientos.create({
+                data: {
+                  ...dataR,
+                  proveedor_id:parseInt(proveedor_id),
+                  user_id: parseInt(user_id),
+                  date: date,
+                  active: 1,
+                },
+              });
+            }
+            else
+              return 0;
+          }
+          else 
+            return 0;
       }
       else
-        return 0;
+      {
+        if(proveedor_id===0) {
+          console.log("No paso",rfc,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
+        }
+      }
+    }
   }
 }
 

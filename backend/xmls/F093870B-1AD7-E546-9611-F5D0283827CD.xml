@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="POSE" Folio="71298298" FormaPago="04" Moneda="MXN" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42181" Fecha="2021-09-22T19:00:14" SubTotal="288.79" Total="335.00" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" NoCertificado="00001000000505494411" Certificado="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" Sello="F5oXjdwqEQjdb8cLpWqC/IjsSt3MFXmikfgJXH2N6l8b8tJ8jGmPOEUFRWTQ7HmzjyPArL4HRrlf+RkwBFAzMS3qFW29O2MqonLfiNCiQXA5IbiZ5wCYUcvzuvg7nkET/pQ1+cR008tYMCwixKQW5NlIFYnIHDDHKjoznqcONNfyE7JFtT5rMAP6jNrQO8qx3JssI+aljKVlKA2iZPovhbVppNpg272lg7NRVWVjhKv9T87Id3b8ayPPplQJDdeNSvPXtx7+7N50uGYsKzzpqQIXkbQYk9XDVkheW2iyjObx2waWKq+Tp8U2zEbMMV6B69FGogq3yB73jlRxeBJE+Q==" xmlns:OD="http://store.officedepot.com.mx/OnlineStore/CFD">
+  <cfdi:Emisor Rfc="ODM950324V2A" Nombre="OFFICE DEPOT DE MEXICO SA DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO S.A DE C.V" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="44121503" NoIdentificacion="000055178" ClaveUnidad="H87" Unidad="NO APLICA" Descripcion="BOLSA MAN CTA 23X30.5 CM 25P" Cantidad="1" ValorUnitario="106.0345" Importe="106.03">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="106.03" TasaOCuota="0.160000" Importe="16.97" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="14111525" NoIdentificacion="000083143" ClaveUnidad="H87" Unidad="NO APLICA" Descripcion="PAPEL DEPOT ECOLOG OFICIO 500H" Cantidad="1" ValorUnitario="98.2759" Importe="98.28">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="98.28" TasaOCuota="0.160000" Importe="15.72" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="14111507" NoIdentificacion="000035452" ClaveUnidad="H87" Unidad="NO APLICA" Descripcion="PAPEL PREMIUM OD CARTA RESMA" Cantidad="1" ValorUnitario="84.4828" Importe="84.48">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="84.48" TasaOCuota="0.160000" Importe="13.52" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="46.21">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="46.21" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="F093870B-1AD7-E546-9611-F5D0283827CD" FechaTimbrado="2021-09-22T21:00:15" RfcProvCertif="SCD110105654" SelloCFD="F5oXjdwqEQjdb8cLpWqC/IjsSt3MFXmikfgJXH2N6l8b8tJ8jGmPOEUFRWTQ7HmzjyPArL4HRrlf+RkwBFAzMS3qFW29O2MqonLfiNCiQXA5IbiZ5wCYUcvzuvg7nkET/pQ1+cR008tYMCwixKQW5NlIFYnIHDDHKjoznqcONNfyE7JFtT5rMAP6jNrQO8qx3JssI+aljKVlKA2iZPovhbVppNpg272lg7NRVWVjhKv9T87Id3b8ayPPplQJDdeNSvPXtx7+7N50uGYsKzzpqQIXkbQYk9XDVkheW2iyjObx2waWKq+Tp8U2zEbMMV6B69FGogq3yB73jlRxeBJE+Q==" NoCertificadoSAT="00001000000502000436" SelloSAT="BdHlBhMp5AoNnx+iP2MbCHZ3+mHXUt6xvu/BNzZfeGlxtklNnIR0yoAym7QY/MJzNK8l7yUlnXAOTCWc2x/W5bEZ4AEkqo8tTuqAPOQMdvdN+jQk4kBtGPb/WQxu8cOmMddEviwepOfScPJz7L/J8EwFhXbEv8IDQMe2B2TKPEUhCBIKDX4gdJZGqXDafR22Jh/FGFRlElOR9pIUxfRabxXfPPaSYkpAbZHEg6K3OYhC0JN6qf0Y0AbK+aVtfL8Q6twkrHbA7uhYW9M1rqY4+9AMa68jTlnLnV2u8X/SguOedoOZCKQgexx4DCI6V4BZT8quBcEFJJGRXXI2MeJD3Q==" />
+  </cfdi:Complemento>
+  <cfdi:Addenda>
+    <OD:AddendaEmisor>
+      <OD:RequestForPayment version="1">
+        <OD:POS>
+          <OD:DatosGenerales ITU="2021092200002011000025193POSA" transaccionPOS="25193" tipoVenta="Venta Normal">
+            <OD:Tienda numero="2" telefono="7717198788" />
+            <OD:Caja numero="11" assoc="1" />
+          </OD:DatosGenerales>
+          <OD:Cliente folioFiscal="AME050309Q32" />
+          <OD:MetodosPago>
+            <OD:MetodoPago tipo="Tarjeta credito" montoPagado="335.00" autorizacion="151501" />
+          </OD:MetodosPago>
+          <OD:Impuestos>
+            <OD:Impuesto tipo="IVA 16%" subTotalPorTasa="288.79" total="46.21" />
+          </OD:Impuestos>
+          <OD:Conceptos>
+            <OD:Concepto precioOriginal="123.00" sku="55178" />
+            <OD:Concepto precioOriginal="114.00" sku="83143" />
+            <OD:Concepto precioOriginal="98.00" sku="35452" />
+          </OD:Conceptos>
+          <OD:DatosCliente>
+            <OD:DomicilioCliente calle="CARR.CUATEPEC-TEPEAPULCO" noExterior="2 4" colonia="SANTA RITA" municipio="CUAUTEPEC DE HINOJOSA" estado="HID" pais="MX" codigoPostal="43740" />
+          </OD:DatosCliente>
+        </OD:POS>
+      </OD:RequestForPayment>
+    </OD:AddendaEmisor>
+  </cfdi:Addenda>
+</cfdi:Comprobante>

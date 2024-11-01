@@ -27,6 +27,7 @@ router.post('/', async (req, res, next) => {
       username: req.body.username,
       firstname: req.body.firstName,
       lastname: req.body.lastName,
+      rfccontribuyente: req.body.rfccontribuyente,
       password: password,
       email: req.body.email?req.body.email:null,
       date: date,
@@ -83,6 +84,9 @@ router.get('/:userId/usuario', async (req, res, next) => {
           username: true,
           firstname: true,
           lastname: true,
+          rfccontribuyente: true,
+          rfcrepresentantelegal: true,
+          rfcproveedor: true,
           email: true,
         },
       });
@@ -135,6 +139,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 router.post('/email', async (req, res, next) => {
+  console.log("si")
   const { error } = sch.schemaEmail.validate(req.body);
   if (error) {
     return res.status(400).json({ message:"schema", error: error.details[0].message });
@@ -150,11 +155,13 @@ router.post('/email', async (req, res, next) => {
   });
 
   if (users){
-    mailer.enviar_mail("098776868",email);
-    res.status(200).json({ message:"success","user_id":users.user_id });
+    const clave = parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)
+    console.log(clave,fn.getPasswordEncrypted(clave))
+    mailer.enviar_mail(clave,email);
+    res.status(200).json({ message:"success","user_id":users.user_id,"clave":fn.getPasswordEncrypted(clave) });
   }
   else
-    res.status(400).json({ message:"The email is not registered." });
+    res.status(400).json({ message:"El email no esta registrado." });
 });
 
 
@@ -165,10 +172,12 @@ router.put('/changePassword', async (req, res, next) => {
     console.log(error.details[0].message)
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }*/
+  const recoveryCode = fn.getPasswordEncrypted(req.body.recoveryCode);
+  console.log("recoveryCode",recoveryCode,req.body.clave);
 
-  if(req.body.recoveryCode === "098776868") {
+  if(recoveryCode === req.body.clave) {
       const password = fn.getPasswordEncrypted(req.body.password);
-      console.log(password)
+      console.log(req.body.id_user_change+" -> "+password)
       console.log("u"+req.body.id_user_change)
       await prisma.users.update({
         where: {
@@ -181,7 +190,7 @@ router.put('/changePassword', async (req, res, next) => {
       res.status(200).json({ message:"success" });
   }
   else {
-    res.status(400).json({ message:"The verification code does not exist" });
+    res.status(400).json({ message:"El código de verificación es incorrecto" });
   }
 });
 

@@ -255,7 +255,7 @@ export default function Inventarios() {
                           <option value={permiso.permiso_id} selected={permiso.permiso_id===1?true:false}>{permiso.permiso}</option>
                         
                         );
-                      })} */}
+                      })} */} 
                       <option value={localStorage.getItem('permiso_id')}>{localStorage.getItem('permiso')}</option>
                   </NativeSelect>
                 </Grid>

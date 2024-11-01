@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " Version="3.3" Serie="FAC" Folio="000131378" Fecha="2021-11-04T12:17:41" Sello="iWjzgyuF9jA2qbk/kv+SLiH+9T8uhPH29iEmZsQrjx7kQ6LNRcIopPKsipdvSA6xlN3AdCD+1CAcl//YoADkv0NtU/CslNeimgNL8fqvB/1XAVCnsZ6fkCm4KFdhtDFYWmdJLJTgo9Edt5HKsEaJhRPqKooJBmfs1FI+3ykmefCiVj1RPmwVjdFCEtK30XTsrShuYoJ8ZGLQnJ3Ef+2w1cdO0F0bZias1vrp18/pX7pbN5o96Yj5iVEehRISxjfWkXnwUKMQSGPwiCn85BL/RzMlmIX4KFKuKJmODpKwFSLBLDvyiRMMlIhYC+VqbGtMU4Q1kFO3LSYB7YnTIiw2oQ==" FormaPago="03" NoCertificado="00001000000506191836" Certificado="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" CondicionesDePago="Contado" SubTotal="260976.37" Descuento="2935.69" Moneda="MXN" Total="299327.18" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="55024" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <cfdi:CfdiRelacionados TipoRelacion="07">
+    <cfdi:CfdiRelacionado UUID="6E6D15EF-D7D2-41AE-B0A8-7D4781A2FC9E" />
+  </cfdi:CfdiRelacionados>
+  <cfdi:Emisor Rfc="FBA8301146I8" Nombre="FERRE BARNIEDO, S.A. DE C.V." RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO S.A. DE C.V." UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="30102204" NoIdentificacion="PCH51670109620" Cantidad="2.26000" ClaveUnidad="26" Unidad="TON" Descripcion="Placa Hoja A-516-70 3/8&quot; (8'x20')9.5Mm (2.44Mt x 6.10Mt)" ValorUnitario="34500.00" Importe="77970.00" Descuento="779.70">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="77190.30" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="12350.45" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="30102204" NoIdentificacion="PCH51670137220" Cantidad="4.51000" ClaveUnidad="26" Unidad="TON" Descripcion="Placa Hoja A-516-70 1/2&quot; (6'x20')12.7Mm (1.83Mt x 6.10Mt)" ValorUnitario="34278.00" Importe="154593.78" Descuento="1545.94">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="153047.84" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="24487.65" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="30101504" NoIdentificacion="AN13152" Cantidad="0.35000" ClaveUnidad="26" Unidad="TON" Descripcion="Angulo 1/2&quot; x 6&quot; (20Ft)12.7Mm x 152.4Mm (6.10Mt)" ValorUnitario="28300.00" Importe="9905.00" Descuento="444.73">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="9460.27" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1513.64" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="30101504" NoIdentificacion="AN06102" Cantidad="0.06000" ClaveUnidad="26" Unidad="TON" Descripcion="Angulo 1/4 x 4&quot; (20Ft)6.3Mm x101.6Mm (6.10Mt)" ValorUnitario="28300.00" Importe="1698.00" Descuento="76.24">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1621.76" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="259.48" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="30102304" NoIdentificacion="MC101010" Cantidad="0.21000" ClaveUnidad="26" Unidad="TON" Descripcion="Monten 10&quot; Patin 2 3/4&quot; x 10Mt C10254.0Mm x 10Mt" ValorUnitario="42420.00" Importe="8908.20" Descuento="89.08">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="8819.12" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1411.06" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="84131504" NoIdentificacion="S/R" Cantidad="1" ClaveUnidad="E48" Unidad="NA" Descripcion="Seguros" ValorUnitario="2501.39" Importe="2501.39">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2501.39" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="400.22" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78121601" NoIdentificacion="MMv" Cantidad="1" ClaveUnidad="E48" Unidad="NA" Descripcion="Manejo de materiales" ValorUnitario="5400.00" Importe="5400.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="5400.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="864.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="41286.50">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="41286.50" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="D93A490A-6C49-4B7F-8803-5706BBED149F" FechaTimbrado="2021-11-04T12:18:24" SelloCFD="iWjzgyuF9jA2qbk/kv+SLiH+9T8uhPH29iEmZsQrjx7kQ6LNRcIopPKsipdvSA6xlN3AdCD+1CAcl//YoADkv0NtU/CslNeimgNL8fqvB/1XAVCnsZ6fkCm4KFdhtDFYWmdJLJTgo9Edt5HKsEaJhRPqKooJBmfs1FI+3ykmefCiVj1RPmwVjdFCEtK30XTsrShuYoJ8ZGLQnJ3Ef+2w1cdO0F0bZias1vrp18/pX7pbN5o96Yj5iVEehRISxjfWkXnwUKMQSGPwiCn85BL/RzMlmIX4KFKuKJmODpKwFSLBLDvyiRMMlIhYC+VqbGtMU4Q1kFO3LSYB7YnTIiw2oQ==" NoCertificadoSAT="00001000000508769381" SelloSAT="l0MZSSLW2Lc1KdCwpkrJDoYbwTc9y3dToGUenCdubslxcsv62ts9FjdO8JKReCDFofWJj4xa5Ctqge73iigHAuNENmGDptOjrKakjkvWO1n6jtOy+o3LhvXqnRCr3yFvMqUlNKruSV1E9mzDW6NZXELkqoRqAqrBMrCODVvSrMS5rSqONiJJTZ8G32y/FLnVQYzwvcv8/vqNS7wMXp/zklTC/g+KnqSALwEtkerFd3D7HkNYrstzI7izokCShTRzbH2voIjnCC/xz4VkBebGftzZyocx4ZZfi6GqUvw66yIeVdLSDSz678YB7pMNW+W/Mdq+TrHSnshkPhqVo3d2YQ==" RfcProvCertif="GYS1010015I2" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

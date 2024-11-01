@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" CondicionesDePago="INMEDIATO" Descuento="0.00" Exportacion="01" Fecha="2024-08-24T19:52:12" Folio="253357" FormaPago="04" LugarExpedicion="42080" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000511342294" Sello="hUa1tjrOlVc92E6uZ9Ehi5rMjbR93z8q5TtQRunWy+6b4/1KzA0NP9arnZSgT9UDZ5U659bqsCF5otTdQxz6XVdfoZR3iZAzvYrdU1HD3HExCm4gwG/mM1FYgimEBjpfVJB/xdLqYEgry2L7Mq5nOObT66vOrj9rdIcp2/p34XVN6l5E67VITgowNyf+Stbvg20CkMCAjulwtZgSCZhWx/zmLuxytqhjyY7dekHxq1XKQUyWSk1Jr7CMskdfAAxCPWnSNaNsZBGe6EfuWWF3gM6MJTndqCWaGLo5m5spu4XQ1XTuLe6GwULzHY3PTMnQ4ly3IILr6kwLV+3zuaK9jA==" Serie="VBALV" SubTotal="600.00" TipoDeComprobante="I" Total="600.00" Version="4.0" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd">
+<cfdi:Emisor Nombre="AUTOTRANSPORTES LINEA VERDE" RegimenFiscal="624" Rfc="ALV570601K43"/>
+<cfdi:Receptor DomicilioFiscalReceptor="43740" Nombre="AUTOGAS MEXICO" RegimenFiscalReceptor="601" Rfc="AME050309Q32" UsoCFDI="G03"/>
+<cfdi:Conceptos>
+<cfdi:Concepto Cantidad="1.000000" ClaveProdServ="78111802" ClaveUnidad="E54" Descripcion="SERVICIO TRANSPORTE DE PASAJEROS" Descuento="0.00" Importe="150.00" NoIdentificacion="Servicios de buses con horarios programados" ObjetoImp="02" Unidad="Viaje" ValorUnitario="150.000000">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="150.000000" Impuesto="002" TipoFactor="Exento"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.000000" ClaveProdServ="78111802" ClaveUnidad="E54" Descripcion="SERVICIO TRANSPORTE DE PASAJEROS" Descuento="0.00" Importe="150.00" NoIdentificacion="Servicios de buses con horarios programados" ObjetoImp="02" Unidad="Viaje" ValorUnitario="150.000000">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="150.000000" Impuesto="002" TipoFactor="Exento"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.000000" ClaveProdServ="78111802" ClaveUnidad="E54" Descripcion="SERVICIO TRANSPORTE DE PASAJEROS" Descuento="0.00" Importe="150.00" NoIdentificacion="Servicios de buses con horarios programados" ObjetoImp="02" Unidad="Viaje" ValorUnitario="150.000000">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="150.000000" Impuesto="002" TipoFactor="Exento"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.000000" ClaveProdServ="78111802" ClaveUnidad="E54" Descripcion="SERVICIO TRANSPORTE DE PASAJEROS" Descuento="0.00" Importe="150.00" NoIdentificacion="Servicios de buses con horarios programados" ObjetoImp="02" Unidad="Viaje" ValorUnitario="150.000000">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="150.000000" Impuesto="002" TipoFactor="Exento"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="600.0" Impuesto="002" TipoFactor="Exento"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="CC3FEEF6-0B4E-467F-8AC3-4775D38D8A50" FechaTimbrado="2024-08-24T19:53:06" RfcProvCertif="SST060807KU0" SelloCFD="hUa1tjrOlVc92E6uZ9Ehi5rMjbR93z8q5TtQRunWy+6b4/1KzA0NP9arnZSgT9UDZ5U659bqsCF5otTdQxz6XVdfoZR3iZAzvYrdU1HD3HExCm4gwG/mM1FYgimEBjpfVJB/xdLqYEgry2L7Mq5nOObT66vOrj9rdIcp2/p34XVN6l5E67VITgowNyf+Stbvg20CkMCAjulwtZgSCZhWx/zmLuxytqhjyY7dekHxq1XKQUyWSk1Jr7CMskdfAAxCPWnSNaNsZBGe6EfuWWF3gM6MJTndqCWaGLo5m5spu4XQ1XTuLe6GwULzHY3PTMnQ4ly3IILr6kwLV+3zuaK9jA==" NoCertificadoSAT="00001000000506202789" SelloSAT="nm90RjajWAL6BkkRESt1fVvvV0dxh7eJhBLgoUOIq+b8OnuqQav+AmYK5sG+0fiwLBGnUQTxp693AATi+U2cqpxQVUmIN9MIy5xv5sVw8vKZwEt5Znf1/A8M1gcedRoQB93c1IidVC165Lt7eXW1BSgmE8kyrw/DZ7RrS7BRXu9qUOLvezOuiKkAg3AX0e1BXpFhX0Dmx4E6vG869eCiBqdZ2WdTzLuPC5NcjNbI6DQGBoJlHZa0nheX/AMHoP9jHMcsMRsQRTNGrAmMrCYiJ3XvFvZb4m+S6rtFl/fLiM7X8zKdetUXfxac37tOkppMfa3xrmHJ/FwRCWMNmHCcsQ==" /></cfdi:Complemento>
+</cfdi:Comprobante>

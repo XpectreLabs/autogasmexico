@@ -14,7 +14,7 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({firstName:'',lastName:'', email:'',username:'',password:'',confirmPassword:''}));
+  const [initialValues, setInitialValues] = useState(({firstName:'',lastName:'', email:'',rfccontribuyente:'',username:'',password:'',confirmPassword:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   return (
@@ -30,6 +30,9 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
             .required("Los apellidos es requerido"),
           email: Yup.string()
             .email("El email es incorrecto"),
+          rfccontribuyente: Yup.string()
+            .min(10, "El Rfc del contribuyente es muy corto")
+            .required("El  Rfc del contribuyente es requerido"),
           username: Yup.string()
           .required("El nombre de usuario es requerido"),
           password: Yup.string()
@@ -149,7 +152,17 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
                     onBlur={handleBlur}
                     size="small"
                   />
-
+                  <TextField
+                    placeholder="RFC Contribuyente"
+                    required
+                    label="RFC Contribuyente"
+                    id="rfccontribuyente"
+                    value={values.rfccontribuyente}
+                    name="rfccontribuyente"
+                    size="small"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
                   <TextField
                     placeholder="Nombre de usuario"
                     id="username"
@@ -183,11 +196,12 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {(errors.firstName || errors.lastName || errors.email || errors.username || errors.password || errors.confirmPassword)?(<div className={styles.errors}>
+                  {(errors.firstName || errors.lastName || errors.email || errors.rfccontribuyente || errors.username || errors.password || errors.confirmPassword)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.firstName? (<p>{errors.firstName}</p>):null}
                         {errors.lastName? (<p>{errors.lastName}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
+                        {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
                         {errors.username? (<p>{errors.username}</p>):null}
                         {errors.password? (<p>{errors.password}</p>):null}
                         {errors.confirmPassword? (<p>{errors.confirmPassword}</p>):null}

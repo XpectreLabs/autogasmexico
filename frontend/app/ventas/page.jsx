@@ -314,9 +314,21 @@ export default function Ventas() {
             //const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
             const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
 
+
+
+            let busqueda = (IngresosAux[j].folio + " "  + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
+                          
+
             if(fechaInicio!==fechaHasta) {
-              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-                listResult.push(IngresosAux[j]);
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta){
+                //listResult.push(IngresosAux[j]);
+
+               
+                //if((""+(busqueda)).includes("PETREOS".toLowerCase()))
+                  listResult.push(IngresosAux[j]);  
+                
+              }
+                
             }
             else {
               if(fechaInicio===dateEmi)
@@ -528,7 +540,7 @@ export default function Ventas() {
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
               <Grid item xs={3} style={{marginTop: '15px', marginBottom: '0px'}} align="left">
-              <p><strong>Litros totales:</strong> {formatter2.format(litrosTotales).replace(',','')}L</p>
+              <p><strong>Litros totales:</strong> {formatter2.format(litrosTotales)}L</p>
               </Grid>
               <Grid item xs={6}></Grid>
               <Grid item xs={3} align="right">
@@ -558,7 +570,8 @@ export default function Ventas() {
                       if(IngresosAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<IngresosAux.length;j++) {
-                          let permisoB =  IngresosAux[j].permisos.permiso;
+                          //let permisoB =  IngresosAux[j].permisos.permiso;
+                          let permisoB =  "";
 
                           let busqueda = (IngresosAux[j].folio + " " + permisoB +" " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
@@ -682,7 +695,7 @@ export default function Ventas() {
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 100,
             },
           },
         }}
@@ -726,7 +739,6 @@ export default function Ventas() {
         isOpen={isDetalleIngresoModalOpen}
         onClose={() => {
           setIsDetallePIngresoModalOpen(false);
-          data();
         }}
       />
     </div>

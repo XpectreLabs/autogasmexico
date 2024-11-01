@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:pago20="http://www.sat.gob.mx/Pagos20" xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd http://www.sat.gob.mx/Pagos20 http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd" Version="4.0" Serie="M" Folio="176713" Fecha="2024-04-26T21:17:28" Sello="flYGWCXhHa3NKm0pb15W8/WcOaTgcLA53mi9wd3YjIvi+FD8LCaQ+ag2lXjAabKjvuASx83DKFeD2ZEQf8l8Yy6KEP8293NqYen9i6GxeIhPsDUzbQiNI4UFOUf1X3osLCnnMGMtkny+fk9uCJkg3/EftvH8kSQHPZgIR0OBQfcXWMPJV0R8tiqP5zM33B1M0cEEe0YecWKJH76uUuWPpMj79qCG49FdSabR8bSVNnAGh8GGPGBzlGGWQ0st0PKc3A4ry+Fqok2kjSj5fCU73yYJva6w4UBRrDZdfuYqRWwmKHy14mlfDlBRBN4mJYgatqQPh+SBjf2KNpHUHZs5Jw==" NoCertificado="00001000000503921820" Certificado="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" SubTotal="0" Moneda="XXX" Total="0" TipoDeComprobante="P" Exportacion="01" LugarExpedicion="43740">
+  <cfdi:Emisor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="GUUM87091923A" Nombre="MARTHA PATRICIA GUTIERREZ URIBE" DomicilioFiscalReceptor="42060" RegimenFiscalReceptor="612" UsoCFDI="CP01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="84111506" Cantidad="1" ClaveUnidad="ACT" Descripcion="Pago" ValorUnitario="0" Importe="0" ObjetoImp="01"/>
+  </cfdi:Conceptos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="b8f2cad8-9ce7-471d-8ad8-69fe342f9502" FechaTimbrado="2024-04-26T21:17:34" RfcProvCertif="DIG130917F9A" SelloCFD="flYGWCXhHa3NKm0pb15W8/WcOaTgcLA53mi9wd3YjIvi+FD8LCaQ+ag2lXjAabKjvuASx83DKFeD2ZEQf8l8Yy6KEP8293NqYen9i6GxeIhPsDUzbQiNI4UFOUf1X3osLCnnMGMtkny+fk9uCJkg3/EftvH8kSQHPZgIR0OBQfcXWMPJV0R8tiqP5zM33B1M0cEEe0YecWKJH76uUuWPpMj79qCG49FdSabR8bSVNnAGh8GGPGBzlGGWQ0st0PKc3A4ry+Fqok2kjSj5fCU73yYJva6w4UBRrDZdfuYqRWwmKHy14mlfDlBRBN4mJYgatqQPh+SBjf2KNpHUHZs5Jw==" NoCertificadoSAT="00001000000513570558" SelloSAT="J4v0MYgiptXJv7NspNlzOEFMhCRVXdN9ZB2okEmBp3WQtJw3S+DMsD6yVE7TjxSJ/DICVDLiA3JSd8jqgbEnFkUfcM6RO2deStrTtJpiM0mrWrVp8HG2264sH+lcabfwZC1P2SnQHVkGz9Zko2EhlJ0l51pyOChwKFemgTsl8YFotTK5XakAlXCq1igugl9AYJzI8uNdMxizKfIuJBr02VuXKecXGFo/3PBkw7uOtM+Uv4VDBAxBtdTkKO0zLZQLQcBjDv3ULnn7//+PssWEUGl86rsVcpKkNLXFderoo2Xn2kmjmWeEe4oqgZ4Xm4jtbnyGDSV9DnJBS7jhlOjTyw=="/>
+    <pago20:Pagos Version="2.0">
+      <pago20:Totales MontoTotalPagos="2953.67" TotalTrasladosBaseIVA16="2546.27" TotalTrasladosImpuestoIVA16="407.4"/>
+      <pago20:Pago FechaPago="2024-04-26T12:00:00" FormaDePagoP="03" MonedaP="MXN" TipoCambioP="1" Monto="2953.67">
+        <pago20:DoctoRelacionado IdDocumento="4142e4db-3d72-4bcf-b804-9b26dc72f194" Serie="M" EquivalenciaDR="1" Folio="176611" MonedaDR="MXN" NumParcialidad="1" ImpSaldoAnt="2953.67" ImpPagado="2953.67" ImpSaldoInsoluto="0" ObjetoImpDR="02">
+          <pago20:ImpuestosDR>
+            <pago20:TrasladosDR>
+              <pago20:TrasladoDR BaseDR="2546.27" ImpuestoDR="002" TipoFactorDR="Tasa" TasaOCuotaDR="0.160000" ImporteDR="407.4"/>
+            </pago20:TrasladosDR>
+          </pago20:ImpuestosDR>
+        </pago20:DoctoRelacionado>
+        <pago20:ImpuestosP>
+          <pago20:TrasladosP>
+            <pago20:TrasladoP BaseP="2546.27" ImpuestoP="002" TipoFactorP="Tasa" TasaOCuotaP="0.160000" ImporteP="407.4"/>
+          </pago20:TrasladosP>
+        </pago20:ImpuestosP>
+      </pago20:Pago>
+    </pago20:Pagos>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

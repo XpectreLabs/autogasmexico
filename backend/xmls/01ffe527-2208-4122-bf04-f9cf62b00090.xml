@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="M" Folio="176692" Fecha="2024-04-24T23:14:23" Sello="GOs15k6hgUFeSFN37L5AVOdRcvMXr76pvVhxCOtCEmTl7wJARLhbcAGsz2y411R0TVgjX1yPl/Rwv0O4f9zdBAn9GdVs090wxUp7wZPWeecOAxd7oTlUDUF0iFlZPappt25gn1xFR44DnbyYV5SkawZsHQZG2aTV4oxhd1Uz+jO7g68MOnuzZEp3qtpDP5hTPE1Jab8pIFhq+nxDC6vxHIfM7V4ZFsWCTzavc/NIElP8trk1ol4mjYznGMbRda35ch0JefkgnfPMY9+MFVaM62I4uWEac7eq4mSEI3tdP3JBkxO/3EU2IXl/8PR64sEEdUk87fVhJHHi4C0BWqTuUQ==" FormaPago="01" NoCertificado="00001000000503921820" Certificado="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" SubTotal="1634.51" Moneda="MXN" Total="1896.03" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="43740">
+  <cfdi:Emisor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="IAGR830422JN5" Nombre="ROBERTO ISLAS GERMAN" DomicilioFiscalReceptor="43750" RegimenFiscalReceptor="626" UsoCFDI="G03"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2020-315884" Cantidad="89.800000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="7.103452" Importe="637.89" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="637.89" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="102.06"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2020-315888" Cantidad="82.900000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="7.103498" Importe="588.88" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="588.88" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="94.22"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="15111510" NoIdentificacion="LP/14766/DIST/PLA/2020-315891" Cantidad="57.400000" ClaveUnidad="LTR" Descripcion="GLP /Gas licuado de petróleo" ValorUnitario="7.103484" Importe="407.74" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="407.74" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="65.24"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="261.52">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="1634.51" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="261.52"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="01ffe527-2208-4122-bf04-f9cf62b00090" FechaTimbrado="2024-04-24T23:14:27" RfcProvCertif="DIG130917F9A" SelloCFD="GOs15k6hgUFeSFN37L5AVOdRcvMXr76pvVhxCOtCEmTl7wJARLhbcAGsz2y411R0TVgjX1yPl/Rwv0O4f9zdBAn9GdVs090wxUp7wZPWeecOAxd7oTlUDUF0iFlZPappt25gn1xFR44DnbyYV5SkawZsHQZG2aTV4oxhd1Uz+jO7g68MOnuzZEp3qtpDP5hTPE1Jab8pIFhq+nxDC6vxHIfM7V4ZFsWCTzavc/NIElP8trk1ol4mjYznGMbRda35ch0JefkgnfPMY9+MFVaM62I4uWEac7eq4mSEI3tdP3JBkxO/3EU2IXl/8PR64sEEdUk87fVhJHHi4C0BWqTuUQ==" NoCertificadoSAT="00001000000513570558" SelloSAT="lV/YuCJfHCajziF85zCE32BzeazyO1AMVKlFC0KWc4xuQd+FKEKobZGh2ypcjxkc+HhLyskWLnsIn7ON32hb3APOE12NbkJ+Yw87U6hgym9st+wwTJTAXRsgSBmsSRGJdmOHNOYP9/7GZ+QdpJq1fL2tMVS0ipzqGste0iq4lmJxOD7XhJeaqUDpGP51DSbL/tl/4yVKrzKCO3xy1iTWBfsGx2AI0/7+PlhefHkownCjcbGigqI3Iu1PSso0depVsQ1x+OlQ3r9+6PsSycuL3wFZ6w+rL5tMAA+ke1Cle6Z9GEcrUhFIXTFowjUy2SjNLoluUXvOhxPlVzr8oUeHsg=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

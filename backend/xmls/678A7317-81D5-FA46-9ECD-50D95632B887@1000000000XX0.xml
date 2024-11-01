@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="MRA" Folio="39943" Fecha="2021-09-02T14:11:17" Sello="ATsQEsPXzV/KFnM9QFGJI+K8/ZV89yHx6aU4extN+yY8wZ3xCuced+/sODaAVHkAsBrtX/1l9Bxroud8tPtkwp0xKTnr7Va5hiLVpJYrPCVMIRRH+DU8LQjJfWQRujx/Uf4O3YayxZbrQVefUCjeSDV0Kvlvh1m4UUkLHQxX919YLVO8RaMCqzpTnYQAmm9jLfpOGiWCXLigKyJhNyKDjem/n0DBix4I5dU4ZSsfXJm5zia3dhVkBKZF7PTv0wH0h1+QHXJu73OiCJTwxR8TRRBo9m+95b4M2To6OATTZ1QqOOdm//R1yLr4dVjaZ8bO/0Wy6SlPYuUiTW+7MvC+cw==" FormaPago="04" NoCertificado="00001000000408786168" Certificado="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" SubTotal="1743.96" Descuento="13.10" Moneda="MXN" Total="2007.80" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42182">
+  <cfdi:Emisor Rfc="HPI131206EH6" Nombre="HERRAMIENTAS DE LA PIEDAD SA DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO S.A. DE C.V." UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="46181500" NoIdentificacion="7501206628232" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Conjunto impermeable talla mediana PVC Truper 14418" ValorUnitario="271.551724" Importe="271.55">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="271.55" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="43.448" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46181500" NoIdentificacion="7501206628249" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Conjunto impermeable talla grande PVC Truper 14419" ValorUnitario="271.551724" Importe="271.55">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="271.55" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="43.448" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="27112001" NoIdentificacion="7501206610077" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Machete estándar 20' cacha naranja Truper 15886" ValorUnitario="58.62069" Importe="117.24">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="117.24" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="18.7584" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46181500" NoIdentificacion="7501206682869" Cantidad="2" ClaveUnidad="PR" Unidad="PAR" Descripcion="Guantes de carnaza cortos Pretul 23262" ValorUnitario="46.551724" Importe="93.10">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="93.10" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="14.896" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46181600" NoIdentificacion="7501206691731" Cantidad="1" ClaveUnidad="PR" Unidad="PAR" Descripcion="Botas industriales # 26 Truper 17912" ValorUnitario="202.586207" Importe="202.59">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="202.59" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.4144" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46181600" NoIdentificacion="7501206691748" Cantidad="1" ClaveUnidad="PR" Unidad="PAR" Descripcion="Botas industriales # 27 Truper 17913" ValorUnitario="202.586207" Importe="202.59">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="202.59" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.4144" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="47131618" NoIdentificacion="082269085080" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Jalador Metalico Reynera" ValorUnitario="65.517241" Importe="65.52" Descuento="13.10">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="52.42" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="8.3872" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="47131600" NoIdentificacion="7506240636984" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Jalador de plástico con base de aluminio 50 cm Klintek 57016" ValorUnitario="47.413793" Importe="47.41">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="47.41" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.5856" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="27112004" NoIdentificacion="7501206652404" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Pala T-2000 escarramán corta puño 'Y' Truper 17162" ValorUnitario="193.965517" Importe="387.93">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="387.93" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="62.0688" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="47131600" NoIdentificacion="57054" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Escoba de vinilo tipo cepillo mediana Klintek 57054" ValorUnitario="42.241379" Importe="84.48">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="84.48" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.5168" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="276.94">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="276.94" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.1" UUID="678A7317-81D5-FA46-9ECD-50D95632B887" FechaTimbrado="2021-09-02T14:11:19" RfcProvCertif="SCD110105654" SelloCFD="ATsQEsPXzV/KFnM9QFGJI+K8/ZV89yHx6aU4extN+yY8wZ3xCuced+/sODaAVHkAsBrtX/1l9Bxroud8tPtkwp0xKTnr7Va5hiLVpJYrPCVMIRRH+DU8LQjJfWQRujx/Uf4O3YayxZbrQVefUCjeSDV0Kvlvh1m4UUkLHQxX919YLVO8RaMCqzpTnYQAmm9jLfpOGiWCXLigKyJhNyKDjem/n0DBix4I5dU4ZSsfXJm5zia3dhVkBKZF7PTv0wH0h1+QHXJu73OiCJTwxR8TRRBo9m+95b4M2To6OATTZ1QqOOdm//R1yLr4dVjaZ8bO/0Wy6SlPYuUiTW+7MvC+cw==" NoCertificadoSAT="00001000000502000436" SelloSAT="k66ifSRAO8DWj6ygCDt6NF7jxpqye5mX1Oyiaz1GFWqZsPrxuWgkA/X1mmjYtqYlx07HH9//roxY+gZ2Zwm7xf7D4Taex1MaA/xCXBJb3X/VwIGWwp2cwNY1THKbAekjLZb3jyTIKmqvz3cM2fAmRTJLugpXL6Q6RDczwMAL1gOFcxrFXqZFCqYdODRdM24LSJMHkuRpic1QnrnzJmysOMI5ruR3+/MxRfkG1knER37l+9icCNb4msFjiU2WgcqaJAbGFlQzEx6BVIj4gfy3dpoBfM2/nz7B+P8ZNv6Z4MrY7o7n25fyP658hmDlxr3RQcOfceW0DqXPvJqtNstgxA==" />
+</cfdi:Complemento></cfdi:Comprobante>

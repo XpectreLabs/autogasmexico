@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:catCFDI="http://www.sat.gob.mx/sitio_internet/cfd/catalogos" xmlns:tdCFDI="http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="HM" Folio="164772" Fecha="2021-08-07T10:06:20" Sello="FW9kR5B3Aqzlr25S9vLLkW5dmRdQYIOnz7TqWqJikEOZ+CLpn3OB5ZQbegehLIj5mWfInPkcu7s04ZFsbnstL/JMn9VFS5MG8eJUYnG0ailZ+olW7NqSksukm1Rhldnl+Ok2gxhWv0UDmaaZHxss6lmneC6Ib6OADZ8eIkZdgxk7jS/1Pe6yZFGQNENfinpt+vLXvMqBdcJZ7lAN1lucbBQO5QnQrtoWrTgZWXin6x18LoEX30z/XlOrQriF67cxK00Qtl0dMYUopzwnF/jZ8IHNudl4hIG3yaqltQGGGnqGV7kSh5biLrshyYC5g9CRFlyi7BKwYZ2UAURjq16nSg==" FormaPago="04" NoCertificado="00001000000505221903" Certificado="MIIF0DCCA7igAwIBAgIUMDAwMDEwMDAwMDA1MDUyMjE5MDMwDQYJKoZIhvcNAQELBQAwggGEMSAwHgYDVQQDDBdBVVRPUklEQUQgQ0VSVElGSUNBRE9SQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxKjAoBgkqhkiG9w0BCQEWG2NvbnRhY3RvLnRlY25pY29Ac2F0LmdvYi5teDEmMCQGA1UECQwdQVYuIEhJREFMR08gNzcsIENPTC4gR1VFUlJFUk8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQQ0lVREFEIERFIE1FWElDTzETMBEGA1UEBwwKQ1VBVUhURU1PQzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMVwwWgYJKoZIhvcNAQkCE01yZXNwb25zYWJsZTogQURNSU5JU1RSQUNJT04gQ0VOVFJBTCBERSBTRVJWSUNJT1MgVFJJQlVUQVJJT1MgQUwgQ09OVFJJQlVZRU5URTAeFw0yMDA5MjkxODM1MDdaFw0yNDA5MjkxODM1MDdaMIGeMRYwFAYDVQQDEw1DT0VMIFNBIERFIENWMRYwFAYDVQQpEw1DT0VMIFNBIERFIENWMRYwFAYDVQQKEw1DT0VMIFNBIERFIENWMSUwIwYDVQQtExxDT0U5NTEwMDU1UjYgLyBUQUdGNTQwNzI2Nk4zMR4wHAYDVQQFExUgLyBUQUdGNTQwNzI2SERGTVJSMDMxDTALBgNVBAsTBENPRUwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCb8y9n6l9O6N0j0qJ/xlb0M2VdC6kSbwNETu8gf1rZJAcrsvh3+WSthmlLjdAbNEFLtZ/G4O9JFtD3qNQhS3pWL8pD/rYrR0UKSLr4dnTrXWbafffWiwab33fiM+Ci7BmkGEUQwJQJYeAfK7MVcas2LwSsdUvcN1fB2LLBCF6Z/pg6R/2HhtpxHw+mzK2PpxOZE9mPSQ4dPQZvyV7I37wE9XUs6kijuCZVFgXllI1XZ7mdU1tWwG2Q/YrFITvzlwRFC46SCmmeyIslIjRIRTpPIuNdo2HSKGLT58h8bkQO/ZGtuobVOt0ssQNLD2w1MhzE0roiUZIMETxNDNgiSbrrAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQC+r6cyyoiUPhfOkbVMHASr9rxr/QAdz7gmvB/KL80+9IXZ/BzHq1wJh7C8vpHN/A4Ga9fUtihnSnV8r7vAhraP3oucFv4hfDitGmYM+w8EpXKdQGGIXA3ngDWsl4o3taNH/D4Tz7BVneUZtlIQ1+MYroVdtSix4SnvgI2Yj54T0eLm51iqnZafjqcRcBmO3iPy1HSxnshLnUUttCvGOckW1m/nR/5BjCqpcI1PvnV4Z5VczNrCChhNxlli1h2sE61sOyTs7BC1ubA3G8YUVf78ikpAqr0qNVkmfE6BBYLBgYDl9dvhwMFhVeTHgAbD6NMPFdaAZNaAYcmaCcpvv0LDcOetZ+toDlZ7FRj6ZVjWEI8rca7UeqIoPdInFNd+PFCLu43BZ4kc0mWa37hGPgYWJCbtXaf3zDqnciwC/fiPkvMAQdL4P/7S66cOeTgYdI70K63SSuAQ0HLoXABYwq/8vPqdGNNKMZR3CoTFTVO0tnAO80hVU3LG/I65kfua0cR0rkdSFs64ZaLVpQANwmo7Ywq2gOlcD3QviEpGa1/ocsTyedSLpTLiuR+bYQSB8qKvrFhro3ZIcoEKtDm4nYae03Abfp/CDLR/XyFTugNYKYxO+VEGIz1rvxVTiV52e98uYdrPFZsBBodOBLlm0JzGRM9iUAc/hsLENBBDrCTM9A==" CondicionesDePago="Contado Especial" SubTotal="568.25" Moneda="MXN" TipoCambio="1" Total="659.17" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42080">
+  <cfdi:Emisor Rfc="COE9510055R6" Nombre="COEL S.A. DE C.V." RegimenFiscal="601" />
+  <cfdi:Receptor Nombre="AUTOGAS MEXICO SA DE CV" Rfc="AME050309Q32" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="39122245" NoIdentificacion="QO230" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="INTERRUPTOR TERMOMAG. ENCHUFABLE 2P 30A 240VCA TE" ValorUnitario="357.916326" Importe="357.916326">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="357.916326" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="57.266612" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39122200" NoIdentificacion="QO115" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="INTERRUPTOR TERMOMAG. 1P 15A 240VCA ENCHUFABLE TE" ValorUnitario="105.167361" Importe="105.167361">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="105.167361" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.826778" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39122205" NoIdentificacion="QO120" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="INTERRUPTOR TERMOMAG. 1P 20A 240VCA ENCHUFABLE TE FD Residential - ENM HOME DISTRIBUTION" ValorUnitario="105.167361" Importe="105.167361">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="105.167361" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.826778" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="90.92">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="90.92" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="C6B28BCA-22BA-40E7-84CC-6EDB551D9E59" FechaTimbrado="2021-08-07T10:13:48" SelloCFD="FW9kR5B3Aqzlr25S9vLLkW5dmRdQYIOnz7TqWqJikEOZ+CLpn3OB5ZQbegehLIj5mWfInPkcu7s04ZFsbnstL/JMn9VFS5MG8eJUYnG0ailZ+olW7NqSksukm1Rhldnl+Ok2gxhWv0UDmaaZHxss6lmneC6Ib6OADZ8eIkZdgxk7jS/1Pe6yZFGQNENfinpt+vLXvMqBdcJZ7lAN1lucbBQO5QnQrtoWrTgZWXin6x18LoEX30z/XlOrQriF67cxK00Qtl0dMYUopzwnF/jZ8IHNudl4hIG3yaqltQGGGnqGV7kSh5biLrshyYC5g9CRFlyi7BKwYZ2UAURjq16nSg==" NoCertificadoSAT="00001000000505600468" SelloSAT="Fwr6QA79MHnN3GBfCfuarmW9jJhin5+lTZ5SATIXyQhluSS4IL8lSY33FMffKBQtbScv1UF8FVNPRmozto8YgWRyg/Dtjx66aC43vh1QkgFUH8lH55yIckzgtBVhI8DWMe5jKdjY9ArmOTVSGnaOYMlRwecmbnURJpE44CVeYj9+51gBCME986xlzh09qCAf9NWzPrt4qBBGx8WWtGEn0zqUfU95BYurLs2VdgYtRpeZtdHt+RZsxcQyIjRA2jjBrxJhpm+J33xVDEBhfIMxRE00PFyt5oyv7on3vc8qRZkYHkJLtR0Egwtv5A7FDeBfJeVbWx8jFyvOL1MOWUCGdw==" RfcProvCertif="EME000602QR9" /></cfdi:Complemento></cfdi:Comprobante>

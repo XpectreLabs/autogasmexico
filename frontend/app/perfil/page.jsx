@@ -32,7 +32,6 @@ export default function Perfil() {
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
 
-
   function Logout() {
     localStorage.setItem('user_id', "");
     localStorage.setItem('token', "");
@@ -57,7 +56,7 @@ export default function Perfil() {
       console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
-        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
+        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'],rfccontribuyente:data.dataUsuario[0]['rfccontribuyente'], rfcrepresentantelegal: data.dataUsuario[0]['rfcrepresentantelegal'],rfcproveedor: data.dataUsuario[0]['rfcproveedor'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
         setShowAlert(false);
       }
       else if(data.message==="schema") {
@@ -101,6 +100,15 @@ export default function Perfil() {
           lastname: Yup.string()
             .min(3, "Los apellidos tener minimo 3 digitos")
             .required("Los apellidos es requerido"),
+          rfccontribuyente: Yup.string()
+            .min(10, "El Rfc del contribuyente es muy corto")
+            .required("El  Rfc del contribuyente es requerido"),
+          rfcrepresentantelegal: Yup.string()
+            .min(10, "El Rfc del representante legal es muy corto")
+            .required("El Rfc del representante legal es requerido"),
+          rfcproveedor: Yup.string()
+            .min(10, "El Rfc del proveedor es muy corto")
+            .required("El Rfc del proveedor es requerido"),
           email: Yup.string()
             .email("El email es incorrecto"),
           password: Yup.string()
@@ -217,7 +225,7 @@ export default function Perfil() {
               <Grid item xs={2}>
               </Grid>
               <Grid item xs={10}>
-                <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>Mi perfil</strong></p>
+                <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>Usuario maestro</strong></p>
 
                 <div className={styles.center}>
                   {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Message:</strong><br />{textError}</p>):null}
@@ -274,6 +282,41 @@ export default function Perfil() {
                       onBlur={handleBlur}
                       disabled="false"
                     />
+                    <p>Razones social</p>
+                    <label className={styles.lbl}><strong>RFC Contribuyente:</strong></label>
+                    <TextField
+                      placeholder="RFC Contribuyente"
+                      required
+                      id="rfccontribuyente"
+                      value={values.rfccontribuyente}
+                      name="rfccontribuyente"
+                      size="small"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+
+                    <label className={styles.lbl}><strong>RFC Representante legal:</strong></label>
+                    <TextField
+                      placeholder="RFC Representante legal"
+                      required
+                      id="rfcrepresentantelegal"
+                      value={values.rfcrepresentantelegal}
+                      name="rfcrepresentantelegal"
+                      size="small"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <label className={styles.lbl}><strong>RFC proveedor:</strong></label>
+                    <TextField
+                      placeholder="RFC proveedor"
+                      required
+                      id="rfcproveedor"
+                      value={values.rfcproveedor}
+                      name="rfcproveedor"
+                      size="small"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
 
                     <div style={{textAlign:'left', marginBottom: '10px'}}>
                       <FormControlLabel  control={<Checkbox id="cbCambiar" name="cbCambiar" onClick={()=>{setShowCambio(!showCambio)}} />} label="Cambiar datos de acceso:" />
@@ -308,10 +351,13 @@ export default function Perfil() {
                     />
 
                     <div className={styles.errors}>
-                        <p><strong>{(errors.firstname || errors.lastname || errors.email)?`Errores:`:null}</strong></p>
+                        <p><strong>{(errors.firstname || errors.lastname || errors.email || errors.rfccontribuyente || errors.rfcrepresentantelegal || errors.rfcproveedor)?`Errores:`:null}</strong></p>
                         {errors.firstname? (<p>{errors.firstname}</p>):null}
                         {errors.lastname? (<p>{errors.lastname}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
+                        {errors.rfccontribuyente? (<p>{errors.rfccontribuyente}</p>):null}
+                        {errors.rfcrepresentantelegal? (<p>{errors.rfcrepresentantelegal}</p>):null}
+                        {errors.rfcproveedor? (<p>{errors.rfcproveedor}</p>):null}
                     </div>
 
                     <div>

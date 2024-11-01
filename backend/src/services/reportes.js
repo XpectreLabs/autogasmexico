@@ -6,6 +6,9 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 const dayjs = require ("dayjs");
 const fnPermisos = require('../services/permisos');
+let totFinalCompras = 0;
+let totFinalIngresos = 0;
+
 
 let dataJson = {
   "Version": "1.012",
@@ -51,8 +54,10 @@ let dataJson = {
 
 const generarJson = async (data,date,version="",numeroregistro="",volumenexistenciasees=0.0,numpermiso="") =>  {
   //const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
-  const fechaEM = dayjs(data.fechayhoraestamedicionmes).format('YYYY-MM-DDTH:m:ssSSS[Z]');
+  const fechaEM = dayjs(data.fechayhoraestamedicionmes).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm');
+
   console.log(numpermiso);
+  console.log("volumenexistenciasees",volumenexistenciasees);
 
   console.log("ja", (parseFloat(data.composdepropanoengaslp).toFixed(2)))
   console.log("data.numpermiso",data.numpermiso);
@@ -78,6 +83,12 @@ const generarJson = async (data,date,version="",numeroregistro="",volumenexisten
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = fechaEM;
   dataJson.Producto[0].ReporteDeVolumenMensual.Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.Producto[0].ReporteDeVolumenMensual.Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
+  console.log("Final",totFinalCompras,totFinalIngresos)
+
+  volumenexistenciasees = (totFinalCompras-totFinalIngresos)+volumenexistenciasees;
+  dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = parseFloat(parseFloat(volumenexistenciasees).toFixed(2));
+
+
   dataJson.BitacoraMensual[0].NumeroRegistro = numeroregistro?numeroregistro:data.numeroregistro;
   dataJson.BitacoraMensual[0].FechaYHoraEvento = date;
   dataJson.BitacoraMensual[0].UsuarioResponsable = data.usuarioresponsable;
@@ -138,6 +149,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
         select: {
           name: true,
           rfc: true,
+          permiso_cre: true,
         },
       },
     },
@@ -151,6 +163,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
   for(let j=0; j<listIngresos.length; j++){
     totalCantidad+=listIngresos[j].cantidad;
     totalImporteTotal+=listIngresos[j].preciovent;
+    const permiso_cre = listIngresos[j].proveedores.permiso_cre?listIngresos[j].proveedores.permiso_cre:"NO TIENE EL PERMISO ASIGNADO";
 
     let item = {
       "TipoComplemento": listIngresos[j].tipocomplemento,
@@ -158,13 +171,13 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
       {
         "RfcClienteOProveedor": listIngresos[j].proveedores.rfc,
         "NombreClienteOProveedor": listIngresos[j].proveedores.name,
-        "PermisoClienteOProveedor": listIngresos[j].permiso,
+        "PermisoClienteOProveedor": permiso_cre,
         "CFDIs": [
         {
           "Cfdi": listIngresos[j].cfdi,
           "TipoCfdi": listIngresos[j].tipoCfdi,
           "PrecioVentaOCompraOContrap": listIngresos[j].preciovent,
-          "FechaYHoraTransaccion": listIngresos[j].fecha_emision,
+          "FechaYHoraTransaccion": dayjs(listIngresos[j].fecha_emision).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm'),
           "VolumenDocumentado": {
             "ValorNumerico": parseFloat(parseFloat(listIngresos[j].cantidad).toFixed(2)),
             "UnidadDeMedida": listIngresos[j].unidaddemedida
@@ -174,6 +187,7 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
     ],
       "Aclaracion": listIngresos[j].aclaracion
     };
+
     ban=true;
     Complemento.push(item);
   }
@@ -185,6 +199,8 @@ async function listRecepciones(user_id,fechaInicio, fechaFin,permiso_id) {
     };
     Complemento.push(item);
   }
+
+  totFinalCompras = totalCantidad;
   Recepciones.TotalRecepcionesMes = listIngresos.length;
   Recepciones.TotalDocumentosMes = listIngresos.length;
   Recepciones.SumaVolumenRecepcionMes.ValorNumerico = parseFloat(parseFloat(formatter.format(totalCantidad).replace(',','')).toFixed(2)) ;
@@ -220,7 +236,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     where: {
       user_id,
       active: 1,
-      permiso_id,
+      //permiso_id,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
 			  lte: new Date(ff), // End of date range
@@ -255,6 +271,8 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     },
    });
 
+   console.log("permiso_id",permiso_id);
+   //console.log("listCompras",listCompras);
 
   let totalCantidad=0;
   let totalImporteTotal=0;
@@ -264,6 +282,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   for(let j=0; j<listCompras.length; j++){
     totalCantidad+=listCompras[j].cantidad;
     totalImporteTotal+=listCompras[j].preciovent;
+    const permiso = listCompras[j].permisos?listCompras[j].permisos.permiso:"NO TIENE EL PERMISO ASIGNADO";
 
     let item = {
       "TipoComplemento": listCompras[j].tipocomplemento,
@@ -271,13 +290,13 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
         {
           "RfcClienteOProveedor": listCompras[j].clients.rfc,
           "NombreClienteOProveedor": listCompras[j].clients.name,
-          "PermisoClienteOProveedor": listCompras[j].permisos.permiso,
+          "PermisoClienteOProveedor": permiso,
           "CFDIs": [
             {
               "Cfdi": listCompras[j].cfdi,
               "TipoCfdi": listCompras[j].tipoCfdi,
               "PrecioVentaOCompraOContrap": listCompras[j].preciovent,
-                  "FechaYHoraTransaccion": listCompras[j].fecha_emision,
+                  "FechaYHoraTransaccion": dayjs(listCompras[j].fecha_emision).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm'),
               "VolumenDocumentado": {
                 "ValorNumerico": parseFloat(parseFloat(listCompras[j].cantidad).toFixed(2)),
                 "UnidadDeMedida": listCompras[j].unidaddemedida
@@ -301,6 +320,7 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     Complemento.push(item);
   }
 
+  totFinalIngresos = totalCantidad;
   Entregas.TotalEntregasMes = listCompras.length;
   Entregas.TotalDocumentosMes = listCompras.length;
   Entregas.SumaVolumenEntregadoMes.ValorNumerico = parseFloat(parseFloat(formatter.format(totalCantidad).replace(',','')).toFixed(2));
@@ -322,7 +342,6 @@ async function totalRecepciones(fechaInicio, fechaFin,permiso_id) {
       },
     ],
     where: {
-      permiso_id,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
 			  lte: new Date(ff), // End of date range}
@@ -358,7 +377,6 @@ async function totalEntregas(fechaInicio, fechaFin,permiso_id) {
     ],
     where: {
       active: 1,
-      permiso_id,
       fecha_emision: {
         gte: new Date(fi), // Start of date range
 			  lte: new Date(ff), // End of date range

@@ -23,7 +23,7 @@ router.post('/login', async (req, res, next) => {
     console.log("user",user,(user > 0))
     if (user !== 0) {
       const token = generateAccessToken(jwt, user);
-      res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), token: token });
+      res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), rfccontribuyente: user.rfccontribuyente, rfcproveedor: user.rfcproveedor, rfcrepresentantelegal:user.rfcrepresentantelegal, type_user: user.type_user, token: token });
     } else {
       let messageError = 'Los datos de acceso son incorrectos';
       console.log(messageError);

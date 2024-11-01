@@ -92,6 +92,7 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
             select: {
               name: true,
               rfc: true,
+              permiso_cre: true,
             },
           },
           permisos: {
@@ -123,7 +124,7 @@ const procesarXmls = async (req, res) => {
           dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
           //console.log(dataJson);
           //listData.push(dataJson)
-          await fnCompras.guardarDataJson(dataJson,req.body.user_id);
+          await fnCompras.guardarDataJson(dataJson,req.body.user_id,req.body.permiso_id);
         })
       })
   }
@@ -280,9 +281,15 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
 
                 const fecha = new Date((req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado+"").substr(0,10)).toISOString();
                 const concepto = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion
+                const noIdentificacion = req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion?req.body.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion:"";
 
                 const dens = fnCompras.getDensidad(concepto);
-                const permiso = fnCompras.getPermiso(concepto);
+                let permiso = fnCompras.getPermiso(concepto);
+
+                console.log("noIdentificacion",noIdentificacion)
+
+                permiso = permiso?permiso:fnCompras.getPermiso(noIdentificacion);
+
                 console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);

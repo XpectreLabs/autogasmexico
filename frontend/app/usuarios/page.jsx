@@ -153,6 +153,13 @@ export default function Usuarios() {
       sortable: false,
       flex: 3,
     },
+    ,
+    {
+      field: 'rfccontribuyente',
+      headerName: 'RFC',
+      sortable: false,
+      flex: 3,
+    },
     {
       field: 'date',
       headerName: 'Fecha de alta',
@@ -268,6 +275,7 @@ export default function Usuarios() {
           lastname: usuario.lastname,
           email: usuario.email?usuario.email:"Sin email",
           date: changedateformatF(usuario.date),
+          rfccontribuyente: usuario.rfccontribuyente
         }))}
         columns={columns}
         initialState={{

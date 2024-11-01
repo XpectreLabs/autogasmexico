@@ -19,9 +19,10 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+  const [initialValues, setInitialValues] = useState(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [listPermisos,setListPermisos] = React.useState([]);
+  const [listaProveedores,setListaProveedores] = React.useState([]);
 
   function data() {
     const user_id = localStorage.getItem('user_id');
@@ -41,6 +42,46 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
       console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
+
+  function listProveedores() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/proveedores/"+user_id+"/listaproveedores";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        console.log("data.listProveedores",data.listProveedores);
+        setListaProveedores(data.listProveedores);
       }
       else if(data.message==="schema") {
         setTextError(data.error);
@@ -106,11 +147,12 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
 
     console.log(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value));
 
-    setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value)), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad), permiso: cadPermiso,  preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+    setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value)), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad),  preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   }
 
   useEffect(() => {
     data();
+    listProveedores();
   }, []);
 
   return (
@@ -120,44 +162,44 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
         validationSchema={Yup.object().shape({
           folio: Yup.string()
             .min(3, "El folio es muy corto")
-            .required("El folio es requerido"),
+            .required("* El folio es requerido"),
           fecha_emision: Yup.date()
             .required("* Fecha de emisión"),
           cantidad: Yup.number()
             .min(1, "La cantidad debe tener minimo 1 digito")
-            .required("La cantidad es requerido"),
+            .required("* La cantidad es requerido"),
           concepto: Yup.string()
             .min(3, "El concepto es muy corto")
-            .required("El concepto es requerida"),
+            .required("* El concepto es requerida"),
           preciounitario: Yup.number()
           .min(1, "El precio unitario debe tener minimo 1 digito")
-          .required("El precio unitario es requerido"),
+          .required("* El precio unitario es requerido"),
           importe: Yup.number()
           .min(1, "El importe debe tener minimo 1 digito")
-          .required("El importe es requerido"),
+          .required("* El importe es requerido"),
           ivaaplicado: Yup.number()
           .min(1, "El iva aplicado debe tener minimo 1 digito")
-          .required("El iva aplicado es requerido"),
+          .required("* El iva aplicado es requerido"),
           cfdi: Yup.string()
             .min(3, "El cfdi es muy corto")
-            .required("El cfdi es requerido"),
+            .required("* El cfdi es requerido"),
           tipoCfdi: Yup.string()
             .min(3, "El tipo de cfdi es muy corto")
-            .required("El tipo de cfdi es requerido"),
+            .required("* El tipo de cfdi es requerido"),
           preciovent: Yup.number()
             .min(1, "El precio de compra debe tener minimo 1 digito")
-            .required("El precio de compra es requerido"),
+            .required("* El precio de compra es requerido"),
           aclaracion: Yup.string()
             .min(3, "La aclaración es muy corto")
-            .required("La aclaración de compra es requerido"),
+            .required("* La aclaración de compra es requerido"),
           tipocomplemento: Yup.string()
             .min(3, "El tipo de complemento es muy corto")
-            .required("El tipo de complemento es requerido"),
+            .required("* El tipo de complemento es requerido"),
           unidaddemedida: Yup.string()
             .min(3, "La unidad de medida es muy corto")
-            .required("La unidad de medida es requerido"),
+            .required("* La unidad de medida es requerido"),
           proveedor_id:Yup.number()
-            .required("El proveedor es requerido"),
+            .required("* El proveedor es requerido"),
         })}
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
@@ -192,7 +234,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los datos de la compra fueron guardados");
-              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
+              setInitialValues(({proveedor_id:'', folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -314,21 +356,9 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                     type='number'
                   />
-                  <TextField
-                    className={`InputModal ${styles.Mr}`}
-                    placeholder="Permiso"
-                    required
-                    id="permiso"
-                    label="Permiso"
-                    name="permiso"
-                    value={values.permiso}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    size="small"
-                  />
 
                   <NativeSelect
-                    className={`Fecha ${styles.select2}`}
+                    className={`Fecha ${styles.select2} ${styles.Mr}`}
                     required
                     value={values.permiso_id}
                     onChange={handleChange}
@@ -347,7 +377,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   </NativeSelect>
 
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Precio unitario"
                     id="preciounitario"
@@ -361,7 +391,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   />
 
                 <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Importe"
                     id="importe"
@@ -374,7 +404,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Iva aplicado"
                     id="ivaaplicado"
@@ -387,7 +417,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Precio de compra"
                     id="preciovent"
@@ -400,7 +430,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     type='number'
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="UUID"
                     id="cfdi"
@@ -412,7 +442,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo de cfdi"
                     id="tipoCfdi"
@@ -424,7 +454,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal ${styles.Mr}`}
+                    className={`InputModal`}
                     required
                     placeholder="Aclaración"
                     id="aclaracion"
@@ -436,7 +466,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                     size="small"
                   />
                   <TextField
-                    className={`InputModal`}
+                    className={`InputModal ${styles.Mr}`}
                     required
                     placeholder="Tipo complemento"
                     id="tipocomplemento"
@@ -460,11 +490,14 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
                   }}
                 >
                   <option aria-label="None" value="">Proveedor *</option>
-                  <option value={1}>DISTRIBUIDORA POTOSINA</option>
-                  <option value={2}>MER MAC GAS</option>
-                  <option value={3}>TRANSCAMELLO</option>
-                  <option value={4}>ENERGIA DEL CENTRO ENERGIA ECOLOGICA SA DE CV</option>
+                  {listaProveedores.map((proveedor) => {
+                    return (
+                      <option value={proveedor.proveedor_id}>{proveedor.name}</option>
+                    );
+                  })}
                 </NativeSelect>
+
+                
 
 
                   {/* <TextField

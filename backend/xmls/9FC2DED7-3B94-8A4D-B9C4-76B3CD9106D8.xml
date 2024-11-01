@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="MRA" Folio="40338" Fecha="2021-09-15T17:04:34" Sello="j7E4rrr1bbFbbMlbq0fepSHKFNym1tgTrvhm0TQlYV2JhQnDWkOvBW9qZWVLhe/TgZSBb8daC+ArHOfDCo01QoRxPhdejDrHwrpZSLtWUpHzr6f0J7myIbJAtcmNmU7mOFaCHZI2qQabV3e4B+tzFzrRfXTIKzbtYZkYPNcGt23Q6bfduYs5CbcFE3fYbDdWQV5/qniP2Xh7F7TYQtFxKxor8vmGU9ms7hRvAzrOf/yDb3Fg4myvl/KYWWX7E7XkmBlogLrXcaY3kx3CLSzOuBdWaKaOXqLzjgdzhtEudtnheQP4ttN2+u/aT6lF9ry0EY3lX8ysahQB4hT/1rC9AA==" FormaPago="04" NoCertificado="00001000000408786168" Certificado="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" SubTotal="1041.38" Moneda="MXN" Total="1208.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42182">
+  <cfdi:Emisor Rfc="HPI131206EH6" Nombre="HERRAMIENTAS DE LA PIEDAD SA DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO S.A. DE C.V." UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="27112007" NoIdentificacion="7501206651476" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Tijera para poda a dos manos 21 forjada tipo alemán Truper 18372" ValorUnitario="521.551724" Importe="521.55">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="521.55" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="83.448" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46171501" NoIdentificacion="7506240629177" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Candado para bicicleta con llave 15 x 1200 mm Hermex 43920" ValorUnitario="125.00" Importe="125.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="125.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="20.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="46171501" NoIdentificacion="7501206673744" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Candado de latón 50mm gancho largo Hermex 43439" ValorUnitario="197.413793" Importe="394.83">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="394.83" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="63.1728" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="166.62">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="166.62" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.1" UUID="9FC2DED7-3B94-8A4D-B9C4-76B3CD9106D8" FechaTimbrado="2021-09-15T17:04:35" RfcProvCertif="SCD110105654" SelloCFD="j7E4rrr1bbFbbMlbq0fepSHKFNym1tgTrvhm0TQlYV2JhQnDWkOvBW9qZWVLhe/TgZSBb8daC+ArHOfDCo01QoRxPhdejDrHwrpZSLtWUpHzr6f0J7myIbJAtcmNmU7mOFaCHZI2qQabV3e4B+tzFzrRfXTIKzbtYZkYPNcGt23Q6bfduYs5CbcFE3fYbDdWQV5/qniP2Xh7F7TYQtFxKxor8vmGU9ms7hRvAzrOf/yDb3Fg4myvl/KYWWX7E7XkmBlogLrXcaY3kx3CLSzOuBdWaKaOXqLzjgdzhtEudtnheQP4ttN2+u/aT6lF9ry0EY3lX8ysahQB4hT/1rC9AA==" NoCertificadoSAT="00001000000502000436" SelloSAT="iFvUWRk28D/Ug9th0X4FEBsZzBuGvR1N8oe1JE2JfE2FuTB7qyT1NgwSJju8d2yI3aACMRwX6BJpw4uGv5WQkdkHL4A3wtVSnykU/BmhMCTsRk3ZiY04kqNjj9Z65AQ4EsvNqC5QR2fx0oD0TVpXrm6E3GH2to6G7l9fwFC7KQ21J0YYCg/SEov3w3Ju98pgHetltDqyyVlE9gPpIA+7M26dLlB6K2qbi+70qoU6/5fHlcv2ml/Wi/yK22wUf1wMtMsvjyjy1VvoKnYsu7l43lAqQ5qF0ievaK/cJzVbIWxWZ/dXyCAT4587Sx3UAXpZj5IwY206haX94NX1W3PLTw==" />
+</cfdi:Complemento></cfdi:Comprobante>

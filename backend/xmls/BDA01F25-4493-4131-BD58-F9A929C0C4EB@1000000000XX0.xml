@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><cfdi:Comprobante Version="3.3" Serie="PCK" Folio="338810123" Fecha="2021-07-28T16:15:15" Sello="qEWYN+b2DXcwJHGwarR0hrl+c9Z59zduepoME387C8Rz892le0YQNuHaGBMCYLXHX8RIjRPvWr7Uuh7HDyEHCaN9mWlyd+U1xBuP/Q18Krg0Q44tOEvDygEjtNVmAZCx37xvPLGhf/6fw79JSDrPc+C4QicevlDE9ujQDxhvHf9lsq81XWVuyeZhne/EQQ9cslpxEcjK+quM/ejil1UCROz1Ai33DBy+mGGWEFzKvGnczx6ij2ZwxkyPJ4GLVwdXqXAL2YGTU7JvKvSyOnqWerpJgMi2TPmLsO95Qvu1i3zMe1vhb+V5N6u7KGyYkpWr538Kej2HozoUEQP5xa+pWw==" FormaPago="04" NoCertificado="00001000000506505905" Certificado="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" SubTotal="51.18" Moneda="MXN" Total="56.80" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42186" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pago10="http://www.sat.gob.mx/Pagos" xmlns:implocal="http://www.sat.gob.mx/implocal">
+  <cfdi:Emisor Rfc="CCO8605231N4" Nombre="CADENA COMERCIAL OXXO, SA DE CV" RegimenFiscal="623" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS DE MEXICO SA DE CV" UsoCFDI="P01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="50161815" Cantidad="1.000" ClaveUnidad="EA" Descripcion="ORBIT 14TAB FRES14PZ     " ValorUnitario="18.97" Importe="18.97">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="18.97" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.03" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="50202306" Cantidad="1.000" ClaveUnidad="EA" Descripcion="PENAFIEL MINERAL 2LT" ValorUnitario="16.21" Importe="16.21">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="16.21" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="2.59" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="50202301" Cantidad="1.000" ClaveUnidad="EA" Descripcion="AGUAPURIFBOMSGONT1.5" ValorUnitario="16.00" Importe="16.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="16.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="5.62">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="5.62" />
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="bda01f25-4493-4131-bd58-f9a929c0c4eb" RfcProvCertif="SNF171020F3A" FechaTimbrado="2021-07-28T16:15:16" SelloCFD="qEWYN+b2DXcwJHGwarR0hrl+c9Z59zduepoME387C8Rz892le0YQNuHaGBMCYLXHX8RIjRPvWr7Uuh7HDyEHCaN9mWlyd+U1xBuP/Q18Krg0Q44tOEvDygEjtNVmAZCx37xvPLGhf/6fw79JSDrPc+C4QicevlDE9ujQDxhvHf9lsq81XWVuyeZhne/EQQ9cslpxEcjK+quM/ejil1UCROz1Ai33DBy+mGGWEFzKvGnczx6ij2ZwxkyPJ4GLVwdXqXAL2YGTU7JvKvSyOnqWerpJgMi2TPmLsO95Qvu1i3zMe1vhb+V5N6u7KGyYkpWr538Kej2HozoUEQP5xa+pWw==" NoCertificadoSAT="00001000000414211380" SelloSAT="AJUNycs5pYo5CZkJHiIcJviuxd76RWD+QIzwU39ShFPnSfhbylhYiySKukN81t+9c6zC08myRcjVTHtinJnb8iQllVmsOUJouNgKbFAlGttZ2/fIX3S+utYXSmFu2IsjLLzanS0MVNQOEEa3IDkgOrEUkZav9BSy0qZe2QeELWiRUeUKuFkH0sY+/wNGEGr3u45X2PnVBWP2lL43v5aeHMfxeVKb1kK30tTLt1t1yf1AhnWHSxT8k/5iZFDSFT6NI1/AW6jbYsG2qG3F7RDKXORXz4/I3H4V8O1M7uwbrS+L4YU8B3T7rzjeKJAgbYGCRH+w4GFh9C5gZF4t3pGQxg==" />
+    </cfdi:Complemento>
+</cfdi:Comprobante>

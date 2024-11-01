@@ -25,7 +25,7 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
             .required("The email is requiered"),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/users/email";
+          const scriptURL = "http://localhost:3001/api/v1/usuarios/email"; 
           const email = values.email;
           const data = {email};
           setLoading(true);
@@ -45,8 +45,9 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
             if(data.message==="success") {
               console.log(data)
               localStorage.setItem('id_user_change', JSON.stringify(data.user_id));
+              localStorage.setItem('clave', data.clave);
               setTypeOfMessage("success");
-              setTextError("We have sent you an email");
+              setTextError("Te hemos enviado un correo electrónico");
               setShowAlert(true);
               setTimeout(()=>{setPage(4)},3000)
             }
@@ -84,7 +85,7 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
                 </figure>
               </div>
 
-              {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Message:</strong><br />{textError}</p>):null}
+              {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Mensaje:</strong><br />{textError}</p>):null}
 
                 <Form
                   name="form"

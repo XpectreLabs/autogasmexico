@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="WTAG" Folio="133950" Fecha="2021-12-12T16:53:25" Sello="gdos5x5mxZdPUh4/ka/QrRJSzofzwgQ5yVoLp5uu599pkxFep0PPazWGqAP+Pc8bYbD39pQWj9EKMoGMBgbjbLgioT/W+MkMmx/QlWHim5yft/26bOaSlyOdaZB5mlehdaJhQ+qEYhhTT99NIOIY6eOlBOkTGeNiJKZu+evtSCAy4qdiJ0LgrqeBsAN+mzZrDZojdl/1zPEYP3ZFYsKgV2DhAi6cVLeZ0KMSntKmTyhjlDxmc4PFSFMJD91pIvnkqDLtT3KmcX9LR+Q8mrV/DLZo8bAgILZ+Yb9jwTejSmKjPwYzB0F2caQkMmnM/c3bSxgp4tiKzb24P5QlGgAtpA==" FormaPago="04" NoCertificado="00001000000408696966" Certificado="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" SubTotal="26143.10" Descuento="333.62" Moneda="MXN" Total="29939.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="11570">
+  <cfdi:Emisor Nombre="El Palacio de Hierro, S.A. de C.V." Rfc="PHI830429MG6" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO SA DE CV" UsoCFDI="G01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="53102900" Cantidad="1.00" ClaveUnidad="H87" Descripcion="CAMISETA CAB FW21,MU" ValorUnitario="775.00" Importe="775.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="775.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="124.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102900" Cantidad="1.00" ClaveUnidad="H87" Descripcion="PLAYERA RUN FAVORITE" ValorUnitario="430.172414" Importe="430.172414">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="430.172414" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="68.827586" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="CHAMARRA DRYZZLE HOM" ValorUnitario="4301.724138" Importe="4301.724138">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="4301.724138" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="688.275862" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="CHAMARRA CLEMENT TRI" ValorUnitario="6025.862069" Importe="6025.862069">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="6025.862069" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="964.137931" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="BANDA PATROL BALACLA" ValorUnitario="681.034483" Importe="681.034483">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="681.034483" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="108.965517" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="BANDA DIPSEA COVER I" ValorUnitario="508.62069" Importe="508.62069">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="508.62069" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="81.37931" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="GUANTE CAB MONTANA,N" ValorUnitario="1629.310345" Importe="1629.310345">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1629.310345" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="260.689655" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="49221500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="TOALLA SECADO RAPIDO" ValorUnitario="231.896552" Importe="231.896552">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="231.896552" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="37.103448" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="49221500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="GORRO PUMA CLASSIC C" ValorUnitario="387.068966" Importe="387.068966">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="387.068966" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="61.931035" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="PLAYERA MUJER WP CRE" ValorUnitario="1112.068966" Importe="1112.068966" Descuento="333.62069">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="778.448276" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="124.551724" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="PANTALON FREEDOM HOM" ValorUnitario="3094.827586" Importe="3094.827586">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3094.827586" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="495.172414" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="PANTALON CABALLERO F" ValorUnitario="2836.206897" Importe="2836.206897">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2836.206897" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="453.793104" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="53102500" Cantidad="1.00" ClaveUnidad="H87" Descripcion="BOTA VECTIV EXPLORIS" ValorUnitario="4129.310345" Importe="4129.310345">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="4129.310345" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="660.689655" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="4129.52">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4129.52" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="9e7d7627-d0ec-4ecf-9d05-69fb2bf8253b" FechaTimbrado="2021-12-12T16:53:25" RfcProvCertif="AUR100128NN3" SelloSAT="KxNYz5BlGjzx7P+ont/bcyKjwKC4rUXqDDJB7Sz1PI51r6pAUJ0+6gFUW6qJ3s9UT3Whvt5PUuhJRFg1hOZnrh+bGfJX/vcu0SUDVV8licUSSsLXUonXMmbY/hjT9TVsI//D/gEsUhEjAPBWWVIXOr3fYRMiyfGy7wpB7kmFSWbKb/6OREWes33+sHNaBeuSin/6wD18p7O/O5vgVQBkT7wxbPg7bPIB9sAEMLzdv4PBPsv7/j0qRB09GGfwq828cV5krtc2tlA6XLLDOaB/5LvyyR4kpv4ZaoIGBFCwPpzHIHGNNmOmnORfBFwfQEL4tAtd21IVlnYzDPl8TM04Vw==" SelloCFD="gdos5x5mxZdPUh4/ka/QrRJSzofzwgQ5yVoLp5uu599pkxFep0PPazWGqAP+Pc8bYbD39pQWj9EKMoGMBgbjbLgioT/W+MkMmx/QlWHim5yft/26bOaSlyOdaZB5mlehdaJhQ+qEYhhTT99NIOIY6eOlBOkTGeNiJKZu+evtSCAy4qdiJ0LgrqeBsAN+mzZrDZojdl/1zPEYP3ZFYsKgV2DhAi6cVLeZ0KMSntKmTyhjlDxmc4PFSFMJD91pIvnkqDLtT3KmcX9LR+Q8mrV/DLZo8bAgILZ+Yb9jwTejSmKjPwYzB0F2caQkMmnM/c3bSxgp4tiKzb24P5QlGgAtpA==" NoCertificadoSAT="00001000000505750848" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>
+

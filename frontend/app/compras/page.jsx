@@ -201,7 +201,7 @@ export default function Compras() {
       flex: 1.8,
     },
     {
-      field: 'permiso',
+      field: 'permiso_cre',
       headerName: 'Permiso proveedor',
       sortable: false,
       flex: 1.8,
@@ -309,12 +309,12 @@ export default function Compras() {
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
     currency: "USD"
   })
 
   const formatter2 = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
     currency: "USD"
   })
 
@@ -445,44 +445,21 @@ export default function Compras() {
     //console.log(event.target.files.length);
     //console.log(event.target.files);
 
-    for(let j=0; j<event.target.files.length;j++)
+    for(let j=0; j<event.target.files.length;j++) {
       formData.append('file', event.target.files[j]);
-    
+      /*let reader = new FileReader();
+      reader.readAsText(event.target.files[j]);
+      reader.onload = function() {
+        console.log(reader.result);
+      };*/
+    }
+      
     formData.append('user_id',user_id);
-    
+    formData.append('permiso_id',localStorage.getItem('permiso_id'));
 
     axios.post('http://localhost:3001/api/v1/compras/cargarXML', formData)
       .then((response) => {
-        /*console.log(response.data);
-        console.log(response.data.dataJson);
-        console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
-        console.log(response.data.dataJson['cfdi:Comprobante']._attributes.Folio)
-
-        console.log("Si");
-        console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
-
-        console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
-        console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
-        console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
-        console.log("Unidad de medida: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Unidad)
-        console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
-        console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
-        console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['_attributes'].SubTotal)
-
-        console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Impuestos']['_attributes'].TotalImpuestosTrasladados)
-        console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['_attributes'].Total)
-        console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
-        console.log("Tipo de cfdi: Ingreso")
-        console.log("Aclaración: SIN OBSERVACIONES")
-        console.log("Tipo complemento: Comercializacion")
-
-
-        console.log("Para proveedor nuevo:");
-        console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Nombre)
-        console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
-        console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].RegimenFiscal)
-        console.log("Permiso: null")*/
-
+        
         const totalI = document.getElementsByClassName("fila").length;
 
         setTimeout(()=>{data();},500)
@@ -513,12 +490,12 @@ export default function Compras() {
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={0}>
               <Grid item xs={3} style={{marginTop: '15px', marginBottom: '0px'}} align="left">
-              <p><strong>Litros totales:</strong> {formatter2.format(litrosTotales).replace(',','')}L</p>
+              <p><strong>Litros totales:</strong> {formatter2.format(parseInt(litrosTotales))}L</p>
               </Grid>
               <Grid item xs={6}><p><strong>Kilos totales:</strong> {densidadTotales}kg</p></Grid>
               <Grid item xs={3} align="right">
                 <div>
-                  <p><strong>Total en compra:</strong> {formatter.format(totalTotales)}</p>
+                  <p><strong>Total en compra:</strong> {formatter.format(parseInt(totalTotales))}</p>
                 </div>
               </Grid>
             </Grid>
@@ -545,7 +522,9 @@ export default function Compras() {
                         for(let j=0;j<comprasAux.length;j++) {
                           console.log(comprasAux[j]);
                           const permiso = comprasAux[j].permisos?comprasAux[j].permisos.permiso:"No asignado";
-                          let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
+                          const permiso_cre = comprasAux[j].proveedores.permiso_cre?comprasAux[j].proveedores.permiso_cre:"Sin permiso";
+
+                          let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + permiso_cre +" " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
                           console.log(busqueda)
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(comprasAux[j]);
@@ -632,8 +611,10 @@ export default function Compras() {
           ...compra,
           id: compra.abastecimiento_id,
           proveedor: compra.proveedores.name,
+          permiso_cre: compra.proveedores.permiso_cre?compra.proveedores.permiso_cre:"Sin permiso",
           permisoComprador: compra.permisos?compra.permisos.permiso:"No asignado",
-          kilos: formatter2.format(compra.cantidad*compra.densidad).replace(',','').replace('.00','')+"kg",
+          //kilos: formatter2.format(compra.cantidad*compra.densidad).replace(',','').replace('.00','')+"kg",
+          kilos: formatter2.format(compra.cantidad*compra.densidad).replace('.00','')+"kg",
           fecha_emision2: cambiarFechaNormal(compra.fecha_emision),
           preciounitario2:formatter.format(compra.preciounitario),
           importe2: formatter.format(compra.importe),
@@ -644,9 +625,9 @@ export default function Compras() {
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 100,
             },
-          },
+          }, 
         }}
         pageSizeOptions={[20]}
         disableRowSelectionOnClick
@@ -703,7 +684,7 @@ export default function Compras() {
           isOpen={isDetalleCompraModalOpen}
           onClose={() => {
             setIsDetallePCompraModalOpen(false);
-            data(compras);
+            //data(compras);
           }}
         />
       </div>

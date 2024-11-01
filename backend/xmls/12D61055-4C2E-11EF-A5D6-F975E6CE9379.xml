@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="H" Folio="69437" Fecha="2024-07-27T09:37:04" Sello="dtrr5RtqP0JGv2Yw7m3oWwmvN3I3jGwYreYKJqOCGJhoilzaeezVJgXJPWHboyG7Dz8MGUZf5whV0kq5Eo0D9Y7CtBO2t62zHSBiNBQ6YwUIkQyvML/k15Np1sZTbR0NidBl/6iclQNOZ6QZ01PGPowCNDXOX0DTypJyWvDGBWKcRiEWWNo4oh5eUNdJaE+ysXeblmp/pex/xQpD1u7lFhdUwTkSdxw/wnN2xdhjfbyRNmIP/homHkjV8P0PEXyAKIX3QOlYMwnwdLv9eK6ikAvb1ph9n4gmovxe3DDIXkhPqkg/IBGDhhK7/bZwizNby0ZsNU+BLHk5QCM/VOPehA==" FormaPago="03" NoCertificado="00001000000505221903" Certificado="MIIF0DCCA7igAwIBAgIUMDAwMDEwMDAwMDA1MDUyMjE5MDMwDQYJKoZIhvcNAQELBQAwggGEMSAwHgYDVQQDDBdBVVRPUklEQUQgQ0VSVElGSUNBRE9SQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxKjAoBgkqhkiG9w0BCQEWG2NvbnRhY3RvLnRlY25pY29Ac2F0LmdvYi5teDEmMCQGA1UECQwdQVYuIEhJREFMR08gNzcsIENPTC4gR1VFUlJFUk8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQQ0lVREFEIERFIE1FWElDTzETMBEGA1UEBwwKQ1VBVUhURU1PQzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMVwwWgYJKoZIhvcNAQkCE01yZXNwb25zYWJsZTogQURNSU5JU1RSQUNJT04gQ0VOVFJBTCBERSBTRVJWSUNJT1MgVFJJQlVUQVJJT1MgQUwgQ09OVFJJQlVZRU5URTAeFw0yMDA5MjkxODM1MDdaFw0yNDA5MjkxODM1MDdaMIGeMRYwFAYDVQQDEw1DT0VMIFNBIERFIENWMRYwFAYDVQQpEw1DT0VMIFNBIERFIENWMRYwFAYDVQQKEw1DT0VMIFNBIERFIENWMSUwIwYDVQQtExxDT0U5NTEwMDU1UjYgLyBUQUdGNTQwNzI2Nk4zMR4wHAYDVQQFExUgLyBUQUdGNTQwNzI2SERGTVJSMDMxDTALBgNVBAsTBENPRUwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCb8y9n6l9O6N0j0qJ/xlb0M2VdC6kSbwNETu8gf1rZJAcrsvh3+WSthmlLjdAbNEFLtZ/G4O9JFtD3qNQhS3pWL8pD/rYrR0UKSLr4dnTrXWbafffWiwab33fiM+Ci7BmkGEUQwJQJYeAfK7MVcas2LwSsdUvcN1fB2LLBCF6Z/pg6R/2HhtpxHw+mzK2PpxOZE9mPSQ4dPQZvyV7I37wE9XUs6kijuCZVFgXllI1XZ7mdU1tWwG2Q/YrFITvzlwRFC46SCmmeyIslIjRIRTpPIuNdo2HSKGLT58h8bkQO/ZGtuobVOt0ssQNLD2w1MhzE0roiUZIMETxNDNgiSbrrAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQC+r6cyyoiUPhfOkbVMHASr9rxr/QAdz7gmvB/KL80+9IXZ/BzHq1wJh7C8vpHN/A4Ga9fUtihnSnV8r7vAhraP3oucFv4hfDitGmYM+w8EpXKdQGGIXA3ngDWsl4o3taNH/D4Tz7BVneUZtlIQ1+MYroVdtSix4SnvgI2Yj54T0eLm51iqnZafjqcRcBmO3iPy1HSxnshLnUUttCvGOckW1m/nR/5BjCqpcI1PvnV4Z5VczNrCChhNxlli1h2sE61sOyTs7BC1ubA3G8YUVf78ikpAqr0qNVkmfE6BBYLBgYDl9dvhwMFhVeTHgAbD6NMPFdaAZNaAYcmaCcpvv0LDcOetZ+toDlZ7FRj6ZVjWEI8rca7UeqIoPdInFNd+PFCLu43BZ4kc0mWa37hGPgYWJCbtXaf3zDqnciwC/fiPkvMAQdL4P/7S66cOeTgYdI70K63SSuAQ0HLoXABYwq/8vPqdGNNKMZR3CoTFTVO0tnAO80hVU3LG/I65kfua0cR0rkdSFs64ZaLVpQANwmo7Ywq2gOlcD3QviEpGa1/ocsTyedSLpTLiuR+bYQSB8qKvrFhro3ZIcoEKtDm4nYae03Abfp/CDLR/XyFTugNYKYxO+VEGIz1rvxVTiV52e98uYdrPFZsBBodOBLlm0JzGRM9iUAc/hsLENBBDrCTM9A==" CondicionesDePago="Contado" SubTotal="3805.26" Moneda="MXN" TipoCambio="1" Total="4414.10" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="42080">
+  <cfdi:Emisor Rfc="COE9510055R6" Nombre="COEL" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO" DomicilioFiscalReceptor="43740" RegimenFiscalReceptor="601" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="39121406" NoIdentificacion="MGF15W" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="GF15W-WP Rec.Dúplex Gfci, 15A 125V Blanco" ValorUnitario="246.510300" ObjetoImp="02" Importe="246.510300">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="246.510300" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="39.441648" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121600" NoIdentificacion="WIU1" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="WIUX-1CL CUBIERTA DE 1-GANG CON CERRADO AUTOMATICO" ValorUnitario="202.810000" ObjetoImp="02" Importe="202.810000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="202.810000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.449600" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121727" NoIdentificacion="VCW15" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="VARILLA COOPERWEL DE 5/8 X 1.5 MTS" ValorUnitario="142.820000" ObjetoImp="02" Importe="142.820000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="142.820000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="22.851200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121400" NoIdentificacion="CVCW" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="CONECTOR VARILLA COOPERWELD" ValorUnitario="11.280000" ObjetoImp="02" Importe="11.280000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="11.280000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1.804800" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="CID12" Cantidad="3.000000" ClaveUnidad="MTR" Unidad="METRO" Descripcion="CABLE DE COBRE DESNUDO CAL. 12 SUAVE" ValorUnitario="7.090000" ObjetoImp="02" Importe="21.270000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="21.270000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.403200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121101" NoIdentificacion="QOD2S" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="CENTRO DE CARGA 2P 50A 240VCA DOMESTICO SOBREP TE" ValorUnitario="158.670000" ObjetoImp="02" Importe="158.670000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="158.670000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="25.387200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121640" NoIdentificacion="QO140" Cantidad="1.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="INTERRUPTOR TERMOMAG. ENCHUFABLE 1P 40A 240VCA TE SQD-Â-15" ValorUnitario="146.780000" ObjetoImp="02" Importe="146.780000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="146.780000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="23.484800" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="40183100" NoIdentificacion="CPD13" Cantidad="5.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="CODO CONDUIT PARED DELGADA 13mm" ValorUnitario="17.408500" ObjetoImp="02" Importe="87.042500">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="87.042500" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.926800" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="CONECTOR13TA" Cantidad="20.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="650396 CONECTOR P/D DE 13MM TIPO AMERICANO CCL12 @11762524" ValorUnitario="6.680000" ObjetoImp="02" Importe="133.600000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="133.600000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="21.376000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="40171600" NoIdentificacion="TPD13" Cantidad="11.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="TUBO CONDUIT PARED DELGADA 13mm Sin COPLE" ValorUnitario="67.846200" ObjetoImp="02" Importe="746.308200">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="746.308200" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="119.409312" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="COPLE13TA" Cantidad="22.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="650405 COPLE P/D TIPO AMERICANO DE 13 MM CPD12 @11762555" ValorUnitario="5.910000" ObjetoImp="02" Importe="130.020000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="130.020000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="20.803200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="OMEGA13" Cantidad="25.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="11762615 ABRAZADERA OMEGA 13mm. PARED GRUESA 0T12 @11762615" ValorUnitario="1.810000" ObjetoImp="02" Importe="45.250000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45.250000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.240000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="LB13" Cantidad="3.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="12143074 CONDULET OVALADO SERIE 3 DE 13MM C/TAPA" ValorUnitario="34.060000" ObjetoImp="02" Importe="102.180000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="102.180000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.348800" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39121000" NoIdentificacion="ELT50" Cantidad="4.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="4900394 CONECTOR RECTO LIQUATITE EN ZINC DE 1/2 pulg" ValorUnitario="19.340000" ObjetoImp="02" Importe="77.360000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="77.360000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="12.377600" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="39131706" NoIdentificacion="TLIC13" Cantidad="3.000000" ClaveUnidad="MTR" Unidad="METRO" Descripcion="2ELTV01301 TUBO FLEXIBLE LICUATITE 13mm T.M.F LICUATITE DE 1/2 ROLLO DE 50M" ValorUnitario="43.785500" ObjetoImp="02" Importe="131.356500">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="131.356500" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="21.017040" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="26121600" NoIdentificacion="CTHW10N" Cantidad="100.000000" ClaveUnidad="MTR" Unidad="METRO" Descripcion="3004314 CABLE THW-LS 10 CONDULAC NEGR CAJ 100" ValorUnitario="14.060000" ObjetoImp="02" Importe="1406.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1406.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="224.960000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="31162103" NoIdentificacion="TP1/4" Cantidad="100.000000" ClaveUnidad="H87" Unidad="PZA" Descripcion="1103-03100 TAQUETE DE PLASTICO COLOR ROJO 1/4 THORSMAN 1103" ValorUnitario="0.160000" ObjetoImp="02" Importe="16.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="16.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="2.560000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="608.84">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="3805.26" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="608.84" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="12D61055-4C2E-11EF-A5D6-F975E6CE9379" FechaTimbrado="2024-07-27T09:37:27" SelloCFD="dtrr5RtqP0JGv2Yw7m3oWwmvN3I3jGwYreYKJqOCGJhoilzaeezVJgXJPWHboyG7Dz8MGUZf5whV0kq5Eo0D9Y7CtBO2t62zHSBiNBQ6YwUIkQyvML/k15Np1sZTbR0NidBl/6iclQNOZ6QZ01PGPowCNDXOX0DTypJyWvDGBWKcRiEWWNo4oh5eUNdJaE+ysXeblmp/pex/xQpD1u7lFhdUwTkSdxw/wnN2xdhjfbyRNmIP/homHkjV8P0PEXyAKIX3QOlYMwnwdLv9eK6ikAvb1ph9n4gmovxe3DDIXkhPqkg/IBGDhhK7/bZwizNby0ZsNU+BLHk5QCM/VOPehA==" NoCertificadoSAT="00001000000700047508" SelloSAT="JDvX8wFAvmTl4Vd0V6N9B8VMXAuwpH5JwCqbO/VdnMVqJa8M9XYtiuamKLeVMH9f0A4byo5SbqQtQQgrlC0T8oO1h2FcGypEgUVuEs7q10gIlqCDrKK/pI0THLWPYR9y8PifKGARhRRh7/Gbr8tQI0EBbbR3TbwGjMINr5qw0GTlZEOk6+8GpD8bhm1vdh1eOiNT87MnW2bS3B63ocVGH7+qW3xRWTRd4QBAz5IL0oeQSSkuUa1YjGWO/yhpM4gbSzhwMTn5kN2QVQ+Vo9zQix7b/ij990HEtcmXrqbpwp1Q7SM3SB5hhzuuEnyE5alcxTCJDmdMdV7Fak67Eb93KA==" RfcProvCertif="EME000602QR9" /></cfdi:Complemento></cfdi:Comprobante>

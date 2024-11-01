@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cfdi:Comprobante Certificado="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" Descuento="599.00" Exportacion="01" Fecha="2024-07-24T14:10:10" Folio="044304" FormaPago="28" LugarExpedicion="42184" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000518610822" Sello="TPJitngW9vKUJ5zWYW50oJZPMekZMo5citEQRdwwpNrXom6uiLmHspyOGCYMHb8xW1Q/wiFhELq8MaEJXXoQ0z9Lp5lC3LXByVJ9Dzaa8M6vee9qJ3AYFJuFRo917lwaCZsp56jS6n15qp/hWRMvX0YS8LjoII5TXz0aonVBfl7GFp7QFS1QW1M4mdKf4pJQMInG5cx8D8mWqfmQZh9zdewNnMPlQv4y4y07Xcd0t8k9UGiNVsiz2a5KVC13IUPHcZuZbSK4K+T4y9CTf6+QXPmsAYlZBl3/hWYl11pcRVGv1iik4xSqt2Y/jaBSo8aa9FXC4Bmba41AX1EZgtz7cg==" Serie="7183" SubTotal="2561.06" TipoDeComprobante="I" Total="2276.00" Version="4.0" xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:dvz="http://www.diverza.com/ns/addenda/diverza/1" xmlns:fm="http://facturame.mx/ns/addenda/1" xmlns:pago20="http://www.sat.gob.mx/Pagos20" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd">
+    <cfdi:Emisor Nombre="AUTOZONE DE MEXICO" RegimenFiscal="601" Rfc="AME970109GW0"/><cfdi:Receptor DomicilioFiscalReceptor="43740" Nombre="AUTOGAS MEXICO" RegimenFiscalReceptor="601" Rfc="AME050309Q32" UsoCFDI="G03" xmlns:cfdi="http://www.sat.gob.mx/cfd/4"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="25191700" ClaveUnidad="H87" Descripcion="U3 30893 160  LITTLE TRE" Importe="68.10" NoIdentificacion="1362075" ObjetoImp="02" ValorUnitario="68.100000">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="68.100000" Importe="10.90" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.000000" ClaveProdServ="25172004" ClaveUnidad="H87" Descripcion="69573  Amortiguador Prem" Descuento="256.66" Importe="1068.16" NoIdentificacion="889940" ObjetoImp="02" ValorUnitario="534.080000">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="811.500000" Importe="129.84" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="25172004" ClaveUnidad="H87" Descripcion="G56649  Strut Premium" Descuento="171.17" Importe="712.40" NoIdentificacion="890355" ObjetoImp="02" ValorUnitario="712.400000">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="541.230000" Importe="86.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="25172004" ClaveUnidad="H87" Descripcion="G56650  AMORTIGUADOR PAR" Descuento="171.17" Importe="712.40" NoIdentificacion="890356" ObjetoImp="02" ValorUnitario="712.400000">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="541.230000" Importe="86.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="313.94">
+        <cfdi:Traslados>
+            <cfdi:Traslado Base="1962.06" Importe="313.94" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="6c1caad8-5100-48aa-aba5-37d7ca2c0a71" RfcProvCertif="SNF171020F3A" FechaTimbrado="2024-07-24T14:10:11" SelloCFD="TPJitngW9vKUJ5zWYW50oJZPMekZMo5citEQRdwwpNrXom6uiLmHspyOGCYMHb8xW1Q/wiFhELq8MaEJXXoQ0z9Lp5lC3LXByVJ9Dzaa8M6vee9qJ3AYFJuFRo917lwaCZsp56jS6n15qp/hWRMvX0YS8LjoII5TXz0aonVBfl7GFp7QFS1QW1M4mdKf4pJQMInG5cx8D8mWqfmQZh9zdewNnMPlQv4y4y07Xcd0t8k9UGiNVsiz2a5KVC13IUPHcZuZbSK4K+T4y9CTf6+QXPmsAYlZBl3/hWYl11pcRVGv1iik4xSqt2Y/jaBSo8aa9FXC4Bmba41AX1EZgtz7cg==" NoCertificadoSAT="00001000000518812364" SelloSAT="VeSxJmVpi0E+hxCfrZjcwq8nVHSk65Gm9pwv95i9I+s1QgdnOd/VnmAthKDUX51/dfWDEPHlpdjc3Bklv0h4EKRQpQ+YjZLy+j/yLN/UMv5JVX6LYFQWqJWwzxOELiHVfLwM4yDWm9m4kMxY0jjCk+PK2qo+Lt3u46MGMsH+VHlu6Xi5e8ieeJo0NWhp2rY3s2CHv5W27UCdnC1FrIoLI3WqsbSZ+F75X4ew6jy9LCOqYotcdjqgiuDoXOsebzVDEus7TKsZbTi5LG/VJq6HDwa6xTgLwjnfvCVmEmF2B7C7NP0rr7wFH3g8x8CkOPg9O5NLq1cv3wjh+MHRjl1QUA=="/>
+    </cfdi:Complemento><cfdi:Addenda>
+        <dvz:diverza version="1.1">
+            <dvz:generales tipoDocumento="Factura"/>
+            <dvz:complemento>
+                <dvz:datosExtra atributo="NumCta" valor="4010"/>
+            </dvz:complemento>
+        </dvz:diverza>
+    <fm:AddendaFacturame version="1.0" xmlns:fm="http://facturame.mx/ns/addenda/1"><Ticket number="7183044304072424"/></fm:AddendaFacturame></cfdi:Addenda>
+</cfdi:Comprobante>

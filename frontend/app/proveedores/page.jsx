@@ -155,8 +155,8 @@ export default function Proveedores() {
       flex: 1.5,
     },
     {
-      field: 'phone',
-      headerName: 'Teléfono',
+      field: 'permiso_cre',
+      headerName: 'Permiso CRE',
       sortable: false,
       flex: 1.2,
     },
@@ -228,7 +228,7 @@ export default function Proveedores() {
                       if(proveedoresAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<proveedoresAux.length;j++) {
-                          let busqueda = (proveedoresAux[j].name + " " + proveedoresAux[j].rfc + " " +  proveedoresAux[j].phone + " " + proveedoresAux[j].email).toLowerCase();
+                          let busqueda = (proveedoresAux[j].name + " " + proveedoresAux[j].rfc + " " +  proveedoresAux[j].permiso_cre + " " + proveedoresAux[j].email).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
                             listResult.push(proveedoresAux[j]);
                         }
@@ -267,14 +267,14 @@ export default function Proveedores() {
           rfc: proveedor.rfc,
           direccion: proveedor.direccion?proveedor.direccion:"Sin dirección",
           tipo_situacion_fiscal: proveedor.tipo_situacion_fiscal,
-          phone: proveedor.phone?proveedor.phone:"Sin teléfono",
+          permiso_cre: proveedor.permiso_cre?proveedor.permiso_cre:"Sin permiso",
           email: proveedor.email?proveedor.email:"Sin email",
         }))}
         columns={columns}
         initialState={{
           pagination: {
              paginationModel: {
-              pageSize: 20,
+              pageSize: 100,
             },
           },
         }}

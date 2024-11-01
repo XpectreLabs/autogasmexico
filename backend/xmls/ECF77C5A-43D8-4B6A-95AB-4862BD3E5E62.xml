@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Sello="eCbTdF3flMlHESLGKLWH7h0SMdb4yfZGjZcaMROb+mjBuvVdcHTxOGHJjz5ZrZIPCyAEgonsKJxCCj/KHbCpa4tbva7cab0tUftJMQegtAnAZN4mnjo3AVTHREJTBsjdYq+1M62L0B4ff3ZmET4AmSswIrBcqwIhN+alO925Rma+dz6vhhfUYVNhED46PBB+VT5QKgqffgVydDdiaHv90sOXcvkicRshS4Fy4cO9+O3gqd5lQOwYxTE7I3Lksdrt+U7wV9CIkg688uADIeGZYenYQ61kWjDmyd+FBKdtjDx+kMzYXjh23Vjn1p0kqED8UnTdn/FGmZGgAbBE5a4MmA==" NoCertificado="00001000000519016458" Certificado="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" Exportacion="01" Serie="JUL" Folio="1" Fecha="2024-07-05T19:27:32" FormaPago="03" SubTotal="488.00" Moneda="MXN" TipoCambio="1" Total="559.98" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="42186" xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<cfdi:Emisor Rfc="REHN830120T71" Nombre="NORMA FABIOLA RESENDIZ HERNANDEZ" RegimenFiscal="626"/>
+	<cfdi:Receptor Rfc="AME050309Q32" Nombre="AUTOGAS MEXICO" UsoCFDI="G03" DomicilioFiscalReceptor="43740" RegimenFiscalReceptor="601"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="24111503" Cantidad="2.000000" ClaveUnidad="KGM" Descripcion="BOLSAS JUMBO" ValorUnitario="53.000000" Importe="106.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="106.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.960000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="106.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="1.325000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="47131500" Cantidad="4.000000" ClaveUnidad="H87" Descripcion="TRAPOS  GRANDES" ValorUnitario="14.000000" Importe="56.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="56.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="8.960000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="56.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="0.700000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="47121701" Cantidad="2.000000" ClaveUnidad="KGM" Unidad="Kilogramo" Descripcion="BOLSAS DE CAMISETA" ValorUnitario="65.000000" Importe="130.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="130.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="20.800000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="130.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="1.625000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53131608" Cantidad="2.000000" ClaveUnidad="LTR" Descripcion="JABON DE MANOS CEREZA" ValorUnitario="18.000000" Importe="36.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="36.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="5.760000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="36.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="0.450000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="47131501" Cantidad="2.000000" ClaveUnidad="H87" Descripcion="MICROFIBRAS PARA TRAPEAR" ValorUnitario="50.000000" Importe="100.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="100.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.000000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="100.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="1.250000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53131608" Cantidad="5.000000" ClaveUnidad="LTR" Descripcion="JABON  ARIEL OXXI" ValorUnitario="12.000000" Importe="60.000000" ObjetoImp="02">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="60.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9.600000"/>
+				</cfdi:Traslados>
+				<cfdi:Retenciones>
+					<cfdi:Retencion Base="60.000000" Impuesto="001" TipoFactor="Tasa" TasaOCuota="0.012500" Importe="0.750000"/>
+				</cfdi:Retenciones>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosRetenidos="6.10" TotalImpuestosTrasladados="78.08">
+		<cfdi:Retenciones>
+			<cfdi:Retencion Impuesto="001" Importe="6.10"/>
+		</cfdi:Retenciones>
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="78.08" Base="488.00"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento>
+		<tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="ECF77C5A-43D8-4B6A-95AB-4862BD3E5E62" FechaTimbrado="2024-07-05T19:36:28" RfcProvCertif="SED1102088J7" SelloCFD="eCbTdF3flMlHESLGKLWH7h0SMdb4yfZGjZcaMROb+mjBuvVdcHTxOGHJjz5ZrZIPCyAEgonsKJxCCj/KHbCpa4tbva7cab0tUftJMQegtAnAZN4mnjo3AVTHREJTBsjdYq+1M62L0B4ff3ZmET4AmSswIrBcqwIhN+alO925Rma+dz6vhhfUYVNhED46PBB+VT5QKgqffgVydDdiaHv90sOXcvkicRshS4Fy4cO9+O3gqd5lQOwYxTE7I3Lksdrt+U7wV9CIkg688uADIeGZYenYQ61kWjDmyd+FBKdtjDx+kMzYXjh23Vjn1p0kqED8UnTdn/FGmZGgAbBE5a4MmA==" NoCertificadoSAT="00001000000706199269" SelloSAT="ClFA/5PCcRlps7RHPoqFbisx/7ubzN1B+IpkcyYovnrGOvQ0kqru5FlK3Z7m7hDw6Cr9vgRnKItJPsLeGVPbEr+7DncYd38Ez/+2fP49LsrK3ftC99XHCznFI1o7Ug+9hc7wESs/HiSCDlOb6gkBbXHdY4Va36POfmXEVrQmSMkLqNoh3ErlpeJE/YeHRN0Ip9jTLMJGgDnCmXu/L3hVgFXEVyS8Ejo+b2/dGD+9RkgVr9vHFpRNvARb2Z2yErhkfyubIcTz1YflyPoHI2qqpcDoJ3mzIUDkCVFrkNclJvwZKAckkL9Xwy5F5L4fAIbX+p7mOLaz+IMlzJ0XijNMRw==" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+	</cfdi:Complemento>
+</cfdi:Comprobante>

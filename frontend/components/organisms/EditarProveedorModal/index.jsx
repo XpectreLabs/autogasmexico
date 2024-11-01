@@ -14,11 +14,10 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
   const [loading, setLoading] = React.useState(false);
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");
-  const [initialValues, setInitialValues] = useState(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
   proveedorData.email = proveedorData.email==="Sin email"?"":proveedorData.email;
-  proveedorData.phone = proveedorData.phone==="Sin teléfono"?"":proveedorData.phone;
+  proveedorData.permiso_cre = proveedorData.permiso_cre==="Sin permiso"?"":proveedorData.permiso_cre;
   proveedorData.direccion = proveedorData.direccion==="Sin dirección"?"":proveedorData.direccion;
 
   console.log("proveedorData",proveedorData);
@@ -38,8 +37,8 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
           tipo_situacion_fiscal: Yup.string()
             .min(3, "El tipo de situación fiscal es muy corto")
             .required("El tipo de situación fiscal es requerido"),
-          phone: Yup.string()
-            .min(3, "El teléfono es muy corto"),
+          permiso_cre: Yup.string()
+            .min(3, "El permiso CRE es muy corto"),
           email: Yup.string()
             .email("El email es incorrecto"),
         })}
@@ -51,12 +50,10 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
           const rfc = values.rfc;
           const direccion = values.direccion;
           const tipo_situacion_fiscal = values.tipo_situacion_fiscal;
-          const phone = values.phone;
+          const permiso_cre = values.permiso_cre;
           const email = values.email;
-          const data = {proveedor_id, name, rfc, direccion, tipo_situacion_fiscal, phone, email,id};
+          const data = {proveedor_id, name, rfc, direccion, tipo_situacion_fiscal, permiso_cre, email,id};
           setLoading(true);
-
-          //setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
 
           fetch(scriptURL, {
             method: 'PUT',
@@ -75,7 +72,6 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
             if(data.message==="success") {
               setTypeOfMessage("success");
               setTextError("Los del proveedor fueron actualizado");
-              setInitialValues(({name:'',rfc:'', direccion:'',tipo_situacion_fiscal:'', phone:'',  email:''}));
               setShowAlert(true);
 
               setTimeout(()=>{onClose();},2000)
@@ -162,15 +158,14 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
                     size="small"
                   />
                   <TextField
-                    placeholder="Teléfono"
-                    id="phone"
-                    label="Teléfono"
-                    name="phone"
-                    value={values.phone}
+                    placeholder="Permiso CRE"
+                    id="permiso_cre"
+                    label="Permiso CRE"
+                    name="permiso_cre"
+                    value={values.permiso_cre}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     size="small"
-                    type='number'
                   />
                   <TextField
                     placeholder="Email"
@@ -183,13 +178,13 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
                     size="small"
                   />
 
-                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.phone || errors.email)?(<div className={styles.errors}>
+                  {(errors.name || errors.rfc || errors.direccion || errors.tipo_situacion_fiscal || errors.permiso_cre || errors.email)?(<div className={styles.errors}>
                         <p><strong>Errores:</strong></p>
                         {errors.name? (<p>{errors.name}</p>):null}
                         {errors.rfc? (<p>{errors.rfc}</p>):null}
                         {errors.direccion? (<p>{errors.direccion}</p>):null}
                         {errors.tipo_situacion_fiscal? (<p>{errors.tipo_situacion_fiscal}</p>):null}
-                        {errors.phone? (<p>{errors.phone}</p>):null}
+                        {errors.permiso_cre? (<p>{errors.permiso_cre}</p>):null}
                         {errors.email? (<p>{errors.email}</p>):null}
                     </div>):null}
 

@@ -1,0 +1,35 @@
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="MIIGoDCCBIigAwIBAgIUMDAwMDEwMDAwMDA1MDk0Nzg3NTUwDQYJKoZIhvcNAQELBQAwggGEMSAwHgYDVQQDDBdBVVRPUklEQUQgQ0VSVElGSUNBRE9SQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxKjAoBgkqhkiG9w0BCQEWG2NvbnRhY3RvLnRlY25pY29Ac2F0LmdvYi5teDEmMCQGA1UECQwdQVYuIEhJREFMR08gNzcsIENPTC4gR1VFUlJFUk8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQQ0lVREFEIERFIE1FWElDTzETMBEGA1UEBwwKQ1VBVUhURU1PQzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMVwwWgYJKoZIhvcNAQkCE01yZXNwb25zYWJsZTogQURNSU5JU1RSQUNJT04gQ0VOVFJBTCBERSBTRVJWSUNJT1MgVFJJQlVUQVJJT1MgQUwgQ09OVFJJQlVZRU5URTAeFw0yMTEwMTkwMjM0NDVaFw0yNTEwMTkwMjM0NDVaMIIBbTFIMEYGA1UEAxM/QkJWQSBTRUdVUk9TIE1FWElDTywgUy5BLiBERSBDLlYuLCBHUlVQTyBGSU5BTkNJRVJPIEJCVkEgTUVYSUNPMUgwRgYDVQQpEz9CQlZBIFNFR1VST1MgTUVYSUNPLCBTLkEuIERFIEMuVi4sIEdSVVBPIEZJTkFOQ0lFUk8gQkJWQSBNRVhJQ08xSDBGBgNVBAoTP0JCVkEgU0VHVVJPUyBNRVhJQ08sIFMuQS4gREUgQy5WLiwgR1JVUE8gRklOQU5DSUVSTyBCQlZBIE1FWElDTzElMCMGA1UELRMcU0JCOTYxMTE4VElBIC8gTE9DQTY2MDgwNEcyMDEeMBwGA1UEBRMVIC8gTFhDQTY2MDgwNEhERlBNTjAyMUYwRAYDVQQLEz1TRUdVUk9TIEJCVkEgQkFOQ09NRVIgU0EgREUgQ1YgR1JVUE8gRklOQU5DSUVSTyBCQlZBIEJBTkNPTUVSMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtNgJDmY7sgsMfFOTopppMS2lbsQwMqXr6qBAzf/vk+jPUjGmoyaJIH9uoV1dpilhlvzPu+xuqeRNaoKmHclWcSm647x5cdQZbLEMnX8IPmQ/4T4gNAVHZ3os5uc8W1+NX3JytkHrDkzaNIUw9Qqnl5ElTXrX72U81H7ebgOVzFlDGUxaj+BTxqT/n4bIVTFzSFBtMmY3es8Qsr7xQ5atdf4KXc/uNkyn9tIACf+eJSp2omeBUDwY5zsPpwW1QtLD4B9TlDoBGLkI1O218Go7/jafZwNPPmxujes4PaZEgHOxECCihj9GXg9YgaoBYAOFVvypNrowN9aWrjlhh7tGjwIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEArmdhRhJx1w9NMlahd3U8OYhF/yiHXW2UEjwmbtXj2Gutt8Qe2Ef4JODR48+sst9tkrJtYZdNDnq1hUSjKy4Pv0/1wHrI3NfTRb/PgclOkqmDKvdySs9fiY2iZwGEfU3CtC0rLQ97K6qMfFQ7lRYlSf/a44MhNhT9XGEP3te5l5n03pJfiDJoLW3+q7Msj4ENf2cuBuEe3KeSLJfGV9B807cLuMpBqbsz4yyXmBn3wUPxMCqmcqdz6sc/+nefAO9AJF+2zwWhft4JlnKbQteBU8STEYzWmMWm1x4h9/+LlJALa4SA7fWMYZBywIas9cne23sXs9uqktsYF0SgnU1j0qr+G4vedCERhqX3hnWV/PdLSO3cNAk/4HpxR17IDFCVmT9nWuCZyRI136Zse9F25pHAMcxZEISLtQXeI0eFzSrEwNeabTclSgcILaxy2N2PnyEG+hAkHwJcj9Ydzxljvxh1ZIWGVWGkgBCxyX7NyIVl+QBbROZwNSJRP9k2Sa9QwIuVKAXmDJWigPJ/UMcVyDgZuG5ifi2fHeRrfTQYtPmy+okmrXIrrVFk96OJdzFsusfXZBNujHP3XAM6canwMXogsZpHmxzQGsaMDeseB4wzJq4hcsXUwXfhWu8R0HmBeQMfHVV08snrasyPSyGsTK/eeRNVkgqYcmpIc6Absaw=" CondicionesDePago="MENSUAL" Fecha="2021-12-20T07:30:40" Folio="268734403" FormaPago="99" LugarExpedicion="06600" MetodoPago="PPD" Moneda="MXN" NoCertificado="00001000000509478755" Sello="IOgaEi2TzFs7eru6Uwxh/dRHPcsM2GXAmg9nT80ElQtuQVh7zAFFF/EIiPfYCeFwJ5OfhQWMVLAF4ZHU1Yu6X1rEnrx7rp9daxnPJbEcJ99/jzyW6rApntMmI/hdip4tvVFk74zp9IpFOL5w0fZRH0GGEdCZ3yNb0X6EuvRGP4sXiN6IuxX+prEq80l5V0rZuUUyU6fjX/YBRy1hB96V9z5EdNJSE0Tpyu9lNYVLzVTw9Z19ea6r9T4wsLztRsU5higv9QW75/osQju6ynaHeHwm/ELVlBkz7LrZVNM8cBkJ52bEGuykg/cjbVc6/Tejki5FWdpVz5Nv6YQjYH0H6g==" Serie="FF" SubTotal="8303.68" TipoDeComprobante="I" Total="9632.27" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+  <cfdi:Emisor Nombre="BBVA Seguros México SA de CV, Grupo Financiero BBVA México" RegimenFiscal="601" Rfc="SBB961118TIA" />
+  <cfdi:Receptor Nombre="AUTOGAS MEXICO SA DE CV" Rfc="AME050309Q32" UsoCFDI="P01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1" ClaveProdServ="84131503" ClaveUnidad="IP" Descripcion="Prima de seguro Auto Prima Neta" Importe="7048.80" NoIdentificacion="8C1W01011V-1-1" Unidad="PÓLIZA DE SEGURO" ValorUnitario="7048.80">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="7048.80" Importe="1127.81" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1" ClaveProdServ="84131503" ClaveUnidad="IP" Descripcion="Derecho" Importe="550.00" NoIdentificacion="8C1W01011V-1-1" Unidad="PÓLIZA DE SEGURO" ValorUnitario="550.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="550.00" Importe="88.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1" ClaveProdServ="84131503" ClaveUnidad="IP" Descripcion="Recargo" Importe="704.88" NoIdentificacion="8C1W01011V-1-1" Unidad="PÓLIZA DE SEGURO" ValorUnitario="704.88">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="704.88" Importe="112.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="1328.59">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="1328.59" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="77ADA475-B569-43EA-8266-824BD10B127C" FechaTimbrado="2021-12-20T13:31:52" RfcProvCertif="CEC961028A98" SelloCFD="IOgaEi2TzFs7eru6Uwxh/dRHPcsM2GXAmg9nT80ElQtuQVh7zAFFF/EIiPfYCeFwJ5OfhQWMVLAF4ZHU1Yu6X1rEnrx7rp9daxnPJbEcJ99/jzyW6rApntMmI/hdip4tvVFk74zp9IpFOL5w0fZRH0GGEdCZ3yNb0X6EuvRGP4sXiN6IuxX+prEq80l5V0rZuUUyU6fjX/YBRy1hB96V9z5EdNJSE0Tpyu9lNYVLzVTw9Z19ea6r9T4wsLztRsU5higv9QW75/osQju6ynaHeHwm/ELVlBkz7LrZVNM8cBkJ52bEGuykg/cjbVc6/Tejki5FWdpVz5Nv6YQjYH0H6g==" NoCertificadoSAT="00001000000508164369" SelloSAT="QMD5jCbr04QXtxL5Px0/BAYl/QPR67ArPcm6is6/8tPdihSDWtcaJjRk+c9cagUliFZG3fSLQtLOdq6Z5+IU4jizJOmq5h0a0FbE3sR2urzQ6+9hEl3YYfjkWdYKfun0W8DH6tl4TTvHZyMx5BXcR86og6EXr2bsVpZy8qvWxT7c1MUHBrKP7h/r22NqENcqp1LzRva9WROfqy+V3CliWZ7DWcX5mB0dCLsiyfmZvPbQS5XZymxq08Xh7CuqXp2QCTEMRQNdAzj7KPuFFoZWK9rbS1p0bJB2WuA7I+PMC5eokwJzPYyrqGkCOwWU46kihEB9yIssxBoGO4mmlvsOxw==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aerolineas="http://www.sat.gob.mx/aerolineas" Certificado="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" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/aerolineas http://www.sat.gob.mx/sitio_internet/cfd/aerolineas/aerolineas.xsd" Sello="UtG1FLiuv2H5DogY/1rAUv0emrot53j5BPB1Ze2SM8XxYLse0Uk+BFz2WWKHmKP4AuoqdXZf4dG92MPx3QTOfh2Wv7p8LkmnIEvfobpzjPyc9s2YxT+9fHs9jvImwkJ4aLgnVJRNmCBk58fTFTC9BtJz7RFHTfh24nE5K3Ez4RWbuBhg1qmyTDrjUAe4vI8X8RVXzTYqWqG32kogVpz95v5yPF+Z9hiobSIXMoqxCgkbKsIrlSIHf65QP+ZillwX9KuGxIXgMx02WPD9KoWb7TyeMSUAORfZPXNWbby4lw2tBYm6m82JOchiGbelys/VylTt74WusOt/5r10S3ZJNQ==" Version="3.3" Serie="B" Folio="59604102" Fecha="2021-08-02T18:00:27" FormaPago="04" NoCertificado="00001000000408637715" CondicionesDePago="Inmediato" SubTotal="8014.58" Moneda="MXN" TipoCambio="1" Total="8250.94" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="66600">
+		<cfdi:Emisor Rfc="ANA050518RL1" Nombre="AEROENLACES NACIONALES SA DE CV" RegimenFiscal="601" />
+		<cfdi:Receptor Rfc="AME050309Q32" UsoCFDI="G03" />
+		<cfdi:Conceptos>
+            <cfdi:Concepto ClaveProdServ="78111500" NoIdentificacion="001" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="TARIFA AEREA PNR: V9D87Z" ValorUnitario="5908.94" Importe="5908.94">
+				<cfdi:Impuestos>
+                    <cfdi:Traslados>
+                        <cfdi:Traslado Base="1477.24" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="236.36" />
+                        <cfdi:Traslado Base="4431.70" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+					</cfdi:Traslados>
+                </cfdi:Impuestos>
+            </cfdi:Concepto>
+            <cfdi:Concepto ClaveProdServ="78111500" NoIdentificacion="002" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="SERVICIOS ADICIONALES PNR: V9D87Z" ValorUnitario="881.92" Importe="881.92">
+				<cfdi:Impuestos>
+                    <cfdi:Traslados>
+                        <cfdi:Traslado Base="881.92" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+					</cfdi:Traslados>
+                </cfdi:Impuestos>
+            </cfdi:Concepto>
+            <cfdi:Concepto ClaveProdServ="78111500" NoIdentificacion="003" Cantidad="1" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="CARGOS AEROPORTUARIOS" ValorUnitario="1223.72" Importe="1223.72">
+				<cfdi:Impuestos>
+                    <cfdi:Traslados>
+                        <cfdi:Traslado Base="1223.72" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+					</cfdi:Traslados>
+                </cfdi:Impuestos>
+            </cfdi:Concepto>
+        </cfdi:Conceptos>
+        <cfdi:Impuestos TotalImpuestosTrasladados="236.36">
+			<cfdi:Traslados>
+                <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+                <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="236.36" />
+			</cfdi:Traslados>
+        </cfdi:Impuestos>
+        <cfdi:Complemento>
+            <aerolineas:Aerolineas Version="1.0" TUA="0.00">
+				<aerolineas:OtrosCargos TotalCargos="1223.72">
+					<aerolineas:Cargo CodigoCargo="BS" Importe="34.48" />
+					<aerolineas:Cargo CodigoCargo="SS" Importe="8.22" />
+					<aerolineas:Cargo CodigoCargo="TUA" Importe="1181.02" />
+				</aerolineas:OtrosCargos>
+            </aerolineas:Aerolineas>
+        <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" FechaTimbrado="2021-08-02T18:00:30" SelloCFD="UtG1FLiuv2H5DogY/1rAUv0emrot53j5BPB1Ze2SM8XxYLse0Uk+BFz2WWKHmKP4AuoqdXZf4dG92MPx3QTOfh2Wv7p8LkmnIEvfobpzjPyc9s2YxT+9fHs9jvImwkJ4aLgnVJRNmCBk58fTFTC9BtJz7RFHTfh24nE5K3Ez4RWbuBhg1qmyTDrjUAe4vI8X8RVXzTYqWqG32kogVpz95v5yPF+Z9hiobSIXMoqxCgkbKsIrlSIHf65QP+ZillwX9KuGxIXgMx02WPD9KoWb7TyeMSUAORfZPXNWbby4lw2tBYm6m82JOchiGbelys/VylTt74WusOt/5r10S3ZJNQ==" UUID="ECB4CA07-CB03-40F8-9B13-3D0EA8520525" NoCertificadoSAT="00001000000503727538" RfcProvCertif="SAD110722MQA" SelloSAT="YZA3o9qhMf/7cbw5dvNMVHvgH1sGKekb0Xr+27KzI/grq5g4KNy6z07IwD2htgSIUVbketc+lF2XXEX76H0S8BcX/mq5xCtEjUIY/Yv4WTkEA25WFpFIA8DTFGULxPNeldWWQyZpq9NTCA4rA72+iYYEToyLNhUASZEQc4TxMApLeOhCE1GpYQbe1shxtAKpNyIzEapN+mjGhEoj2EFjumi8cbABfmnQHTFliS+XrAwRvPTxH6ikWsp89155uvdN0XwzCQ4YIYElQuYvJk7S5ZeASkjxOc3CKEav0bNap7GItlyAV0znvUjbA27IoFWh7FTrLr+hl5/u3n8yY5dGxA==" /></cfdi:Complemento>
+    </cfdi:Comprobante>
