@@ -16,4 +16,19 @@ const findInventarioInicial = async (permiso_id) =>  {
   return permisos.inventario_inicial;
 }
 
-module.exports = { findInventarioInicial }
+const findNamePermiso = async (permiso_id) =>  {    
+  const permisos = await prisma.cat_permisos.findFirst({
+    where: {
+      permiso_id,
+    },
+    select: {
+      permiso: true,
+    },
+  });
+  if (permisos == null) return "";
+
+  return permisos.permiso;
+}
+
+
+module.exports = { findInventarioInicial,findNamePermiso }

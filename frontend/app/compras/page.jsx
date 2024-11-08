@@ -50,18 +50,18 @@ export default function Compras() {
   const [isEditCompraModalOpen, setIsEditPCompraModalOpen] = useState(false);
   const [compraToEdit, setCompraToEdit] = useState({});
   const [compraIdd, setCompraIdd] = useState(0);
-
-
   const [isSettingCompraModalOpen, setIsSettingPCompraModalOpen] = useState(false);
   const [compraToSetting, setCompraToSetting] = useState({});
-
-
   const [litrosTotales, setLitrosTotales] = useState(0);
   const [densidadTotales, setDensidadTotales] = useState(0);
   const [totalTotales, setTotalTotales] = useState(0);
-
   const [isDetalleCompraModalOpen, setIsDetallePCompraModalOpen] = useState(false);
   const [compraToDetalle, setCompraToDetalle] = useState({});
+
+
+  const [fechaInicioB, setFechaInicioB] = useState(0);
+  const [fechaHastaB, setFechaHastaB] = useState(0);
+  const [searB, setSearB] = useState("");
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -264,14 +264,16 @@ export default function Compras() {
       sortable: false,
       flex: 0.1,
       renderCell: (params) => (
-        <CreateIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setCompraIdd(params.row.abastecimiento_id);
-            setCompraToEdit(params.row);
-            setIsEditPCompraModalOpen(true);
-          }}
-        />
+        localStorage.getItem('type_user')==="1"?(
+          <CreateIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              setCompraIdd(params.row.abastecimiento_id);
+              setCompraToEdit(params.row);
+              setIsEditPCompraModalOpen(true);
+            }}
+          />
+        ):null
       ),
     },
     {
@@ -296,13 +298,15 @@ export default function Compras() {
       sortable: false,
       flex: 0.1,
       renderCell: (params) => (
-        <DeleteIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            if(confirm("¿Desea borrar esta compra?"))
-              deleteCompra(params.row.abastecimiento_id);
-          }}
-        />
+        localStorage.getItem('type_user')==="1"?(
+          <DeleteIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              if(confirm("¿Desea borrar esta compra?"))
+                deleteCompra(params.row.abastecimiento_id);
+            }}
+          />
+        ):null
       ),
     },
   ];
@@ -342,25 +346,46 @@ export default function Compras() {
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",comprasAux);
+          setFechaInicioB(fechaInicio);
+          setFechaHastaB(fechaHasta);
+          
           for(let j=0;j<comprasAux.length;j++) {
             //const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
             const ff = comprasAux[j].fecha_emision+"";
             const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+            const permiso = comprasAux[j].permisos?comprasAux[j].permisos.permiso:"No asignado";
+            const permiso_cre = comprasAux[j].proveedores.permiso_cre?comprasAux[j].proveedores.permiso_cre:"Sin permiso";
+
+            let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + permiso_cre +" " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
 
             if(fechaInicio!==fechaHasta) {
-              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-                listResult.push(comprasAux[j]);
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(comprasAux[j]);
+                }
+                else
+                  listResult.push(comprasAux[j]);
+              }
             }
             else {
-              if(fechaInicio===dateEmi)
-                listResult.push(comprasAux[j]);
+              if(fechaInicio===dateEmi){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(comprasAux[j]);
+                }
+                else
+                  listResult.push(comprasAux[j]);
+              }
             }
           }
           setCompras(listResult);
         }
-        else
-          setCompras(listResult);
+        else {
+            setCompras(listResult);
+            setFechaInicioB(0);
+            setFechaHastaB(0);
+        }
 
         setTimeout(()=> {
           cargarTotales(listResult);
@@ -393,25 +418,46 @@ export default function Compras() {
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",comprasAux);
+          setFechaInicioB(fechaInicio);
+          setFechaHastaB(fechaHasta);
+
           for(let j=0;j<comprasAux.length;j++) {
             //const dateEmi = convertDate(new Date((""+comprasAux[j].fecha_emision)).toLocaleDateString('en-GB'));
             const ff = comprasAux[j].fecha_emision+"";
             const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+            const permiso = comprasAux[j].permisos?comprasAux[j].permisos.permiso:"No asignado";
+            const permiso_cre = comprasAux[j].proveedores.permiso_cre?comprasAux[j].proveedores.permiso_cre:"Sin permiso";
 
+            let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + permiso_cre +" " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
+            
             if(fechaInicio!==fechaHasta) {
-              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-                listResult.push(comprasAux[j]);
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(comprasAux[j]);
+                }
+                else
+                  listResult.push(comprasAux[j]);
+              }
             }
             else {
-              if(fechaInicio===dateEmi)
-                listResult.push(comprasAux[j]);
+              if(fechaInicio===dateEmi){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(comprasAux[j]);
+                }
+                else
+                  listResult.push(comprasAux[j]);
+              }
             }
           }
           setCompras(listResult);
         }
-        else
+        else {
           setCompras(listResult);
+          setFechaInicioB(0);
+          setFechaHastaB(0);
+        }
 
         setTimeout(()=> {
           cargarTotales(listResult);
@@ -517,17 +563,36 @@ export default function Compras() {
                     inputProps={{ 'aria-label': 'Buscar' }}
                     onChange={(query) => {
                       const sear=query.target.value;
+                      setSearB(sear);
                       if(comprasAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<comprasAux.length;j++) {
-                          console.log(comprasAux[j]);
                           const permiso = comprasAux[j].permisos?comprasAux[j].permisos.permiso:"No asignado";
                           const permiso_cre = comprasAux[j].proveedores.permiso_cre?comprasAux[j].proveedores.permiso_cre:"Sin permiso";
 
                           let busqueda = (comprasAux[j].folio + " " + comprasAux[j].fecha_emision + " " + comprasAux[j].cantidad+ " "+comprasAux[j].permiso + " "+ comprasAux[j].proveedores.name+ " " + permiso_cre +" " + comprasAux[j].concepto + " " + comprasAux[j].preciounitario + " " + comprasAux[j].importe + " " +permiso +" "+ comprasAux[j].preciovent).toLowerCase();
-                          console.log(busqueda)
-                          if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
-                            listResult.push(comprasAux[j]);
+                          
+                          if(fechaInicioB!==0&&fechaHastaB!==0){
+                            const ff = comprasAux[j].fecha_emision+"";
+                            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+
+                            if(fechaInicioB!==fechaHastaB) {
+                              if(dateEmi>=fechaInicioB&&dateEmi<=fechaHastaB) {
+                                if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                                  listResult.push(comprasAux[j]);
+                              }
+                            }
+                            else {
+                              if(fechaInicioB===dateEmi){
+                                if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                                  listResult.push(comprasAux[j]);
+                              }
+                            }
+                          } 
+                          else {
+                            if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                              listResult.push(comprasAux[j]);
+                          }
                         }
                         setCompras(listResult);
                         cargarTotales(listResult);

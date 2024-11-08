@@ -37,9 +37,12 @@ const findProveedor = async (rfc) =>  {
 
 
 const getDensidad = (texto) => {
-    let dens = ".";
-    if(texto.includes("Den.")) {
-        const posicion = texto.indexOf("Den.")+4;
+    //let dens = ".";
+    let dens = "";
+    texto = texto.toUpperCase();
+
+    if(texto.includes("DEN.")) {
+        const posicion = texto.indexOf("DEN.")+4;
 
         for(let j=posicion; j<texto.length; j++) {
             if(Number.isInteger(parseInt(texto[j])))
@@ -48,8 +51,8 @@ const getDensidad = (texto) => {
                 break;
         }
     }
-    else if(texto.includes("Densidad")) {
-        const posicion = texto.indexOf("Densidad")+9;
+    else if(texto.includes("DENSIDAD")) {
+        const posicion = texto.indexOf("DENSIDAD")+9;
 
         for(let j=posicion; j<texto.length; j++) {
             if(Number.isInteger(parseInt(texto[j]))||texto[j]==='.')
@@ -58,6 +61,25 @@ const getDensidad = (texto) => {
                 break;
         }
     }
+    else if(texto.includes("DEN")) {
+      const posicion = texto.indexOf("DEN")+4;
+
+      for(let j=posicion; j<texto.length; j++) {
+          if(Number.isInteger(parseInt(texto[j])))
+              dens+=texto[j];
+          else
+              break;
+      }
+    }
+
+    if(parseInt(dens)>2) {
+      console.log("Dens",dens);
+      dens = dens/1000;
+      console.log("Dens",dens);
+    }
+    else
+      dens = "."+dens;
+
     return dens;
 }
 

@@ -137,7 +137,7 @@ export default function Clientes() {
     loadingData===false?data():null;
   }, []);
 
-  const columns = [
+  const columns = localStorage.getItem('type_user')==="1"?[
     {
       field: 'name',
       headerName: 'Nombre',
@@ -202,6 +202,40 @@ export default function Clientes() {
         />
       ),
     },
+  ]:[
+    {
+      field: 'name',
+      headerName: 'Nombre',
+      flex: 1.2,
+    },
+    {
+      field: 'rfc',
+      headerName: 'RFC',
+      flex: 1.2,
+    },
+    {
+      field: 'direccion',
+      headerName: 'Código postal',
+      flex: 1.2,
+    },
+    {
+      field: 'tipo_situacion_fiscal',
+      headerName: 'Tipo de situación fiscal',
+      type: 'tel',
+      flex: 1.5,
+    },
+    {
+      field: 'phone',
+      headerName: 'Teléfono',
+      sortable: false,
+      flex: 1.2,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      sortable: false,
+      flex: 2,
+    }
   ];
 
   return (
@@ -243,15 +277,17 @@ export default function Clientes() {
                 </Paper>
               </Grid>
               <Grid item xs={5} align="right">
-                <Button
-                  variant="outlined"
-                  className={styles.agregarProveedorButton}
-                  onClick={() => {
-                    setIsAgregarClienteModalOpen(true);
-                  }}
-                >
-                  <span>+</span> Agregar cliente
-                </Button>
+                {localStorage.getItem('type_user')==="1"?(
+                  <Button
+                    variant="outlined"
+                    className={styles.agregarProveedorButton}
+                    onClick={() => {
+                      setIsAgregarClienteModalOpen(true);
+                    }}
+                  >
+                    <span>+</span> Agregar cliente
+                  </Button>
+                ):null}
               </Grid>
             </Grid>
           </Item>

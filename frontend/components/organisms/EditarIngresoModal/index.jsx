@@ -23,6 +23,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
   const [listPermisos,setListPermisos] = React.useState([]); 
   const [initialValues, setInitialValues] = useState(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
+  const [listaClientes,setListaClientes] = React.useState([]);
 
   const convertirFecha = (fecha) => {
     return (fecha.substr(6,4)+"-"+fecha.substr(3,2)+"-"+fecha.substr(0,2))
@@ -78,8 +79,48 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
     });
   }
 
+  function listClientes() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/clientes/"+user_id+"/listaclientes";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        console.log("data.listClientes",data.listClientes);
+        setListaClientes(data.listClientes);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
   useEffect(() => {
     data();
+    listClientes();
   }, []);
 
   return (
@@ -416,6 +457,12 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
                   <option aria-label="None" value="">Cliente *</option>
                   <option value={1}>PETREOS</option>
                   <option value={2}>GAS DE APAN SA DE CV</option>
+
+                  {listaClientes.map((cliente) => {
+                      return (
+                        <option value={cliente.client_id} selected={cliente.client_id===ventaData.client_id?true:false}>{cliente.name}</option>
+                      );
+                    })}
                 </NativeSelect>
 
                   {(errors.client_id || errors.folio || errors.fecha_emision || errors.cantidad || errors.concepto || errors.preciounitario || errors.importe|| errors.ivaaplicado|| errors.cfdi|| errors.tipoCfdi|| errors.preciovent|| errors.aclaracion|| errors.tipocomplemento || errors.unidaddemedida || errors.permiso_id)?(<div className={styles.errors}>

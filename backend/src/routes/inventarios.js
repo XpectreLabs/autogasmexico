@@ -70,15 +70,15 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
   const user_id = parseInt(req.params.user_id)
   const permiso_id = parseInt(req.params.permiso_id)
 
-  console.log("Yes 0 -> "+mesRecibido);
-  console.log("permiso_id",permiso_id)
+  //console.log("Yes 0 -> "+mesRecibido);
+  //console.log("permiso_id",permiso_id)
 
   const inv_ini = await fnPermisos.findInventarioInicial(permiso_id);
 
   if(mesRecibido===0) {
-    console.log("Yes 1: ",anio);
+    //console.log("Yes 1: ",anio);
     for(let j=0; j<12; j++) {
-      console.log("Yes 2");
+      //console.log("Yes 2");
       let diaBisiesto = j==1?anio%4===0?1:0:0;
       let diasMes = meses[j]+diaBisiesto;
       const mes = (j+1)<10?("0"+(j+1)):(j+1);
@@ -405,7 +405,8 @@ async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
       },
     ],
     where: {
-      user_id,
+      //Ajuste por usuario ocultamiento de user_id
+      //user_id,
       //permiso_id:permiso_id,
       active: 1,
       fecha_emision: {
@@ -434,8 +435,6 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
   const fi = (fechaInicio+"").substring(0,10);
   const ff = (fechaFin+"").substring(0,10);
 
-  
-
   const listCompras = await prisma.ventas.findMany({
     orderBy: [
       {
@@ -443,7 +442,8 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
       },
     ],
     where: {
-      user_id,
+      //Ajuste por usuario ocultamiento de user_id
+      //user_id,
       active: 1,
       //permiso_id,
       fecha_emision: {

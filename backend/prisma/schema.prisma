@@ -156,7 +156,7 @@ model ventas {
 
 model cat_permisos {
   permiso_id                                Int         @id @default(autoincrement()) @db.SmallInt
-  permiso                                   String      @db.VarChar(100)
+  permiso                                   String?      @db.VarChar(150)
   nombre_permiso                            String?     @db.VarChar(100)
   inventario_inicial                        Float?      @db.Real
   caracter                                  String?     @db.VarChar(100)

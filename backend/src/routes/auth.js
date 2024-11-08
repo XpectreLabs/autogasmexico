@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const fn = require('../services/users.js');
 const sch = require('../schemas/auth.js');
+const fnPermiso = require("../services/permisos.js")
 
 router.post('/login', async (req, res, next) => {
   const { error } = sch.schema.validate(req.body);
@@ -23,7 +24,8 @@ router.post('/login', async (req, res, next) => {
     console.log("user",user,(user > 0))
     if (user !== 0) {
       const token = generateAccessToken(jwt, user);
-      res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), rfccontribuyente: user.rfccontribuyente, rfcproveedor: user.rfcproveedor, rfcrepresentantelegal:user.rfcrepresentantelegal, type_user: user.type_user, token: token });
+      const isInicial = await fnPermiso.findNamePermiso(3)?true:false;
+      res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), rfccontribuyente: user.rfccontribuyente, rfcproveedor: user.rfcproveedor, rfcrepresentantelegal:user.rfcrepresentantelegal, type_user: user.type_user, token, isInicial });
     } else {
       let messageError = 'Los datos de acceso son incorrectos';
       console.log(messageError);

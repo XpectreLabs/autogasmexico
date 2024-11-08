@@ -52,6 +52,10 @@ export default function Ventas() {
   const [isDetalleIngresoModalOpen, setIsDetallePIngresoModalOpen] = useState(false);
   const [ingresoToDetalle, setIngresoToDetalle] = useState({});
 
+  const [fechaInicioB, setFechaInicioB] = useState(0);
+  const [fechaHastaB, setFechaHastaB] = useState(0);
+  const [searB, setSearB] = useState("");
+
   function Logout() {
     localStorage.setItem('user_id', "");
     localStorage.setItem('token', "");
@@ -227,14 +231,16 @@ export default function Ventas() {
       sortable: false,
       flex: 0.2,
       renderCell: (params) => (
-        <CreateIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setIngresodd(params.row.venta_id);
-            setIngresoToEdit(params.row);
-            setIsEditPIngresoModalOpen(true);
-          }}
-        />
+        localStorage.getItem('type_user')==="1"?(
+          <CreateIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              setIngresodd(params.row.venta_id);
+              setIngresoToEdit(params.row);
+              setIsEditPIngresoModalOpen(true);
+            }}
+          />
+        ):null
       ),
     },
     {
@@ -259,13 +265,15 @@ export default function Ventas() {
       sortable: false,
       flex: 0.2,
       renderCell: (params) => (
-        <DeleteIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            if(confirm("¿Desea borrar esta venta?"))
-              deleteVenta(params.row.venta_id);
-          }}
-        />
+        localStorage.getItem('type_user')==="1"?(
+          <DeleteIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              if(confirm("¿Desea borrar esta venta?"))
+                deleteVenta(params.row.venta_id);
+            }}
+          />
+        ):null
       ),
     },
   ];
@@ -304,35 +312,37 @@ export default function Ventas() {
       setTimeout(()=>{
         const fechaInicio = convertDate(fechaIni);
         const fechaHasta = convertDate(fechaFin);
-        //alert(fechaIni+"->"+fechaInicio+" ---- "+fechaFin+"->"+fechaHasta);
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",IngresosAux);
+          setFechaInicioB(fechaInicio);
+          setFechaHastaB(fechaHasta);
+          
           for(let j=0;j<IngresosAux.length;j++) {
             const ff = IngresosAux[j].fecha_emision+"";
-            //const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
-            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
-
-
-
-            let busqueda = (IngresosAux[j].folio + " "  + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
-                          
-
+            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));   
+            let permisoB =  "";
+            let busqueda = (IngresosAux[j].folio + " " + permisoB +" " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
+            
             if(fechaInicio!==fechaHasta) {
               if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta){
-                //listResult.push(IngresosAux[j]);
-
-               
-                //if((""+(busqueda)).includes("PETREOS".toLowerCase()))
-                  listResult.push(IngresosAux[j]);  
-                
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(IngresosAux[j]);
+                }
+                else
+                  listResult.push(IngresosAux[j]);
               }
-                
             }
             else {
-              if(fechaInicio===dateEmi)
-                listResult.push(IngresosAux[j]);
+              if(fechaInicio===dateEmi){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(IngresosAux[j]);
+                }
+                else
+                  listResult.push(IngresosAux[j]);
+              }
             }
           }
           setIngresos(listResult);
@@ -373,19 +383,33 @@ export default function Ventas() {
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",IngresosAux);
+          setFechaInicioB(fechaInicio);
+          setFechaHastaB(fechaHasta);
           for(let j=0;j<IngresosAux.length;j++) {
             const ff = IngresosAux[j].fecha_emision+"";
-            //const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
             const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
-
+            let permisoB =  "";
+            let busqueda = (IngresosAux[j].folio + " " + permisoB +" " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
+            
             if(fechaInicio!==fechaHasta) {
-              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta)
-                listResult.push(IngresosAux[j]);
+              if(dateEmi>=fechaInicio&&dateEmi<=fechaHasta){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(IngresosAux[j]);
+                }
+                else
+                  listResult.push(IngresosAux[j]);
+              }
             }
             else {
-              if(fechaInicio===dateEmi)
-                listResult.push(IngresosAux[j]);
+              if(fechaInicio===dateEmi){
+                if(searB!=="") {
+                  if((""+(busqueda)).includes(searB.toLowerCase())||(searB===""))
+                    listResult.push(IngresosAux[j]);
+                }
+                else
+                  listResult.push(IngresosAux[j]);
+              }
             }
           }
           setIngresos(listResult);
@@ -567,15 +591,35 @@ export default function Ventas() {
                     inputProps={{ 'aria-label': 'Buscar' }}
                     onChange={(query) => {
                       const sear=query.target.value;
+                      setSearB(sear);
                       if(IngresosAux.length>0) {
                         let listResult = [];
                         for(let j=0;j<IngresosAux.length;j++) {
                           //let permisoB =  IngresosAux[j].permisos.permiso;
                           let permisoB =  "";
-
                           let busqueda = (IngresosAux[j].folio + " " + permisoB +" " + IngresosAux[j].fecha_emision + " " + IngresosAux[j].cantidad+ " " + IngresosAux[j].concepto + " " +IngresosAux[j].clients.name + " " + IngresosAux[j].preciounitario + " " + IngresosAux[j].importe + " " + IngresosAux[j].preciovent).toLowerCase();
-                          if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
-                            listResult.push(IngresosAux[j]);
+
+                          if(fechaInicioB!==0&&fechaHastaB!==0){
+                            const ff = IngresosAux[j].fecha_emision+"";
+                            const dateEmi = convertDate(ff.substr(8,2)+"/"+ff.substr(5,2)+"/"+ff.substr(0,4));
+
+                            if(fechaInicioB!==fechaHastaB) {
+                              if(dateEmi>=fechaInicioB&&dateEmi<=fechaHastaB) {
+                                if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                                  listResult.push(IngresosAux[j]);
+                                }
+                            }
+                            else {
+                              if(fechaInicioB===dateEmi){
+                                if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                                  listResult.push(IngresosAux[j]);
+                              }
+                            }
+                          } 
+                          else {
+                            if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))
+                              listResult.push(IngresosAux[j]);
+                          }
                         }
                         setIngresos(listResult);
                         cargarTotales(listResult);

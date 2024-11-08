@@ -157,6 +157,44 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
   res.status(200).json({ message:"success", dataJson, "nombre_archivo":nombre_archivo_json });
 });
 
+
+
+router.post('/descargarJSON',jwtV.verifyToken, async (req, res, next) => {
+  let nombre_archivo_json= req.body.nombre_archivo_json;
+  console.log(nombre_archivo_json);
+  delete req.body.nombre_archivo_json;
+  delete req.body.nombre_archivo_status;
+
+  const { error } = sch.schemaUpdate.validate(req.body);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).json({ message:"schema",error: error.details[0].message });
+  }
+ 
+  console.log(req.body.version)
+  const id = parseInt(req.body.reporte_id);
+  let date = req.body.date;
+
+  let numpermiso = req.body.numpermiso;
+  delete req.body.numpermiso
+
+  console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
+  //console.log("fechayhoraestamedicionmes",);
+
+  console.log("Edit",req.body)
+
+  const fechaI=(req.body.fecha_inicio+"").slice(0,10);
+  const fechas = await reporteS.obtenerMesAnterior(fechaI);
+  const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
+  let volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
+  let num_modificaciones = (parseInt(req.body.num_modificaciones)+1)
+  const version = req.body.version;
+
+  const dataJson = await reporteS.generarJson(req.body,date,version,"",volumenexistenciasees,numpermiso);
+  res.status(200).json({ message:"success", dataJson, "nombre_archivo":nombre_archivo_json });
+});
+
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdReporte.validate(req.body);
   if (error) {

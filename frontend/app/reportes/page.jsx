@@ -24,6 +24,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import 'dayjs/locale/es';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 dayjs.locale('es');
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -50,6 +52,7 @@ export default function Compras() {
   const [isDetalleReporteModalOpen, setIsDetallePReporteModalOpen] = useState(false);
   const [reporteToDetalle, setReporteToDetalle] = useState({});
   const [reporteId, setReporteID ] = useState([]);
+  const [listPermisos,setListPermisos] = React.useState([]);
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -107,6 +110,50 @@ export default function Compras() {
     });
   }
 
+  function listaPermisos() {
+    const user_id = localStorage.getItem('user_id');
+    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'GET',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("data r",data);
+      if(data.message==="success") {
+        setListPermisos(data.listPermisos);
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+
+      setTimeout(()=>{
+        setShowAlert(false);
+      },3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
+
   function deleteReporte(reporte_id) {
     const scriptURL = "http://localhost:3001/api/v1/reportes/";
     fetch(scriptURL, {
@@ -144,6 +191,90 @@ export default function Compras() {
     });
   }
 
+  const obtenerPermiso = (permiso_id) => {
+    for(let j=0; j<listPermisos.length;j++)
+    {
+      if(parseInt(listPermisos[j].permiso_id)===parseInt(permiso_id))
+        return listPermisos[j].permiso;
+    }
+    return "";
+  }
+
+  const descargarJSON = async (dataJson,nombre_archivo) => {
+    const zip = new JSZip();
+    const archivo = nombre_archivo+".json";
+    const jsonString = JSON.stringify(dataJson, null, 2);
+    zip.file(archivo, jsonString);
+
+    try {
+      const content = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+      saveAs(content, nombre_archivo+".zip");
+    } catch (err) {
+      console.error("Error al generar el ZIP:", err);
+    }
+  }
+
+  const descargarJSONReporte = (dataR)=>{
+    
+    console.log(dataR)
+    delete dataR.id;
+    delete dataR.fecha_inicio2;
+    delete dataR.fecha_terminacion2;
+    delete dataR.date;
+    delete dataR.date2;
+    delete dataR.active;
+    delete dataR.volumenexistenciasees;
+
+    const numpermiso =  obtenerPermiso(dataR.permiso_id);
+    const reporte_id = dataR.reporte_id;
+    const scriptURL = "http://localhost:3001/api/v1/reportes/descargarJSON";
+    
+    //const data = {...dataR,reporte_id,numpermiso,fechayhoraestamedicionmes,fecha_inicio,fecha_terminacion};
+    const data = {...dataR,reporte_id,numpermiso};
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+localStorage.getItem('token'),
+      },
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      //setLoading(false);
+      //setTypeOfMessage("error");
+
+      if(data.message==="success") {
+        //console.log("dataRe",data);
+        descargarJSON(data.dataJson,data.nombre_archivo);
+
+        //setTypeOfMessage("success");
+        //setTextError("Los datos del reporte fueron actualizados");
+        //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', permiso_id: 1,  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
+        //setShowAlert(true);
+
+        //setTimeout(()=>{onClose();},2000)
+      }
+      else if(data.message==="schema") {
+        setTextError(data.error);
+        setShowAlert(true);
+      }
+      else {
+        setTextError(data.message);
+        setShowAlert(true);
+        setTimeout(()=>{
+          Logout();
+        },3200)
+      }
+      setTimeout(()=>{setShowAlert(false);},3000)
+    })
+    .catch(error => {
+      console.log(error.message);
+      console.error('Error!', error.message);
+    });
+  }
 
   const handleUpload = (event) => {
     //event.preventDefault();
@@ -172,6 +303,7 @@ export default function Compras() {
 
   useEffect(() => {
     loadingData===false?data():null;
+    listaPermisos();
   }, []);
 
   const columns = [
@@ -183,9 +315,9 @@ export default function Compras() {
     {
       field: 'nombre_archivo_json',
       headerName: 'Reporte',
-      flex: 4,
+      flex: 4.5,
       renderCell: (params) => 
-        <a onClick={()=>{alert("ja")}}>{params.row.nombre_archivo_json}</a>,
+        <a onClick={()=>{descargarJSONReporte(params.row)}}>{params.row.nombre_archivo_json}</a>,
     },
     // {
     //   field: 'rfcproveedor',
@@ -440,6 +572,7 @@ export default function Compras() {
         rows={reportes.map((reporte) => ({
           ...reporte,
           id: reporte.reporte_id,
+          nombre_archivo_json: reporte.nombre_archivo_json+".zip",
           fecha_inicio2: changedateformatF(reporte.fecha_inicio),
           fecha_terminacion2: changedateformatF(reporte.fecha_terminacion),
           date2: changedateformatF(reporte.date),
@@ -457,42 +590,38 @@ export default function Compras() {
       />
       {Object.keys(reportes).length===0?<p className={styles.NoData}><strong>No hay datos todavia</strong></p>:null}
 
-
       <div className={styles.ContentLoadding}>
         <CircularProgress  className={loading?'Loading show':'Loading'}/>
       </div>
 
       <div>
-      <NuevoReporteModal
-        isOpen={isAgregarReporteModalOpen}
-        onClose={() => {
-          setIsAgregarReporteModalOpen(false);
-          data();
-        }}
-      />
+        <NuevoReporteModal
+          isOpen={isAgregarReporteModalOpen}
+          onClose={() => {
+            setIsAgregarReporteModalOpen(false);
+            data();
+          }}
+        />
 
-      <EditReporteModal
-        reporteData={reporteoEdit}
-        reporteIdd={ReporteIdd}
-        isOpen={isEditReporteModalOpen}
-        onClose={() => {
-          setIsEditPReporteModalOpen(false);
-          data();
-        }}
-      />
+        <EditReporteModal
+          reporteData={reporteoEdit}
+          reporteIdd={ReporteIdd}
+          isOpen={isEditReporteModalOpen}
+          onClose={() => {
+            setIsEditPReporteModalOpen(false);
+            data();
+          }}
+        />
 
-      <DetalleReporteModal
-        reporteData={reporteToDetalle}
-        isOpen={isDetalleReporteModalOpen}
-        onClose={() => {
-          setIsDetallePReporteModalOpen(false);
-          data();
-        }}
-      />
-
-      
-    </div>
-
+        <DetalleReporteModal
+          reporteData={reporteToDetalle}
+          isOpen={isDetalleReporteModalOpen}
+          onClose={() => {
+            setIsDetallePReporteModalOpen(false);
+            data();
+          }}
+        />
+      </div>
     </main>
   );
 }

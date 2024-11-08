@@ -14,14 +14,6 @@ import { Formik, Form } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
 import * as Yup from "yup";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function Perfil() {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
@@ -88,8 +80,7 @@ export default function Perfil() {
 
   return (
     <main className={styles.main} style={{ opacity: 1 }}>
-      <Navbar activeMain="5" />
-
+      {/* <Navbar activeMain="5" /> */}
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
@@ -134,8 +125,6 @@ export default function Perfil() {
           delete values.username;
           const data = {...values,user_id};
           setLoading(true);
-          console.log(data);
-
 
           fetch(scriptURL, {
             method: 'PUT',
@@ -152,6 +141,14 @@ export default function Perfil() {
             setTypeOfMessage("error");
 
             if(data.message==="success") {
+
+              localStorage.setItem('isSavePerfil', true)
+
+              if(localStorage.getItem("isSavePermiso")&&localStorage.getItem("isSavePerfil")){
+                localStorage.setItem('isInicial', true)
+                //router.push('/compras');
+              }
+
               setTypeOfMessage("success");
               setTextError("Tus datos de acceso fueron actualizados");
               setShowAlert(true);
@@ -225,8 +222,7 @@ export default function Perfil() {
               <Grid item xs={2}>
               </Grid>
               <Grid item xs={10}>
-                <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>Usuario maestro</strong></p>
-
+                {/* <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>Usuario maestro</strong></p> */}
                 <div className={styles.center}>
                   {showAlert?(<p className={`${styles.message} ${typeOfMessage==="success"?styles.success:null} slideLeft`}><strong>Message:</strong><br />{textError}</p>):null}
 
@@ -237,86 +233,112 @@ export default function Perfil() {
                       onSubmit={handleSubmit}
                       className={styles.form}
                   >
-                    <label className={styles.lbl}><strong>Nombre:</strong></label>
-                    <TextField
-                      placeholder="Nombre"
-                      required
-                      id="firstname"
-                      name="firstname"
-                      value={values.firstname}
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <label className={styles.lbl}><strong>Apellidos:</strong></label>
-                    <TextField
-                      placeholder="Apellidos"
-                      required
-                      id="lastname"
-                      value={values.lastname}
-                      name="lastname"
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <label className={styles.lbl}><strong>Email:</strong></label>
-                    <TextField
-                      placeholder="email"
-                      id="email"
-                      value={values.email}
-                      name="email"
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    {/* <p>Razones social</p> */}
 
-                    <label className={styles.lbl}><strong>Usuario:</strong></label>
-                    <TextField
-                      placeholder="Usuario"
-                      required
-                      id="username"
-                      name="username"
-                      value={values.username}
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      disabled="false"
-                    />
-                    <p>Razones social</p>
-                    <label className={styles.lbl}><strong>RFC Contribuyente:</strong></label>
-                    <TextField
-                      placeholder="RFC Contribuyente"
-                      required
-                      id="rfccontribuyente"
-                      value={values.rfccontribuyente}
-                      name="rfccontribuyente"
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    <Grid container spacing={2}>
+                      <Grid item xs={6} align="center">
+                          <label className={styles.lbl}><strong>RFC Contribuyente:</strong></label>
+                        <TextField
+                          placeholder="RFC Contribuyente"
+                          required
+                          id="rfccontribuyente"
+                          value={values.rfccontribuyente}
+                          name="rfccontribuyente"
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
 
-                    <label className={styles.lbl}><strong>RFC Representante legal:</strong></label>
-                    <TextField
-                      placeholder="RFC Representante legal"
-                      required
-                      id="rfcrepresentantelegal"
-                      value={values.rfcrepresentantelegal}
-                      name="rfcrepresentantelegal"
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <label className={styles.lbl}><strong>RFC proveedor:</strong></label>
-                    <TextField
-                      placeholder="RFC proveedor"
-                      required
-                      id="rfcproveedor"
-                      value={values.rfcproveedor}
-                      name="rfcproveedor"
-                      size="small"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                        <label className={styles.lbl}><strong>RFC Representante legal:</strong></label>
+                        <TextField
+                          placeholder="RFC Representante legal"
+                          required
+                          id="rfcrepresentantelegal"
+                          value={values.rfcrepresentantelegal}
+                          name="rfcrepresentantelegal"
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </Grid>
+
+                      <Grid item xs={6} align="center">
+                        <label className={styles.lbl}><strong>RFC proveedor:</strong></label>
+                        <TextField
+                          placeholder="RFC proveedor"
+                          required
+                          id="rfcproveedor"
+                          value={values.rfcproveedor}
+                          name="rfcproveedor"
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </Grid>
+                    </Grid>
+                    
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={6} align="center">
+                        <label className={styles.lbl}><strong>Nombre:</strong></label>
+                        <TextField
+                          placeholder="Nombre"
+                          required
+                          id="firstname"
+                          name="firstname"
+                          value={values.firstname}
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+
+                        <label className={styles.lbl}><strong>Email:</strong></label>
+                        <TextField
+                          placeholder="email"
+                          id="email"
+                          value={values.email}
+                          name="email"
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </Grid>
+
+                      <Grid item xs={6} align="center">
+                        <label className={styles.lbl}><strong>Apellidos:</strong></label>
+                        <TextField
+                          placeholder="Apellidos"
+                          required
+                          id="lastname"
+                          value={values.lastname}
+                          name="lastname"
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <label className={styles.lbl}><strong>Usuario:</strong></label>
+                        <TextField
+                          placeholder="Usuario"
+                          required
+                          id="username"
+                          name="username"
+                          value={values.username}
+                          size="small"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          disabled="false"
+                        />
+                      </Grid>
+                      
+                    </Grid>
+                    
+
+                    
+                    
+                    
+
+                    
+                    
 
                     <div style={{textAlign:'left', marginBottom: '10px'}}>
                       <FormControlLabel  control={<Checkbox id="cbCambiar" name="cbCambiar" onClick={()=>{setShowCambio(!showCambio)}} />} label="Cambiar datos de acceso:" />
@@ -368,7 +390,7 @@ export default function Perfil() {
                       <input
                         className={styles.btn}
                         type="submit"
-                        value="Editar perfil"
+                        value="Actualizar"
                       />
                     </div>
                   </Form>

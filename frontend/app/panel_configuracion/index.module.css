@@ -1,12 +1,23 @@
 .main {
   background-color: white;
   min-height: 100vh;
-  /* padding: 5rem; */
+  padding: 5rem;
   padding-top: 1.4rem;
 }
 
-.main button {
+/*.BorderBottom {
+  box-shadow: 0px 1px 0px 0px #b7b7b7;
+}
+
+.Logo {
+  margin-bottom: 25px;
+}
+
+.Logo img {
   width: 100px;
+}*/
+
+.main button {
   margin: 0px auto;
 }
 
@@ -15,16 +26,34 @@
   padding: 0px !important;
 }
 
+/*.BtnLogIn svg {
+  font-size: 30px;
+  margin-top: -11px;
+}
+
+.BtnLogIn:hover {
+  color: #083636;
+  background: none !important;
+}
+
+.BtnLogIn:hover svg {
+  color: #083636;
+}*/
+
 .center {
-  /* max-width: 850px; */
+  max-width: 800px;
   margin: 0px auto;
   color: #072525 !important;
   font: 16px "Roboto","Helvetica","Arial",sans-serif;
   line-height: 16px;
   text-align: center;
-  padding-top: 70px;
+  padding-top: 40px;
   position: relative;
   overflow: hidden;
+}
+
+.center form div.MuiTextField-root {
+  width: 49% !important;
 }
 
 .btns {
@@ -89,6 +118,7 @@
   margin-bottom: 15px;
   padding: 8px;
   position: absolute;
+  z-index: 90;
   top: 8px;
   right: 5px;
 }
@@ -101,3 +131,7 @@
   margin-top: 15px;
   line-height: 21px;
 }
+
+.Mr{
+  margin-right: 8px !important;
+} 

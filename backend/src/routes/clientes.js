@@ -53,7 +53,7 @@ router.get('/:userId/clientes',jwtV.verifyToken, async (req, res, next) => {
           },
         ],
         where: {
-          user_id: parseInt(id),
+          //user_id: parseInt(id),
           active: 1,
         },
         select: {
@@ -65,6 +65,40 @@ router.get('/:userId/clientes',jwtV.verifyToken, async (req, res, next) => {
           phone: true,
           email: true,
           date: true,
+        },
+      });
+      console.log("List",listClientes);
+      res.status(200).json({ message:"success", listClientes });
+    }
+    else
+      res.status(400).json({ message:"Id invalido", error: "Solicitud no válida, el ID no existe" });
+  }
+});
+
+router.get('/:userId/listaclientes',jwtV.verifyToken, async (req, res, next) => {
+  const { error } = sch.schemaId.validate(req.params);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).json({ message:"schema",error: error.details[0].message });
+  }
+
+  if (req.params.userId !== null) {
+    const id = req.params.userId;
+
+    if(await fnUsuatio.validateUser(parseInt(id))) {
+      const listClientes = await prisma.clients.findMany({
+        orderBy: [
+          {
+            client_id: 'asc',
+          },
+        ],
+        where: {
+          //user_id: parseInt(id),
+          active: 1,
+        },
+        select: {
+          client_id: true,
+          name: true,
         },
       });
       console.log("List",listClientes);

@@ -32,7 +32,6 @@ export default function Navbar({activeMain}) {
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
 
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -41,7 +40,6 @@ export default function Navbar({activeMain}) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -53,6 +51,7 @@ export default function Navbar({activeMain}) {
       setOpen(false);
     }
   }
+
   return (
         <>
         <Grid container spacing={2} className={styles.BorderBottom}>
@@ -67,9 +66,8 @@ export default function Navbar({activeMain}) {
           <Item className={styles.DeleteBorder}>
             <Grid container spacing={2}>
               <Grid item xs={11} align="left">
-                
                 {
-                  activeMain<12?(
+                  activeMain<12&&localStorage.getItem("isInicial")==='true'?(
                     <>
                         <Paper sx={{ width: 97, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
                           <MenuList  className={styles.ListNav}>
@@ -110,7 +108,7 @@ export default function Navbar({activeMain}) {
                             </Link>
                           </MenuList>
                         </Paper>
-                        {localStorage.getItem('type_user')==="1"?(
+                        
                           <div style={{width: 170, maxWidth: '100%', display:"inline-block"}}>
                             <Button
                               style={{color: "#000", width: 170}}
@@ -159,24 +157,25 @@ export default function Navbar({activeMain}) {
                                             Clientes
                                           </MenuItem>
                                         </Link>
+                                        {localStorage.getItem('type_user')==="1"?(<>
+                                          <Link href="/panel_configuracion" onClick={()=>{setActive(5)}}>
+                                            <MenuItem onClick={handleClose} className={active===5?"activo":null}>
+                                              Panel de configuración
+                                            </MenuItem>
+                                          </Link>
 
-                                        <Link href="/perfil" onClick={()=>{setActive(5)}}>
-                                          <MenuItem onClick={handleClose} className={active===5?"activo":null}>
-                                            Usuario maestro
-                                          </MenuItem>
-                                        </Link>
+                                          <Link href="/usuarios" onClick={()=>{setActive(6)}}>
+                                            <MenuItem onClick={handleClose} className={active===6?"activo":null}>
+                                              Usuarios
+                                            </MenuItem>
+                                          </Link>
 
-                                        <Link href="/usuarios" onClick={()=>{setActive(6)}}>
-                                          <MenuItem onClick={handleClose} className={active===6?"activo":null}>
-                                            Usuarios
-                                          </MenuItem>
-                                        </Link>
-
-                                        <Link href="/permisos" onClick={()=>{setActive(8)}}>
-                                          <MenuItem onClick={handleClose} className={active===8?"activo":null}>
-                                            Permisos
-                                          </MenuItem>
-                                        </Link>
+                                          {/* <Link href="/permisos" onClick={()=>{setActive(8)}}>
+                                            <MenuItem onClick={handleClose} className={active===8?"activo":null}>
+                                              Permisos
+                                            </MenuItem>
+                                          </Link> */}
+                                        </>):null}
                                       </MenuList>
                                     </ClickAwayListener>
                                   </Paper>
@@ -184,7 +183,7 @@ export default function Navbar({activeMain}) {
                               )}
                             </Popper>
                           </div>
-                        ):null}
+                        
                     </>
                   ):null
                 }

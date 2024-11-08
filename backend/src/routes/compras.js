@@ -65,7 +65,7 @@ router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
           },
         ],
         where: {
-          user_id: parseInt(id),
+          //user_id: parseInt(id),
           active: 1,
         },
         select: {

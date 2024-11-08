@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Perfil() {
+export default function Seleccionar_permiso() {
   const router = useRouter();
   const [showAlert,setShowAlert] = React.useState(false);
   const [textError,setTextError] = React.useState("");

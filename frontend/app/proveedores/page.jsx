@@ -132,7 +132,7 @@ export default function Proveedores() {
     });
   }
 
-  const columns = [
+  const columns = localStorage.getItem('type_user')==="1"?[
     {
       field: 'name',
       headerName: 'Nombre',
@@ -197,7 +197,42 @@ export default function Proveedores() {
         />
       ),
     },
+  ]:[
+    {
+      field: 'name',
+      headerName: 'Nombre',
+      flex: 2 ,
+    },
+    {
+      field: 'rfc',
+      headerName: 'RFC',
+      flex: 1.2,
+    },
+    {
+      field: 'direccion',
+      headerName: 'Dirección',
+      flex: 1.2,
+    },
+    {
+      field: 'tipo_situacion_fiscal',
+      headerName: 'Tipo de situación fiscal',
+      type: 'tel',
+      flex: 1.5,
+    },
+    {
+      field: 'permiso_cre',
+      headerName: 'Permiso CRE',
+      sortable: false,
+      flex: 1.2,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      sortable: false,
+      flex: 2,
+    }
   ];
+
 
   useEffect(() => {
     loadingData===false?data():null;
@@ -242,7 +277,8 @@ export default function Proveedores() {
                 </Paper>
               </Grid>
               <Grid item xs={5} align="right">
-                <Button
+                {localStorage.getItem('type_user')==="1"?(
+                  <Button
                   variant="outlined"
                   className={styles.agregarProveedorButton}
                   onClick={() => {
@@ -251,6 +287,8 @@ export default function Proveedores() {
                 >
                   <span>+</span> Agregar proveedor
                 </Button>
+                ):null}
+                
               </Grid>
             </Grid>
           </Item>

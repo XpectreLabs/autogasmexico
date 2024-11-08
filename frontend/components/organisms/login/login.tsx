@@ -49,12 +49,19 @@ export const Login = ({setPage}:{setPage:Function}) => {
               console.log("data",data)
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
               localStorage.setItem('nameUser', data.name);
+              localStorage.setItem('isInicial', data.isInicial)
               localStorage.setItem('type_user', data.type_user);
               localStorage.setItem('rfccontribuyente', data.rfccontribuyente);
               localStorage.setItem('rfcproveedor', data.rfcproveedor);
               localStorage.setItem('rfcrepresentantelegal', data.rfcrepresentantelegal);
               localStorage.setItem('token',  data.token);
-              router.push("/seleccionar_permiso");
+              localStorage.setItem('permiso_id', '3');
+              localStorage.setItem('permiso', "LP/22811/COM/2019");
+
+              if(data.isInicial)
+                router.push("/compras");
+              else
+                router.push("/panel_configuracion");
 
               setTimeout(()=> {
                 setLoading(false);
