@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from './perfil.module.css';
 import Navbar from '@/components/molecules/Navbar';
 import Paper from '@mui/material/Paper';
@@ -24,59 +24,62 @@ export default function Perfil() {
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
 
-  function Logout() {
-    localStorage.setItem('user_id', "");
-    localStorage.setItem('token', "");
-    router.push('/');
-  }
+ 
+    function Logout() {
+      localStorage.setItem('user_id', "");
+      localStorage.setItem('token', "");
+      router.push('/');
+    }
 
-  function data() {
-    const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
+    function data() {
+      const user_id = localStorage.getItem('user_id');
+      const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
 
-    fetch(scriptURL, {
-      method: 'GET',
-      body: JSON.stringify(data),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': "Bearer "+localStorage.getItem('token'),
-      },
-    })
-    .then((resp) => resp.json())
-    .then(function(data) {
-      console.log("data",data);
-      if(data.message==="success") {
-        setLoadingData(true);
-        setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'],rfccontribuyente:data.dataUsuario[0]['rfccontribuyente'], rfcrepresentantelegal: data.dataUsuario[0]['rfcrepresentantelegal'],rfcproveedor: data.dataUsuario[0]['rfcproveedor'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
-        setShowAlert(false);
-      }
-      else if(data.message==="schema") {
-        setTextError(data.error);
-        setShowAlert(true);
+      fetch(scriptURL, {
+        method: 'GET',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer "+localStorage.getItem('token'),
+        },
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+        console.log("data",data);
+        if(data.message==="success") {
+          setLoadingData(true);
+          setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'],rfccontribuyente:data.dataUsuario[0]['rfccontribuyente'], rfcrepresentantelegal: data.dataUsuario[0]['rfcrepresentantelegal'],rfcproveedor: data.dataUsuario[0]['rfcproveedor'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
+          setShowAlert(false);
+        }
+        else if(data.message==="schema") {
+          setTextError(data.error);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+        else {
+          setTextError(data.message);
+          setShowAlert(true);
+          setTimeout(()=>{
+            Logout();
+          },3200)
+        }
+
         setTimeout(()=>{
-          Logout();
-        },3200)
-      }
-      else {
-        setTextError(data.message);
-        setShowAlert(true);
-        setTimeout(()=>{
-          Logout();
-        },3200)
-      }
+          setShowAlert(false);
+        },3000)
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.error('Error!', error.message);
+      });
+    }
 
-      setTimeout(()=>{
-        setShowAlert(false);
-      },3000)
-    })
-    .catch(error => {
-      console.log(error.message);
-      console.error('Error!', error.message);
-    });
-  }
-
-  loadingData===false?data():null;
+  useEffect(() => {
+    loadingData===false?data():null;
+  }, [])
 
   return (
     <main className={styles.main} style={{ opacity: 1 }}>
@@ -109,7 +112,7 @@ export default function Perfil() {
             .min(3, 'La contraseña de confirmación debe tener un mínimo de 3 caracteres.')
         })}
         onSubmit={(values, actions) => {
-          /*const scriptURL = "http://localhost:3001/api/v1/users/";
+          /*const scriptURL = "http://54.242.89.171:3001/api/v1/users/";
           const user_id = localStorage.getItem('user_id');
           const firstname = values.firstname;
           const lastname = values.lastname;
@@ -119,7 +122,7 @@ export default function Perfil() {
 
 
           const user_id = parseInt(localStorage.getItem('user_id'));
-          const scriptURL = "http://localhost:3001/api/v1/usuarios";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios";
           delete values.id;
           delete values.confirmPassword;
           delete values.username;

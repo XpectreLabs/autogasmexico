@@ -73,7 +73,7 @@ export default function Compras() {
 
   function data(compras) {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/compras/"+user_id+"/compras";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/compras/"+user_id+"/compras";
 
     console.log(scriptURL);
     fetch(scriptURL, {
@@ -122,7 +122,7 @@ export default function Compras() {
   }
 
   function deleteCompra(abastecimiento_id) {
-    const scriptURL = "http://localhost:3001/api/v1/compras/";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/compras/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ abastecimiento_id }),
@@ -503,7 +503,7 @@ export default function Compras() {
     formData.append('user_id',user_id);
     formData.append('permiso_id',localStorage.getItem('permiso_id'));
 
-    axios.post('http://localhost:3001/api/v1/compras/cargarXML', formData)
+    axios.post('http://54.242.89.171:3001/api/v1/compras/cargarXML', formData)
       .then((response) => {
         
         const totalI = document.getElementsByClassName("fila").length;

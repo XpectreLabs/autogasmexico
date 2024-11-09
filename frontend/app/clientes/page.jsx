@@ -40,6 +40,7 @@ export default function Clientes() {
   const [isEditClienteModalOpen, setIsEditPClienteModalOpen] = useState(false);
   const [clienteToEdit, setClienteToEdit] = useState({});
   const [clienteIdd, setClienteIdd] = useState(0);
+  const [typeUser,setTypeUser] = useState("1");
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -49,7 +50,7 @@ export default function Clientes() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/clientes/"+user_id+"/clientes";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/clientes/"+user_id+"/clientes";
 
     console.log(scriptURL);
     fetch(scriptURL, {
@@ -96,7 +97,7 @@ export default function Clientes() {
   }
 
   function deleteCliente(client_id) {
-    const scriptURL = "http://localhost:3001/api/v1/clientes/";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/clientes/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ client_id }),
@@ -132,12 +133,7 @@ export default function Clientes() {
     });
   }
 
-  
-  useEffect(() => {
-    loadingData===false?data():null;
-  }, []);
-
-  const columns = localStorage.getItem('type_user')==="1"?[
+  const columns = typeUser==="1"?[
     {
       field: 'name',
       headerName: 'Nombre',
@@ -238,6 +234,10 @@ export default function Clientes() {
     }
   ];
 
+  useEffect(() => {
+    loadingData===false?data():null;
+    setTypeUser(localStorage.getItem('type_user'));
+  }, []);
   return (
     <main
       className={styles.main}
@@ -277,7 +277,7 @@ export default function Clientes() {
                 </Paper>
               </Grid>
               <Grid item xs={5} align="right">
-                {localStorage.getItem('type_user')==="1"?(
+                {typeUser==="1"?(
                   <Button
                     variant="outlined"
                     className={styles.agregarProveedorButton}

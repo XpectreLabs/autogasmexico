@@ -24,7 +24,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -124,7 +124,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
           const tipo_modena_id = 1;
-          const scriptURL = "http://localhost:3001/api/v1/ingresos";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/ingresos";
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;

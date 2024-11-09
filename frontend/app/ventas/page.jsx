@@ -66,7 +66,7 @@ export default function Ventas() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/ingresos/"+user_id+"/ingresos";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/ingresos/"+user_id+"/ingresos";
 
     console.log(scriptURL);
     fetch(scriptURL, {
@@ -115,7 +115,7 @@ export default function Ventas() {
   }
 
   function deleteVenta(venta_id) {
-    const scriptURL = "http://localhost:3001/api/v1/ingresos/";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/ingresos/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ venta_id }),
@@ -454,7 +454,7 @@ export default function Ventas() {
     formData.append('user_id',user_id);
 
 
-    axios.post('http://localhost:3001/api/v1/ingresos/cargarXML', formData)
+    axios.post('http://54.242.89.171:3001/api/v1/ingresos/cargarXML', formData)
       .then((response) => {
         console.log(response.data);
         console.log(response.data.dataJson);

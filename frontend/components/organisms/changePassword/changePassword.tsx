@@ -36,7 +36,7 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
             .required("* La confirmación de la contraseña es requerida."),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/usuarios/changePassword";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/changePassword";
           const recoveryCode = values.recoveryCode;
           const password = values.password;
           const id_user_change = localStorage.getItem('id_user_change');

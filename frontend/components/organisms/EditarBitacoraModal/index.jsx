@@ -31,7 +31,7 @@ export default function EditarBitacoraModal({ isOpen, onClose, bitacoraData,bita
             .required("La diferencia es requerida"),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/bitacoras";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/bitacoras";
           const bitacora_inventario_id = bitacoraIdd;
           //const id = bitacoraIdd;
           delete values.id;

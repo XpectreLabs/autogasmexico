@@ -27,7 +27,7 @@ export default function EditarBitacoraDiariaModal({ isOpen, onClose, bitacoraDat
             .required("La nota es requerido"),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://localhost:3001/api/v1/bitacoras";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/bitacoras";
           const bitacora_inventario_id = bitacoraIdd;
           //const id = bitacoraIdd;
           delete values.id;

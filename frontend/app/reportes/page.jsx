@@ -64,7 +64,7 @@ export default function Compras() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/reportes/"+user_id+"/reportes";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/reportes/"+user_id+"/reportes";
 
     console.log(scriptURL);
     fetch(scriptURL, {
@@ -112,7 +112,7 @@ export default function Compras() {
 
   function listaPermisos() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -155,7 +155,7 @@ export default function Compras() {
   }
 
   function deleteReporte(reporte_id) {
-    const scriptURL = "http://localhost:3001/api/v1/reportes/";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/reportes/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ reporte_id }),
@@ -227,7 +227,7 @@ export default function Compras() {
 
     const numpermiso =  obtenerPermiso(dataR.permiso_id);
     const reporte_id = dataR.reporte_id;
-    const scriptURL = "http://localhost:3001/api/v1/reportes/descargarJSON";
+    const scriptURL = "http://54.242.89.171:3001/api/v1/reportes/descargarJSON";
     
     //const data = {...dataR,reporte_id,numpermiso,fechayhoraestamedicionmes,fecha_inicio,fecha_terminacion};
     const data = {...dataR,reporte_id,numpermiso};
@@ -290,7 +290,7 @@ export default function Compras() {
     
     formData.append('reporte_id',reporteId);
 
-    axios.post('http://localhost:3001/api/v1/reportes/cargarPDF', formData)
+    axios.post('http://54.242.89.171:3001/api/v1/reportes/cargarPDF', formData)
       .then((response) => {
         setTimeout(()=>{data();},500)
       })
@@ -336,7 +336,7 @@ export default function Compras() {
       headerName: 'Archivo de aceptación',
       sortable: false,
       flex: 2.7,
-      renderCell: (params) => params.row.nombre_archivo_status?<a href={"http://localhost:3001/pdfs/"+params.row.nombre_archivo_status} target='_blank'>{params.row.nombre_archivo_status}</a>:<a onClick={()=>{setReporteID(params.row.reporte_id);document.querySelector("#file").click()}}>Subir archivo de aceptación</a>
+      renderCell: (params) => params.row.nombre_archivo_status?<a href={"http://54.242.89.171:3001/pdfs/"+params.row.nombre_archivo_status} target='_blank'>{params.row.nombre_archivo_status}</a>:<a onClick={()=>{setReporteID(params.row.reporte_id);document.querySelector("#file").click()}}>Subir archivo de aceptación</a>
     },
     // {
     //   field: 'usuarioresponsable',

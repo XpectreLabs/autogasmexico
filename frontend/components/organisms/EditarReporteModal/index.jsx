@@ -63,7 +63,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
 
     function data() {
       const user_id = localStorage.getItem('user_id');
-      const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+      const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
       fetch(scriptURL, {
         method: 'GET',
@@ -197,7 +197,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
           const tipo_reporte_id   = 1;
-          const scriptURL = "http://localhost:3001/api/v1/reportes";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/reportes";
           const reporte_id = reporteIdd;
           const numpermiso =  obtenerPermiso(values.permiso_id);
           /*const folio = values.name;

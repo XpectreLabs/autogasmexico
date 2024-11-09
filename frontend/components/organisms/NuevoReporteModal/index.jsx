@@ -67,7 +67,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
     function data() {
       const user_id = localStorage.getItem('user_id');
-      const scriptURL = "http://localhost:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+      const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
       fetch(scriptURL, {
         method: 'GET',
@@ -126,7 +126,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
     async function getObtenerListaDeComprasSinPermisos(fecha_inicio,fecha_terminacion) {
       const user_id = localStorage.getItem('user_id');
-      const scriptURL = "http://localhost:3001/api/v1/compras/"+user_id+"/listPermisoNulosCompras/"+fecha_inicio+"/"+fecha_terminacion+""; 
+      const scriptURL = "http://54.242.89.171:3001/api/v1/compras/"+user_id+"/listPermisoNulosCompras/"+fecha_inicio+"/"+fecha_terminacion+""; 
 
       let folios = "";
 
@@ -165,7 +165,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
     async function getObtenerListaDeVentasSinPermisos(fecha_inicio,fecha_terminacion) {
       const user_id = localStorage.getItem('user_id');
-      const scriptURL = "http://localhost:3001/api/v1/ingresos/"+user_id+"/listPermisoNulosVentas/"+fecha_inicio+"/"+fecha_terminacion; 
+      const scriptURL = "http://54.242.89.171:3001/api/v1/ingresos/"+user_id+"/listPermisoNulosVentas/"+fecha_inicio+"/"+fecha_terminacion; 
       let folios = "";
 
       fetch(scriptURL, {
@@ -356,7 +356,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
 
           const user_id = localStorage.getItem('user_id');
           const tipo_reporte_id  = 1;
-          const scriptURL = "http://localhost:3001/api/v1/reportes";
+          const scriptURL = "http://54.242.89.171:3001/api/v1/reportes";
           const numpermiso =  obtenerPermiso(values.permiso_id);
           const fechayhoraestamedicionmes = new Date(fechaTerminacionReporte+"T23:59:00");
           const fecha_inicio = new Date(fechaInicioReporte);
