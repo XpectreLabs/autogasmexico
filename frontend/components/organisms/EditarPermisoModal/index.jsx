@@ -63,7 +63,8 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
 
   if(abastecimientoData.fecha_emision!==undefined){
     abastecimientoData.fecha_emision = dayjs(convertirFecha(abastecimientoData.fecha_emision2));
-    abastecimientoData.permiso_id=abastecimientoData.permiso_id?abastecimientoData.permiso_id:localStorage.getItem('permiso_id');
+    abastecimientoData.permiso_id=abastecimientoData.permiso_id?abastecimientoData.permiso_id:'3';
+    // abastecimientoData.permiso_id=abastecimientoData.permiso_id?abastecimientoData.permiso_id:localStorage.getItem('permiso_id');
   }
 
   useEffect(() => {

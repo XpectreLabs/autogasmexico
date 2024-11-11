@@ -37,6 +37,8 @@ export default function Permisos() {
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
   const [listPermisos,setListPermisos] = useState([]);
+  const [permisoIdC,setPermisoIdC] = useState("");
+  const [permisoC,setPermisoC] = useState("");
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -172,6 +174,8 @@ export default function Permisos() {
 
   useEffect(() => {
     getListPermiso();
+    setPermisoIdC(localStorage.getItem('permiso_id'));
+    setPermisoC(localStorage.getItem('permiso'));
   }, []);
   return (
     <main className={styles.main} style={{ opacity: 1 }}>
@@ -194,7 +198,7 @@ export default function Permisos() {
                         name:"permiso_id"
                       }}
                     >
-                      <option value={localStorage.getItem('permiso_id')}>{localStorage.getItem('permiso')}</option>
+                      <option value={permisoIdC}>{permisoC}</option>
                   </NativeSelect>
                 </Grid>
             </Grid>

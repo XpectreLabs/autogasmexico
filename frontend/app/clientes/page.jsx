@@ -41,6 +41,7 @@ export default function Clientes() {
   const [clienteToEdit, setClienteToEdit] = useState({});
   const [clienteIdd, setClienteIdd] = useState(0);
   const [typeUser,setTypeUser] = useState("1");
+  const [columns, setColumns] = useState([]);
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -133,110 +134,112 @@ export default function Clientes() {
     });
   }
 
-  const columns = typeUser==="1"?[
-    {
-      field: 'name',
-      headerName: 'Nombre',
-      flex: 1.2,
-    },
-    {
-      field: 'rfc',
-      headerName: 'RFC',
-      flex: 1.2,
-    },
-    {
-      field: 'direccion',
-      headerName: 'Código postal',
-      flex: 1.2,
-    },
-    {
-      field: 'tipo_situacion_fiscal',
-      headerName: 'Tipo de situación fiscal',
-      type: 'tel',
-      flex: 1.5,
-    },
-    {
-      field: 'phone',
-      headerName: 'Teléfono',
-      sortable: false,
-      flex: 1.2,
-    },
-    {
-      field: 'email',
-      headerName: 'Email',
-      sortable: false,
-      flex: 2,
-    },
-    {
-      field: 'edit',
-      headerName: '',
-      sortable: false,
-      flex: 0.4,
-      renderCell: (params) => (
-        <CreateIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setClienteIdd(params.row.client_id);
-            setClienteToEdit(params.row);
-            setIsEditPClienteModalOpen(true);
-          }}
-        />
-      ),
-    },
-    {
-      field: 'delete',
-      headerName: '',
-      sortable: false,
-      flex: 0.4,
-      renderCell: (params) => (
-        <DeleteIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            if(confirm("¿Desea borrar este cliente?"))
-              deleteCliente(params.row.client_id);
-          }}
-        />
-      ),
-    },
-  ]:[
-    {
-      field: 'name',
-      headerName: 'Nombre',
-      flex: 1.2,
-    },
-    {
-      field: 'rfc',
-      headerName: 'RFC',
-      flex: 1.2,
-    },
-    {
-      field: 'direccion',
-      headerName: 'Código postal',
-      flex: 1.2,
-    },
-    {
-      field: 'tipo_situacion_fiscal',
-      headerName: 'Tipo de situación fiscal',
-      type: 'tel',
-      flex: 1.5,
-    },
-    {
-      field: 'phone',
-      headerName: 'Teléfono',
-      sortable: false,
-      flex: 1.2,
-    },
-    {
-      field: 'email',
-      headerName: 'Email',
-      sortable: false,
-      flex: 2,
-    }
-  ];
+   
 
   useEffect(() => {
     loadingData===false?data():null;
     setTypeUser(localStorage.getItem('type_user'));
+    
+    setColumns(localStorage.getItem('type_user')==="1"?[
+      {
+        field: 'name',
+        headerName: 'Nombre',
+        flex: 1.2,
+      },
+      {
+        field: 'rfc',
+        headerName: 'RFC',
+        flex: 1.2,
+      },
+      {
+        field: 'direccion',
+        headerName: 'Código postal',
+        flex: 1.2,
+      },
+      {
+        field: 'tipo_situacion_fiscal',
+        headerName: 'Tipo de situación fiscal',
+        type: 'tel',
+        flex: 1.5,
+      },
+      {
+        field: 'phone',
+        headerName: 'Teléfono',
+        sortable: false,
+        flex: 1.2,
+      },
+      {
+        field: 'email',
+        headerName: 'Email',
+        sortable: false,
+        flex: 2,
+      },
+      {
+        field: 'edit',
+        headerName: '',
+        sortable: false,
+        flex: 0.4,
+        renderCell: (params) => (
+          <CreateIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              setClienteIdd(params.row.client_id);
+              setClienteToEdit(params.row);
+              setIsEditPClienteModalOpen(true);
+            }}
+          />
+        ),
+      },
+      {
+        field: 'delete',
+        headerName: '',
+        sortable: false,
+        flex: 0.4,
+        renderCell: (params) => (
+          <DeleteIcon
+            className={styles.btnAccion}
+            onClick={() => {
+              if(confirm("¿Desea borrar este cliente?"))
+                deleteCliente(params.row.client_id);
+            }}
+          />
+        ),
+      },
+    ]:[
+      {
+        field: 'name',
+        headerName: 'Nombre',
+        flex: 1.2,
+      },
+      {
+        field: 'rfc',
+        headerName: 'RFC',
+        flex: 1.2,
+      },
+      {
+        field: 'direccion',
+        headerName: 'Código postal',
+        flex: 1.2,
+      },
+      {
+        field: 'tipo_situacion_fiscal',
+        headerName: 'Tipo de situación fiscal',
+        type: 'tel',
+        flex: 1.5,
+      },
+      {
+        field: 'phone',
+        headerName: 'Teléfono',
+        sortable: false,
+        flex: 1.2,
+      },
+      {
+        field: 'email',
+        headerName: 'Email',
+        sortable: false,
+        flex: 2,
+      }
+    ])
   }, []);
   return (
     <main

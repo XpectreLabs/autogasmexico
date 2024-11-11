@@ -55,6 +55,7 @@ export default function Ventas() {
   const [fechaInicioB, setFechaInicioB] = useState(0);
   const [fechaHastaB, setFechaHastaB] = useState(0);
   const [searB, setSearB] = useState("");
+  const [columns, setColumns] = useState([]);
 
   function Logout() {
     localStorage.setItem('user_id', "");
@@ -165,118 +166,119 @@ export default function Ventas() {
 
   useEffect(() => {
     loadingData===false?data():null;
-  }, []);
-
-  const columns = [
-    {
-      field: 'folio',
-      headerName: 'Folio',
-      flex: 0.7,
-    },
-    {
-      field: 'cliente',
-      headerName: 'Cliente',
-      flex: 1.5,
-    },
-    {
-      field: 'permiso',
-      headerName: 'Permiso',
-      flex: 1.5,
-    },
-    {
-      field: 'cantidad',
-      headerName: 'Litros',
-      sortable: false,
-      flex: 0.7,
-    },
-    {
-      field: 'concepto',
-      headerName: 'Concepto',
-      sortable: false,
-      flex: 1.5,
-    },
-    // {
-    //   field: 'preciounitario2',
-    //   headerName: 'Precio unitario',
-    //   sortable: false,
-    //   flex: 1,
-    // },
-    // },
-    // {
-    //   field: 'importe2',
-    //   headerName: 'Importe',
-    //   sortable: false,
-    //   flex: 1,
-    // },
-    // {
-    //   field: 'ivaaplicado2',
-    //   headerName: 'Iva',
-    //   sortable: false,
-    //   flex: 1,
-    // },
-    {
-      field: 'preciovent2',
-      headerName: 'Total',
-      sortable: false,
-      flex: 0.8,
-    },
-    {
-      field: 'fecha_emision2',
-      headerName: 'Fecha de emisión',
-      flex: 1,
-    },
-    {
-      field: 'edit',
-      headerName: '',
-      sortable: false,
-      flex: 0.2,
-      renderCell: (params) => (
-        localStorage.getItem('type_user')==="1"?(
-          <CreateIcon
+    setColumns([
+      {
+        field: 'folio',
+        headerName: 'Folio',
+        flex: 0.7,
+      },
+      {
+        field: 'cliente',
+        headerName: 'Cliente',
+        flex: 1.5,
+      },
+      {
+        field: 'permiso',
+        headerName: 'Permiso',
+        flex: 1.5,
+      },
+      {
+        field: 'cantidad',
+        headerName: 'Litros',
+        sortable: false,
+        flex: 0.7,
+      },
+      {
+        field: 'concepto',
+        headerName: 'Concepto',
+        sortable: false,
+        flex: 1.5,
+      },
+      // {
+      //   field: 'preciounitario2',
+      //   headerName: 'Precio unitario',
+      //   sortable: false,
+      //   flex: 1,
+      // },
+      // },
+      // {
+      //   field: 'importe2',
+      //   headerName: 'Importe',
+      //   sortable: false,
+      //   flex: 1,
+      // },
+      // {
+      //   field: 'ivaaplicado2',
+      //   headerName: 'Iva',
+      //   sortable: false,
+      //   flex: 1,
+      // },
+      {
+        field: 'preciovent2',
+        headerName: 'Total',
+        sortable: false,
+        flex: 0.8,
+      },
+      {
+        field: 'fecha_emision2',
+        headerName: 'Fecha de emisión',
+        flex: 1,
+      },
+      {
+        field: 'edit',
+        headerName: '',
+        sortable: false,
+        flex: 0.2,
+        renderCell: (params) => (
+          localStorage.getItem('type_user')==="1"?(
+            <CreateIcon
+              className={styles.btnAccion}
+              onClick={() => {
+                setIngresodd(params.row.venta_id);
+                setIngresoToEdit(params.row);
+                setIsEditPIngresoModalOpen(true);
+              }}
+            />
+          ):null
+        ),
+      },
+      {
+        field: 'view',
+        headerName: '',
+        sortable: false,
+        flex: 0.2,
+        renderCell: (params) => (
+          <VisibilityIcon
             className={styles.btnAccion}
             onClick={() => {
               setIngresodd(params.row.venta_id);
-              setIngresoToEdit(params.row);
-              setIsEditPIngresoModalOpen(true);
+              setIngresoToDetalle(params.row);
+              setIsDetallePIngresoModalOpen(true);
             }}
           />
-        ):null
-      ),
-    },
-    {
-      field: 'view',
-      headerName: '',
-      sortable: false,
-      flex: 0.2,
-      renderCell: (params) => (
-        <VisibilityIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setIngresodd(params.row.venta_id);
-            setIngresoToDetalle(params.row);
-            setIsDetallePIngresoModalOpen(true);
-          }}
-        />
-      ),
-    },
-    {
-      field: 'delete',
-      headerName: '',
-      sortable: false,
-      flex: 0.2,
-      renderCell: (params) => (
-        localStorage.getItem('type_user')==="1"?(
-          <DeleteIcon
-            className={styles.btnAccion}
-            onClick={() => {
-              if(confirm("¿Desea borrar esta venta?"))
-                deleteVenta(params.row.venta_id);
-            }}
-          />
-        ):null
-      ),
-    },
-  ];
+        ),
+      },
+      {
+        field: 'delete',
+        headerName: '',
+        sortable: false,
+        flex: 0.2,
+        renderCell: (params) => (
+          localStorage.getItem('type_user')==="1"?(
+            <DeleteIcon
+              className={styles.btnAccion}
+              onClick={() => {
+                if(confirm("¿Desea borrar esta venta?"))
+                  deleteVenta(params.row.venta_id);
+              }}
+            />
+          ):null
+        ),
+      },
+    ]);
+  }, []);
+
+   
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',

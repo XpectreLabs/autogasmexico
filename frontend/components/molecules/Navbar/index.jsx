@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 import { useRouter } from 'next/navigation';
@@ -31,6 +31,8 @@ export default function Navbar({activeMain}) {
   const [active, setActive] = useState(parseInt(activeMain));
   const anchorRef = React.useRef(null);
   const [open, setOpen] = React.useState(false);
+  const [isInicial, setIsInicial] = useState('true');
+  const [typeUser, setTypeUser] = useState("1");
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -52,6 +54,11 @@ export default function Navbar({activeMain}) {
     }
   }
 
+  useEffect(() => {
+    setIsInicial(localStorage.getItem("isInicial"))
+    setTypeUser(localStorage.getItem('type_user'))
+  }, []);
+
   return (
         <>
         <Grid container spacing={2} className={styles.BorderBottom}>
@@ -67,7 +74,7 @@ export default function Navbar({activeMain}) {
             <Grid container spacing={2}>
               <Grid item xs={11} align="left">
                 {
-                  activeMain<12&&localStorage.getItem("isInicial")==='true'?(
+                  activeMain<12&&isInicial==='true'?(
                     <>
                         <Paper sx={{ width: 97, maxWidth: '100%', display:"inline-block", marginRight:'5px' }}>
                           <MenuList  className={styles.ListNav}>
@@ -157,7 +164,7 @@ export default function Navbar({activeMain}) {
                                             Clientes
                                           </MenuItem>
                                         </Link>
-                                        {localStorage.getItem('type_user')==="1"?(<>
+                                        {typeUser==="1"?(<>
                                           <Link href="/panel_configuracion" onClick={()=>{setActive(5)}}>
                                             <MenuItem onClick={handleClose} className={active===5?"activo":null}>
                                               Panel de configuración

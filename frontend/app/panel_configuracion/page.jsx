@@ -19,10 +19,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Panel_configuracion() {
+  const [isInicial, setIsInicial] = useState('true');
   const router = useRouter();
 
   useEffect(() => {
-
+    setIsInicial(localStorage.getItem("isInicial"));
   }, []);
   return (
     <main className={styles.main} style={{ opacity: 1 }}>
@@ -31,7 +32,7 @@ export default function Panel_configuracion() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item className={styles.DeleteBorder}>
-            <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>{localStorage.getItem("isInicial")==='true'?"Panel de configuración":"Configuración inicial"}</strong></p>
+            <p style={{color: "#327065", fontSize:"18px", paddingTop:"10px", textAlign: "center"}}><strong>{isInicial==='true'?"Panel de configuración":"Configuración inicial"}</strong></p>
           </Item>
         </Grid>
       </Grid>

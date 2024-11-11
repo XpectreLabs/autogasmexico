@@ -58,14 +58,14 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
         setTextError(data.error);
         setShowAlert(true);
         setTimeout(()=>{
-          Logout();
+          //Logout();
         },3200)
       }
       else {
         setTextError(data.message);
         setShowAlert(true);
         setTimeout(()=>{
-          Logout();
+          //Logout();
         },3200)
       }
 
@@ -227,7 +227,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
               setTextError(data.message);
               setShowAlert(true);
               setTimeout(()=>{
-                Logout();
+                //Logout();
               },3200)
             }
             setTimeout(()=>{setShowAlert(false);},3000)

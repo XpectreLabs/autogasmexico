@@ -57,6 +57,7 @@ export default function Compras() {
   const [totalTotales, setTotalTotales] = useState(0);
   const [isDetalleCompraModalOpen, setIsDetallePCompraModalOpen] = useState(false);
   const [compraToDetalle, setCompraToDetalle] = useState({});
+  const [columns, setColumns] = useState([]);
 
 
   const [fechaInicioB, setFechaInicioB] = useState(0);
@@ -178,138 +179,136 @@ export default function Compras() {
 
   useEffect(() => {
     loadingData===false?data(compras):null;
-  }, []);
-
-
-  const columns = [
-    {
-      field: 'folio',
-      headerName: 'Folio',
-      flex: 0.8,
-    },
-    // },
-    // {
-    //   field: 'concepto',
-    //   headerName: 'Concepto',
-    //   sortable: false,
-    //   flex: 2.2,
-    // },
-    {
-      field: 'proveedor',
-      headerName: 'Proveedor',
-      sortable: false,
-      flex: 1.8,
-    },
-    {
-      field: 'permiso_cre',
-      headerName: 'Permiso proveedor',
-      sortable: false,
-      flex: 1.8,
-    },
-    {
-      field: 'permisoComprador',
-      headerName: 'Permiso comprador',
-      sortable: false,
-      flex: 1.8,
-    },
-    {
-      field: 'cantidad',
-      headerName: 'Litros',
-      sortable: false,
-      flex: 0.7,
-    },
-    {
-      field: 'kilos',
-      headerName: 'Kilos',
-      sortable: false,
-      flex: 1,
-    },
-    // },
-    // {
-    //   field: 'preciounitario2',
-    //   headerName: 'Precio unitario',
-    //   sortable: false,
-    //   flex: 1,
-    // },
-    {
-      field: 'preciovent2',
-      headerName: 'Total',
-      sortable: false,
-      flex: 1,
-    },
-    {
-      field: 'fecha_emision2',
-      headerName: 'Fecha de emisión',
-      flex: 1,
-    },
-    {
-      field: 'settings',
-      headerName: '',
-      sortable: false,
-      flex: 0.1,
-      renderCell: (params) => (
-        <SettingsIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setCompraIdd(params.row.abastecimiento_id);
-            setCompraToSetting(params.row);
-            setIsSettingPCompraModalOpen(true);
-          }}
-        />
-      ),
-    },
-    {
-      field: 'edit',
-      headerName: '',
-      sortable: false,
-      flex: 0.1,
-      renderCell: (params) => (
-        localStorage.getItem('type_user')==="1"?(
-          <CreateIcon
+    setColumns([
+      {
+        field: 'folio',
+        headerName: 'Folio',
+        flex: 0.8,
+      },
+      // },
+      // {
+      //   field: 'concepto',
+      //   headerName: 'Concepto',
+      //   sortable: false,
+      //   flex: 2.2,
+      // },
+      {
+        field: 'proveedor',
+        headerName: 'Proveedor',
+        sortable: false,
+        flex: 1.8,
+      },
+      {
+        field: 'permiso_cre',
+        headerName: 'Permiso proveedor',
+        sortable: false,
+        flex: 1.8,
+      },
+      {
+        field: 'permisoComprador',
+        headerName: 'Permiso comprador',
+        sortable: false,
+        flex: 1.8,
+      },
+      {
+        field: 'cantidad',
+        headerName: 'Litros',
+        sortable: false,
+        flex: 0.7,
+      },
+      {
+        field: 'kilos',
+        headerName: 'Kilos',
+        sortable: false,
+        flex: 1,
+      },
+      // },
+      // {
+      //   field: 'preciounitario2',
+      //   headerName: 'Precio unitario',
+      //   sortable: false,
+      //   flex: 1,
+      // },
+      {
+        field: 'preciovent2',
+        headerName: 'Total',
+        sortable: false,
+        flex: 1,
+      },
+      {
+        field: 'fecha_emision2',
+        headerName: 'Fecha de emisión',
+        flex: 1,
+      },
+      {
+        field: 'settings',
+        headerName: '',
+        sortable: false,
+        flex: 0.1,
+        renderCell: (params) => (
+          <SettingsIcon
             className={styles.btnAccion}
             onClick={() => {
               setCompraIdd(params.row.abastecimiento_id);
-              setCompraToEdit(params.row);
-              setIsEditPCompraModalOpen(true);
+              setCompraToSetting(params.row);
+              setIsSettingPCompraModalOpen(true);
             }}
           />
-        ):null
-      ),
-    },
-    {
-      field: 'view',
-      headerName: '',
-      sortable: false,
-      flex: 0.1,
-      renderCell: (params) => (
-        <VisibilityIcon
-          className={styles.btnAccion}
-          onClick={() => {
-            setCompraIdd(params.row.abastecimiento_id);
-            setCompraToDetalle(params.row);
-            setIsDetallePCompraModalOpen(true);
-          }}
-        />
-      ),
-    },
-    {
-      field: 'delete',
-      headerName: '',
-      sortable: false,
-      flex: 0.1,
-      renderCell: (params) => (
-        localStorage.getItem('type_user')==="1"?(
-          <DeleteIcon
+        ),
+      },
+      {
+        field: 'edit',
+        headerName: '',
+        sortable: false,
+        flex: 0.1,
+        renderCell: (params) => (
+          localStorage.getItem('type_user')==="1"?(
+            <CreateIcon
+              className={styles.btnAccion}
+              onClick={() => {
+                setCompraIdd(params.row.abastecimiento_id);
+                setCompraToEdit(params.row);
+                setIsEditPCompraModalOpen(true);
+              }}
+            />
+          ):null
+        ),
+      },
+      {
+        field: 'view',
+        headerName: '',
+        sortable: false,
+        flex: 0.1,
+        renderCell: (params) => (
+          <VisibilityIcon
             className={styles.btnAccion}
             onClick={() => {
-              if(confirm("¿Desea borrar esta compra?"))
-                deleteCompra(params.row.abastecimiento_id);
+              setCompraIdd(params.row.abastecimiento_id);
+              setCompraToDetalle(params.row);
+              setIsDetallePCompraModalOpen(true);
             }}
           />
-        ):null
-      ),
-    },
-  ];
+        ),
+      },
+      {
+        field: 'delete',
+        headerName: '',
+        sortable: false,
+        flex: 0.1,
+        renderCell: (params) => (
+          localStorage.getItem('type_user')==="1"?(
+            <DeleteIcon
+              className={styles.btnAccion}
+              onClick={() => {
+                if(confirm("¿Desea borrar esta compra?"))
+                  deleteCompra(params.row.abastecimiento_id);
+              }}
+            />
+          ):null
+        ),
+      },
+    ])
+  }, []);
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',

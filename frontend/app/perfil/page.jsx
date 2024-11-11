@@ -24,7 +24,7 @@ export default function Perfil() {
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
 
- 
+
     function Logout() {
       localStorage.setItem('user_id', "");
       localStorage.setItem('token', "");

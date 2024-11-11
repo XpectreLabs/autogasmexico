@@ -38,6 +38,8 @@ export default function Inventarios() {
   const [mesC,SetMesC] = useState(0);
   const [diaC,SetDiaC] = useState(0);
   const [fechaC,setFechaC] = useState(null);
+  const [permisoId,setPermisoId] = useState("");
+  const [permiso,setPermiso] = useState("");
 
   function getListPermiso() {
     const user_id = localStorage.getItem('user_id');
@@ -75,8 +77,6 @@ export default function Inventarios() {
       console.error('Error!', error.message);
     });
   }
-
-
 
   function cargarDataPorPermiso(permiso_id,anio, mesEnvio=0, diaEnvio=0) {
     const user_id = localStorage.getItem('user_id');
@@ -223,6 +223,8 @@ export default function Inventarios() {
 
   useEffect(() => {
     getListPermiso();
+    setPermisoId(localStorage.getItem('permiso_id'));
+    setPermiso(localStorage.getItem('permiso'));
   }, []);
 
   return (
@@ -256,7 +258,7 @@ export default function Inventarios() {
                         
                         );
                       })} */} 
-                      <option value={localStorage.getItem('permiso_id')}>{localStorage.getItem('permiso')}</option>
+                      <option value={permisoId}>{permiso}</option>
                   </NativeSelect>
                 </Grid>
 
