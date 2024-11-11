@@ -40,7 +40,7 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
         })}
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/proveedores";
+          const scriptURL = "http://44.212.165.114:3001/api/v1/proveedores";
           const name = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;

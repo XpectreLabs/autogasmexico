@@ -52,7 +52,7 @@ export default function Proveedores() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://44.212.165.114/:3001/api/v1/proveedores/"+user_id+"/proveedores";
+    const scriptURL = "http://44.212.165.114:3001/api/v1/proveedores/"+user_id+"/proveedores";
 
     fetch(scriptURL, {
       method: 'GET',
@@ -99,7 +99,7 @@ export default function Proveedores() {
 
 
   function deleteProveedor(proveedor_id) {
-    const scriptURL = "http://44.212.165.114/:3001/api/v1/proveedores/";
+    const scriptURL = "http://44.212.165.114:3001/api/v1/proveedores/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ proveedor_id }),

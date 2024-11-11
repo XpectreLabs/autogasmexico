@@ -25,7 +25,7 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
             .required("The email is requiered"),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios/email"; 
+          const scriptURL = "http://44.212.165.114:3001/api/v1/usuarios/email"; 
           const email = values.email;
           const data = {email};
           setLoading(true);

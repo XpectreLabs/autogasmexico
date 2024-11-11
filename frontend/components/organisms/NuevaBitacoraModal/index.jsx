@@ -35,7 +35,7 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
         })}
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/bitacoras";
+          const scriptURL = "http://44.212.165.114:3001/api/v1/bitacoras";
           /*const folio = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;

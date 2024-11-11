@@ -44,7 +44,7 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
         })}
         onSubmit={(values, actions) => {
           const id = localStorage.getItem('user_id');
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/proveedores";
+          const scriptURL = "http://44.212.165.114:3001/api/v1/proveedores";
           const proveedor_id = proveedorIdd;
           const name = values.name;
           const rfc = values.rfc;

@@ -47,7 +47,7 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
         })}
         onSubmit={(values, actions) => {
           const user_id = localStorage.getItem('user_id');
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios";
+          const scriptURL = "http://44.212.165.114:3001/api/v1/usuarios";
           /*const name = values.name;
           const rfc = values.rfc;
           const direccion = values.direccion;

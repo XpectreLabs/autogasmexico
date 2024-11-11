@@ -47,7 +47,7 @@ export const Signup = ({setPage}:{setPage:Function}) => {
             .required("* The confirm password is requiered."),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://44.212.165.114/:3001/api/v1/users/";
+          const scriptURL = "http://44.212.165.114:3001/api/v1/users/";
           const username = values.username;
           const firstName = values.firstName;
           const lastName = values.lastName;

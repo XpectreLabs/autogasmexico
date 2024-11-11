@@ -153,11 +153,11 @@ input[type=number]::-webkit-outer-spin-button {
   border: 1px solid #000;
 }
 
-.css-1mtsuo7 {
+.base-Popper-root {
   z-index: 1300;
-  z-index: 1300;
-  background: #fff;
-  border: 1px solid #000;
+  z-index: 1300 !important;
+  background: #fff !important;
+  border: 1px solid #000 !important;
 }
 
 .css-v0pjtz-MuiStack-root {

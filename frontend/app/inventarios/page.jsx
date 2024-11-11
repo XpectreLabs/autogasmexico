@@ -43,7 +43,7 @@ export default function Inventarios() {
 
   function getListPermiso() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://44.212.165.114/:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -80,7 +80,7 @@ export default function Inventarios() {
 
   function cargarDataPorPermiso(permiso_id,anio, mesEnvio=0, diaEnvio=0) {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://44.212.165.114/:3001/api/v1/inventarios/"+user_id+"/inventarios/"+permiso_id+"/"+anio+"/"+mesEnvio+"/"+diaEnvio;
+    const scriptURL = "http://44.212.165.114:3001/api/v1/inventarios/"+user_id+"/inventarios/"+permiso_id+"/"+anio+"/"+mesEnvio+"/"+diaEnvio;
 
     fetch(scriptURL, {
       method: 'GET',
