@@ -44,7 +44,7 @@ export default function EditarClienteModal({ isOpen, onClose, clienteData,client
         })}
         onSubmit={(values, actions) => {
           const id = localStorage.getItem('user_id');
-          const scriptURL = "http://54.242.89.171:3001/api/v1/clientes";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/clientes";
           const client_id = clienteIdd;
           const name = values.name;
           const rfc = values.rfc;

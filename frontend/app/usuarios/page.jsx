@@ -49,7 +49,7 @@ export default function Usuarios() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/"+user_id+"/usuarios";
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios/"+user_id+"/usuarios";
 
     fetch(scriptURL, {
       method: 'GET',
@@ -95,7 +95,7 @@ export default function Usuarios() {
   }
 
   function deleteUsuario(userId) {
-    const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/";
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ userId }),

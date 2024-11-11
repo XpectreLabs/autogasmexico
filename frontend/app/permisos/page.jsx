@@ -54,7 +54,7 @@ export default function Permisos() {
 
   function getListPermiso() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -105,7 +105,7 @@ export default function Permisos() {
 
   /*function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -273,7 +273,7 @@ export default function Permisos() {
             .required("La incertidumbre medición sist medición tanque es requerido"),           
         })}
         onSubmit={(values, actions) => {
-          /*const scriptURL = "http://54.242.89.171:3001/api/v1/users/";
+          /*const scriptURL = "http://44.212.165.114/:3001/api/v1/users/";
           const user_id = localStorage.getItem('user_id');
           const firstname = values.firstname;
           const lastname = values.lastname;
@@ -283,7 +283,7 @@ export default function Permisos() {
 
 
           //const user_id = parseInt(localStorage.getItem('user_id'));
-          const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/cat-permisos/";
           //delete values.id;
           //delete values.confirmPassword;
           delete values.active;

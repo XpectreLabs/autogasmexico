@@ -37,7 +37,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -81,7 +81,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
 
   function listClientes() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/clientes/"+user_id+"/listaclientes";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/clientes/"+user_id+"/listaclientes";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -173,7 +173,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
         })}
         onSubmit={(values, actions) => {
           const tipo_modena_id = 1;
-          const scriptURL = "http://54.242.89.171:3001/api/v1/ingresos";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/ingresos";
           const venta_id = ventaIdd;
           delete values.id;
           delete values.fecha_emision2;

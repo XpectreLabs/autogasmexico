@@ -29,7 +29,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
             .required("La contraseña es requerida"),
         })}
         onSubmit={(values, actions) => {
-          const scriptURL = "http://54.242.89.171:3001/api/v1/auth/login";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/auth/login";
           const username = values.username;
           const password = values.password;
           const data = {username, password};

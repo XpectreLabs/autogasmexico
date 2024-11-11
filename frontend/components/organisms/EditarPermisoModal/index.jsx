@@ -21,7 +21,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/cat-permisos/"+user_id+"/permisos";    //setLoading(true);
 
     fetch(scriptURL, {
       method: 'GET',
@@ -82,7 +82,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
         })}
         onSubmit={(values, actions) => {
           const tipo_modena_id = 1;
-          const scriptURL = "http://54.242.89.171:3001/api/v1/compras";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/compras";
           const abastecimiento_id = abastecimientoIdd;
           delete values.id;
           delete values.fecha_emision2;

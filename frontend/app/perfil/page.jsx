@@ -33,7 +33,7 @@ export default function Perfil() {
 
     function data() {
       const user_id = localStorage.getItem('user_id');
-      const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
+      const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios/"+user_id+"/usuario";    //setLoading(true);
 
       fetch(scriptURL, {
         method: 'GET',
@@ -112,7 +112,7 @@ export default function Perfil() {
             .min(3, 'La contraseña de confirmación debe tener un mínimo de 3 caracteres.')
         })}
         onSubmit={(values, actions) => {
-          /*const scriptURL = "http://54.242.89.171:3001/api/v1/users/";
+          /*const scriptURL = "http://44.212.165.114/:3001/api/v1/users/";
           const user_id = localStorage.getItem('user_id');
           const firstname = values.firstname;
           const lastname = values.lastname;
@@ -122,7 +122,7 @@ export default function Perfil() {
 
 
           const user_id = parseInt(localStorage.getItem('user_id'));
-          const scriptURL = "http://54.242.89.171:3001/api/v1/usuarios";
+          const scriptURL = "http://44.212.165.114/:3001/api/v1/usuarios";
           delete values.id;
           delete values.confirmPassword;
           delete values.username;

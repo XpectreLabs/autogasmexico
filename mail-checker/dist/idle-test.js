@@ -66,10 +66,10 @@ imap.once("ready", () => {
                                     //console.log(json['cfdi:Comprobante']['cfdi:Emisor']);
                                     const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
                                     console.log("Rfc:" + rfc);
-                                    let scriptURL = "http://54.242.89.171:3001/api/v1/compras/cargarXMLCorreo";
+                                    let scriptURL = "http://44.212.165.114/:3001/api/v1/compras/cargarXMLCorreo";
                                     const data = { dataJson };
                                     if (rfc === 'AME050309Q32') {
-                                        scriptURL = "http://54.242.89.171:3001/api/v1/ingresos/cargarXMLCorreo";
+                                        scriptURL = "http://44.212.165.114/:3001/api/v1/ingresos/cargarXMLCorreo";
                                         fetch(scriptURL, {
                                             method: 'POST',
                                             body: JSON.stringify(data),

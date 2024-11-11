@@ -51,7 +51,7 @@ export default function Clientes() {
 
   function data() {
     const user_id = localStorage.getItem('user_id');
-    const scriptURL = "http://54.242.89.171:3001/api/v1/clientes/"+user_id+"/clientes";
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/clientes/"+user_id+"/clientes";
 
     console.log(scriptURL);
     fetch(scriptURL, {
@@ -98,7 +98,7 @@ export default function Clientes() {
   }
 
   function deleteCliente(client_id) {
-    const scriptURL = "http://54.242.89.171:3001/api/v1/clientes/";
+    const scriptURL = "http://44.212.165.114/:3001/api/v1/clientes/";
     fetch(scriptURL, {
       method: 'DELETE',
       body: JSON.stringify({ client_id }),
@@ -139,7 +139,7 @@ export default function Clientes() {
   useEffect(() => {
     loadingData===false?data():null;
     setTypeUser(localStorage.getItem('type_user'));
-    
+
     setColumns(localStorage.getItem('type_user')==="1"?[
       {
         field: 'name',
