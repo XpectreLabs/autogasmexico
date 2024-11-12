@@ -38,7 +38,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
         //setLoadingData(true);
@@ -65,7 +65,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -137,7 +137,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
           setLoading(true);
 
           setInitialValues(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -174,7 +174,7 @@ export default function NuevoIngresoModal({ isOpen, onClose }) {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

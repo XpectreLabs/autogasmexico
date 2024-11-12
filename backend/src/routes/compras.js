@@ -20,14 +20,14 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
   let date = new Date().toISOString();
 
-  console.log("Data");
-  console.log(req.body);
+  //console.log("Data");
+  //console.log(req.body);
 
   if(!(await fnCompras.findCfdi(req.body.cfdi))) {
     await prisma.abastecimientos.create({
@@ -50,7 +50,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/compras',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -122,7 +122,7 @@ const procesarXmls = async (req, res) => {
 
         new  Promise(async (resolve,reject)=>{
           dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-          //console.log(dataJson);
+          ////console.log(dataJson);
           //listData.push(dataJson)
           await fnCompras.guardarDataJson(dataJson,req.body.user_id,req.body.permiso_id);
         })
@@ -133,10 +133,10 @@ const procesarXmls = async (req, res) => {
 router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
-  /*console.log(req.body.user_id);
-  console.log(typeof(req.files))
-  console.log(req.files);
-  console.log(Object.keys(req.files.file).length)*/
+  /*//console.log(req.body.user_id);
+  //console.log(typeof(req.files))
+  //console.log(req.files);
+  //console.log(Object.keys(req.files.file).length)*/
 
   await procesarXmls(req, res);
   return res.status(200).send({ message : 'success',dataJson })
@@ -150,7 +150,7 @@ router.post('/cargarXML', async (req, res, next) => {
 
           return  new  Promise(async (resolve,reject)=>{
             dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            console.log(dataJson);
+            //console.log(dataJson);
 
             const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
 
@@ -160,8 +160,8 @@ router.post('/cargarXML', async (req, res, next) => {
               let proveedor_id = await fnProveedores.findProveedor(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",proveedor_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",proveedor_id)
 
               if(proveedor_id===0) {
                 const nuevo = await prisma.proveedores.create({
@@ -177,7 +177,7 @@ router.post('/cargarXML', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo proveedor",nuevo);
+                //console.log("Nuevo proveedor",nuevo);
                 proveedor_id = nuevo.proveedor_id;
               }
 
@@ -186,7 +186,7 @@ router.post('/cargarXML', async (req, res, next) => {
 
                 const dens = fnCompras.getDensidad(concepto);
                 const permiso = fnCompras.getPermiso(concepto);
-                console.log("Rd",dens)
+                //console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
 
@@ -210,7 +210,7 @@ router.post('/cargarXML', async (req, res, next) => {
                   tipo_modena_id: 1
                 }
 
-                console.log("dataR",dataR);
+                //console.log("dataR",dataR);
 
                 if(!(await fnCompras.findCfdi(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
                   await prisma.abastecimientos.create({
@@ -229,7 +229,7 @@ router.post('/cargarXML', async (req, res, next) => {
                   return res.status(400).json({ message:"schema", error: 'El UUDI de la compra  ya se habia registrado' });
             }
         })
-        console.log("a->")
+        //console.log("a->")
     })
   }
 
@@ -242,24 +242,24 @@ router.post('/cargarXML', async (req, res, next) => {
 
 
 router.post('/cargarXMLCorreo', async (req, res, next) => {
-  //console.log(req.body.user_id);
+  ////console.log(req.body.user_id);
           return new Promise(async (resolve,reject)=>{
             try {
             //req.body.dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            //console.log(req.body.dataJson);
-            //console.log(req.body)
+            ////console.log(req.body.dataJson);
+            ////console.log(req.body)
 
             const rfc = req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
 
-            console.log("Rfc obtenido",rfc);
+            //console.log("Rfc obtenido",rfc);
             if(rfc==='AME050309Q32')
               return res.status(400).json({ message:"schema", error: 'El XML no es de compras' });
             else {
               let proveedor_id = await fnProveedores.findProveedor(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",proveedor_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",proveedor_id)
 
               if(proveedor_id===0) {
                 const nuevo = await prisma.proveedores.create({
@@ -275,7 +275,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo proveedor",nuevo);
+                //console.log("Nuevo proveedor",nuevo);
                 proveedor_id = nuevo.proveedor_id;
               }
 
@@ -286,11 +286,11 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                 const dens = fnCompras.getDensidad(concepto);
                 let permiso = fnCompras.getPermiso(concepto);
 
-                console.log("noIdentificacion",noIdentificacion)
+                //console.log("noIdentificacion",noIdentificacion)
 
                 permiso = permiso?permiso:fnCompras.getPermiso(noIdentificacion);
 
-                console.log("Rd",dens)
+                //console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
 
@@ -377,7 +377,7 @@ router.get('/:userId/listPermisoNulosCompras/:fecha_inicio/:fecha_terminacion', 
   const fi = (req.params.fecha_inicio+"").substring(0,10);
   const ff = (req.params.fecha_terminacion+"").substring(0,10);
 
-  console.log("Si"+req.params.fecha_terminacion);
+  //console.log("Si"+req.params.fecha_terminacion);
   const listComprasSinPermisos = await prisma.abastecimientos.findMany({
     orderBy: [
       {
@@ -503,7 +503,7 @@ router.get('/:userId/list', async (req, res, next) => {
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -525,7 +525,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdAbastecimiento.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

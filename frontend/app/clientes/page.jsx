@@ -53,7 +53,7 @@ export default function Clientes() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://44.212.165.114:3001/api/v1/clientes/"+user_id+"/clientes";
 
-    console.log(scriptURL);
+    //console.log(scriptURL);
     fetch(scriptURL, {
       method: 'GET',
       body: JSON.stringify(data),
@@ -65,7 +65,7 @@ export default function Clientes() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log(data);
+      //console.log(data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -92,7 +92,7 @@ export default function Clientes() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -129,7 +129,7 @@ export default function Clientes() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }

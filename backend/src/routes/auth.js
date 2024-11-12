@@ -11,7 +11,7 @@ const fnPermiso = require("../services/permisos.js")
 router.post('/login', async (req, res, next) => {
   const { error } = sch.schema.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(403).json({ message:"schema", error: error.details[0].message });
   }
 
@@ -19,22 +19,22 @@ router.post('/login', async (req, res, next) => {
     const password = fn.getPasswordEncrypted(req.body.password)
     let user = await fn.findUser(req.body.username, password);
 
-    console.log("Password"+req.body.username, password)
+    //console.log("Password"+req.body.username, password)
 
-    console.log("user",user,(user > 0))
+    //console.log("user",user,(user > 0))
     if (user !== 0) {
       const token = generateAccessToken(jwt, user);
       const isInicial = await fnPermiso.findNamePermiso(3)?true:false;
       res.status(200).json({ message:"success", user_id: user.user_id, name: (user.firstname + " " + user.lastname), rfccontribuyente: user.rfccontribuyente, rfcproveedor: user.rfcproveedor, rfcrepresentantelegal:user.rfcrepresentantelegal, type_user: user.type_user, token, isInicial });
     } else {
       let messageError = 'Los datos de acceso son incorrectos';
-      console.log(messageError);
+      //console.log(messageError);
 
       res.status(400).json({ message: messageError });
     }
   } catch (e) {
     let messageError = 'Los datos de acceso son incorrectos';
-    console.log(messageError);
+    //console.log(messageError);
     res.status(400).json({ message: messageError });
   }
 });

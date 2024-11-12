@@ -12,13 +12,13 @@ const fnUsuatio = require('../services/users.js');
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
   let date = new Date().toISOString();
-  console.log(date);
-  console.log("Permiso",req.body.permiso_cre);
+  //console.log(date);
+  //console.log("Permiso",req.body.permiso_cre);
   await prisma.proveedores.create({
     data: {
       name: req.body.name,
@@ -39,7 +39,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -81,7 +81,7 @@ router.get('/:userId/proveedores',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/listaproveedores',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -114,7 +114,7 @@ router.get('/:userId/listaproveedores',jwtV.verifyToken, async (req, res, next) 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -140,7 +140,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdProveedor.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

@@ -20,14 +20,14 @@ router.use(fileUpload())
 
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
   let date = new Date().toISOString();
 
-  console.log("Data");
-  console.log(req.body);
+  //console.log("Data");
+  //console.log(req.body);
 
   if(!(await fnCompras.findCfdi(req.body.cfdi))) {
     await prisma.abastecimientos.create({
@@ -51,14 +51,14 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
 
   const { error } = sch.schemaCreate.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
   const mesRecibido = parseInt(req.params.mes+"");
   const diaRecibido = parseInt(req.params.dia+"");
-  console.log("Mes enviado: "+mesRecibido);
-  console.log("Tipo: "+typeof(req.params.permiso_id))
+  //console.log("Mes enviado: "+mesRecibido);
+  //console.log("Tipo: "+typeof(req.params.permiso_id))
 
   let meses = [31,28,31,30,31,30,31,31,30,31,30,31];
   let mesesNombre = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -70,15 +70,15 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
   const user_id = parseInt(req.params.user_id)
   const permiso_id = parseInt(req.params.permiso_id)
 
-  //console.log("Yes 0 -> "+mesRecibido);
-  //console.log("permiso_id",permiso_id)
+  ////console.log("Yes 0 -> "+mesRecibido);
+  ////console.log("permiso_id",permiso_id)
 
   const inv_ini = await fnPermisos.findInventarioInicial(permiso_id);
 
   if(mesRecibido===0) {
-    //console.log("Yes 1: ",anio);
+    ////console.log("Yes 1: ",anio);
     for(let j=0; j<12; j++) {
-      //console.log("Yes 2");
+      ////console.log("Yes 2");
       let diaBisiesto = j==1?anio%4===0?1:0:0;
       let diasMes = meses[j]+diaBisiesto;
       const mes = (j+1)<10?("0"+(j+1)):(j+1);
@@ -116,8 +116,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
       const sumaIC = inventarioInicial + totalCompra;
       inventarioFinal = sumaIC - totalVenta;
 
-      //console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
-      //console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
+      ////console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
+      ////console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
 
       totalInvIni+=inventarioInicial;
       totalCompras += totalCompra;
@@ -130,12 +130,12 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
         const fB = await findBitacora(fechaFin,1,permiso_id);
         const tB = await totalEnBitacora(fechaInicio,fechaFin,permiso_id);
         //const fB = await totalEnBitacora(fechaInicio,fechaFin);
-        //console.log("fb",fB)
+        ////console.log("fb",fB)
 
         if(fB!==0) {
-          console.log("tb: "+tB);
-          console.log("Dif: "+fB.diferencia);
-          console.log("Diferencia: "+(parseFloat(tB)-parseFloat(fB.diferencia)))
+          //console.log("tb: "+tB);
+          //console.log("Dif: "+fB.diferencia);
+          //console.log("Diferencia: "+(parseFloat(tB)-parseFloat(fB.diferencia)))
           bitacora_inventario_id =  fB.bitacora_inventario_id;
           diferenciaReportada = parseFloat(tB);
           diferenciaReportadaR = parseFloat(fB.diferencia);
@@ -150,8 +150,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
         porcentajeDiferencia = parseFloat(diferencia) / parseFloat(totalVenta);
         porcentajeDiferencia = isNaN(porcentajeDiferencia)?0:porcentajeDiferencia===Infinity?0:porcentajeDiferencia;
 
-        //console.log(diferencia,totalVenta);
-        //console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
+        ////console.log(diferencia,totalVenta);
+        ////console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
 
         item = {
           "id": j,
@@ -263,8 +263,8 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
       const sumaIC = inventarioInicial + totalCompra;
       inventarioFinal = sumaIC - totalVenta;
 
-      //console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
-      //console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
+      ////console.log("Total compra "+mesesNombre[j]+": " + totalCompra);
+      ////console.log("Total venta "+mesesNombre[j]+": " + totalVenta);
 
       totalInvIni+=inventarioInicial;
       totalCompras += totalCompra;
@@ -275,7 +275,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
 
       if(permiso_id===1) {
         const fB = await findBitacora(fechaFin,2,permiso_id);
-        //console.log("fb",fB)
+        ////console.log("fb",fB)
 
         if(fB!==0) {
           bitacora_inventario_id =  fB.bitacora_inventario_id;
@@ -285,18 +285,18 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
 
         inventarioFisico = sumaIC - totalVenta + diferenciaReportada;
 
-        console.log("inventarioInicial: "+inventarioInicial);
-        console.log("totalCompra: "+totalCompra);
-        console.log("totalVenta: "+totalVenta);
-        console.log("inventarioFinal: "+inventarioFinal);
-        console.log("inventarioFisico: "+inventarioFisico);
+        //console.log("inventarioInicial: "+inventarioInicial);
+        //console.log("totalCompra: "+totalCompra);
+        //console.log("totalVenta: "+totalVenta);
+        //console.log("inventarioFinal: "+inventarioFinal);
+        //console.log("inventarioFisico: "+inventarioFisico);
 
         diferencia = inventarioFisico - inventarioFinal;
         porcentajeDiferencia = parseFloat(diferencia) / parseFloat(totalVenta);
         porcentajeDiferencia = isNaN(porcentajeDiferencia)?0:porcentajeDiferencia===Infinity?0:porcentajeDiferencia;
 
-        //console.log(diferencia,totalVenta);
-        //console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
+        ////console.log(diferencia,totalVenta);
+        ////console.log("porcentajeDiferencia:"+porcentajeDiferencia+" ->"+diferencia / totalVenta);
 
         item = {
           "id": j,
@@ -385,7 +385,7 @@ router.get('/:user_id/inventarios/:permiso_id/:anio/:mes/:dia',jwtV.verifyToken,
 
 
 
-  //console.log(listInventario);
+  ////console.log(listInventario);
 
   res.status(200).json({ message:"success",listInventario});
 });
@@ -396,7 +396,7 @@ async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
   const fi = (fechaInicio+"").substring(0,10);
   const ff = (fechaFin+"").substring(0,10);
 
-  console.log(fi,ff);
+  //console.log(fi,ff);
 
   const listIngresos = await prisma.abastecimientos.findMany({
     orderBy: [
@@ -421,7 +421,7 @@ async function totalRecepcion(user_id,fechaInicio, fechaFin,permiso_id) {
 
   let totalImporteTotal=0;
 
-  //console.log("Len"+listIngresos.length);
+  ////console.log("Len"+listIngresos.length);
   for(let j=0; j<listIngresos.length; j++){
     totalImporteTotal+=listIngresos[j].cantidad;
   }
@@ -458,7 +458,7 @@ async function totalEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
 
   let totalImporteTotal=0;
 
-  console.log(fi,listCompras);
+  //console.log(fi,listCompras);
 
   for(let j=0; j<listCompras.length; j++){
     totalImporteTotal+=listCompras[j].cantidad;
@@ -485,7 +485,7 @@ async function findBitacora(fecha_reporte,tipo_bitacora,permiso_id) {
     },
    });
 
-   //console.log("dataBitacora",dataBitacora)
+   ////console.log("dataBitacora",dataBitacora)
    if (dataBitacora == null) return 0;
 
   return dataBitacora;
@@ -511,22 +511,22 @@ async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
    });
 
    const sumT = dataBitacora._sum.diferencia!=null?dataBitacora._sum.diferencia:0;
-   console.log("Resultado s: "+sumT)
-   console.log('Suma:' + dataBitacora._sum.diferencia)
+   //console.log("Resultado s: "+sumT)
+   //console.log('Suma:' + dataBitacora._sum.diferencia)
 
   return sumT;
 }
 /*router.post('/cargarXML', async (req, res, next) => {
   let dataJson;
 
-  console.log(req.body.user_id);
+  //console.log(req.body.user_id);
   let EDFile = req.files.file;
   EDFile.mv (`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
           return new Promise(async (resolve,reject)=>{
             dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            console.log(dataJson);
+            //console.log(dataJson);
 
             const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
 
@@ -536,8 +536,8 @@ async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
               let proveedor_id = await fnProveedores.findProveedor(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",proveedor_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",proveedor_id)
 
               if(proveedor_id===0) {
                 const nuevo = await prisma.proveedores.create({
@@ -553,7 +553,7 @@ async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
                     active: 1,
                   },
                 });
-                console.log("Nuevo proveedor",nuevo);
+                //console.log("Nuevo proveedor",nuevo);
                 proveedor_id = nuevo.proveedor_id;
               }
 
@@ -562,7 +562,7 @@ async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
 
                 const dens = fnCompras.getDensidad(concepto);
                 const permiso = fnCompras.getPermiso(concepto);
-                console.log("Rd",dens)
+                //console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
 
@@ -609,23 +609,23 @@ async function totalEnBitacora(fecha_inicio, fecha_terminacion,permiso_id) {
 
 
 router.post('/cargarXMLCorreo', async (req, res, next) => {
-  //console.log(req.body.user_id);
+  ////console.log(req.body.user_id);
           return new Promise(async (resolve,reject)=>{
             //req.body.dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            //console.log(req.body.dataJson);
-            //console.log(req.body)
+            ////console.log(req.body.dataJson);
+            ////console.log(req.body)
 
             const rfc = req.body.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
 
-            console.log("Rfc obtenido",rfc);
+            //console.log("Rfc obtenido",rfc);
             if(rfc==='AME050309Q32')
               return res.status(400).json({ message:"schema", error: 'El XML no es de compras' });
             else {
               let proveedor_id = await fnProveedores.findProveedor(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",proveedor_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",proveedor_id)
 
               if(proveedor_id===0) {
                 const nuevo = await prisma.proveedores.create({
@@ -641,7 +641,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo proveedor",nuevo);
+                //console.log("Nuevo proveedor",nuevo);
                 proveedor_id = nuevo.proveedor_id;
               }
 
@@ -650,7 +650,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
 
                 const dens = fnCompras.getDensidad(concepto);
                 const permiso = fnCompras.getPermiso(concepto);
-                console.log("Rd",dens)
+                //console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
 
@@ -698,7 +698,7 @@ router.get('/:userId/listPermisoNulosCompras/:fecha_inicio/:fecha_terminacion', 
   const fi = (req.params.fecha_inicio+"").substring(0,10);
   const ff = (req.params.fecha_terminacion+"").substring(0,10);
 
-  console.log("Si"+req.params.fecha_terminacion);
+  //console.log("Si"+req.params.fecha_terminacion);
   const listComprasSinPermisos = await prisma.abastecimientos.findMany({
     orderBy: [
       {
@@ -824,7 +824,7 @@ router.get('/:userId/list', async (req, res, next) => {
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -846,7 +846,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdAbastecimiento.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

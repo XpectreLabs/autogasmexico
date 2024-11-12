@@ -13,7 +13,7 @@ const fnUsuatio = require('../services/users.js');
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -35,7 +35,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/permisos',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

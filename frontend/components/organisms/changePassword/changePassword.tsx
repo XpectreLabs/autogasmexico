@@ -84,7 +84,7 @@ export const ChangePassword = ({setPage}:{setPage:Function}) => {
             //setTimeout(()=>{setShowAlert(false)},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

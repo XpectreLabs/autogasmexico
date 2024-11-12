@@ -18,34 +18,34 @@ router.use(fileUpload())
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
-  console.log("fecha actual: "+new Date());
+  //console.log("fecha actual: "+new Date());
   let date = dayjs(new Date()).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm');
-  console.log(new Date().toISOString(),date)
-  //console.log("Data");
-  //console.log(req.body);
-  console.log((req.body.fecha_inicio+"").slice(0,10)+" "+(req.body.fecha_terminacion+"").substring(0,10));
+  //console.log(new Date().toISOString(),date)
+  ////console.log("Data");
+  ////console.log(req.body);
+  //console.log((req.body.fecha_inicio+"").slice(0,10)+" "+(req.body.fecha_terminacion+"").substring(0,10));
   const fechaI=(req.body.fecha_inicio+"").slice(0,10);
   const fechas = await reporteS.obtenerMesAnterior(fechaI);
   const totalRecepcionesMP = await reporteS.totalRecepciones(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
   const totalEntregasMP = await reporteS.totalEntregas(fechas.fechaInicio,fechas.fechaFinal,parseInt(req.body.permiso_id));
   const volumenexistenciasees = (totalRecepcionesMP-totalEntregasMP);
 
-  console.log("Data",totalRecepcionesMP,totalEntregasMP,volumenexistenciasees)
+  //console.log("Data",totalRecepcionesMP,totalEntregasMP,volumenexistenciasees)
 
   const uuid = uuidv4();
 
   let nombre_archivo_json="M_"+(uuid.toUpperCase())+"_"+req.body.rfccontribuyente+"_"+req.body.rfcproveedor+"_"+(req.body.fecha_terminacion+"").substring(0,10)+"_CMN-0001_CMN_JSON"
   
-  console.log(nombre_archivo_json);
+  //console.log(nombre_archivo_json);
   //obtenerFecha(fechaI)
   //const listRecepcions = await listRecepciones(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
   //const listEntregs =  await listEntregas(parseInt(req.body.user_id),req.body.fecha_inicio, req.body.fecha_terminacion);
 
-  //console.log(listRecepcions);
+  ////console.log(listRecepcions);
   //delete req.body.permiso_id;
   //delete req.body.user_id;
   //delete req.body.tipo_reporte_id;
@@ -79,7 +79,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -107,27 +107,27 @@ router.get('/:userId/reportes',jwtV.verifyToken, async (req, res, next) => {
 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   let nombre_archivo_json= req.body.nombre_archivo_json;
-  console.log(nombre_archivo_json);
+  //console.log(nombre_archivo_json);
   delete req.body.nombre_archivo_json;
   delete req.body.nombre_archivo_status;
 
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
  
-  console.log(req.body.version)
+  //console.log(req.body.version)
   const id = parseInt(req.body.reporte_id);
   let date = new Date().toISOString();
 
   let numpermiso = req.body.numpermiso;
   delete req.body.numpermiso
 
-  console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
-  //console.log("fechayhoraestamedicionmes",);
+  //console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
+  ////console.log("fechayhoraestamedicionmes",);
 
-  console.log("Edit",req.body)
+  //console.log("Edit",req.body)
 
   const fechaI=(req.body.fecha_inicio+"").slice(0,10);
   const fechas = await reporteS.obtenerMesAnterior(fechaI);
@@ -161,27 +161,27 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 
 router.post('/descargarJSON',jwtV.verifyToken, async (req, res, next) => {
   let nombre_archivo_json= req.body.nombre_archivo_json;
-  console.log(nombre_archivo_json);
+  //console.log(nombre_archivo_json);
   delete req.body.nombre_archivo_json;
   delete req.body.nombre_archivo_status;
 
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
  
-  console.log(req.body.version)
+  //console.log(req.body.version)
   const id = parseInt(req.body.reporte_id);
   let date = req.body.date;
 
   let numpermiso = req.body.numpermiso;
   delete req.body.numpermiso
 
-  console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
-  //console.log("fechayhoraestamedicionmes",);
+  //console.log("fechayhoraestamedicionmes",req.body.fechayhoraestamedicionmes)
+  ////console.log("fechayhoraestamedicionmes",);
 
-  console.log("Edit",req.body)
+  //console.log("Edit",req.body)
 
   const fechaI=(req.body.fecha_inicio+"").slice(0,10);
   const fechas = await reporteS.obtenerMesAnterior(fechaI);
@@ -198,7 +198,7 @@ router.post('/descargarJSON',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdReporte.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -218,7 +218,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 
 router.post('/cargarPDF', async (req, res, next) => {
 
-  console.log(req.body.reporte_id);
+  //console.log(req.body.reporte_id);
   let EDFile = req.files.file;
   const name_archivo = EDFile.name;
   await EDFile.mv (`./public/pdfs//${EDFile.name}`,err => {
@@ -250,7 +250,7 @@ router.post('/cargarPDF', async (req, res, next) => {
 
           return  new  Promise(async (resolve,reject)=>{
             dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            console.log(dataJson);
+            //console.log(dataJson);
 
             const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
 
@@ -260,8 +260,8 @@ router.post('/cargarPDF', async (req, res, next) => {
               let proveedor_id = await fnProveedores.findProveedor(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",proveedor_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",proveedor_id)
 
               if(proveedor_id===0) {
                 const nuevo = await prisma.proveedores.create({
@@ -277,7 +277,7 @@ router.post('/cargarPDF', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo proveedor",nuevo);
+                //console.log("Nuevo proveedor",nuevo);
                 proveedor_id = nuevo.proveedor_id;
               }
 
@@ -286,7 +286,7 @@ router.post('/cargarPDF', async (req, res, next) => {
 
                 const dens = fnCompras.getDensidad(concepto);
                 const permiso = fnCompras.getPermiso(concepto);
-                console.log("Rd",dens)
+                //console.log("Rd",dens)
 
                 const densidad = parseFloat(dens===''?0:dens);
 
@@ -310,7 +310,7 @@ router.post('/cargarPDF', async (req, res, next) => {
                   tipo_modena_id: 1
                 }
 
-                console.log("dataR",dataR);
+                //console.log("dataR",dataR);
 
                 if(!(await fnCompras.findCfdi(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
                   await prisma.abastecimientos.create({
@@ -329,7 +329,7 @@ router.post('/cargarPDF', async (req, res, next) => {
                   return res.status(400).json({ message:"schema", error: 'El UUDI de la compra  ya se habia registrado' });
             }
         })
-        console.log("a->")
+        //console.log("a->")
     })
   }
 

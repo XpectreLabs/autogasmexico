@@ -76,7 +76,7 @@ export default function Compras() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://44.212.165.114:3001/api/v1/compras/"+user_id+"/compras";
 
-    console.log(scriptURL);
+    //console.log(scriptURL);
     fetch(scriptURL, {
       method: 'GET',
       body: JSON.stringify(data),
@@ -88,7 +88,7 @@ export default function Compras() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data",data);
+      //console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -117,7 +117,7 @@ export default function Compras() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -154,7 +154,7 @@ export default function Compras() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -165,7 +165,7 @@ export default function Compras() {
     let total = 0;
     let densidadT = 0;
 
-    console.log("c",compras)
+    //console.log("c",compras)
 
     for(let w=0; w<compras.length;w++) {
       litrosT += compras[w].cantidad;
@@ -485,17 +485,17 @@ export default function Compras() {
     //event.preventDefault();
     const user_id = localStorage.getItem('user_id');
     const formData = new FormData();
-    //console.log(event.target)
-    //console.log("Subida");
-    //console.log(event.target.files.length);
-    //console.log(event.target.files);
+    ////console.log(event.target)
+    ////console.log("Subida");
+    ////console.log(event.target.files.length);
+    ////console.log(event.target.files);
 
     for(let j=0; j<event.target.files.length;j++) {
       formData.append('file', event.target.files[j]);
       /*let reader = new FileReader();
       reader.readAsText(event.target.files[j]);
       reader.onload = function() {
-        console.log(reader.result);
+        //console.log(reader.result);
       };*/
     }
       

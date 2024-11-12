@@ -43,7 +43,7 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
             setTypeOfMessage("error");
 
             if(data.message==="success") {
-              console.log(data)
+              //console.log(data)
               localStorage.setItem('id_user_change', JSON.stringify(data.user_id));
               localStorage.setItem('clave', data.clave);
               setTypeOfMessage("success");
@@ -62,7 +62,7 @@ export const Recovery = ({setPage}:{setPage:Function}) => {
             setTimeout(()=>{setShowAlert(false)},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

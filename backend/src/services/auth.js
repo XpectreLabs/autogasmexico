@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
 function verifyToken(req, res, next) {
-  //console.log(req.headers.authorization);
+  ////console.log(req.headers.authorization);
   const token = req.headers.authorization.split(" ")[1]
-  //console.log(token);
+  ////console.log(token);
   if (!token) {
     return res
       .status(401)

@@ -90,7 +90,7 @@ export default function PermisoTipo1(props) {
         <CreateIcon
           className={styles.btnAccion}
           onClick={() => {
-            console.log("params",params.row.fecha);
+            //console.log("params",params.row.fecha);
             setFecha(params.row.fecha)
             setFecha(params.row.fecha)
             setTipoBitacora(params.row.tipo_bitacora)
@@ -107,7 +107,7 @@ export default function PermisoTipo1(props) {
     }
   ];
 
-  console.log("Si",props.listTipo1);
+  //console.log("Si",props.listTipo1);
   return (
     <main
       className={styles.mainInterior}

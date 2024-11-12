@@ -56,11 +56,11 @@ const generarJson = async (data,date,version="",numeroregistro="",volumenexisten
   //const fechaEM = dayjs(data.fechayhoraestamedicionmes).subtract(1, 'hour').locale("es").format('YYYY-MM-DDTH:m:ssSSS[Z]');
   const fechaEM = dayjs(data.fechayhoraestamedicionmes).format('YYYY-MM-DDTHH:mm:ss[-]HH:mm');
 
-  console.log(numpermiso);
-  console.log("volumenexistenciasees",volumenexistenciasees);
+  //console.log(numpermiso);
+  //console.log("volumenexistenciasees",volumenexistenciasees);
 
-  console.log("ja", (parseFloat(data.composdepropanoengaslp).toFixed(2)))
-  console.log("data.numpermiso",data.numpermiso);
+  //console.log("ja", (parseFloat(data.composdepropanoengaslp).toFixed(2)))
+  //console.log("data.numpermiso",data.numpermiso);
   dataJson.Version = version?version:data.version;
   dataJson.RfcContribuyente = data.rfccontribuyente;
   dataJson.RfcRepresentanteLegal = data.rfcrepresentantelegal;
@@ -83,7 +83,7 @@ const generarJson = async (data,date,version="",numeroregistro="",volumenexisten
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.FechaYHoraEstaMedicionMes = fechaEM;
   dataJson.Producto[0].ReporteDeVolumenMensual.Recepciones = await listRecepciones(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
   dataJson.Producto[0].ReporteDeVolumenMensual.Entregas = await listEntregas(parseInt(data.user_id),data.fecha_inicio, data.fecha_terminacion,parseInt(data.permiso_id)),
-  console.log("Final",totFinalCompras,totFinalIngresos)
+  //console.log("Final",totFinalCompras,totFinalIngresos)
 
   volumenexistenciasees = (totFinalCompras-totFinalIngresos)+volumenexistenciasees;
   dataJson.Producto[0].ReporteDeVolumenMensual.ControlDeExistencias.VolumenExistenciasMes = parseFloat(parseFloat(volumenexistenciasees).toFixed(2));
@@ -271,8 +271,8 @@ async function listEntregas(user_id,fechaInicio, fechaFin,permiso_id) {
     },
    });
 
-   console.log("permiso_id",permiso_id);
-   //console.log("listCompras",listCompras);
+   //console.log("permiso_id",permiso_id);
+   ////console.log("listCompras",listCompras);
 
   let totalCantidad=0;
   let totalImporteTotal=0;
@@ -358,7 +358,7 @@ async function totalRecepciones(fechaInicio, fechaFin,permiso_id) {
     totalCantidad+=parseFloat(listIngresos[j].cantidad);
 
   const inv_ini = await fnPermisos.findInventarioInicial(permiso_id);
-  console.log("inv_ini",inv_ini);
+  //console.log("inv_ini",inv_ini);
 
   totalCantidad+=inv_ini;
 
@@ -411,7 +411,7 @@ const obtenerConsecutivos = async () =>  {
     version: "1.0",
     numeroregistro: (parseInt(total._count.reporte_id)+1)
   }
-  console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1));
+  //console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1));
   return data;
 }
 
@@ -424,9 +424,9 @@ const obtenerMesAnterior = async (fecha) =>  {
   let mesAnteriorFinal = anioAnterior+"-"+mesAnterior+"-"+diasMesAnterior;
 
   mesAnteriorInicio=new Date("2022-01-01");
-  console.log("2022-01-01",mesAnteriorFinal)
-  console.log(mesAnteriorInicio,mesAnteriorFinal)
-  console.log("anioAnterior",anioAnterior)
+  //console.log("2022-01-01",mesAnteriorFinal)
+  //console.log(mesAnteriorInicio,mesAnteriorFinal)
+  //console.log("anioAnterior",anioAnterior)
   let data = {
     fechaInicio: mesAnteriorInicio,
     fechaFinal: mesAnteriorFinal

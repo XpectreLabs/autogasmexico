@@ -4,7 +4,7 @@ const fnCompras = require('./compras');
 const fnClientes = require('./clients');
 
 const findCfdiI = async (cfdi) =>  {
-  //console.log("Cfdi",cfdi);
+  ////console.log("Cfdi",cfdi);
   const ventas = await prisma.ventas.findFirst({
     where: {
       cfdi,
@@ -15,7 +15,7 @@ const findCfdiI = async (cfdi) =>  {
     },
   });
 
-  //console.log("Ventas",ventas)
+  ////console.log("Ventas",ventas)
   if (ventas == null) return false;
 
   return true;
@@ -28,8 +28,8 @@ const guardarDataJson = async (dataJson,user_id) => {
   const UsoCFDI = dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].UsoCFDI;
 
   let isSave =  true;
-  //console.log("UsoCFDI",UsoCFDI);
-  //console.log(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']);
+  ////console.log("UsoCFDI",UsoCFDI);
+  ////console.log(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']);
 
   //S01 CP01
   //if(UsoCFDI!=="S01"&&UsoCFDI!=="G03")
@@ -50,11 +50,11 @@ const guardarDataJson = async (dataJson,user_id) => {
         let client_id = await fnClientes.findClient(rfc);
         let date = new Date().toISOString();
 
-        console.log("rfc",rfc);
-        console.log("ID",client_id)
+        //console.log("rfc",rfc);
+        //console.log("ID",client_id)
  
         if(client_id===0) {
-          console.log("Resultado",dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes']);
+          //console.log("Resultado",dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes']);
           const nuevo = await prisma.clients.create({
             data: {
               name: dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre,
@@ -69,7 +69,7 @@ const guardarDataJson = async (dataJson,user_id) => {
               active: 1,
             },
           });
-          console.log("Nuevo cliente",nuevo);
+          //console.log("Nuevo cliente",nuevo);
           client_id = nuevo.client_id;
         }
 
@@ -122,9 +122,9 @@ const guardarDataJson = async (dataJson,user_id) => {
             guardar=false;
           
         /*if(!isArray)
-          console.log(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ClaveProdServ)
+          //console.log(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ClaveProdServ)
         else
-          console.log("prueba",rfc)*/
+          //console.log("prueba",rfc)*/
 
         if(guardar) {
           let permiso_id= null;
@@ -135,7 +135,7 @@ const guardarDataJson = async (dataJson,user_id) => {
             let NoIdentificacion=dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion?dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].NoIdentificacion:"";
             permiso = fnCompras.getPermiso(NoIdentificacion);
 
-            console.log("NoIdentificacion",NoIdentificacion);
+            //console.log("NoIdentificacion",NoIdentificacion);
           }
 
           if(permiso!=="") {
@@ -172,7 +172,7 @@ const guardarDataJson = async (dataJson,user_id) => {
             tipo_modena_id: 1
           }
 
-          //console.log(dataR);
+          ////console.log(dataR);
 
           if(!(await findCfdiI(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
             const nV = await prisma.ventas.create({

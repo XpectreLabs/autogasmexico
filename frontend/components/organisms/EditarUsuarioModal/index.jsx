@@ -20,7 +20,7 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
   const [showCambio,setShowCambio] = React.useState(true);
 
-  console.log("userData",userData);
+  //console.log("userData",userData);
   userData.email = userData.email==="Sin email"?"":userData.email;
 
   return (
@@ -61,7 +61,7 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
           delete values.date;
           const data = {...values};
           setLoading(true);
-          console.log(data);
+          //console.log(data);
 
           //setInitialValues(({firstname:'',lastname:'', email:'',username:'',password:'',confirmPassword:''}));
 
@@ -101,7 +101,7 @@ export default function EditarUsuarioModal({ isOpen, onClose, userData,userIdd }
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

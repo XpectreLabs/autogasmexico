@@ -11,7 +11,7 @@ const findClient = async (rfc) =>  {
     },
   });
 
-  console.log("Resultadoclientes".clientes);
+  //console.log("Resultadoclientes".clientes);
 
   if (clientes === null) return 0;
 

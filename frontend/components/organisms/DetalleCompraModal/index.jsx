@@ -8,8 +8,8 @@ import { Formik, Form } from "formik";
 
 export default function DetalleCompraModal({ isOpen, onClose, abastecimientoData,abastecimientoIdd }) {
 
-  console.log("Dta t",abastecimientoData);
-  console.log("Dta ",abastecimientoData.proveedores?abastecimientoData.proveedores.name:'');
+  //console.log("Dta t",abastecimientoData);
+  //console.log("Dta ",abastecimientoData.proveedores?abastecimientoData.proveedores.name:'');
   
   return (
     <Formik>

@@ -56,7 +56,7 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
           delete values.confirmPassword;
           const data = {...values};
           setLoading(true);
-          console.log(data);
+          //console.log(data);
 
           //setInitialValues(({firstName:'',lastName:'', email:'',username:'',password:'',confirmPassword:''}));
 
@@ -96,7 +96,7 @@ export default function NuevoUsuarioModal({ isOpen, onClose }) {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

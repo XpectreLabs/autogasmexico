@@ -66,7 +66,7 @@ export default function Permisos() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
 
@@ -98,7 +98,7 @@ export default function Permisos() {
     })
     .catch(error => {
       
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -118,7 +118,7 @@ export default function Permisos() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data",data);
+      //console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
         setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
@@ -144,14 +144,14 @@ export default function Permisos() {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }*/
 
   const onChangePermiso = (tipo) =>{
     const permiso = tipo.target.value
-    console.log(listPermisos[permiso-1]);
+    //console.log(listPermisos[permiso-1]);
     setInitialValues(listPermisos[permiso-1]);
     /*if(document.querySelector("input[name=fecha_desde]").value!==''){
       const permiso = tipo.target.value
@@ -329,7 +329,7 @@ export default function Permisos() {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

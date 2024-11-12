@@ -12,12 +12,12 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
   
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
   let date = new Date().toISOString();
-  console.log(date);
+  //console.log(date);
   await prisma.patients.create({
     data: {
       firstname: req.body.firstName,
@@ -36,7 +36,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/patients',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -69,7 +69,7 @@ router.get('/:userId/patients',jwtV.verifyToken, async (req, res, next) => {
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -93,7 +93,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdPatient.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

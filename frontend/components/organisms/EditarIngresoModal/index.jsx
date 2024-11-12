@@ -33,7 +33,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
     ventaData.fecha_emision = dayjs(convertirFecha(ventaData.fecha_emision2));
   }
 
-  console.log("Dta",ventaData);
+  //console.log("Dta",ventaData);
 
   function data() {
     const user_id = localStorage.getItem('user_id');
@@ -50,7 +50,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -74,7 +74,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -94,9 +94,9 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
-        console.log("data.listClientes",data.listClientes);
+        //console.log("data.listClientes",data.listClientes);
         setListaClientes(data.listClientes);
       }
       else if(data.message==="schema") {
@@ -113,7 +113,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -196,7 +196,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
           setLoading(true);
 
           setInitialValues(({client_id:'', permiso_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:''}));
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -233,7 +233,7 @@ export default function EditarIngresoModal({ isOpen, onClose, ventaData,ventaIdd
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

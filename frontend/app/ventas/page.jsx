@@ -69,7 +69,7 @@ export default function Ventas() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://44.212.165.114:3001/api/v1/ingresos/"+user_id+"/ingresos";
 
-    console.log(scriptURL);
+    //console.log(scriptURL);
     fetch(scriptURL, {
       method: 'GET',
       body: JSON.stringify(data),
@@ -81,7 +81,7 @@ export default function Ventas() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data",data);
+      //console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -110,7 +110,7 @@ export default function Ventas() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -147,7 +147,7 @@ export default function Ventas() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -458,26 +458,26 @@ export default function Ventas() {
 
     axios.post('http://44.212.165.114:3001/api/v1/ingresos/cargarXML', formData)
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data.dataJson);
-        /*console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
-        //console.log(response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales'])
+        //console.log(response.data);
+        //console.log(response.data.dataJson);
+        /*//console.log(response.data.dataJson['cfdi:Comprobante']['_attributes']['Folio'])
+        ////console.log(response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales'])
 
-        console.log("Ventas");
-        console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
+        //console.log("Ventas");
+        //console.log("Emisor:"+response.data.dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc)
 
-        console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
-        console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
-        //console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
-        console.log("Unid ad de medida: UM03");
+        //console.log("Folio:"+response.data.dataJson['cfdi:Comprobante']['_attributes'].Folio)
+        //console.log("Fecha de emisión: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].FechaTimbrado)
+        ////console.log("Cantidad: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad)
+        //console.log("Unid ad de medida: UM03");
         const isArray = response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length?true:false
 
         //tambien
-        //console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
-        //console.log("tipo T",typeof(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']))
-        //console.log("total T",response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length)
+        ////console.log("Concepto: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Descripcion)
+        ////console.log("tipo T",typeof(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']))
+        ////console.log("total T",response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length)
 
-        console.log("Es array",isArray)
+        //console.log("Es array",isArray)
 
         let dataG ;
         //alert(response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'][0]['cfdi:Impuestos']['cfdi:Traslados']['cfdi:Traslado']['_attributes'].Base);
@@ -487,7 +487,7 @@ export default function Ventas() {
           let canCantidad = 0, preciounitario = 0, importe = 0, ivaaplicado = 0, precioventa = 0;
           let descripcion;
 
-          console.log("jaja");
+          //console.log("jaja");
           const totalFilas = response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto'].length;
 
           for(let j=0; j<totalFilas; j++)
@@ -505,9 +505,9 @@ export default function Ventas() {
             preciounitario/=totalFilas;
 
 
-          console.log("jja");
+          //console.log("jja");
 
-          console.log("Resultado:",{
+          //console.log("Resultado:",{
             "cantidad": canCantidad,
             "concepto": descripcion,
             "preciounitario": Number.parseFloat(preciounitario).toFixed(2),
@@ -517,22 +517,22 @@ export default function Ventas() {
           })
         }
 
-        //console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
-        //console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16)
-        //console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16)
-        //console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos)
+        ////console.log("Precio unitario: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].ValorUnitario)
+        ////console.log("Importe: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosBaseIVA16)
+        ////console.log("Iva: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].TotalTrasladosImpuestoIVA16)
+        ////console.log("Precio ingreso: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['pago20:Pagos']['pago20:Totales']['_attributes'].MontoTotalPagos)
 
-        console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
-        console.log("Tipo de cfdi: Ingreso")
-        console.log("Aclaración: SIN OBSERVACIONES")
-        console.log("Tipo complemento: Comercializacion")
+        //console.log("Cfdi: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
+        //console.log("Tipo de cfdi: Ingreso")
+        //console.log("Aclaración: SIN OBSERVACIONES")
+        //console.log("Tipo complemento: Comercializacion")
 
-        console.log("Para cliente nuevo:");
-        console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre)
-        console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc)
-        console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor)
-        console.log("Domicilio: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor)
-        console.log("Permiso: null")*/
+        //console.log("Para cliente nuevo:");
+        //console.log("Nombre: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Nombre)
+        //console.log("RFC: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc)
+        //console.log("Tipo de situación fiscal: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].RegimenFiscalReceptor)
+        //console.log("Domicilio: "+response.data.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].DomicilioFiscalReceptor)
+        //console.log("Permiso: null")*/
 
         const totalI = document.getElementsByClassName("fila").length;
 

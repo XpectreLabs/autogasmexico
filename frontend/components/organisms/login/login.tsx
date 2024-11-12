@@ -46,7 +46,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
           .then(function(data) {
             if(data.message==="success") {
               setShowAlert(false);
-              console.log("data",data)
+              //console.log("data",data)
               localStorage.setItem('user_id', JSON.stringify(data.user_id));
               localStorage.setItem('nameUser', data.name);
               localStorage.setItem('isInicial', data.isInicial)
@@ -78,7 +78,7 @@ export const Login = ({setPage}:{setPage:Function}) => {
             setTimeout(()=>{setShowAlert(false)},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

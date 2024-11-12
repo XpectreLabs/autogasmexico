@@ -49,8 +49,8 @@ router.use(fileUpload())
   // const xmlFile = fs.readFileSync('./xmls/M_177174_7d1c8379-85a8-9054-198c-665fdf8c17d4.xml', 'utf8');
   // result1 = xmlJs.xml2json(xmlFile, {compact: true, spaces: 4});
   // result1 = JSON.parse(result1);
-  // console.log(result1);
-  console.log(result1);
+  // //console.log(result1);
+  //console.log(result1);
   return res.status(200).send({ message : 'File upload', result1 });
 });*/
 
@@ -66,14 +66,14 @@ router.get('/obtenerVersionSiguiente', async  (req, res) => {
     version: "1."+(parseInt(total._count.reporte_id)+1),
     numeroRegistro: (parseInt(total._count.reporte_id)+1)
   }
-  console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1))  ;
+  //console.log("Total de registro: 1."+(parseInt(total._count.reporte_id)+1))  ;
   return res.status(200).send({ message : 'Exito', data });
 });
 
 
 
 router.listen(3001, () => {
-  console.log('Aplicación ejecutandose ....');
+  //console.log('Aplicación ejecutandose ....');
 });
 
 

@@ -42,7 +42,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:userId/usuarios',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message)
+    //console.log(error.details[0].message)
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
@@ -66,7 +66,7 @@ router.get('/:userId/usuarios',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/usuario', async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message)
+    //console.log(error.details[0].message)
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
@@ -98,10 +98,10 @@ router.get('/:userId/usuario', async (req, res, next) => {
 });
 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
-  //console.log(req.body);
+  ////console.log(req.body);
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message)
+    //console.log(error.details[0].message)
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
@@ -119,10 +119,10 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
-  //console.log(req.body);
+  ////console.log(req.body);
   const { error } = sch.schemaId.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -139,7 +139,7 @@ router.delete('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 router.post('/email', async (req, res, next) => {
-  console.log("si")
+  //console.log("si")
   const { error } = sch.schemaEmail.validate(req.body);
   if (error) {
     return res.status(400).json({ message:"schema", error: error.details[0].message });
@@ -156,7 +156,7 @@ router.post('/email', async (req, res, next) => {
 
   if (users){
     const clave = parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)+""+parseInt(Math.random()*100)
-    console.log(clave,fn.getPasswordEncrypted(clave))
+    //console.log(clave,fn.getPasswordEncrypted(clave))
     mailer.enviar_mail(clave,email);
     res.status(200).json({ message:"success","user_id":users.user_id,"clave":fn.getPasswordEncrypted(clave) });
   }
@@ -166,19 +166,19 @@ router.post('/email', async (req, res, next) => {
 
 
 router.put('/changePassword', async (req, res, next) => {
-  /*console.log(req.body);
+  /*//console.log(req.body);
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message)
+    //console.log(error.details[0].message)
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }*/
   const recoveryCode = fn.getPasswordEncrypted(req.body.recoveryCode);
-  console.log("recoveryCode",recoveryCode,req.body.clave);
+  //console.log("recoveryCode",recoveryCode,req.body.clave);
 
   if(recoveryCode === req.body.clave) {
       const password = fn.getPasswordEncrypted(req.body.password);
-      console.log(req.body.id_user_change+" -> "+password)
-      console.log("u"+req.body.id_user_change)
+      //console.log(req.body.id_user_change+" -> "+password)
+      //console.log("u"+req.body.id_user_change)
       await prisma.users.update({
         where: {
           user_id: parseInt(req.body.id_user_change),

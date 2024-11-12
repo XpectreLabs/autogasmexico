@@ -85,7 +85,7 @@ export default function NuevoProveedorModal({ isOpen, onClose }) {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

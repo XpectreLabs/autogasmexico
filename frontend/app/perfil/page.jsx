@@ -46,7 +46,7 @@ export default function Perfil() {
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log("data",data);
+        //console.log("data",data);
         if(data.message==="success") {
           setLoadingData(true);
           setInitialValues(({firstname:""+data.dataUsuario[0]['firstname'], lastname:data.dataUsuario[0]['lastname'],rfccontribuyente:data.dataUsuario[0]['rfccontribuyente'], rfcrepresentantelegal: data.dataUsuario[0]['rfcrepresentantelegal'],rfcproveedor: data.dataUsuario[0]['rfcproveedor'], username: data.dataUsuario[0]['username'], email:data.dataUsuario[0]['email']?data.dataUsuario[0]['email']:''}));
@@ -72,7 +72,7 @@ export default function Perfil() {
         },3000)
       })
       .catch(error => {
-        console.log(error.message);
+        //console.log(error.message);
         console.error('Error!', error.message);
       });
     }
@@ -170,7 +170,7 @@ export default function Perfil() {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
 
@@ -208,7 +208,7 @@ export default function Perfil() {
             setTimeout(()=>{setShowAlert(false)},4000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });*/
         }}

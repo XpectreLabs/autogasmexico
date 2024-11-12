@@ -20,7 +20,7 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
   proveedorData.permiso_cre = proveedorData.permiso_cre==="Sin permiso"?"":proveedorData.permiso_cre;
   proveedorData.direccion = proveedorData.direccion==="Sin dirección"?"":proveedorData.direccion;
 
-  console.log("proveedorData",proveedorData);
+  //console.log("proveedorData",proveedorData);
   return (
     <Formik
         enableReinitialize={true}
@@ -90,7 +90,7 @@ export default function EditarProveedorModal({ isOpen, onClose, proveedorData,pr
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

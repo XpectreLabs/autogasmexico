@@ -40,7 +40,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -58,7 +58,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -79,9 +79,9 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
-        console.log("data.listProveedores",data.listProveedores);
+        //console.log("data.listProveedores",data.listProveedores);
         setListaProveedores(data.listProveedores);
       }
       else if(data.message==="schema") {
@@ -98,7 +98,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -146,7 +146,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
       }
     }
 
-    console.log(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value));
+    //console.log(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value));
 
     setInitialValues(({proveedor_id:'', folio:document.querySelector("#folio").value,fecha_emision:dayjs(cambiarFechaNormal(document.querySelector("input[name=fecha_emision]").value)), cantidad:parseInt(document.querySelector("#cantidad").value),concepto:document.querySelector("#concepto").value, densidad: parseFloat(cad),  preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
   }
@@ -217,7 +217,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
           setLoading(true);
 
           //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', permiso_id:localStorage.getItem('permiso_id'), preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -254,7 +254,7 @@ export default function NuevaCompraModal({ isOpen, onClose }) {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

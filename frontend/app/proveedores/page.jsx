@@ -65,7 +65,7 @@ export default function Proveedores() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log(data);
+      //console.log(data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -92,7 +92,7 @@ export default function Proveedores() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -130,7 +130,7 @@ export default function Proveedores() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }

@@ -65,7 +65,7 @@ export default function Ventas() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://44.212.165.114:3001/api/v1/ingresos/"+user_id+"/ingresos";
 
-    console.log(scriptURL);
+    //console.log(scriptURL);
     fetch(scriptURL, {
       method: 'GET',
       body: JSON.stringify(data),
@@ -77,7 +77,7 @@ export default function Ventas() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data",data);
+      //console.log("data",data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -106,7 +106,7 @@ export default function Ventas() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -143,7 +143,7 @@ export default function Ventas() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -291,7 +291,7 @@ export default function Ventas() {
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",IngresosAux);
+          //console.log("Aux",IngresosAux);
           for(let j=0;j<IngresosAux.length;j++) {
             const dateEmi = convertDate(new Date((""+IngresosAux[j].fecha_emision)).toLocaleDateString('en-GB'));
 

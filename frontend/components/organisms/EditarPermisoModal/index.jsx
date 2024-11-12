@@ -34,7 +34,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -52,7 +52,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -71,7 +71,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
     data();
   }, []);
 
-  console.log("Dta",abastecimientoData);
+  //console.log("Dta",abastecimientoData);
   return (
     <Formik
         enableReinitialize={true}
@@ -99,10 +99,10 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
           delete values.permiso_cre;
 
           const data = {...values,abastecimiento_id,tipo_modena_id};
-          console.log(data);
+          //console.log(data);
           setLoading(true);
 
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -138,7 +138,7 @@ export default function EditarPermisoModal({ isOpen, onClose, abastecimientoData
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

@@ -62,7 +62,7 @@ export default function Usuarios() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("Usuarios",data);
+      //console.log("Usuarios",data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -89,7 +89,7 @@ export default function Usuarios() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -126,7 +126,7 @@ export default function Usuarios() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -205,7 +205,7 @@ export default function Usuarios() {
 
   const changedateformatF = (date) => {
     const fecha = date.substr(0,10)
-    console.log(fecha);
+    //console.log(fecha);
     return fecha.substr(8,2)+"/"+fecha.substr(5,2)+"/"+fecha.substr(0,4);
   };
 

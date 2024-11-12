@@ -44,7 +44,7 @@ export default function Seleccionar_permiso() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -63,7 +63,7 @@ export default function Seleccionar_permiso() {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }

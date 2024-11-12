@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 const fnProveedores = require('./proveedores');
 
 const findCfdi = async (cfdi) =>  {
-  console.log("Cfdi",cfdi);
+  //console.log("Cfdi",cfdi);
   const abastecimientos = await prisma.abastecimientos.findFirst({
     where: {
       cfdi, 
@@ -14,7 +14,7 @@ const findCfdi = async (cfdi) =>  {
     },
   });
 
-  console.log("abastecimientos",abastecimientos)
+  //console.log("abastecimientos",abastecimientos)
   if (abastecimientos == null) return false;
 
   return true;
@@ -73,9 +73,9 @@ const getDensidad = (texto) => {
     }
 
     if(parseInt(dens)>2) {
-      console.log("Dens",dens);
+      //console.log("Dens",dens);
       dens = dens/1000;
-      console.log("Dens",dens);
+      //console.log("Dens",dens);
     }
     else
       dens = "."+dens;
@@ -97,19 +97,19 @@ const getPermiso = (texto) => {
       }
     }
 
-  console.log("permiso",permiso)
+  //console.log("permiso",permiso)
   return permiso;
 }
 
 
 const guardarDataJson = async (dataJson,user_id,permiso_id) => {
-  //console.log(dataJson);
+  ////console.log(dataJson);
   permiso_id=parseInt(permiso_id);
   
   const rfc = dataJson['cfdi:Comprobante']['cfdi:Emisor']['_attributes'].Rfc;
   const UsoCFDI = dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].UsoCFDI;
 
-  console.log("UsoCFDI",UsoCFDI,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID);
+  //console.log("UsoCFDI",UsoCFDI,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID);
   
   if(rfc==='AME050309Q32')
     return 2;
@@ -119,8 +119,8 @@ const guardarDataJson = async (dataJson,user_id,permiso_id) => {
       let proveedor_id = await fnProveedores.findProveedor(rfc);
       let date = new Date().toISOString();
 
-      console.log("rfc",rfc);
-      //console.log("ID",proveedor_id)
+      //console.log("rfc",rfc);
+      ////console.log("ID",proveedor_id)
 
       //Ya no se guardna proveedores
       /*if(proveedor_id===0) {
@@ -137,7 +137,7 @@ const guardarDataJson = async (dataJson,user_id,permiso_id) => {
             active: 1,
           },
         });
-        //console.log("Nuevo proveedor",nuevo);
+        ////console.log("Nuevo proveedor",nuevo);
         proveedor_id = nuevo.proveedor_id;
       }*/
 
@@ -157,11 +157,11 @@ const guardarDataJson = async (dataJson,user_id,permiso_id) => {
 
             const dens = getDensidad(concepto);
             //const permiso = getPermiso(concepto);
-            //console.log("Rd",dens)
+            ////console.log("Rd",dens)
 
             const densidad = parseFloat(dens===''?0:dens);
 
-            console.log("Cantidad",parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad));
+            //console.log("Cantidad",parseFloat(dataJson['cfdi:Comprobante']['cfdi:Conceptos']['cfdi:Concepto']['_attributes'].Cantidad));
             const dataR = {
               proveedor_id,
               folio: dataJson['cfdi:Comprobante']['_attributes'].Folio,
@@ -203,7 +203,7 @@ const guardarDataJson = async (dataJson,user_id,permiso_id) => {
       else
       {
         if(proveedor_id===0) {
-          console.log("No paso",rfc,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
+          //console.log("No paso",rfc,dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID)
         }
       }
     }

@@ -5,4 +5,7 @@ backend/node_modules/
 frontend/node_modules/
 
 mail-checker/node_modules/
-# mail-checker/dist/
+
+mail-checker/dist/
+
+.env

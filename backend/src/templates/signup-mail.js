@@ -42,9 +42,9 @@ this.enviar_mail = (codigo,email) => {
     };
     transporter.sendMail(mail_options, (error, info) => {
         if (error) {
-            console.log(error);
+            //console.log(error);
         } else {
-            console.log('El correo se envío correctamente ' + info.response);
+            //console.log('El correo se envío correctamente ' + info.response);
         }
     });
 };

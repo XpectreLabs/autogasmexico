@@ -39,7 +39,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -57,7 +57,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -77,9 +77,9 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
-        console.log("data.listProveedores",data.listProveedores);
+        //console.log("data.listProveedores",data.listProveedores);
         setListaProveedores(data.listProveedores);
       }
       else if(data.message==="schema") {
@@ -96,7 +96,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -186,10 +186,10 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
           const phone = values.phone;
           const email = values.email;*/
           const data = {...values,abastecimiento_id,tipo_modena_id};
-          console.log(data);
+          //console.log(data);
           setLoading(true);
 
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -225,7 +225,7 @@ export default function EditarCompraModal({ isOpen, onClose, abastecimientoData,
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}      

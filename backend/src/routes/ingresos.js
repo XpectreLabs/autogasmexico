@@ -19,7 +19,7 @@ const fnUsuatio = require('../services/users.js');
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
@@ -45,7 +45,7 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/ingresos',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -258,17 +258,17 @@ router.post('/cargarXML', async (req, res, next) => {
     return res.status(500).send({ message : "error" })
   }
 
-  /*console.log(req.body.user_id);
+  /*//console.log(req.body.user_id);
   let EDFile = req.files.file;
 
   EDFile.mv (`./xmls//${EDFile.name}`,err => {
         if(err) return res.status(500).send({ message : err })
 
           dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-          //console.log(dataJson);
+          ////console.log(dataJson);
           return new Promise(async (resolve,reject)=>{
             //dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            console.log(dataJson);
+            //console.log(dataJson);
 
             const rfc = dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc;
 
@@ -278,8 +278,8 @@ router.post('/cargarXML', async (req, res, next) => {
               let client_id = await fnClientes.findClient(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",client_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",client_id)
 
               if(client_id===0) {
                 const nuevo = await prisma.clients.create({
@@ -295,7 +295,7 @@ router.post('/cargarXML', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo cliente",nuevo);
+                //console.log("Nuevo cliente",nuevo);
                 client_id = nuevo.client_id;
               }
 
@@ -382,7 +382,7 @@ router.post('/cargarXML', async (req, res, next) => {
                 tipo_modena_id: 1
               }
 
-              console.log(dataR);
+              //console.log(dataR);
 
               if(!(await fnIngresos.findCfdiI(dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
                 const nV = await prisma.ventas.create({
@@ -395,7 +395,7 @@ router.post('/cargarXML', async (req, res, next) => {
                   },
                 });
 
-                console.log(nV);
+                //console.log(nV);
                 return res.status(200).send({ message : 'success',dataJson })
               }
               else
@@ -414,7 +414,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
           return new Promise(async (resolve,reject)=>{
             try {
             //dataJson = JSON.parse(xmlJs.xml2json((fs.readFileSync('./xmls/'+EDFile.name, 'utf8')), {compact: true, spaces: 4}));
-            console.log(req.body.dataJson);
+            //console.log(req.body.dataJson);
 
             const rfc = req.body.dataJson['cfdi:Comprobante']['cfdi:Receptor']['_attributes'].Rfc;
 
@@ -424,8 +424,8 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
               let client_id = await fnClientes.findClient(rfc);
               let date = new Date().toISOString();
 
-              console.log("rfc",rfc);
-              console.log("ID",client_id)
+              //console.log("rfc",rfc);
+              //console.log("ID",client_id)
 
               if(client_id===0) {
                 const nuevo = await prisma.clients.create({
@@ -442,7 +442,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                     active: 1,
                   },
                 });
-                console.log("Nuevo cliente",nuevo);
+                //console.log("Nuevo cliente",nuevo);
                 client_id = nuevo.client_id;
               }
 
@@ -529,7 +529,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
                 tipo_modena_id: 1
               }
 
-              console.log(dataR);
+              //console.log(dataR);
 
               if(!(await fnIngresos.findCfdiI(req.body.dataJson['cfdi:Comprobante']['cfdi:Complemento']['tfd:TimbreFiscalDigital']['_attributes'].UUID))) {
                 const nV = await prisma.ventas.create({
@@ -599,7 +599,7 @@ router.post('/cargarXMLCorreo', async (req, res, next) => {
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -621,7 +621,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdVenta.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

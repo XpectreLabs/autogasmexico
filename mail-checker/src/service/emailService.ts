@@ -24,7 +24,7 @@ export function checkEmails() {
 
       imap.search(["UNSEEN", ["SINCE", yesterdayString]], (err, results) => {
         if (err || !results.length) {
-          console.log("No new mails.")
+          //console.log("No new mails.")
           imap.end()
           return
         }
@@ -34,7 +34,7 @@ export function checkEmails() {
             simpleParser(stream, async (err, parsed) => {
               if (err) throw err
 
-              console.log("attachments:", parsed.attachments)
+              //console.log("attachments:", parsed.attachments)
 
               // Procesa los archivos adjuntos
               if (parsed.attachments) {
@@ -45,19 +45,19 @@ export function checkEmails() {
                   ) {
                     const xml = attachment.content.toString("utf8")
                     const json = await parseStringPromise(xml)
-                    console.log("Parsed XML to JSON:", json)
+                    //console.log("Parsed XML to JSON:", json)
                     // Aquí podrías almacenar el JSON en una base de datos
                   }
                 })
               } else {
-                console.log("No attachments found.")
+                //console.log("No attachments found.")
               }
             })
           })
         })
 
         f.once("end", () => {
-          console.log("Done fetching all messages!")
+          //console.log("Done fetching all messages!")
           imap.end()
         })
       })
@@ -65,7 +65,7 @@ export function checkEmails() {
   })
 
   imap.once("error", (err: any) => {
-    console.log("IMAP error:", err)
+    //console.log("IMAP error:", err)
   })
 
   imap.connect()

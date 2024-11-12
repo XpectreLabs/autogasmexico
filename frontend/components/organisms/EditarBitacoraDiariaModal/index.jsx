@@ -16,7 +16,7 @@ export default function EditarBitacoraDiariaModal({ isOpen, onClose, bitacoraDat
   const [textError,setTextError] = React.useState("");
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
-  console.log("Dta",bitacoraData);
+  //console.log("Dta",bitacoraData);
   return (
     <Formik
         enableReinitialize={true}
@@ -46,10 +46,10 @@ export default function EditarBitacoraDiariaModal({ isOpen, onClose, bitacoraDat
           const phone = values.phone;
           const email = values.email;*/
           const data = {...values,bitacora_inventario_id};
-          console.log(data);
+          //console.log(data);
           setLoading(true);
 
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -85,7 +85,7 @@ export default function EditarBitacoraDiariaModal({ isOpen, onClose, bitacoraDat
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

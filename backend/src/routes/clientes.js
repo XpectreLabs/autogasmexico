@@ -12,12 +12,12 @@ const sch = require('../schemas/clientes.js');
 router.post('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaCreate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema", error: error.details[0].message });
   }
 
   let date = new Date().toISOString();
-  console.log(date);
+  //console.log(date);
   await prisma.clients.create({
     data: {
       name: req.body.name,
@@ -35,10 +35,10 @@ router.post('/',jwtV.verifyToken, async (req, res, next) => {
 });
 
 router.get('/:userId/clientes',jwtV.verifyToken, async (req, res, next) => {
-  console.log("SI");
+  //console.log("SI");
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -67,7 +67,7 @@ router.get('/:userId/clientes',jwtV.verifyToken, async (req, res, next) => {
           date: true,
         },
       });
-      console.log("List",listClientes);
+      //console.log("List",listClientes);
       res.status(200).json({ message:"success", listClientes });
     }
     else
@@ -78,7 +78,7 @@ router.get('/:userId/clientes',jwtV.verifyToken, async (req, res, next) => {
 router.get('/:userId/listaclientes',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaId.validate(req.params);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -101,7 +101,7 @@ router.get('/:userId/listaclientes',jwtV.verifyToken, async (req, res, next) => 
           name: true,
         },
       });
-      console.log("List",listClientes);
+      //console.log("List",listClientes);
       res.status(200).json({ message:"success", listClientes });
     }
     else
@@ -112,7 +112,7 @@ router.get('/:userId/listaclientes',jwtV.verifyToken, async (req, res, next) => 
 router.put('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaUpdate.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 
@@ -137,7 +137,7 @@ router.put('/',jwtV.verifyToken, async (req, res, next) => {
 router.delete('/',jwtV.verifyToken, async (req, res, next) => {
   const { error } = sch.schemaIdCliente.validate(req.body);
   if (error) {
-    console.log(error.details[0].message);
+    //console.log(error.details[0].message);
     return res.status(400).json({ message:"schema",error: error.details[0].message });
   }
 

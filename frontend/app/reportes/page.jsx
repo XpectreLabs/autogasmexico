@@ -66,7 +66,7 @@ export default function Compras() {
     const user_id = localStorage.getItem('user_id');
     const scriptURL = "http://44.212.165.114:3001/api/v1/reportes/"+user_id+"/reportes";
 
-    console.log(scriptURL);
+    //console.log(scriptURL);
     fetch(scriptURL, {
       method: 'GET',
       body: JSON.stringify(data),
@@ -78,7 +78,7 @@ export default function Compras() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setLoadingData(true);
         setLoading(false);
@@ -105,7 +105,7 @@ export default function Compras() {
       },3400)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -125,7 +125,7 @@ export default function Compras() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -149,7 +149,7 @@ export default function Compras() {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -186,7 +186,7 @@ export default function Compras() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -216,7 +216,7 @@ export default function Compras() {
 
   const descargarJSONReporte = (dataR)=>{
     
-    console.log(dataR)
+    //console.log(dataR)
     delete dataR.id;
     delete dataR.fecha_inicio2;
     delete dataR.fecha_terminacion2;
@@ -247,7 +247,7 @@ export default function Compras() {
       //setTypeOfMessage("error");
 
       if(data.message==="success") {
-        //console.log("dataRe",data);
+        ////console.log("dataRe",data);
         descargarJSON(data.dataJson,data.nombre_archivo);
 
         //setTypeOfMessage("success");
@@ -271,7 +271,7 @@ export default function Compras() {
       setTimeout(()=>{setShowAlert(false);},3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -280,10 +280,10 @@ export default function Compras() {
     //event.preventDefault();
     //const user_id = localStorage.getItem('user_id');
     const formData = new FormData();
-    //console.log(event.target)
-    //console.log("Subida");
-    //console.log(event.target.files.length);
-    //console.log(event.target.files);
+    ////console.log(event.target)
+    ////console.log("Subida");
+    ////console.log(event.target.files.length);
+    ////console.log(event.target.files);
 
     for(let j=0; j<event.target.files.length;j++)
       formData.append('file', event.target.files[j]);
@@ -421,7 +421,7 @@ export default function Compras() {
 
   const changedateformatF = (date) => {
     const fecha = date.substr(0,10)
-    console.log(fecha);
+    //console.log(fecha);
     return fecha.substr(8,2)+"/"+fecha.substr(5,2)+"/"+fecha.substr(0,4);
   };
 
@@ -449,7 +449,7 @@ export default function Compras() {
         let listResult = [];
 
         if(!isNaN(fechaInicio)&&!isNaN(fechaHasta)) {
-          console.log("Aux",reportesAux);
+          //console.log("Aux",reportesAux);
           for(let j=0;j<reportesAux.length;j++) {
             const dateEmi = convertDate(new Date((""+reportesAux[j].date)).toLocaleDateString('en-GB'));
 
@@ -511,7 +511,7 @@ export default function Compras() {
                       const sear=query.target.value;
                       if(reportesAux.length>0) {
                         let listResult = [];
-                        console.log("b",reportesAux);
+                        //console.log("b",reportesAux);
                         for(let j=0;j<reportesAux.length;j++) {
                           let busqueda = (reportesAux[j].version + " " + reportesAux[j].rfccontribuyente + " " + reportesAux[j].rfcproveedor + " " + reportesAux[j].claveinstalacion + " " + reportesAux[j].usuarioresponsable+ " " + changedateformatF(reportesAux[j].fecha_inicio) + " " + changedateformatF(reportesAux[j].fecha_terminacion) + " " + changedateformatF(reportesAux[j].date)).toLowerCase();
                           if((""+(busqueda)).includes(sear.toLowerCase())||(sear===""))

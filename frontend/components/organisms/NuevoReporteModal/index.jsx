@@ -81,10 +81,10 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log("data r",data);
+        //console.log("data r",data);
         if(data.message==="success") {
           setListPermisos(data.listPermisos);
-          console.log("data.listPermisos",data.listPermisos);
+          //console.log("data.listPermisos",data.listPermisos);
 
           let {
             caracter,
@@ -120,7 +120,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         },3000)
       })
       .catch(error => {
-        console.log(error.message);
+        //console.log(error.message);
         console.error('Error!', error.message);
       });
     }
@@ -141,7 +141,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log("data r",data);
+        //console.log("data r",data);
         if(data.message==="success") {
           for(let j=0; j<data.listComprasSinPermisos.length; j++) {
             if(j===0)
@@ -159,7 +159,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         },3000)
       })
       .catch(error => {
-        console.log(error.message);
+        //console.log(error.message);
         console.error('Error!', error.message);
       });
     }
@@ -179,7 +179,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log("data Ventas",data);
+        //console.log("data Ventas",data);
         if(data.message==="success") {
           for(let j=0; j<data.listIngresosSinPermisos.length; j++) {
             if(j===0)
@@ -195,7 +195,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
         },3000)
       })
       .catch(error => {
-        console.log(error.message);
+        //console.log(error.message);
         console.error('Error!', error.message);
       });
     }
@@ -339,7 +339,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           const tipo_reporte_id   = 1;
           const numpermiso =  obtenerPermiso(values.permiso_id);
           const data = {...values,user_id,tipo_reporte_id,numpermiso};
-          console.log("Da",data);
+          //console.log("Da",data);
           
           const foliosCompras = await getObtenerListaDeComprasSinPermisos(dayjs(values.fecha_inicio).format("YYYY-MM-DD"),dayjs(values.fecha_terminacion).format("YYYY-MM-DD"));
           const foliosVentas = await getObtenerListaDeVentasSinPermisos(dayjs(values.fecha_inicio).format("YYYY-MM-DD"),dayjs(values.fecha_terminacion).format("YYYY-MM-DD"));
@@ -367,7 +367,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
           setLoading(true);
 
           //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', numpermiso:'',  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',fechayhoraestamedicionmes:'',usuarioresponsable:localStorage.getItem('nameUser'),tipoevento:'5',descripcionevento:'Consulta Informacion',fecha_inicio:'',fecha_terminacion:''}));
-          console.log("data v",data);
+          //console.log("data v",data);
 
           fetch(scriptURL, {
             method: 'POST',
@@ -384,7 +384,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             setTypeOfMessage("error");
 
             if(data.message==="success") {
-              console.log("dataRe",data);
+              //console.log("dataRe",data);
               descargarJSON(data.dataJson,data.nombre_archivo);
 
               setTypeOfMessage("success");
@@ -408,7 +408,7 @@ export default function NuevoReporteModal({ isOpen, onClose }) {
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

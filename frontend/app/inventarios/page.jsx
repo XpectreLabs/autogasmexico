@@ -55,7 +55,7 @@ export default function Inventarios() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         setListPermisos(data.listPermisos);
       }
@@ -73,7 +73,7 @@ export default function Inventarios() {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -92,7 +92,7 @@ export default function Inventarios() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("data r",data);
+      //console.log("data r",data);
       if(data.message==="success") {
         if(permiso_id==="1") {
           setListTipo1(data.listInventario)
@@ -119,7 +119,7 @@ export default function Inventarios() {
       },3000)
     })
     .catch(error => {
-      console.log(error.message);
+      //console.log(error.message);
       console.error('Error!', error.message);
     });
   }
@@ -159,7 +159,7 @@ export default function Inventarios() {
     const permiso = document.querySelector("#permiso_id").value;
     const anio = parseInt(document.querySelector("input[name=fecha_desde]").value);
 
-    console.log("mes",item);
+    //console.log("mes",item);
     if(item!==null) {
       const mes = parseInt(item.$M+"")+1;
 
@@ -171,7 +171,7 @@ export default function Inventarios() {
         const mesCC = mes<10?("0"+mes):mes;
         const fechaCN = dayjs(anio+"-"+mesCC+"-01");
 
-        console.log(fechaCN);
+        //console.log(fechaCN);
         SetDiaC(0);
         setFechaC(fechaCN);
         cargarDataPorPermiso(permiso,anio,mes,0);
@@ -209,7 +209,7 @@ export default function Inventarios() {
       if(mesC!==0) {
         const mesCC = mesC<10?("0"+mesC):mesC;
         const fechaCN = dayjs(anio+"-"+mesCC+"-01");
-        console.log("R",fechaCN);
+        //console.log("R",fechaCN);
         setTimeout(()=> {
           setFechaC(fechaCN);
           setFechaC(fechaCN);

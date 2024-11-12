@@ -76,7 +76,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
       })
       .then((resp) => resp.json())
       .then(function(data) {
-        console.log("data r",data);
+        //console.log("data r",data);
         if(data.message==="success") {
           setListPermisos(data.listPermisos);
         }
@@ -100,7 +100,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
         },3000)
       })
       .catch(error => {
-        console.log(error.message);
+        //console.log(error.message);
         console.error('Error!', error.message);
       });
     }
@@ -128,8 +128,8 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
       data();
     }, []);
 
-    console.log("Dta",reporteData);
-    console.log("reporteIdd",reporteIdd);
+    //console.log("Dta",reporteData);
+    //console.log("reporteIdd",reporteIdd);
   return (
     <Formik
         enableReinitialize={true}
@@ -207,7 +207,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           const permiso = values.permiso+"";
           const phone = values.phone;
           const email = values.email;*/
-          console.log("values",values);
+          //console.log("values",values);
           delete values.id;
           delete values.fecha_inicio2;
           delete values.fecha_terminacion2;
@@ -216,7 +216,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           delete values.active;
           delete values.volumenexistenciasees;
 
-          console.log("f",values.fechayhoraestamedicionmes)
+          //console.log("f",values.fechayhoraestamedicionmes)
           //alert(values.fechayhoraestamedicionmes)
           //alert(dayjs(values.fechayhoraestamedicionmes))
           //alert(new Date(values.fechayhoraestamedicionmes))
@@ -236,7 +236,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
           setLoading(true);
 
           //setInitialValues(({version:'',rfccontribuyente:'',rfcrepresentantelegal:'', rfcproveedor:'',caracter:'', modalidadpermiso:'', permiso_id: 1,  claveinstalacion:'',descripcioninstalacion:'',numeropozos:'',numerotanques:'',numeroductosentradasalida:'',numeroductostransportedistribucion:'',numerodispensarios:'',claveproducto:'',composdepropanoengaslp:'',composdebutanoengaslp:'',volumenexistenciasees:'',fechayhoraestamedicionmes:'',numeroregistro:'',usuarioresponsable:'',tipoevento:'',descripcionevento:'',fecha_inicio:'',fecha_terminacion:''}));
-          console.log("vEdit",data);
+          //console.log("vEdit",data);
           fetch(scriptURL, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -252,7 +252,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
             setTypeOfMessage("error");
 
             if(data.message==="success") {
-              console.log("dataRe",data);
+              //console.log("dataRe",data);
               descargarJSON(data.dataJson,data.nombre_archivo);
 
               setTypeOfMessage("success");
@@ -276,7 +276,7 @@ export default function EditReporteModal({ isOpen, onClose, reporteData,reporteI
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

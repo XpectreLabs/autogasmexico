@@ -17,7 +17,7 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
   const [initialValues, setInitialValues] = useState(({nota:'',diferencia:''}));
   const [typeOfMessage, setTypeOfMessage] = React.useState("error");
 
-  console.log(fecha_reporte)
+  //console.log(fecha_reporte)
 
   return (
     <Formik
@@ -47,7 +47,7 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
           setLoading(true);
 
           //setInitialValues(({proveedor_id:'',folio:'',fecha_emision:'', cantidad:'',concepto:'', densidad:'', permiso:'', preciounitario:'', importe:'',  ivaaplicado:'',cfdi:'',tipoCfdi:'',preciovent:'',aclaracion:'',tipocomplemento:'',unidaddemedida:'UM03'}));
-          console.log("v",data);
+          //console.log("v",data);
           fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -85,7 +85,7 @@ export default function NuevaBitacoraModal({ isOpen, onClose, fecha_reporte,carg
             setTimeout(()=>{setShowAlert(false);},3000)
           })
           .catch(error => {
-            console.log(error.message);
+            //console.log(error.message);
             console.error('Error!', error.message);
           });
         }}

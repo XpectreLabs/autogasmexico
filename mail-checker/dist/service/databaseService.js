@@ -8,6 +8,6 @@ function saveData(data) {
     db.run(sql, [JSON.stringify(data)], (err) => {
         if (err)
             return console.error("Database error:", err.message);
-        console.log("Data saved successfully!");
+        //console.log("Data saved successfully!");
     });
 }
