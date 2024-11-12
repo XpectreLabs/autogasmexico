@@ -17,8 +17,6 @@ const mailparser_1 = require("mailparser");
 const xml2js_1 = require("xml2js");
 const xmlJs = require('xml-js');
 const imapConfig = {
-    user: "autogas_cliente@xpectrelabs.com",
-    password: "Xp3ct123l@bs20_",
     host: "imap.hostinger.com",
     port: 993,
     tls: true,
